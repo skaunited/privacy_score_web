@@ -1,0 +1,25 @@
+---
+/**
+ * TrustQuoteSection.astro — interstitial blockquote between manifesto and metrics.
+ * Matches `variation-illustrated.html` lines 1309-1320.
+ * No scoped CSS — uses globals from `site.css`.
+ */
+interface Props {
+  quote: {
+    body: string; // HTML-safe (contains <em>)
+    attribution: string;
+  };
+}
+
+const { quote } = Astro.props;
+---
+
+<section class="trust" style="padding: 100px 32px 60px;">
+  <div class="container">
+    <div class="trust-quote reveal">
+      <span class="qmark" aria-hidden="true">"</span>
+      <p set:html={quote.body}></p>
+      <footer>{quote.attribution}</footer>
+    </div>
+  </div>
+</section>

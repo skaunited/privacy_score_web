@@ -1,0 +1,156 @@
+---
+/**
+ * ManifestoSection.astro — Chapter 05/05 "La promesse".
+ *
+ * Matches `variation-illustrated.html` lines 1248-1303.
+ * Scoped <style> below copy-pasted from design lines 322-413.
+ */
+interface ManCard {
+  title: string;
+  body: string;
+  code: string;
+}
+
+interface Props {
+  manifesto: {
+    title: { line1: string; negLine: string };
+    body: string;
+    cards: ManCard[];
+  };
+  chapters: {
+    word: string;
+    promise: { label: string };
+  };
+}
+
+const { manifesto, chapters } = Astro.props;
+
+// Icons per card index, layout-only.
+const cardIcons = ['cloud_off', 'person_off', 'phone_iphone', 'notifications_off'] as const;
+---
+
+<section class="manifesto" id="manifesto" aria-labelledby="manifesto-h2">
+  <div class="head reveal">
+    <div class="chapter">
+      <span class="ch-pill">{chapters.word} <span class="ch-current">05</span> <span class="ch-total">/ 05</span></span>
+      <span class="ch-label">{chapters.promise.label}</span>
+    </div>
+    <h2 id="manifesto-h2">
+      {manifesto.title.line1}
+      <span class="neg">{manifesto.title.negLine}</span>
+    </h2>
+    <p>{manifesto.body}</p>
+  </div>
+
+  <div class="man-grid reveal">
+    {manifesto.cards.map((card, i) => (
+      <article class={`man-card c-${i + 1}`}>
+        <div class="x">
+          <span class="material-icons-round" aria-hidden="true">{cardIcons[i]}</span>
+        </div>
+        <h3>{card.title}</h3>
+        <p>{card.body}</p>
+        <code>{card.code}</code>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  /* ============================================================
+     MANIFESTO — scoped (design lines 322-413)
+  ============================================================ */
+  .manifesto {
+    position: relative; overflow: hidden;
+    padding: 140px 32px;
+    background: #020617;
+  }
+  .manifesto::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, transparent 0 28px, rgba(96,165,250,0.04) 28px 29px);
+    pointer-events: none;
+  }
+  .manifesto .head {
+    max-width: 1000px; margin: 0 auto 60px; text-align: center;
+    position: relative; z-index: 2;
+  }
+  .manifesto .head :global(.overline) {
+    color: #60A5FA; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.22em; text-transform: uppercase;
+  }
+  .manifesto .head h2 {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: clamp(36px, 5.2vw, 72px);
+    line-height: 1.02; letter-spacing: -0.03em;
+    color: #F8FAFC; margin: 18px 0;
+  }
+  .manifesto .head h2 .neg {
+    color: #FB7185;
+    display: block;
+  }
+  .manifesto .head p {
+    font-size: 17px; line-height: 1.55; color: #94A3B8;
+    max-width: 580px; margin: 0 auto;
+  }
+
+  .man-grid {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    position: relative; z-index: 2;
+  }
+  .man-card {
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    padding: 32px 26px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform .3s var(--ease-out), border-color .3s;
+  }
+  .man-card::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    border-radius: 20px 20px 0 0;
+    background: linear-gradient(90deg, transparent, #FB7185, transparent);
+  }
+  .man-card:hover { transform: translateY(-4px); border-color: rgba(251,113,133,0.30); }
+
+  .man-card .x {
+    width: 64px; height: 64px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: rgba(251,113,133,0.10);
+    border: 1px solid rgba(251,113,133,0.30);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .man-card .x svg { width: 28px; height: 28px; stroke: #FB7185; stroke-width: 3; fill: none; stroke-linecap: round; }
+  .man-card .x :global(.material-icons-round) { font-size: 28px; color: #FB7185; }
+
+  .man-card h3 {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: 19px; color: #F8FAFC;
+    letter-spacing: -0.01em;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+  }
+  .man-card p {
+    font-size: 13.5px; line-height: 1.5; color: #94A3B8;
+    margin: 0 0 14px;
+  }
+  .man-card code {
+    display: inline-block;
+    background: rgba(251,113,133,0.08);
+    border: 1px solid rgba(251,113,133,0.20);
+    color: #FB7185;
+    border-radius: 8px;
+    padding: 4px 9px;
+    font-size: 11.5px;
+    font-family: var(--font-mono, monospace);
+  }
+
+  @media (max-width: 900px) { .man-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .man-grid { grid-template-columns: 1fr; } }
+</style>

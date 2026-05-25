@@ -1,0 +1,9 @@
+packages:
+  - '.'
+
+# pnpm 10+ requires explicit opt-in for packages that run build scripts.
+# Astro's image pipeline pulls in sharp; esbuild ships precompiled binaries
+# whose install script must run to wire up the platform-specific binary.
+allowBuilds:
+  esbuild: true
+  sharp: true

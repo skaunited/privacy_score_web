@@ -1,0 +1,192 @@
+---
+/**
+ * HeroSection.astro — top of page hero.
+ *
+ * Matches `variation-illustrated.html` lines 455-591. Includes:
+ *   - 3 background orbs + dot grid
+ *   - hero copy (overline / h1 with strike / lede / 2 CTAs / 3 pillars)
+ *   - hero visual (phone mockup with gauge SVG + 2 floating chips)
+ *
+ * Load-bearing IDs (do NOT rename — `src/assets/site.js` reads them):
+ *   - #gaugeArc      (animated stroke-dashoffset)
+ *   - #gaugeNum      (counts 0 → 77)
+ *   - [data-count-to="2487"]
+ */
+import type { Locale } from '@i18n/utils';
+
+interface Props {
+  hero: {
+    overline: string;
+    title: {
+      line1Pre: string;
+      line1Em: string;
+      line1Post: string;
+      line2Pre: string;
+      line2Strike: string;
+      line2Post: string;
+    };
+    lede: string;
+    ctas: {
+      primary: string;
+      ghost: string;
+    };
+    pillars: {
+      cloud:  { title: string; sub: string };
+      person: { title: string; sub: string };
+      phone:  { title: string; sub: string };
+    };
+    phone: {
+      statusbarTime: string;
+      dashboardTitle: string;
+      statusOverline: string;
+      statusValue: string;
+      gaugeGrade: string;
+      metaBrand: string;
+      metaDetail: string;
+      cta: string;
+    };
+    chips: {
+      trackers: { label: string; countTo: number };
+      dns:      { label: string; value: string };
+    };
+    scrollCue: string;
+  };
+  locale: Locale;
+}
+
+const { hero, locale } = Astro.props;
+---
+
+<section id="top" class="hero" aria-labelledby="hero-h1" data-locale={locale}>
+  <div class="orb orb-a"></div>
+  <div class="orb orb-b"></div>
+  <div class="orb orb-c"></div>
+  <div class="dot-grid"></div>
+
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <span class="overline hero-overline">
+        <span class="live-dot" aria-hidden="true"></span> {hero.overline}
+      </span>
+      <h1 class="hero-title" id="hero-h1">
+        {hero.title.line1Pre}<em>{hero.title.line1Em}</em>{hero.title.line1Post}<br/>
+        {hero.title.line2Pre}<span class="hero-strike">{hero.title.line2Strike}</span>{hero.title.line2Post}
+      </h1>
+      <p class="hero-lede" set:html={hero.lede}></p>
+
+      <div class="hero-ctas">
+        <a href="#download" class="btn btn-primary">
+          <span class="material-icons-round" aria-hidden="true">download</span>
+          {hero.ctas.primary}
+        </a>
+        <a href="#story" class="btn btn-ghost">
+          {hero.ctas.ghost}
+          <span class="material-icons-round" aria-hidden="true">arrow_downward</span>
+        </a>
+      </div>
+
+      <div class="hero-pillars">
+        <div class="pillar">
+          <span class="material-icons-round" aria-hidden="true">cloud_off</span>
+          <div>
+            <div class="pillar-title">{hero.pillars.cloud.title}</div>
+            <div class="pillar-sub">{hero.pillars.cloud.sub}</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <span class="material-icons-round" aria-hidden="true">person_off</span>
+          <div>
+            <div class="pillar-title">{hero.pillars.person.title}</div>
+            <div class="pillar-sub">{hero.pillars.person.sub}</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <span class="material-icons-round" aria-hidden="true">phone_iphone</span>
+          <div>
+            <div class="pillar-title">{hero.pillars.phone.title}</div>
+            <div class="pillar-sub">{hero.pillars.phone.sub}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-phone">
+        <div class="phone-screen">
+          <div class="phone-statusbar">
+            <span>{hero.phone.statusbarTime}</span>
+            <span class="material-icons-round" style="font-size:14px;" aria-hidden="true">near_me</span>
+            <span class="phone-rs">
+              <span class="material-icons-round" style="font-size:14px;" aria-hidden="true">signal_cellular_alt</span>
+              <span class="material-icons-round" style="font-size:14px;" aria-hidden="true">wifi</span>
+              <span class="material-icons-round" style="font-size:14px;" aria-hidden="true">battery_full</span>
+            </span>
+          </div>
+
+          <h2 class="phone-h1">{hero.phone.dashboardTitle}</h2>
+
+          <div class="phone-status">
+            <span class="overline">{hero.phone.statusOverline}</span>
+            <div class="phone-status-row">
+              <span class="status-dot" aria-hidden="true"></span>
+              <strong>{hero.phone.statusValue}</strong>
+            </div>
+          </div>
+
+          <div class="gauge-card">
+            <svg class="gauge" viewBox="0 0 220 220" aria-hidden="true">
+              <defs>
+                <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#60A5FA"/>
+                  <stop offset="100%" stop-color="#3B82F6"/>
+                </linearGradient>
+                <filter id="gaugeGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="6" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <circle cx="110" cy="110" r="92" stroke="rgba(255,255,255,0.06)" stroke-width="14" fill="none"/>
+              <circle id="gaugeArc" cx="110" cy="110" r="92"
+                      stroke="url(#gaugeGrad)" stroke-width="14" fill="none"
+                      stroke-linecap="round"
+                      filter="url(#gaugeGlow)"
+                      transform="rotate(-90 110 110)"
+                      stroke-dasharray="578" stroke-dashoffset="578"/>
+            </svg>
+            <div class="gauge-center">
+              <div class="gauge-num" id="gaugeNum">0</div>
+              <div class="gauge-grade">{hero.phone.gaugeGrade}</div>
+            </div>
+          </div>
+
+          <div class="phone-meta">
+            <strong>{hero.phone.metaBrand}</strong>
+            <span set:html={hero.phone.metaDetail}></span>
+          </div>
+
+          <button class="phone-cta">{hero.phone.cta}</button>
+        </div>
+      </div>
+
+      <div class="float-chip chip-trackers">
+        <span class="material-icons-round" aria-hidden="true">ads_click</span>
+        <div>
+          <div class="chip-label">{hero.chips.trackers.label}</div>
+          <div class="chip-value"><span data-count-to={hero.chips.trackers.countTo}>0</span></div>
+        </div>
+      </div>
+      <div class="float-chip chip-dns">
+        <span class="material-icons-round" aria-hidden="true">dns</span>
+        <div>
+          <div class="chip-label">{hero.chips.dns.label}</div>
+          <div class="chip-value chip-good">{hero.chips.dns.value}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue" aria-hidden="true">
+    <span>{hero.scrollCue}</span>
+    <span class="material-icons-round">expand_more</span>
+  </div>
+</section>

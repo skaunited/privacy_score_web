@@ -1,0 +1,41 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/check-i18n-on-save.sh",
+            "if": "Write(src/i18n/*.json)|Edit(src/i18n/*.json)",
+            "timeout": 15
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/supply-chain-on-pkg-change.sh",
+            "if": "Write(package.json)|Edit(package.json)|Write(pnpm-lock.yaml)",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/block-destructive.sh",
+            "if": "Bash(rm -rf *)|Bash(git push --force*)|Bash(git reset --hard*)",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

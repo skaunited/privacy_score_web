@@ -1,0 +1,192 @@
+---
+/**
+ * AnglesSection.astro — Chapter 04/05 "L'app".
+ *
+ * Matches `variation-illustrated.html` lines 1176-1242.
+ * Scoped <style> below copy-pasted from design lines 213-316.
+ */
+interface AngleCard {
+  callout: string;
+  title: string;
+  body: string;
+  meta: string;
+  imageAlt: string;
+}
+
+interface Props {
+  angles: {
+    title: string;
+    cards: AngleCard[];
+  };
+  chapters: {
+    word: string;
+    app: { label: string };
+  };
+}
+
+const { angles, chapters } = Astro.props;
+
+// Layout-only mapping: icon, callout pill color class, screenshot path.
+const cardMeta = [
+  { icon: 'dashboard',    style: 'new',      img: '/assets/screen-dashboard.png'       },
+  { icon: 'add',          style: 'points',   img: '/assets/screen-recommendations.png' },
+  { icon: 'trending_up',  style: 'trending', img: '/assets/screen-evolution.png'       },
+  { icon: 'hub',          style: 'detail',   img: '/assets/screen-network.png'         },
+] as const;
+
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<section class="angles" id="angles" aria-labelledby="angles-h2">
+  <div class="orb-x"></div>
+
+  <div class="head reveal">
+    <div class="chapter">
+      <span class="ch-pill">{chapters.word} <span class="ch-current">04</span> <span class="ch-total">/ 05</span></span>
+      <span class="ch-label">{chapters.app.label}</span>
+    </div>
+    <h2 id="angles-h2">{angles.title}</h2>
+  </div>
+
+  <div class="angles-grid">
+    {angles.cards.map((card, i) => (
+      <article class="angle-card reveal">
+        <span class={`callout ${cardMeta[i].style}`}>
+          <span class="material-icons-round" aria-hidden="true">{cardMeta[i].icon}</span> {card.callout}
+        </span>
+        <div>
+          <span class="num">{pad(i + 1)}/04</span>
+          <h3>{card.title}</h3>
+          <p>{card.body}</p>
+          <div class="meta">{card.meta}</div>
+        </div>
+        <div class="shot">
+          <img
+            src={cardMeta[i].img}
+            alt={card.imageAlt}
+            width="1320"
+            height="2868"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  /* ============================================================
+     FOUR-CARD GRID — scoped (design lines 213-316)
+  ============================================================ */
+  .angles {
+    position: relative; overflow: hidden;
+    padding: 140px 32px;
+    background: linear-gradient(180deg, #020617 0%, #050D29 100%);
+  }
+  .angles .orb-x {
+    position: absolute; width: 600px; height: 600px;
+    background: rgba(59,130,246,0.16);
+    border-radius: 50%; filter: blur(120px);
+    top: -100px; left: -100px;
+  }
+  .angles .head {
+    max-width: 760px; margin: 0 auto 60px; text-align: center;
+    position: relative; z-index: 2;
+  }
+  .angles .head :global(.overline) { color: #60A5FA; font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; }
+  .angles .head h2 {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: clamp(28px, 3.6vw, 48px);
+    line-height: 1.15; letter-spacing: -0.02em;
+    color: #F8FAFC; margin: 14px 0;
+    text-wrap: pretty;
+  }
+
+  .angles-grid {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px;
+    position: relative; z-index: 2;
+  }
+  .angle-card {
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 24px;
+    padding: 30px;
+    display: grid; grid-template-columns: 1.2fr 0.8fr;
+    gap: 24px; align-items: center;
+    position: relative;
+    transition: transform .3s var(--ease-out), border-color .3s, box-shadow .3s;
+  }
+  .angle-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(96,165,250,0.25);
+    box-shadow: 0 24px 50px -12px rgba(96,165,250,0.15);
+  }
+  .angle-card .num {
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 11px; font-weight: 600; color: #60A5FA;
+    letter-spacing: 0.16em; margin-bottom: 14px;
+    display: block;
+  }
+  .angle-card h3 {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: 26px; color: #F8FAFC;
+    letter-spacing: -0.015em;
+    margin: 0 0 12px;
+  }
+  .angle-card p {
+    font-size: 14.5px; line-height: 1.55; color: #94A3B8;
+    margin: 0 0 18px;
+  }
+  .angle-card .meta {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: #60A5FA;
+    font-family: var(--font-mono, monospace);
+    border-top: 1px dashed rgba(255,255,255,0.08);
+    padding-top: 12px;
+  }
+
+  /* Floating callout pill (replaces sticker) */
+  .angle-card .callout {
+    position: absolute; top: 18px; right: 18px;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px;
+    border-radius: 9999px;
+    font-family: var(--font-display);
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.10em; text-transform: uppercase;
+  }
+  .angle-card .callout :global(.material-icons-round) { font-size: 14px; }
+  .callout.new      { background: rgba(96,165,250,0.14); color: #60A5FA; border: 1px solid rgba(96,165,250,0.30); }
+  .callout.points   { background: rgba(16,185,129,0.14); color: #10B981; border: 1px solid rgba(16,185,129,0.30); }
+  .callout.trending { background: rgba(99,102,241,0.14); color: #818CF8; border: 1px solid rgba(99,102,241,0.35); }
+  .callout.detail   { background: rgba(251,113,133,0.14); color: #FB7185; border: 1px solid rgba(251,113,133,0.35); }
+
+  /* Phone shot inside */
+  .angle-card .shot {
+    background: linear-gradient(170deg, #1E293B 0%, #0F172A 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 26px;
+    padding: 8px;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.03) inset;
+  }
+  /* Keep PNG aspect ratio when HTML width/height attributes are set
+     (browser needs height: auto to honor the implicit aspect-ratio
+      computed from the width=1320 height=2868 attributes). */
+  .angle-card .shot img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 20px;
+  }
+  .angle-card .shot img {
+    width: 100%; border-radius: 20px; display: block;
+  }
+
+  @media (max-width: 900px) {
+    .angles-grid { grid-template-columns: 1fr; }
+    .angle-card { grid-template-columns: 1fr; }
+  }
+</style>

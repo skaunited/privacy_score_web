@@ -1,0 +1,24 @@
+{
+  "name": "privacy-score-web",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Marketing site for Privacy Score (privacyscore.fr) — Astro 5 static SSG, bilingual FR/EN.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview --host",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/sitemap": "^3.5.1",
+    "astro": "^5.16.1",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=20.3.0",
+    "pnpm": ">=10"
+  },
+  "packageManager": "pnpm@11.0.0"
+}

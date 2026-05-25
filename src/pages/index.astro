@@ -1,0 +1,55 @@
+---
+/**
+ * Root `/` — Accept-Language sniffer.
+ *
+ * - JS sniffer in <head> redirects to /fr/ or /en/ based on navigator.languages.
+ * - <meta http-equiv="refresh"> is the no-JS fallback (-> /fr/).
+ * - <meta name="robots" content="noindex,nofollow"> — must NOT appear in search.
+ * - Body has plain <a> links as a final fallback if both above fail.
+ */
+const TITLE = 'Privacy Score';
+---
+<!doctype html>
+<html lang="fr-FR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{TITLE}</title>
+    <meta name="robots" content="noindex,nofollow" />
+
+    {/* hreflang signals for crawlers that do reach here */}
+    <link rel="alternate" hreflang="fr-FR" href="https://privacyscore.fr/fr/" />
+    <link rel="alternate" hreflang="en-US" href="https://privacyscore.fr/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://privacyscore.fr/fr/" />
+    <link rel="canonical" href="https://privacyscore.fr/fr/" />
+
+    {/* JS-first sniffer — runs synchronously, before paint. */}
+    <script is:inline>
+      (function () {
+        try {
+          var langs = (navigator.languages && navigator.languages.length)
+            ? navigator.languages
+            : [navigator.language || 'fr'];
+          var target = '/fr/';
+          for (var i = 0; i < langs.length; i++) {
+            var l = (langs[i] || '').toLowerCase();
+            if (l.indexOf('fr') === 0) { target = '/fr/'; break; }
+            if (l.indexOf('en') === 0) { target = '/en/'; break; }
+          }
+          window.location.replace(target);
+        } catch (_) {
+          window.location.replace('/fr/');
+        }
+      })();
+    </script>
+
+    {/* No-JS fallback — defaults to FR (primary market). */}
+    <meta http-equiv="refresh" content="0; url=/fr/" />
+  </head>
+  <body>
+    <p style="font-family: system-ui, sans-serif; padding: 24px;">
+      <a href="/fr/" hreflang="fr">Continuer en français →</a><br/>
+      <a href="/en/" hreflang="en">Continue in English →</a>
+    </p>
+  </body>
+</html>

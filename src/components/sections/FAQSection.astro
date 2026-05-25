@@ -1,0 +1,42 @@
+---
+/**
+ * FAQSection.astro — collapsible Q&A list.
+ * Matches `variation-illustrated.html` lines 1353-1420.
+ * All <details> closed by default (locked decision).
+ */
+interface FaqItem {
+  q: string;
+  a: string; // HTML-safe
+}
+
+interface Props {
+  faq: {
+    overline: string;
+    title: string;
+    items: FaqItem[];
+  };
+}
+
+const { faq } = Astro.props;
+---
+
+<section class="faq" aria-labelledby="faq-h2">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="overline">{faq.overline}</span>
+      <h2 id="faq-h2">{faq.title}</h2>
+    </div>
+
+    <div class="faq-list reveal">
+      {faq.items.map((item) => (
+        <details>
+          <summary>
+            {item.q}
+            <span class="material-icons-round chev" aria-hidden="true">expand_more</span>
+          </summary>
+          <p set:html={item.a}></p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

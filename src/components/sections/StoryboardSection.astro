@@ -1,0 +1,673 @@
+---
+/**
+ * StoryboardSection.astro — Chapter 01/05 "L'histoire".
+ *
+ * 8 narrative panels with verbatim inline SVG illustrations copy-pasted
+ * byte-for-byte from `variation-illustrated.html` (lines 620-1065).
+ *
+ * Tag pill positions (`tl/tr/bl/br`) and the `alert` (red) flag are
+ * layout-only: they live in this component, never in the dict.
+ *
+ * Scoped CSS below contains the storyboard-specific rules from design
+ * lines 70-210 (chapter etiquette is global, in `site.css`).
+ */
+interface Panel {
+  tag: string;
+  captionStrong: string;
+  caption: string;
+}
+
+interface Props {
+  story: {
+    title: { pre: string; hi: string; post: string };
+    intro: string;
+    panels: Panel[];
+    pivot: {
+      line1Pre: string;
+      line1Em: string;
+      line1Post: string;
+      line2Pre: string;
+      line2Strong: string;
+    };
+  };
+  chapters: {
+    word: string;
+    story: { label: string };
+  };
+}
+
+const { story, chapters } = Astro.props;
+
+// Tag pill layout — never i18n, see spec section 3.
+type Pos = 'tl' | 'tr' | 'bl' | 'br';
+const tagLayout: { position: Pos; alert?: boolean }[] = [
+  { position: 'tr' },                  // 01 Washington
+  { position: 'tr', alert: true },     // 02 Open market
+  { position: 'tl' },                  // 03 26 red dots
+  { position: 'br', alert: true },     // 04 Identifiés
+  { position: 'tl' },                  // 05 Strava 2018
+  { position: 'tr', alert: true },     // 06 Your iPhone
+  { position: 'tl' },                  // 07 A tool appears
+  { position: 'br' },                  // 08 +45 points
+];
+---
+
+<section class="story-board" id="story" aria-labelledby="story-h2">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <div class="sb-head reveal">
+    <div class="chapter">
+      <span class="ch-pill">{chapters.word} <span class="ch-current">01</span> <span class="ch-total">/ 05</span></span>
+      <span class="ch-label">{chapters.story.label}</span>
+    </div>
+    <h2 id="story-h2">
+      {story.title.pre}<span class="hi">{story.title.hi}</span>{story.title.post}
+    </h2>
+    <p>{story.intro}</p>
+  </div>
+
+  <div class="sb-strip" role="list">
+
+    <!-- ── PANEL 01 — Washington 2024 ──────────────────────────── -->
+    <article class="sb-panel reveal" role="listitem">
+      <div class="num">01/08</div>
+      <div class="scene">
+        <span class={`sb-tag ${tagLayout[0].position}`}>{story.panels[0].tag}</span>
+        <svg class="scene-svg" viewBox="0 0 200 184" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="ill1-sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#162447"/>
+              <stop offset="100%" stop-color="#0A1428"/>
+            </linearGradient>
+            <radialGradient id="ill1-moon" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#60A5FA" stop-opacity="0.5"/>
+              <stop offset="100%" stop-color="#60A5FA" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="200" height="184" fill="url(#ill1-sky)"/>
+          <!-- moon glow -->
+          <circle cx="160" cy="40" r="40" fill="url(#ill1-moon)"/>
+          <circle cx="160" cy="40" r="9" fill="#CBD5E1"/>
+          <!-- stars -->
+          <g fill="#CBD5E1" opacity="0.6">
+            <circle cx="30" cy="22" r="0.8"/><circle cx="62" cy="36" r="0.8"/>
+            <circle cx="98" cy="18" r="1.2"/><circle cx="120" cy="44" r="0.8"/>
+            <circle cx="14" cy="50" r="0.8"/><circle cx="190" cy="78" r="0.8"/>
+          </g>
+          <!-- ground -->
+          <rect x="0" y="135" width="200" height="49" fill="#0F1A33"/>
+          <line x1="0" y1="135" x2="200" y2="135" stroke="rgba(96,165,250,0.15)" stroke-width="1"/>
+          <!-- White House silhouette -->
+          <g>
+            <polygon points="60,80 140,80 100,62" fill="#1E293B" stroke="rgba(96,165,250,0.25)" stroke-width="1"/>
+            <rect x="60" y="80" width="80" height="55" fill="#1E293B" stroke="rgba(96,165,250,0.25)" stroke-width="1"/>
+            <!-- columns lit windows -->
+            <g fill="#60A5FA" opacity="0.85">
+              <rect x="68" y="98" width="6" height="20"/>
+              <rect x="82" y="98" width="6" height="20"/>
+              <rect x="96" y="98" width="6" height="20"/>
+              <rect x="110" y="98" width="6" height="20"/>
+              <rect x="124" y="98" width="6" height="20"/>
+            </g>
+            <!-- flag pole -->
+            <line x1="100" y1="62" x2="100" y2="48" stroke="#CBD5E1" stroke-width="1"/>
+            <rect x="100" y="48" width="10" height="6" fill="#FB7185"/>
+          </g>
+          <!-- 2 agent silhouettes -->
+          <g fill="#0B1730" stroke="rgba(96,165,250,0.40)" stroke-width="1">
+            <g transform="translate(20,108)">
+              <circle cx="6" cy="0" r="5"/>
+              <rect x="0" y="5" width="12" height="22"/>
+            </g>
+            <g transform="translate(170,108)">
+              <circle cx="6" cy="0" r="5"/>
+              <rect x="0" y="5" width="12" height="22"/>
+            </g>
+          </g>
+          <!-- discreet earpiece dots glowing -->
+          <circle cx="27" cy="106" r="1.5" fill="#FB7185"/>
+          <circle cx="177" cy="106" r="1.5" fill="#FB7185"/>
+        </svg>
+      </div>
+      <div class="caption">
+        <strong>{story.panels[0].captionStrong}</strong>
+        {story.panels[0].caption}
+      </div>
+    </article>
+
+    <!-- ── PANEL 02 — Data market $200 ─────────────────────────── -->
+    <article class="sb-panel reveal" role="listitem">
+      <div class="num">02/08</div>
+      <div class="scene">
+        <span class={`sb-tag ${tagLayout[1].position}${tagLayout[1].alert ? ' alert' : ''}`}>{story.panels[1].tag}</span>
+        <svg class="scene-svg" viewBox="0 0 200 184" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="ill2-bg" cx="50%" cy="40%">
+              <stop offset="0%" stop-color="#162447"/>
+              <stop offset="100%" stop-color="#0A1428"/>
+            </radialGradient>
+          </defs>
+          <rect width="200" height="184" fill="url(#ill2-bg)"/>
+          <!-- desk surface -->
+          <rect x="0" y="130" width="200" height="54" fill="#0B1730"/>
+          <line x1="0" y1="130" x2="200" y2="130" stroke="rgba(255,255,255,0.06)"/>
+          <!-- laptop -->
+          <g transform="translate(50,40)">
+            <rect x="0" y="0" width="100" height="68" rx="6" fill="#1E293B" stroke="rgba(96,165,250,0.30)" stroke-width="1"/>
+            <rect x="5" y="5" width="90" height="58" rx="3" fill="#020617"/>
+            <!-- terminal lines -->
+            <g font-family="ui-monospace, monospace" fill="#60A5FA">
+              <text x="11" y="18" font-size="6" opacity="0.5">$ buy --dataset gps</text>
+              <text x="11" y="28" font-size="6" opacity="0.5">100M records ......</text>
+              <text x="11" y="38" font-size="6" opacity="0.7">PRICE: $200</text>
+              <text x="11" y="50" font-size="7" font-weight="700" fill="#FB7185">▶ CHECKOUT</text>
+            </g>
+            <!-- base -->
+            <rect x="-12" y="68" width="124" height="6" rx="2" fill="#0B1730" stroke="rgba(255,255,255,0.05)"/>
+            <rect x="42" y="68" width="16" height="3" fill="#020617"/>
+          </g>
+          <!-- coin -->
+          <g transform="translate(36,90)">
+            <circle cx="0" cy="0" r="14" fill="#0F1A33" stroke="#60A5FA" stroke-width="1.5"/>
+            <text x="0" y="4" text-anchor="middle" font-family="ui-monospace, monospace" font-size="12" font-weight="700" fill="#60A5FA">$</text>
+          </g>
+          <!-- coffee cup -->
+          <g transform="translate(168,108)">
+            <rect x="0" y="0" width="18" height="20" rx="2" fill="#1E293B" stroke="rgba(255,255,255,0.10)"/>
+            <ellipse cx="9" cy="0" rx="9" ry="2" fill="#60A5FA" opacity="0.35"/>
+            <path d="M 18 5 Q 24 5 24 11 Q 24 17 18 17" stroke="rgba(255,255,255,0.10)" fill="none" stroke-width="1"/>
+          </g>
+        </svg>
+      </div>
+      <div class="caption">
+        <strong>{story.panels[1].captionStrong}</strong>
+        {story.panels[1].caption}
+      </div>
+    </article>
+
+    <!-- ── PANEL 03 — 26 dots map ─────────────────────────────── -->
+    <article class="sb-panel reveal" role="listitem">
+      <div class="num">03/08</div>
+      <div class="scene">
+        <span class={`sb-tag ${tagLayout[2].position}`}>{story.panels[2].tag}</span>
+        <svg class="scene-svg" viewBox="0 0 200 184" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="ill3-bg" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#0F1A33"/>
+              <stop offset="100%" stop-color="#040814"/>
+            </radialGradient>
+            <pattern id="ill3-grid" x="0" y="0" width="18" height="18" patternUnits="userSpaceOnUse">
+              <circle cx="9" cy="9" r="0.8" fill="#60A5FA" opacity="0.18"/>
+            </pattern>
+            <filter id="redGlow" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="2" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="200" height="184" fill="url(#ill3-bg)"/>
+          <rect width="200" height="184" fill="url(#ill3-grid)"/>
+          <!-- subtle latitude curves -->
+          <g stroke="rgba(96,165,250,0.20)" stroke-width="0.6" fill="none">
+            <path d="M 0 50 Q 60 60 120 45 T 200 70"/>
+            <path d="M 0 100 Q 70 95 130 110 T 200 95"/>
+            <path d="M 0 140 Q 60 130 130 145 T 200 135"/>
+          </g>
+          <!-- 26 dots, glowing red -->
+          <g fill="#FB7185" filter="url(#redGlow)">
+            <circle cx="40" cy="40" r="3"/><circle cx="58" cy="55" r="3"/>
+            <circle cx="74" cy="46" r="3"/><circle cx="92" cy="62" r="3"/>
+            <circle cx="110" cy="48" r="3"/><circle cx="128" cy="66" r="3"/>
+            <circle cx="146" cy="54" r="3"/><circle cx="166" cy="68" r="3"/>
+            <circle cx="34" cy="90" r="3"/><circle cx="52" cy="100" r="3"/>
+            <circle cx="72" cy="92" r="3"/><circle cx="94" cy="106" r="3"/>
+            <circle cx="116" cy="96" r="3"/><circle cx="138" cy="108" r="3"/>
+            <circle cx="158" cy="98" r="3"/><circle cx="178" cy="112" r="3"/>
+            <circle cx="42" cy="140" r="3"/><circle cx="62" cy="150" r="3"/>
+            <circle cx="84" cy="138" r="3"/><circle cx="104" cy="156" r="3"/>
+            <circle cx="124" cy="142" r="3"/><circle cx="144" cy="158" r="3"/>
+            <circle cx="166" cy="146" r="3"/><circle cx="184" cy="158" r="3"/>
+            <circle cx="76" cy="170" r="3"/><circle cx="120" cy="172" r="3"/>
+          </g>
+          <!-- label -->
+          <text x="100" y="22" text-anchor="middle" font-family="ui-monospace, monospace"
+                font-size="8" font-weight="600" letter-spacing="2" fill="#94A3B8">WASHINGTON · DC</text>
+        </svg>
+      </div>
+      <div class="caption">
+        <strong>{story.panels[2].captionStrong}</strong>
+        {story.panels[2].caption}
+      </div>
+    </article>
+
+    <!-- ── PANEL 04 — Dossier identifiés ──────────────────────── -->
+    <article class="sb-panel reveal" role="listitem">
+      <div class="num">04/08</div>
+      <div class="scene">
+        <span class={`sb-tag ${tagLayout[3].position}${tagLayout[3].alert ? ' alert' : ''}`}>{story.panels[3].tag}</span>
+        <svg class="scene-svg" viewBox="0 0 200 184" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="200" height="184" fill="#0A1428"/>
+          <!-- file -->
+          <g transform="translate(28,16) rotate(-2 80 76)">
+            <rect x="0" y="0" width="160" height="152" rx="6" fill="#0F1A33" stroke="rgba(96,165,250,0.30)" stroke-width="1"/>
+            <line x1="0" y1="22" x2="160" y2="22" stroke="rgba(96,165,250,0.30)"/>
+            <text x="10" y="16" font-family="ui-monospace, monospace" font-size="8" font-weight="700" fill="#60A5FA" letter-spacing="1.5">DOSSIER · 2024-26</text>
+            <!-- redaction bars -->
+            <g fill="#1E293B">
+              <rect x="10" y="30" width="74" height="6" rx="1"/>
+              <rect x="92" y="30" width="58" height="6" rx="1"/>
+              <rect x="10" y="42" width="100" height="6" rx="1"/>
+              <rect x="116" y="42" width="32" height="6" rx="1"/>
+              <rect x="10" y="54" width="60" height="6" rx="1"/>
+              <rect x="76" y="54" width="74" height="6" rx="1"/>
+              <rect x="10" y="66" width="120" height="6" rx="1"/>
+              <rect x="10" y="78" width="80" height="6" rx="1"/>
+              <rect x="98" y="78" width="52" height="6" rx="1"/>
+              <rect x="10" y="90" width="100" height="6" rx="1"/>
+              <rect x="10" y="102" width="60" height="6" rx="1"/>
+              <rect x="78" y="102" width="50" height="6" rx="1"/>
+            </g>
+            <!-- 26 small avatar dots, like an identified list -->
+            <g transform="translate(10,118)">
+              <g fill="#60A5FA" opacity="0.9">
+                <circle cx="4" cy="6" r="3"/><circle cx="14" cy="6" r="3"/><circle cx="24" cy="6" r="3"/>
+                <circle cx="34" cy="6" r="3"/><circle cx="44" cy="6" r="3"/><circle cx="54" cy="6" r="3"/>
+                <circle cx="64" cy="6" r="3"/><circle cx="74" cy="6" r="3"/><circle cx="84" cy="6" r="3"/>
+                <circle cx="94" cy="6" r="3"/><circle cx="104" cy="6" r="3"/><circle cx="114" cy="6" r="3"/>
+                <circle cx="124" cy="6" r="3"/>
+                <circle cx="4" cy="18" r="3"/><circle cx="14" cy="18" r="3"/><circle cx="24" cy="18" r="3"/>
+                <circle cx="34" cy="18" r="3"/><circle cx="44" cy="18" r="3"/><circle cx="54" cy="18" r="3"/>
+                <circle cx="64" cy="18" r="3"/><circle cx="74" cy="18" r="3"/><circle cx="84" cy="18" r="3"/>
+                <circle cx="94" cy="18" r="3"/><circle cx="104" cy="18" r="3"/><circle cx="114" cy="18" r="3"/>
+                <circle cx="124" cy="18" r="3"/>
+              </g>
+            </g>
+            <!-- stamp -->
+            <g transform="translate(108,138) rotate(-12)">
+              <rect x="-26" y="-9" width="52" height="20" fill="none" stroke="#FB7185" stroke-width="1.5" rx="2"/>
+              <text x="0" y="4" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" font-weight="700" fill="#FB7185" letter-spacing="1.5">IDENTIFIÉS</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="caption">
+        <strong>{story.panels[3].captionStrong}</strong>
+        {story.panels[3].caption}
+      </div>
+    </article>
+
+    <!-- ── PANEL 05 — Strava 2018 ─────────────────────────────── -->
+    <article class="sb-panel reveal" role="listitem">
+      <div class="num">05/08</div>
+      <div class="scene">
+        <span class={`sb-tag ${tagLayout[4].position}`}>{story.panels[4].tag}</span>
+        <svg class="scene-svg" viewBox="0 0 200 184" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="ill5-sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1A1845"/>
+              <stop offset="60%" stop-color="#3B2A4D"/>
+              <stop offset="100%" stop-color="#0A1428"/>
+            </linearGradient>
+            <filter id="trailGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="2.5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="200" height="120" fill="url(#ill5-sky)"/>
+          <!-- desert dunes -->
+          <path d="M 0 120 Q 50 110 100 122 T 200 116 L 200 184 L 0 184 Z" fill="#0B1730"/>
+          <line x1="0" y1="120" x2="200" y2="120" stroke="rgba(96,165,250,0.20)"/>
+          <!-- sun setting -->
+          <circle cx="40" cy="60" r="20" fill="#FB7185" opacity="0.40"/>
+          <circle cx="40" cy="60" r="11" fill="#FB7185"/>
+          <!-- base -->
+          <g transform="translate(118,82)">
+            <rect x="0" y="0" width="56" height="32" fill="#1E293B" stroke="rgba(96,165,250,0.25)" stroke-width="1"/>
+            <g fill="#60A5FA" opacity="0.7">
+              <rect x="6" y="6" width="6" height="6"/>
+              <rect x="18" y="6" width="6" height="6"/>
+              <rect x="30" y="6" width="6" height="6"/>
+              <rect x="42" y="6" width="6" height="6"/>
+            </g>
+            <rect x="-6" y="32" width="68" height="4" fill="#0B1730"/>
+            <line x1="28" y1="0" x2="28" y2="-14" stroke="#94A3B8" stroke-width="1"/>
+            <circle cx="28" cy="-15" r="2" fill="#FB7185"/>
+          </g>
+          <!-- glowing red route -->
+          <g filter="url(#trailGlow)">
+            <path d="M 20 156 Q 60 144 100 150 T 180 138" stroke="#FB7185" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </g>
+          <g fill="#FB7185" filter="url(#trailGlow)">
+            <circle cx="20" cy="156" r="2.5"/>
+            <circle cx="60" cy="146" r="2.5"/>
+            <circle cx="100" cy="150" r="2.5"/>
+            <circle cx="140" cy="142" r="2.5"/>
+            <circle cx="180" cy="138" r="2.5"/>
+          </g>
+        </svg>
+      </div>
+      <div class="caption">
+        <strong>{story.panels[4].captionStrong}</strong>
+        {story.panels[4].caption}
+      </div>
+    </article>
+
+    <!-- ── PANEL 06 — Your iPhone ─────────────────────────────── -->
+    <article class="sb-panel reveal" role="listitem">
+      <div class="num">06/08</div>
+      <div class="scene">
+        <span class={`sb-tag ${tagLayout[5].position}${tagLayout[5].alert ? ' alert' : ''}`}>{story.panels[5].tag}</span>
+        <svg class="scene-svg" viewBox="0 0 200 184" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="ill6-bg" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#162447"/>
+              <stop offset="100%" stop-color="#040814"/>
+            </radialGradient>
+            <filter id="leakGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="1.5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="200" height="184" fill="url(#ill6-bg)"/>
+          <!-- phone -->
+          <g transform="translate(72,18)">
+            <rect x="0" y="0" width="56" height="148" rx="10" fill="#0F172A" stroke="rgba(96,165,250,0.30)" stroke-width="1"/>
+            <rect x="3" y="6" width="50" height="136" rx="6" fill="#020617"/>
+            <!-- notch -->
+            <rect x="20" y="3" width="16" height="2" rx="1" fill="#0B1730"/>
+            <!-- 9 app icons -->
+            <g>
+              <rect x="8" y="12" width="11" height="11" rx="2.5" fill="#60A5FA"/>
+              <rect x="22" y="12" width="11" height="11" rx="2.5" fill="#FB7185"/>
+              <rect x="36" y="12" width="11" height="11" rx="2.5" fill="#10B981"/>
+              <rect x="8" y="26" width="11" height="11" rx="2.5" fill="#FBBF24"/>
+              <rect x="22" y="26" width="11" height="11" rx="2.5" fill="#818CF8"/>
+              <rect x="36" y="26" width="11" height="11" rx="2.5" fill="#60A5FA"/>
+              <rect x="8" y="40" width="11" height="11" rx="2.5" fill="#FB7185"/>
+              <rect x="22" y="40" width="11" height="11" rx="2.5" fill="#10B981"/>
+              <rect x="36" y="40" width="11" height="11" rx="2.5" fill="#FBBF24"/>
+            </g>
+            <!-- progress fake -->
+            <rect x="8" y="58" width="40" height="2" rx="1" fill="rgba(96,165,250,0.20)"/>
+            <rect x="8" y="58" width="26" height="2" rx="1" fill="#60A5FA"/>
+          </g>
+          <!-- leak lines & labels -->
+          <g stroke="#FB7185" stroke-width="1.5" fill="none" stroke-dasharray="3 3" filter="url(#leakGlow)">
+            <path d="M 72 60 Q 40 50 26 30"/>
+            <path d="M 128 60 Q 160 50 174 30"/>
+            <path d="M 72 110 Q 40 110 22 130"/>
+            <path d="M 128 110 Q 160 110 176 130"/>
+          </g>
+          <g font-family="ui-monospace, monospace" font-size="7" font-weight="700" fill="#FB7185">
+            <text x="16" y="22" text-anchor="middle">→ PUB</text>
+            <text x="180" y="22" text-anchor="middle">→ GPS</text>
+            <text x="16" y="146" text-anchor="middle">→ ID</text>
+            <text x="180" y="146" text-anchor="middle">→ AGE</text>
+          </g>
+        </svg>
+      </div>
+      <div class="caption">
+        <strong>{story.panels[5].captionStrong}</strong>
+        {story.panels[5].caption}
+      </div>
+    </article>
+
+    <!-- ── PANEL 07 — Privacy Score appears ───────────────────── -->
+    <article class="sb-panel reveal" role="listitem">
+      <div class="num">07/08</div>
+      <div class="scene">
+        <span class={`sb-tag ${tagLayout[6].position}`}>{story.panels[6].tag}</span>
+        <svg class="scene-svg" viewBox="0 0 200 184" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="ill7-burst" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#60A5FA" stop-opacity="0.65"/>
+              <stop offset="50%" stop-color="#3B82F6" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="#0A1428" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="ill7-ring" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#60A5FA"/>
+              <stop offset="100%" stop-color="#3B82F6"/>
+            </linearGradient>
+            <filter id="ringGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="200" height="184" fill="#040814"/>
+          <!-- radial burst -->
+          <rect width="200" height="184" fill="url(#ill7-burst)"/>
+          <!-- subtle rays -->
+          <g stroke="rgba(96,165,250,0.20)" stroke-width="0.6">
+            <line x1="100" y1="92" x2="100" y2="0"/>
+            <line x1="100" y1="92" x2="200" y2="92"/>
+            <line x1="100" y1="92" x2="100" y2="184"/>
+            <line x1="100" y1="92" x2="0" y2="92"/>
+            <line x1="100" y1="92" x2="180" y2="20"/>
+            <line x1="100" y1="92" x2="20" y2="20"/>
+            <line x1="100" y1="92" x2="180" y2="164"/>
+            <line x1="100" y1="92" x2="20" y2="164"/>
+          </g>
+          <!-- app icon -->
+          <g transform="translate(100,92)">
+            <rect x="-30" y="-30" width="60" height="60" rx="14" fill="#0F172A" stroke="rgba(96,165,250,0.50)" stroke-width="1.5"/>
+            <circle cx="0" cy="0" r="18" fill="none" stroke="rgba(96,165,250,0.20)" stroke-width="3"/>
+            <circle cx="0" cy="0" r="18" fill="none" stroke="url(#ill7-ring)" stroke-width="3"
+                    stroke-linecap="round" stroke-dasharray="113" stroke-dashoffset="26"
+                    transform="rotate(-90)" filter="url(#ringGlow)"/>
+            <text x="0" y="4" text-anchor="middle" font-family="Manrope, system-ui, sans-serif"
+                  font-size="17" font-weight="800" fill="#F8FAFC" letter-spacing="-1">77</text>
+          </g>
+          <text x="100" y="158" text-anchor="middle" font-family="Manrope, system-ui, sans-serif"
+                font-size="9" font-weight="700" letter-spacing="3" fill="#60A5FA">PRIVACY SCORE</text>
+        </svg>
+      </div>
+      <div class="caption">
+        <strong>{story.panels[6].captionStrong}</strong>
+        {story.panels[6].caption}
+      </div>
+    </article>
+
+    <!-- ── PANEL 08 — Your turn ──────────────────────────────── -->
+    <article class="sb-panel reveal" role="listitem">
+      <div class="num">08/08</div>
+      <div class="scene">
+        <span class={`sb-tag ${tagLayout[7].position}`}>{story.panels[7].tag}</span>
+        <svg class="scene-svg" viewBox="0 0 200 184" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="ill8-burst" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#10B981" stop-opacity="0.45"/>
+              <stop offset="60%" stop-color="#10B981" stop-opacity="0.10"/>
+              <stop offset="100%" stop-color="#020617" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="checkGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="200" height="184" fill="#040814"/>
+          <rect width="200" height="184" fill="url(#ill8-burst)"/>
+          <!-- score history bars climbing -->
+          <g>
+            <rect x="12"  y="130" width="6" height="22" rx="1" fill="rgba(96,165,250,0.30)"/>
+            <rect x="22"  y="120" width="6" height="32" rx="1" fill="rgba(96,165,250,0.40)"/>
+            <rect x="32"  y="106" width="6" height="46" rx="1" fill="rgba(96,165,250,0.55)"/>
+            <rect x="42"  y="92"  width="6" height="60" rx="1" fill="rgba(96,165,250,0.70)"/>
+            <rect x="52"  y="78"  width="6" height="74" rx="1" fill="#60A5FA"/>
+            <rect x="62"  y="62"  width="6" height="90" rx="1" fill="#60A5FA"/>
+
+            <rect x="138" y="62"  width="6" height="90" rx="1" fill="#60A5FA"/>
+            <rect x="148" y="78"  width="6" height="74" rx="1" fill="#60A5FA"/>
+            <rect x="158" y="92"  width="6" height="60" rx="1" fill="rgba(96,165,250,0.70)"/>
+            <rect x="168" y="106" width="6" height="46" rx="1" fill="rgba(96,165,250,0.55)"/>
+            <rect x="178" y="120" width="6" height="32" rx="1" fill="rgba(96,165,250,0.40)"/>
+          </g>
+          <!-- check circle -->
+          <g transform="translate(100,86)" filter="url(#checkGlow)">
+            <circle r="34" fill="#0F1A33" stroke="#10B981" stroke-width="2"/>
+            <path d="M -14 2 L -4 14 L 16 -10" stroke="#10B981" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <text x="100" y="156" text-anchor="middle" font-family="Manrope, system-ui, sans-serif"
+                font-size="9" font-weight="700" letter-spacing="3" fill="#10B981">À VOUS DE JOUER</text>
+        </svg>
+      </div>
+      <div class="caption">
+        <strong>{story.panels[7].captionStrong}</strong>
+        {story.panels[7].caption}
+      </div>
+    </article>
+
+  </div>
+
+  <div class="sb-pivot reveal">
+    <div class="line"></div>
+    <p>
+      {story.pivot.line1Pre}<em>{story.pivot.line1Em}</em>{story.pivot.line1Post}<br/>
+      {story.pivot.line2Pre}<strong>{story.pivot.line2Strong}</strong>
+    </p>
+  </div>
+</section>
+
+<style>
+  /* ============================================================
+     STORYBOARD — scoped styles (design lines 70-210)
+     Chapter etiquette (.chapter, .ch-pill, .ch-label) lives in
+     `site.css` since 5 sections share it.
+  ============================================================ */
+  .story-board {
+    position: relative;
+    padding: 140px 32px 120px;
+    background: linear-gradient(180deg, #020617 0%, #050B21 100%);
+    overflow: hidden;
+  }
+  .story-board :global(.orb) {
+    position: absolute; border-radius: 50%;
+    filter: blur(120px); pointer-events: none; z-index: 0;
+  }
+  .story-board :global(.orb-1) { width: 520px; height: 520px; background: rgba(99,102,241,0.18); top: 100px; right: -120px; }
+  .story-board :global(.orb-2) { width: 460px; height: 460px; background: rgba(59,130,246,0.18); bottom: 120px; left: -120px; }
+
+  .sb-head { max-width: 880px; margin: 0 auto 70px; text-align: center; position: relative; z-index: 2; }
+  .sb-head :global(.overline) { color: #60A5FA; font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; }
+  .sb-head h2 {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: clamp(28px, 3.6vw, 48px);
+    line-height: 1.15; letter-spacing: -0.02em;
+    color: #F8FAFC; margin: 18px 0;
+    text-wrap: pretty;
+  }
+  .sb-head h2 .hi {
+    color: #FB7185;
+    position: relative; display: inline-block;
+    padding: 0 6px;
+  }
+  .sb-head h2 .hi::after {
+    content: ""; position: absolute; inset: 0;
+    background: rgba(251,113,133,0.10);
+    border-radius: 6px; z-index: -1;
+  }
+  .sb-head p {
+    font-size: 18px; line-height: 1.55; color: #94A3B8;
+    max-width: 620px; margin: 0 auto;
+  }
+
+  /* 8-panel grid */
+  .sb-strip {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    position: relative; z-index: 2;
+  }
+  .sb-panel {
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    transition: transform .35s var(--ease-out), border-color .3s, box-shadow .3s;
+  }
+  .sb-panel:hover {
+    transform: translateY(-4px);
+    border-color: rgba(96,165,250,0.30);
+    box-shadow: 0 20px 50px -10px rgba(96,165,250,0.18);
+  }
+  .sb-panel .num {
+    display: flex; align-items: center;
+    padding: 14px 18px 8px;
+    font-family: var(--font-mono, ui-monospace, SF Mono, Menlo, monospace);
+    font-size: 11px; font-weight: 600;
+    color: #60A5FA; letter-spacing: 0.16em;
+  }
+  .sb-panel .num::before {
+    content: ""; display: inline-block; width: 18px; height: 1px;
+    background: rgba(96,165,250,0.5); vertical-align: middle; margin-right: 8px;
+  }
+  .sb-panel .scene {
+    display: block; width: 100%;
+    aspect-ratio: 1 / 0.92;
+    background: linear-gradient(180deg, #0E1A33 0%, #0A1428 100%);
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .sb-panel .scene svg.scene-svg { display: block; width: 100%; height: 100%; }
+
+  /* Floating label inside scene (replaces speech bubble) */
+  .sb-tag {
+    position: absolute; z-index: 4;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(96,165,250,0.30);
+    color: #60A5FA;
+    border-radius: 9999px;
+    padding: 5px 12px;
+    font-family: var(--font-display);
+    font-size: 10.5px; font-weight: 700;
+    letter-spacing: 0.10em; text-transform: uppercase;
+    white-space: nowrap;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  }
+  .sb-tag.tl { top: 12px; left: 12px; }
+  .sb-tag.tr { top: 12px; right: 12px; }
+  .sb-tag.bl { bottom: 12px; left: 12px; }
+  .sb-tag.br { bottom: 12px; right: 12px; }
+  .sb-tag.alert { border-color: rgba(251,113,133,0.40); color: #FB7185; }
+
+  /* Caption */
+  .sb-panel .caption {
+    padding: 18px 18px 22px;
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #94A3B8;
+  }
+  .sb-panel .caption strong {
+    color: #F8FAFC; font-weight: 700;
+    display: block; margin-bottom: 4px;
+    font-family: var(--font-display);
+    font-size: 14.5px; letter-spacing: -0.01em;
+  }
+
+  /* Strip responsive */
+  @media (max-width: 1100px) { .sb-strip { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .sb-strip { grid-template-columns: 1fr; } }
+
+  /* Pivot */
+  .sb-pivot {
+    margin: 100px auto 0;
+    text-align: center;
+    position: relative; z-index: 2;
+  }
+  .sb-pivot .line {
+    width: 1px; height: 60px; margin: 0 auto 24px;
+    background: linear-gradient(180deg, transparent, #60A5FA, transparent);
+  }
+  .sb-pivot p {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 2.4vw, 32px);
+    line-height: 1.3; color: #F8FAFC;
+    font-weight: 700; letter-spacing: -0.015em;
+  }
+  .sb-pivot p strong { color: #60A5FA; font-weight: 800; }
+  .sb-pivot p em { color: #FB7185; font-style: normal; }
+</style>

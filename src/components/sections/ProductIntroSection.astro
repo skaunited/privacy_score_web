@@ -1,0 +1,83 @@
+---
+/**
+ * ProductIntroSection.astro — Chapter 02/05 "Le produit".
+ * Matches `variation-illustrated.html` lines 1082-1119.
+ * Scoped CSS adds height:auto to the phone screenshot so the browser
+ * honors the aspect ratio implied by the width/height HTML attributes
+ * (1320×2868). Without it, the literal height attribute wins and the
+ * image stretches vertically inside its 320px-wide frame.
+ */
+interface Props {
+  product: {
+    title: { line1: string; line2: string; line3: string };
+    body: string; // HTML-safe
+    bullets: string[];
+    phoneAlt: string;
+  };
+  chapters: {
+    word: string;
+    product: { label: string };
+  };
+}
+
+const { product, chapters } = Astro.props;
+---
+
+<section id="product-intro" class="product-intro" aria-labelledby="product-h2">
+  <div class="container">
+    <div class="intro-grid">
+      <div class="intro-copy reveal">
+        <div class="intro-mark">
+          <img
+            src="/assets/app-icon-256.png"
+            alt=""
+            width="256"
+            height="256"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <div class="chapter" style="justify-content: flex-start;">
+          <span class="ch-pill">{chapters.word} <span class="ch-current">02</span> <span class="ch-total">/ 05</span></span>
+          <span class="ch-label">{chapters.product.label}</span>
+        </div>
+        <h2 class="intro-h" id="product-h2">
+          {product.title.line1}<br/>
+          {product.title.line2}<br/>
+          {product.title.line3}
+        </h2>
+        <p class="intro-p" set:html={product.body}></p>
+        <ul class="intro-bullets">
+          {product.bullets.map((bullet) => (
+            <li>
+              <span class="material-icons-round" aria-hidden="true">check</span>
+              {bullet}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="intro-visual reveal">
+        <div class="intro-phone">
+          <img
+            src="/assets/screen-dashboard.png"
+            alt={product.phoneAlt}
+            width="1320"
+            height="2868"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .intro-phone img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 32px;
+  }
+</style>

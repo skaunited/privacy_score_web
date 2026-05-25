@@ -1,0 +1,1429 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Privacy Score — L'histoire qui vous concerne.</title>
+<link rel="icon" type="image/png" href="assets/app-icon-256.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&family=Special+Elite&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" />
+
+<style>
+/* ===========================================================
+   PRIVACY SCORE — COMIC / ILLUSTRATED VARIATION
+   Cream paper, ink black, brand blue, alert red.
+   Halftone textures, panel borders, speech bubbles.
+   =========================================================== */
+
+:root {
+  --paper: #F4EBD8;
+  --paper-2: #EFE3CC;
+  --ink: #1A1814;
+  --blue: #2E5BFF;
+  --blue-deep: #1A3FCC;
+  --red: #E53E3E;
+  --yellow: #FFD54F;
+  --green: #2EA66C;
+  --line: #1A1814;
+  --shadow: 6px 6px 0 #1A1814;
+  --shadow-sm: 4px 4px 0 #1A1814;
+  --shadow-tight: 3px 3px 0 #1A1814;
+  --shadow-red: 6px 6px 0 #E53E3E;
+  --shadow-blue: 6px 6px 0 #2E5BFF;
+  --shadow-yellow: 6px 6px 0 #FFD54F;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; padding: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+.container { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+
+.material-icons-round { font-family: 'Material Icons Round'; font-size: 18px; line-height: 1; vertical-align: -3px; }
+
+/* ── Paper texture ──────────────────────────────────────── */
+body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.09 0 0 0 0 0.08 0 0 0 0.18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.65;
+  mix-blend-mode: multiply;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Archivo Black', 'Inter', sans-serif;
+  margin: 0;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+/* ────────────────────────────────────────────────────────── */
+/* TOP BAR + variation switcher                              */
+/* ────────────────────────────────────────────────────────── */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--paper);
+  border-bottom: 3px solid var(--ink);
+  padding: 14px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.topbar .brand {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 18px;
+}
+.topbar .brand img {
+  width: 32px; height: 32px;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.topbar .switch {
+  display: inline-flex; gap: 0;
+  border: 2px solid var(--ink);
+  border-radius: 9999px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.topbar .switch a {
+  padding: 8px 16px; font-size: 12px; font-weight: 700;
+  color: var(--ink);
+}
+.topbar .switch a.active { background: var(--ink); color: var(--paper); }
+.topbar .cta {
+  background: var(--blue); color: #fff;
+  padding: 10px 20px;
+  border: 2px solid var(--ink);
+  border-radius: 9999px;
+  font-weight: 700; font-size: 13px;
+  display: inline-flex; align-items: center; gap: 6px;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: transform .12s, box-shadow .12s;
+}
+.topbar .cta:hover { transform: translate(-1px,-1px); box-shadow: 5px 5px 0 var(--ink); }
+.topbar .cta:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+
+@media (max-width: 760px) {
+  .topbar .switch { display: none; }
+}
+
+
+/* ────────────────────────────────────────────────────────── */
+/* HERO TITLE CARD                                            */
+/* ────────────────────────────────────────────────────────── */
+.hero {
+  padding: 60px 32px 40px;
+  position: relative;
+  z-index: 2;
+}
+.hero-inner {
+  max-width: 1180px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.05fr 0.95fr;
+  gap: 48px; align-items: center;
+}
+.tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--yellow);
+  border: 2px solid var(--ink);
+  border-radius: 9999px;
+  padding: 6px 14px;
+  font-weight: 700; font-size: 12px;
+  box-shadow: 3px 3px 0 var(--ink);
+  transform: rotate(-2deg);
+  margin-bottom: 22px;
+}
+.hero h1 {
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: 0.93;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.hero h1 .stamp {
+  display: inline-block;
+  background: var(--red); color: #fff;
+  padding: 0 12px; margin: 0 4px;
+  transform: rotate(-2deg);
+  position: relative;
+}
+.hero h1 .ul {
+  position: relative; display: inline-block;
+}
+.hero h1 .ul::after {
+  content: ""; position: absolute; left: -2%; right: -2%; bottom: -4px;
+  height: 6px; background: var(--blue);
+  transform: skewX(-12deg);
+}
+.hero p.lede {
+  font-size: 18px; line-height: 1.55; color: #3D3A33;
+  max-width: 500px; margin-bottom: 30px;
+  font-weight: 500;
+}
+.hero p.lede b { color: var(--ink); font-weight: 800; }
+
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.btn-comic {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 22px;
+  border: 2px solid var(--ink);
+  border-radius: 9999px;
+  font-weight: 800; font-size: 14px;
+  cursor: pointer;
+  transition: transform .12s, box-shadow .12s;
+}
+.btn-comic:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink) !important; }
+.btn-comic.primary {
+  background: var(--ink); color: var(--paper);
+  box-shadow: 5px 5px 0 var(--blue);
+}
+.btn-comic.primary:hover { transform: translate(-1px,-1px); box-shadow: 6px 6px 0 var(--blue); }
+.btn-comic.ghost {
+  background: #fff; color: var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+.btn-comic.ghost:hover { transform: translate(-1px,-1px); box-shadow: 6px 6px 0 var(--ink); }
+
+/* Hero illustration: agent + phone with leaking data */
+.hero-art {
+  position: relative;
+}
+.hero-frame {
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  box-shadow: 8px 8px 0 var(--ink);
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-frame .panel-no {
+  position: absolute; top: 10px; right: 14px;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 13px; color: rgba(0,0,0,0.4);
+  letter-spacing: 0.1em;
+}
+.hero-illust { width: 100%; height: auto; display: block; }
+
+.hero-burst {
+  position: absolute; top: -28px; right: -20px;
+  background: var(--red); color: #fff;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 14px; line-height: 1.05;
+  padding: 14px 18px;
+  border: 3px solid var(--ink);
+  text-align: center;
+  transform: rotate(8deg);
+  width: 140px;
+  text-transform: uppercase;
+  box-shadow: 5px 5px 0 var(--ink);
+  clip-path: polygon(
+    50% 0%, 60% 12%, 75% 5%, 78% 22%, 95% 18%, 88% 35%, 100% 45%,
+    88% 60%, 95% 78%, 75% 75%, 78% 92%, 60% 85%, 50% 100%, 40% 85%,
+    22% 92%, 22% 75%, 5% 78%, 12% 60%, 0% 50%, 12% 38%, 5% 22%,
+    22% 25%, 22% 8%, 40% 15%
+  );
+  display: flex; align-items: center; justify-content: center;
+  z-index: 5;
+}
+
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 30px; }
+}
+
+
+/* ────────────────────────────────────────────────────────── */
+/* COMIC STRIP — the 8-panel story                            */
+/* ────────────────────────────────────────────────────────── */
+.story {
+  padding: 100px 32px 80px;
+  position: relative;
+  z-index: 2;
+  background: var(--paper);
+}
+.story-head {
+  max-width: 760px; margin: 0 auto 60px;
+  text-align: center; position: relative;
+}
+.section-tag {
+  display: inline-block;
+  background: var(--blue); color: #fff;
+  border: 2px solid var(--ink);
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 12px;
+  padding: 6px 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: rotate(-1deg);
+  box-shadow: 3px 3px 0 var(--ink);
+  margin-bottom: 22px;
+}
+.story-head h2 {
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.0; text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.story-head p {
+  font-size: 17px; line-height: 1.5;
+  color: #3D3A33; font-weight: 500;
+}
+
+/* The strip itself */
+.strip {
+  max-width: 1180px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.panel {
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 14px;
+  box-shadow: 5px 5px 0 var(--ink);
+  position: relative;
+  overflow: hidden;
+  transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .2s;
+  cursor: default;
+}
+.panel:hover { transform: translate(-2px, -2px) rotate(0.3deg); box-shadow: 7px 7px 0 var(--ink); }
+.panel:nth-child(2) { transform: rotate(-0.5deg); }
+.panel:nth-child(3) { transform: rotate(0.4deg); }
+.panel:nth-child(5) { transform: rotate(0.5deg); }
+.panel:nth-child(7) { transform: rotate(-0.3deg); }
+
+.panel .num {
+  position: absolute; top: 8px; left: 10px; z-index: 4;
+  background: var(--ink); color: var(--paper);
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 12px;
+  padding: 4px 9px;
+  letter-spacing: 0.06em;
+}
+.panel .scene {
+  display: block; width: 100%;
+  aspect-ratio: 1 / 0.95;
+  background: var(--paper-2);
+  position: relative;
+  overflow: hidden;
+}
+.panel svg.scene-svg {
+  display: block; width: 100%; height: 100%;
+}
+.panel .caption {
+  background: var(--paper);
+  border-top: 3px solid var(--ink);
+  padding: 14px 16px;
+  font-family: 'Special Elite', 'Inter', monospace;
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--ink);
+  min-height: 78px;
+}
+.panel .caption b { font-family: 'Archivo Black', sans-serif; font-weight: normal; }
+
+/* Speech bubble */
+.bubble {
+  position: absolute;
+  background: #fff;
+  border: 2.5px solid var(--ink);
+  border-radius: 16px;
+  padding: 8px 12px;
+  font-family: 'Special Elite', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  z-index: 3;
+  box-shadow: 3px 3px 0 var(--ink);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  max-width: 65%;
+  text-align: center;
+}
+.bubble::after {
+  content: ""; position: absolute;
+  width: 16px; height: 16px;
+  background: #fff;
+  border-right: 2.5px solid var(--ink);
+  border-bottom: 2.5px solid var(--ink);
+}
+.bubble.tl { top: 14px; left: 14px; }
+.bubble.tl::after { left: 18px; bottom: -10px; transform: rotate(45deg); }
+.bubble.tr { top: 14px; right: 14px; }
+.bubble.tr::after { right: 18px; bottom: -10px; transform: rotate(45deg); }
+.bubble.br { bottom: 14px; right: 14px; }
+.bubble.br::after { right: 18px; top: -10px; transform: rotate(225deg); }
+.bubble.thought { border-style: dashed; }
+
+/* Strip mobile */
+@media (max-width: 1100px) { .strip { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .strip { grid-template-columns: 1fr; } }
+
+
+/* ────────────────────────────────────────────────────────── */
+/* TURN — the pivot                                          */
+/* ────────────────────────────────────────────────────────── */
+.turn {
+  padding: 120px 32px;
+  text-align: center;
+  position: relative; z-index: 2;
+}
+.turn h2 {
+  font-size: clamp(36px, 6vw, 76px);
+  line-height: 0.96;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  max-width: 880px;
+  margin: 0 auto 30px;
+}
+.turn h2 em {
+  font-style: normal;
+  background: var(--blue); color: #fff;
+  padding: 0 14px;
+  display: inline-block;
+  transform: rotate(-2deg);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+.turn p {
+  font-size: 18px;
+  font-family: 'Special Elite', monospace;
+  max-width: 580px; margin: 0 auto;
+  color: #3D3A33;
+}
+
+
+/* ────────────────────────────────────────────────────────── */
+/* PRODUCT REVEAL                                            */
+/* ────────────────────────────────────────────────────────── */
+.reveal-section {
+  padding: 80px 32px 120px;
+  position: relative; z-index: 2;
+}
+.reveal-wrap {
+  max-width: 1180px; margin: 0 auto;
+  background: var(--ink);
+  color: var(--paper);
+  border: 3px solid var(--ink);
+  border-radius: 22px;
+  padding: 70px 60px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 8px 8px 0 var(--blue);
+}
+.reveal-wrap::before {
+  content: "";
+  position: absolute; inset: 0; opacity: 0.2;
+  background-image: radial-gradient(rgba(255,255,255,0.4) 1.2px, transparent 1.2px);
+  background-size: 14px 14px;
+}
+.reveal-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+  position: relative; z-index: 2;
+  align-items: center;
+}
+.reveal-grid .section-tag { background: var(--yellow); color: var(--ink); }
+.reveal-grid h2 {
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 0.95; text-transform: uppercase;
+  margin: 18px 0 22px;
+  color: var(--paper);
+}
+.reveal-grid p {
+  font-size: 17px; line-height: 1.55;
+  font-family: 'Special Elite', monospace;
+  color: #D6CDB8;
+  margin: 0 0 26px; max-width: 480px;
+}
+.reveal-grid ul {
+  list-style: none; padding: 0; margin: 0 0 32px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.reveal-grid li {
+  font-family: 'Special Elite', monospace;
+  font-size: 14px; color: var(--paper);
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.reveal-grid li::before {
+  content: ""; flex-shrink: 0;
+  width: 14px; height: 14px; margin-top: 4px;
+  background: var(--blue);
+  border: 2px solid var(--paper);
+}
+.reveal-grid li.has-x::before { background: var(--red); }
+
+.reveal-phone {
+  display: flex; justify-content: center;
+  position: relative;
+}
+.reveal-phone .ph {
+  width: 290px;
+  background: #fff;
+  border: 3px solid var(--paper);
+  border-radius: 42px;
+  padding: 10px;
+  transform: rotate(2deg);
+}
+.reveal-phone .ph img { width: 100%; border-radius: 32px; }
+
+.zap {
+  position: absolute;
+  background: var(--yellow);
+  color: var(--ink);
+  border: 2.5px solid var(--ink);
+  font-family: 'Archivo Black', sans-serif;
+  text-transform: uppercase;
+  font-size: 13px;
+  padding: 10px 14px;
+  box-shadow: 4px 4px 0 var(--ink);
+  z-index: 5;
+}
+.zap.z1 { top: -20px; left: -10px; transform: rotate(-6deg); }
+.zap.z2 { bottom: 40px; right: -20px; transform: rotate(5deg); background: var(--red); color: #fff; }
+
+@media (max-width: 900px) {
+  .reveal-wrap { padding: 48px 28px; }
+  .reveal-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+
+
+/* ────────────────────────────────────────────────────────── */
+/* INSIDE THE APP — 4 panels                                 */
+/* ────────────────────────────────────────────────────────── */
+.inside {
+  padding: 80px 32px 120px;
+  position: relative; z-index: 2;
+}
+.inside-head { max-width: 800px; margin: 0 auto 50px; text-align: center; }
+.inside-head h2 {
+  font-size: clamp(36px, 5vw, 64px);
+  text-transform: uppercase; line-height: 0.96; margin: 18px 0;
+}
+.inside-grid {
+  max-width: 1180px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+.inside-card {
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  box-shadow: 6px 6px 0 var(--ink);
+  padding: 30px;
+  display: grid; grid-template-columns: 1.2fr 1fr;
+  gap: 26px; align-items: center;
+  position: relative;
+  transition: transform .2s, box-shadow .2s;
+}
+.inside-card:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ink); }
+.inside-card:nth-child(odd) { transform: rotate(-0.4deg); }
+.inside-card:nth-child(even) { transform: rotate(0.4deg); }
+.inside-card .num {
+  position: absolute; top: -14px; left: 24px;
+  background: var(--ink); color: var(--paper);
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 13px; padding: 4px 12px;
+  letter-spacing: 0.06em;
+  border: 2px solid var(--ink);
+}
+.inside-card .sticker {
+  position: absolute;
+  top: -16px; right: 18px;
+  background: var(--yellow);
+  border: 2px solid var(--ink);
+  padding: 6px 10px;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 11px;
+  transform: rotate(8deg);
+  box-shadow: 3px 3px 0 var(--ink);
+  text-transform: uppercase;
+}
+.inside-card h3 {
+  font-size: 24px;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+  line-height: 1.05;
+}
+.inside-card p {
+  font-family: 'Special Elite', monospace;
+  font-size: 13.5px; line-height: 1.55;
+  color: #3D3A33;
+  margin: 0;
+}
+.inside-card .ph {
+  background: var(--ink);
+  border-radius: 28px;
+  padding: 7px;
+  box-shadow: 4px 4px 0 var(--blue);
+}
+.inside-card .ph img { width: 100%; border-radius: 22px; display: block; }
+
+@media (max-width: 900px) {
+  .inside-grid { grid-template-columns: 1fr; }
+  .inside-card { grid-template-columns: 1fr; gap: 20px; }
+}
+
+
+/* ────────────────────────────────────────────────────────── */
+/* MANIFESTO — trust pillars as block-print poster           */
+/* ────────────────────────────────────────────────────────── */
+.manifesto {
+  padding: 100px 32px;
+  background:
+    repeating-linear-gradient(45deg, transparent 0 18px, rgba(26,24,20,0.04) 18px 19px),
+    var(--paper);
+  border-top: 3px solid var(--ink);
+  border-bottom: 3px solid var(--ink);
+  position: relative; z-index: 2;
+}
+.manifesto h2 {
+  font-size: clamp(40px, 6vw, 78px);
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 0.95;
+  max-width: 980px; margin: 18px auto 50px;
+}
+.man-grid {
+  max-width: 1180px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.man-c {
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 14px;
+  padding: 24px;
+  position: relative;
+  text-align: center;
+}
+.man-c:nth-child(1) { box-shadow: 5px 5px 0 var(--blue); }
+.man-c:nth-child(2) { box-shadow: 5px 5px 0 var(--red); }
+.man-c:nth-child(3) { box-shadow: 5px 5px 0 var(--green); }
+.man-c:nth-child(4) { box-shadow: 5px 5px 0 var(--yellow); }
+.man-c .x {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 80px;
+  line-height: 1; color: var(--red);
+  margin-bottom: 8px;
+  text-shadow: 3px 3px 0 var(--ink);
+}
+.man-c h3 {
+  font-size: 22px; text-transform: uppercase;
+  line-height: 1; margin-bottom: 10px;
+}
+.man-c p {
+  font-family: 'Special Elite', monospace;
+  font-size: 13px; line-height: 1.5;
+  color: #3D3A33;
+}
+
+@media (max-width: 900px) { .man-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .man-grid { grid-template-columns: 1fr; } }
+
+
+/* ────────────────────────────────────────────────────────── */
+/* CTA POSTER                                                 */
+/* ────────────────────────────────────────────────────────── */
+.cta {
+  padding: 120px 32px;
+  text-align: center;
+  position: relative; z-index: 2;
+}
+.cta-poster {
+  max-width: 900px; margin: 0 auto;
+  background: var(--blue); color: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  box-shadow: 10px 10px 0 var(--ink);
+  padding: 70px 50px;
+  position: relative;
+  overflow: hidden;
+}
+.cta-poster::before {
+  content: "";
+  position: absolute; top: -50%; right: -20%; width: 500px; height: 500px;
+  background: var(--yellow);
+  border-radius: 50%;
+  opacity: 0.6;
+  z-index: 0;
+}
+.cta-poster::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.20) 1px, transparent 1px);
+  background-size: 12px 12px;
+  z-index: 1;
+}
+.cta-poster > * { position: relative; z-index: 2; }
+.cta-poster h2 {
+  font-size: clamp(42px, 6vw, 80px);
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  color: #fff;
+}
+.cta-poster p {
+  font-family: 'Special Elite', monospace;
+  font-size: 17px; line-height: 1.5;
+  max-width: 540px; margin: 0 auto 32px;
+  color: #fff;
+}
+.cta-poster .icon {
+  width: 90px; height: 90px;
+  border-radius: 22px; margin: 0 auto 26px;
+  display: block;
+  border: 3px solid #fff;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.cta-poster .row { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.cta-poster .btn-comic.primary {
+  background: #fff; color: var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+.cta-poster .btn-comic.ghost {
+  background: transparent; color: #fff;
+  border-color: #fff;
+  box-shadow: 5px 5px 0 var(--ink);
+}
+
+
+/* ────────────────────────────────────────────────────────── */
+/* FOOTER                                                     */
+/* ────────────────────────────────────────────────────────── */
+.foot {
+  padding: 50px 32px 30px;
+  border-top: 3px solid var(--ink);
+  position: relative; z-index: 2;
+  font-family: 'Special Elite', monospace;
+  font-size: 13px;
+  color: #3D3A33;
+}
+.foot .row {
+  max-width: 1180px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  flex-wrap: wrap;
+}
+.foot .brand {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'Archivo Black', sans-serif; font-size: 14px; color: var(--ink);
+}
+.foot .brand img { width: 26px; height: 26px; border: 2px solid var(--ink); border-radius: 6px; }
+.foot .links { display: flex; gap: 18px; }
+.foot a:hover { color: var(--blue); }
+
+
+/* ────────────────────────────────────────────────────────── */
+/* REVEAL                                                     */
+/* ────────────────────────────────────────────────────────── */
+.r { opacity: 0; transform: translateY(20px); transition: opacity .7s ease-out, transform .7s ease-out; }
+.r.in { opacity: 1; transform: none; }
+</style>
+</head>
+
+<body>
+
+<!-- ============================================================
+     TOPBAR
+============================================================ -->
+<header class="topbar">
+  <a class="brand" href="#top">
+    <img src="assets/app-icon-256.png" alt="" />
+    PRIVACY SCORE
+  </a>
+  <div class="switch">
+    <a href="index.html">Dark</a>
+    <a href="variation-glass.html">Glass</a>
+    <a href="variation-comic.html" class="active">Comic</a>
+  </div>
+  <a class="cta" href="#download">
+    <span class="material-icons-round">download</span>
+    Télécharger
+  </a>
+</header>
+
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div>
+      <span class="tag">📖 UNE HISTOIRE VRAIE EN 8 CASES</span>
+      <h1>
+        VOUS PENSEZ ÊTRE <span class="ul">ANONYME</span>.<br/>
+        VOUS NE L'ÊTES <span class="stamp">PAS.</span>
+      </h1>
+      <p class="lede">
+        Chaque app sur votre iPhone <b>parle dans votre dos</b> —
+        votre position, vos centres d'intérêt, vos déplacements.
+        <b>Privacy Score</b> les écoute. Sur votre iPhone.
+        Pas dans le cloud.
+      </p>
+      <div class="hero-ctas">
+        <a class="btn-comic primary" href="#download">
+          <span class="material-icons-round">download</span>
+          App Store
+        </a>
+        <a class="btn-comic ghost" href="#story">
+          Lire l'histoire ↓
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <div class="hero-burst">L'HISTOIRE QUI A TOUT DÉCLENCHÉ</div>
+      <div class="hero-frame">
+        <div class="panel-no">COUV.</div>
+
+        <!-- Hero illustration: silhouette agent + phone with leaking data -->
+        <svg class="hero-illust" viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <pattern id="halftoneA" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
+              <circle cx="3" cy="3" r="1.2" fill="#1A1814"/>
+            </pattern>
+            <pattern id="halftoneB" x="0" y="0" width="5" height="5" patternUnits="userSpaceOnUse">
+              <circle cx="2.5" cy="2.5" r="0.9" fill="#1A1814"/>
+            </pattern>
+          </defs>
+
+          <!-- Sky/wall -->
+          <rect x="0" y="0" width="500" height="240" fill="#FFF" />
+          <rect x="0" y="0" width="500" height="240" fill="url(#halftoneB)" opacity="0.18"/>
+          <!-- Floor -->
+          <rect x="0" y="240" width="500" height="140" fill="#EFE3CC"/>
+          <line x1="0" y1="240" x2="500" y2="240" stroke="#1A1814" stroke-width="3"/>
+          <!-- Buildings silhouette -->
+          <path d="M 0 240 L 0 130 L 40 130 L 40 100 L 100 100 L 100 140 L 150 140 L 150 80 L 200 80 L 200 110 L 250 110 L 250 90 L 320 90 L 320 130 L 380 130 L 380 105 L 440 105 L 440 145 L 500 145 L 500 240 Z" fill="#1A1814"/>
+          <!-- Windows -->
+          <g fill="#FFD54F" stroke="#1A1814" stroke-width="1.2">
+            <rect x="55" y="155" width="8" height="12"/><rect x="75" y="155" width="8" height="12"/>
+            <rect x="160" y="115" width="8" height="12"/><rect x="180" y="115" width="8" height="12"/>
+            <rect x="335" y="155" width="8" height="12"/><rect x="355" y="155" width="8" height="12"/>
+            <rect x="450" y="170" width="8" height="12"/><rect x="470" y="170" width="8" height="12"/>
+          </g>
+
+          <!-- Sun -->
+          <circle cx="420" cy="60" r="28" fill="#FFD54F" stroke="#1A1814" stroke-width="3"/>
+          <g stroke="#1A1814" stroke-width="2.5" stroke-linecap="round">
+            <line x1="420" y1="20" x2="420" y2="6"/>
+            <line x1="460" y1="60" x2="476" y2="60"/>
+            <line x1="448" y1="32" x2="460" y2="20"/>
+          </g>
+
+          <!-- Agent silhouette: suit, earpiece -->
+          <g transform="translate(180,160)">
+            <!-- shadow -->
+            <ellipse cx="40" cy="200" rx="50" ry="6" fill="#1A1814" opacity="0.3"/>
+            <!-- legs -->
+            <rect x="22" y="130" width="14" height="70" fill="#1A1814"/>
+            <rect x="44" y="130" width="14" height="70" fill="#1A1814"/>
+            <rect x="18" y="195" width="22" height="8" fill="#1A1814" stroke="#1A1814" stroke-width="2"/>
+            <rect x="42" y="195" width="22" height="8" fill="#1A1814" stroke="#1A1814" stroke-width="2"/>
+            <!-- body suit -->
+            <path d="M 12 70 Q 12 60 22 60 L 58 60 Q 68 60 68 70 L 72 138 L 8 138 Z" fill="#1A1814"/>
+            <!-- white shirt -->
+            <path d="M 30 60 L 40 90 L 50 60 Z" fill="#fff"/>
+            <!-- tie -->
+            <path d="M 36 70 L 44 70 L 42 110 L 38 110 Z" fill="#E53E3E" stroke="#1A1814" stroke-width="1.5"/>
+            <!-- head -->
+            <circle cx="40" cy="40" r="22" fill="#F4D7B8" stroke="#1A1814" stroke-width="2.5"/>
+            <!-- hair -->
+            <path d="M 18 36 Q 18 20 40 18 Q 62 20 62 36 L 62 28 Q 50 22 40 22 Q 30 22 18 28 Z" fill="#1A1814"/>
+            <!-- sunglasses -->
+            <rect x="22" y="38" width="14" height="9" rx="2" fill="#1A1814"/>
+            <rect x="44" y="38" width="14" height="9" rx="2" fill="#1A1814"/>
+            <line x1="36" y1="42" x2="44" y2="42" stroke="#1A1814" stroke-width="2"/>
+            <!-- earpiece -->
+            <circle cx="62" cy="44" r="3" fill="#1A1814"/>
+            <path d="M 62 47 Q 70 60 66 70" stroke="#1A1814" stroke-width="2" fill="none"/>
+            <!-- phone in hand -->
+            <rect x="58" y="100" width="22" height="34" rx="3" fill="#fff" stroke="#1A1814" stroke-width="2.5"/>
+            <rect x="60" y="103" width="18" height="26" fill="#2E5BFF"/>
+            <text x="69" y="120" font-family="Archivo Black" font-size="9" fill="#fff" text-anchor="middle">77</text>
+          </g>
+
+          <!-- Floating leaking data icons around agent -->
+          <g>
+            <!-- location ping -->
+            <g transform="translate(310,80)">
+              <circle cx="0" cy="0" r="18" fill="#E53E3E" stroke="#1A1814" stroke-width="2.5"/>
+              <path d="M 0 -8 L 0 4 M -5 -3 L 0 -8 L 5 -3" stroke="#fff" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <circle cx="0" cy="6" r="2" fill="#fff"/>
+            </g>
+            <text x="310" y="115" font-family="Archivo Black" font-size="10" fill="#1A1814" text-anchor="middle">LAT/LON</text>
+
+            <!-- $$$ -->
+            <g transform="translate(380,180)">
+              <rect x="-22" y="-15" width="44" height="30" fill="#2EA66C" stroke="#1A1814" stroke-width="2.5" rx="3"/>
+              <text x="0" y="6" font-family="Archivo Black" font-size="20" fill="#fff" text-anchor="middle">$$$</text>
+            </g>
+
+            <!-- ID card -->
+            <g transform="translate(120,110)">
+              <rect x="-24" y="-16" width="48" height="32" fill="#FFD54F" stroke="#1A1814" stroke-width="2.5" rx="3"/>
+              <circle cx="-14" cy="-2" r="6" fill="#1A1814"/>
+              <line x1="-4" y1="-6" x2="14" y2="-6" stroke="#1A1814" stroke-width="2"/>
+              <line x1="-4" y1="0" x2="12" y2="0" stroke="#1A1814" stroke-width="2"/>
+              <line x1="-4" y1="6" x2="14" y2="6" stroke="#1A1814" stroke-width="2"/>
+            </g>
+
+            <!-- Dotted leak lines from phone -->
+            <g stroke="#1A1814" stroke-width="2" stroke-dasharray="4 4" fill="none">
+              <path d="M 250 250 Q 290 200 310 95"/>
+              <path d="M 250 260 Q 300 240 365 180"/>
+              <path d="M 250 250 Q 200 200 140 115"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     COMIC STRIP — 8 panels
+============================================================ -->
+<section class="story" id="story">
+  <div class="story-head r">
+    <span class="section-tag">CHAPITRE 01</span>
+    <h2>L'histoire vraie<br/>en huit cases.</h2>
+    <p>
+      En 2024, des journalistes ont identifié <b>26 agents du Secret Service</b>
+      protégeant le Président — en achetant des données publicitaires sur le marché ouvert.
+      Voici comment.
+    </p>
+  </div>
+
+  <div class="strip">
+
+    <!-- ── PANEL 1 ─────────────────────────────────── -->
+    <article class="panel r">
+      <div class="num">01</div>
+      <div class="scene">
+        <svg class="scene-svg" viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="dot1" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="0.8" fill="#1A1814"/></pattern>
+          </defs>
+          <rect width="200" height="120" fill="#C7E0FF"/>
+          <rect width="200" height="120" fill="url(#dot1)" opacity="0.10"/>
+          <rect y="120" width="200" height="70" fill="#EFE3CC"/>
+          <line x1="0" y1="120" x2="200" y2="120" stroke="#1A1814" stroke-width="2.5"/>
+          <!-- White House -->
+          <rect x="55" y="80" width="90" height="40" fill="#fff" stroke="#1A1814" stroke-width="2.5"/>
+          <polygon points="55,80 145,80 100,55" fill="#fff" stroke="#1A1814" stroke-width="2.5"/>
+          <rect x="64" y="100" width="8" height="20" fill="#1A1814"/>
+          <rect x="80" y="100" width="8" height="20" fill="#1A1814"/>
+          <rect x="96" y="100" width="8" height="20" fill="#1A1814"/>
+          <rect x="112" y="100" width="8" height="20" fill="#1A1814"/>
+          <rect x="128" y="100" width="8" height="20" fill="#1A1814"/>
+          <!-- flag -->
+          <line x1="100" y1="55" x2="100" y2="40" stroke="#1A1814" stroke-width="2"/>
+          <rect x="100" y="40" width="14" height="9" fill="#E53E3E" stroke="#1A1814" stroke-width="1.5"/>
+          <!-- agents -->
+          <g transform="translate(28,138)">
+            <ellipse cx="6" cy="42" rx="10" ry="2" fill="#1A1814" opacity="0.3"/>
+            <rect x="0" y="20" width="12" height="20" fill="#1A1814"/>
+            <circle cx="6" cy="12" r="8" fill="#F4D7B8" stroke="#1A1814" stroke-width="1.5"/>
+            <rect x="2" y="11" width="8" height="3" fill="#1A1814"/>
+          </g>
+          <g transform="translate(168,138)">
+            <ellipse cx="6" cy="42" rx="10" ry="2" fill="#1A1814" opacity="0.3"/>
+            <rect x="0" y="20" width="12" height="20" fill="#1A1814"/>
+            <circle cx="6" cy="12" r="8" fill="#F4D7B8" stroke="#1A1814" stroke-width="1.5"/>
+            <rect x="2" y="11" width="8" height="3" fill="#1A1814"/>
+          </g>
+        </svg>
+        <div class="bubble tl">L'AN<br/>2024</div>
+      </div>
+      <div class="caption">
+        <b>WASHINGTON, D.C.</b> Le Secret Service protège le Président jour et nuit. Discrètement. C'est leur métier.
+      </div>
+    </article>
+
+    <!-- ── PANEL 2 ─────────────────────────────────── -->
+    <article class="panel r">
+      <div class="num">02</div>
+      <div class="scene">
+        <svg class="scene-svg" viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="190" fill="#F4EBD8"/>
+          <!-- desk -->
+          <rect x="0" y="140" width="200" height="50" fill="#3D3A33"/>
+          <line x1="0" y1="140" x2="200" y2="140" stroke="#1A1814" stroke-width="2.5"/>
+          <!-- laptop -->
+          <rect x="50" y="70" width="100" height="70" fill="#1A1814" stroke="#1A1814" stroke-width="2.5"/>
+          <rect x="55" y="75" width="90" height="55" fill="#fff"/>
+          <text x="100" y="100" font-family="Special Elite" font-size="11" text-anchor="middle" fill="#1A1814">DATA MARKET</text>
+          <text x="100" y="118" font-family="Archivo Black" font-size="14" text-anchor="middle" fill="#2E5BFF">$200</text>
+          <rect x="40" y="138" width="120" height="6" fill="#3D3A33" stroke="#1A1814" stroke-width="2"/>
+          <!-- coffee -->
+          <rect x="160" y="120" width="20" height="22" fill="#fff" stroke="#1A1814" stroke-width="2"/>
+          <line x1="160" y1="128" x2="180" y2="128" stroke="#1A1814" stroke-width="2"/>
+          <!-- person back -->
+          <ellipse cx="100" cy="180" rx="50" ry="10" fill="#1A1814" opacity="0.5"/>
+          <!-- key icon floating -->
+          <g transform="translate(30,40)">
+            <circle cx="0" cy="0" r="14" fill="#FFD54F" stroke="#1A1814" stroke-width="2"/>
+            <text x="0" y="5" font-family="Archivo Black" font-size="14" text-anchor="middle">$</text>
+          </g>
+        </svg>
+        <div class="bubble tr thought">UN FICHIER<br/>200&nbsp;€</div>
+      </div>
+      <div class="caption">
+        Des <b>journalistes</b> achètent un jeu de données pub. Cent millions de pings GPS, pour le prix d'un repas.
+      </div>
+    </article>
+
+    <!-- ── PANEL 3 ─────────────────────────────────── -->
+    <article class="panel r">
+      <div class="num">03</div>
+      <div class="scene">
+        <svg class="scene-svg" viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="190" fill="#1A1814"/>
+          <!-- map -->
+          <g stroke="#FFD54F" stroke-width="1" fill="none" opacity="0.5">
+            <path d="M 0 60 Q 50 70 100 50 T 200 80"/>
+            <path d="M 0 100 Q 60 90 120 110 T 200 90"/>
+            <path d="M 0 140 Q 70 130 130 150 T 200 130"/>
+          </g>
+          <!-- grid -->
+          <g stroke="#FFD54F" stroke-width="0.5" opacity="0.2">
+            <line x1="0" y1="30" x2="200" y2="30"/>
+            <line x1="0" y1="90" x2="200" y2="90"/>
+            <line x1="0" y1="150" x2="200" y2="150"/>
+            <line x1="40" y1="0" x2="40" y2="190"/>
+            <line x1="100" y1="0" x2="100" y2="190"/>
+            <line x1="160" y1="0" x2="160" y2="190"/>
+          </g>
+          <!-- 26 red dots -->
+          <g fill="#E53E3E" stroke="#fff" stroke-width="1.2">
+            <circle cx="40" cy="50" r="4"/><circle cx="55" cy="65" r="4"/>
+            <circle cx="68" cy="58" r="4"/><circle cx="82" cy="72" r="4"/>
+            <circle cx="98" cy="60" r="4"/><circle cx="112" cy="78" r="4"/>
+            <circle cx="128" cy="68" r="4"/><circle cx="145" cy="82" r="4"/>
+            <circle cx="160" cy="65" r="4"/><circle cx="175" cy="80" r="4"/>
+            <circle cx="50" cy="100" r="4"/><circle cx="70" cy="115" r="4"/>
+            <circle cx="92" cy="108" r="4"/><circle cx="112" cy="118" r="4"/>
+            <circle cx="135" cy="112" r="4"/><circle cx="155" cy="125" r="4"/>
+            <circle cx="38" cy="135" r="4"/><circle cx="60" cy="148" r="4"/>
+            <circle cx="80" cy="140" r="4"/><circle cx="102" cy="155" r="4"/>
+            <circle cx="120" cy="148" r="4"/><circle cx="140" cy="160" r="4"/>
+            <circle cx="60" cy="170" r="4"/><circle cx="100" cy="178" r="4"/>
+            <circle cx="135" cy="172" r="4"/><circle cx="160" cy="155" r="4"/>
+          </g>
+          <text x="100" y="22" font-family="Archivo Black" font-size="13" fill="#fff" text-anchor="middle">WASHINGTON D.C.</text>
+        </svg>
+        <div class="bubble tl">26 POINTS<br/>ROUGES</div>
+      </div>
+      <div class="caption">
+        Le fichier <b>cartographie 26 personnes</b> entrant et sortant de la Maison Blanche, jour après jour.
+      </div>
+    </article>
+
+    <!-- ── PANEL 4 ─────────────────────────────────── -->
+    <article class="panel r">
+      <div class="num">04</div>
+      <div class="scene">
+        <svg class="scene-svg" viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="190" fill="#fff"/>
+          <!-- redacted file -->
+          <rect x="20" y="20" width="160" height="150" fill="#F4EBD8" stroke="#1A1814" stroke-width="2.5"/>
+          <line x1="20" y1="40" x2="180" y2="40" stroke="#1A1814" stroke-width="2"/>
+          <text x="30" y="34" font-family="Archivo Black" font-size="10" fill="#1A1814">DOSSIER #2024-26</text>
+          <!-- redacted lines -->
+          <g fill="#1A1814">
+            <rect x="30" y="50" width="70" height="6"/>
+            <rect x="105" y="50" width="50" height="6"/>
+            <rect x="30" y="62" width="100" height="6"/>
+            <rect x="30" y="74" width="55" height="6"/>
+            <rect x="90" y="74" width="60" height="6"/>
+            <rect x="30" y="86" width="120" height="6"/>
+            <rect x="30" y="98" width="80" height="6"/>
+            <rect x="115" y="98" width="35" height="6"/>
+            <rect x="30" y="110" width="100" height="6"/>
+            <rect x="30" y="122" width="60" height="6"/>
+            <rect x="95" y="122" width="55" height="6"/>
+          </g>
+          <!-- stamp -->
+          <g transform="translate(140, 145) rotate(-12)">
+            <rect x="-30" y="-12" width="60" height="24" fill="none" stroke="#E53E3E" stroke-width="2.5"/>
+            <text x="0" y="4" font-family="Archivo Black" font-size="11" fill="#E53E3E" text-anchor="middle">IDENTIFIÉS</text>
+          </g>
+        </svg>
+        <div class="bubble br">26 NOMS.<br/>26 VISAGES.</div>
+      </div>
+      <div class="caption">
+        Recoupé avec quelques données publiques : <b>26 noms</b>. Agents identifiés. Pas un piratage. Légal.
+      </div>
+    </article>
+
+    <!-- ── PANEL 5 ─────────────────────────────────── -->
+    <article class="panel r">
+      <div class="num">05</div>
+      <div class="scene">
+        <svg class="scene-svg" viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="hatch" patternUnits="userSpaceOnUse" width="8" height="8" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="8" stroke="#1A1814" stroke-width="1.2"/>
+            </pattern>
+          </defs>
+          <rect width="200" height="190" fill="#C7E0FF"/>
+          <!-- sand -->
+          <path d="M 0 110 Q 50 100 100 115 T 200 105 L 200 190 L 0 190 Z" fill="#FFD54F"/>
+          <line x1="0" y1="110" x2="200" y2="110" stroke="#1A1814" stroke-width="2" stroke-dasharray="5 3"/>
+          <!-- sun -->
+          <circle cx="40" cy="40" r="20" fill="#E53E3E" stroke="#1A1814" stroke-width="2.5"/>
+          <!-- military base -->
+          <g transform="translate(110, 80)">
+            <rect x="0" y="0" width="60" height="35" fill="#3D3A33" stroke="#1A1814" stroke-width="2.5"/>
+            <rect x="5" y="5" width="8" height="8" fill="#FFD54F"/>
+            <rect x="20" y="5" width="8" height="8" fill="#FFD54F"/>
+            <rect x="35" y="5" width="8" height="8" fill="#FFD54F"/>
+            <rect x="50" y="5" width="8" height="8" fill="#FFD54F"/>
+            <rect x="-8" y="35" width="76" height="6" fill="#1A1814"/>
+            <!-- antenna -->
+            <line x1="30" y1="0" x2="30" y2="-18" stroke="#1A1814" stroke-width="2"/>
+            <polygon points="30,-18 24,-10 36,-10" fill="#E53E3E" stroke="#1A1814" stroke-width="1.5"/>
+          </g>
+          <!-- glowing route trail -->
+          <g stroke="#E53E3E" stroke-width="3" fill="none" stroke-linecap="round">
+            <path d="M 20 160 Q 60 145 95 150 T 170 130"/>
+          </g>
+          <g fill="#E53E3E" stroke="#1A1814" stroke-width="1">
+            <circle cx="20" cy="160" r="3"/>
+            <circle cx="60" cy="148" r="3"/>
+            <circle cx="100" cy="150" r="3"/>
+            <circle cx="135" cy="140" r="3"/>
+            <circle cx="170" cy="130" r="3"/>
+          </g>
+        </svg>
+        <div class="bubble tl">STRAVA<br/>2018</div>
+      </div>
+      <div class="caption">
+        <b>2018 — DÉJÀ.</b> Une app de fitness révèle au monde les routes de patrouille de soldats au Moyen-Orient.
+      </div>
+    </article>
+
+    <!-- ── PANEL 6 ─────────────────────────────────── -->
+    <article class="panel r">
+      <div class="num">06</div>
+      <div class="scene">
+        <svg class="scene-svg" viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="190" fill="#F4EBD8"/>
+          <!-- phone -->
+          <rect x="55" y="20" width="90" height="155" fill="#fff" stroke="#1A1814" stroke-width="3" rx="14"/>
+          <rect x="62" y="30" width="76" height="135" fill="#1A1814" rx="4"/>
+          <!-- apps grid -->
+          <g>
+            <rect x="68" y="40" width="16" height="16" fill="#E53E3E" rx="3"/>
+            <rect x="90" y="40" width="16" height="16" fill="#FFD54F" rx="3"/>
+            <rect x="112" y="40" width="16" height="16" fill="#2E5BFF" rx="3"/>
+            <rect x="68" y="62" width="16" height="16" fill="#2EA66C" rx="3"/>
+            <rect x="90" y="62" width="16" height="16" fill="#E53E3E" rx="3"/>
+            <rect x="112" y="62" width="16" height="16" fill="#FFD54F" rx="3"/>
+            <rect x="68" y="84" width="16" height="16" fill="#FFD54F" rx="3"/>
+            <rect x="90" y="84" width="16" height="16" fill="#2E5BFF" rx="3"/>
+            <rect x="112" y="84" width="16" height="16" fill="#E53E3E" rx="3"/>
+          </g>
+          <!-- leaking signals -->
+          <g stroke="#E53E3E" stroke-width="2" fill="none" stroke-linecap="round">
+            <path d="M 60 110 Q 40 110 30 90"/>
+            <path d="M 140 110 Q 160 110 170 90"/>
+            <path d="M 100 175 Q 100 185 100 188"/>
+          </g>
+          <g fill="#E53E3E">
+            <text x="20" y="80" font-family="Archivo Black" font-size="9">→PUB</text>
+            <text x="170" y="80" font-family="Archivo Black" font-size="9">→GPS</text>
+            <text x="100" y="190" font-family="Archivo Black" font-size="9" text-anchor="middle">→ID</text>
+          </g>
+          <!-- many small location pins floating -->
+          <g fill="#E53E3E" opacity="0.6">
+            <circle cx="20" cy="50" r="3"/>
+            <circle cx="30" cy="30" r="3"/>
+            <circle cx="180" cy="40" r="3"/>
+            <circle cx="170" cy="20" r="3"/>
+            <circle cx="20" cy="160" r="3"/>
+            <circle cx="180" cy="150" r="3"/>
+          </g>
+        </svg>
+        <div class="bubble tr">VOTRE<br/>IPHONE.</div>
+      </div>
+      <div class="caption">
+        <b>Maintenant — votre iPhone.</b> 909 traceurs par semaine en moyenne. Votre position part dans 26 pays.
+      </div>
+    </article>
+
+    <!-- ── PANEL 7 ─────────────────────────────────── -->
+    <article class="panel r">
+      <div class="num">07</div>
+      <div class="scene">
+        <svg class="scene-svg" viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg">
+          <!-- radial burst -->
+          <defs>
+            <radialGradient id="burst" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#FFD54F"/>
+              <stop offset="100%" stop-color="#FFD54F" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="200" height="190" fill="#2E5BFF"/>
+          <circle cx="100" cy="95" r="90" fill="url(#burst)"/>
+          <!-- rays -->
+          <g stroke="#fff" stroke-width="2" opacity="0.5">
+            <line x1="100" y1="95" x2="100" y2="0"/>
+            <line x1="100" y1="95" x2="200" y2="95"/>
+            <line x1="100" y1="95" x2="100" y2="190"/>
+            <line x1="100" y1="95" x2="0" y2="95"/>
+            <line x1="100" y1="95" x2="170" y2="25"/>
+            <line x1="100" y1="95" x2="30" y2="25"/>
+            <line x1="100" y1="95" x2="170" y2="165"/>
+            <line x1="100" y1="95" x2="30" y2="165"/>
+          </g>
+          <!-- app icon -->
+          <rect x="68" y="60" width="64" height="64" rx="14" fill="#fff" stroke="#1A1814" stroke-width="3"/>
+          <circle cx="100" cy="92" r="18" fill="none" stroke="#2E5BFF" stroke-width="4"/>
+          <text x="100" y="98" font-family="Archivo Black" font-size="14" fill="#2E5BFF" text-anchor="middle">77</text>
+          <text x="100" y="160" font-family="Archivo Black" font-size="13" fill="#fff" text-anchor="middle">PRIVACY SCORE</text>
+        </svg>
+        <div class="bubble tl">UN HÉROS<br/>APPARAÎT.</div>
+      </div>
+      <div class="caption">
+        <b>Privacy Score.</b> Lit le rapport iOS. Calcule un score. Vous dit quoi corriger. Tout en local.
+      </div>
+    </article>
+
+    <!-- ── PANEL 8 ─────────────────────────────────── -->
+    <article class="panel r">
+      <div class="num">08</div>
+      <div class="scene">
+        <svg class="scene-svg" viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg">
+          <rect width="200" height="190" fill="#FFD54F"/>
+          <!-- big check -->
+          <g transform="translate(100, 90)">
+            <circle r="56" fill="#fff" stroke="#1A1814" stroke-width="3"/>
+            <path d="M -22 4 L -6 22 L 24 -18" stroke="#2EA66C" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <!-- speech bursts -->
+          <g fill="#1A1814" font-family="Archivo Black">
+            <text x="40" y="32" font-size="11" transform="rotate(-10, 40, 32)">BOUM!</text>
+            <text x="155" y="32" font-size="10" transform="rotate(8, 155, 32)">POW!</text>
+            <text x="38" y="170" font-size="10" transform="rotate(6, 38, 170)">ZAP!</text>
+            <text x="155" y="170" font-size="11" transform="rotate(-8, 155, 170)">+45 PTS</text>
+          </g>
+        </svg>
+        <div class="bubble br">À VOUS<br/>DE JOUER.</div>
+      </div>
+      <div class="caption">
+        <b>Soixante secondes.</b> Un score. Trois fixes. La prochaine fuite ne sera pas la vôtre.
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     TURN — pivot
+============================================================ -->
+<section class="turn r">
+  <h2>
+    Vous ne pouvez pas <em>supprimer</em><br/>
+    ces données.<br/>
+    Mais vous pouvez<br/>
+    <em>arrêter d'en produire.</em>
+  </h2>
+  <p>Privacy Score est un outil. Pas une promesse. Pas un slogan.</p>
+</section>
+
+
+<!-- ============================================================
+     REVEAL — the app
+============================================================ -->
+<section class="reveal-section" id="showcase">
+  <div class="reveal-wrap r">
+    <div class="reveal-grid">
+      <div>
+        <span class="section-tag">CHAPITRE 02</span>
+        <h2>Un score.<br/>Trois fixes.<br/>Zéro panique.</h2>
+        <p>
+          On lit le rapport que votre iPhone génère déjà. On croise avec
+          la base ouverte de DuckDuckGo. Et on vous propose des actions
+          concrètes — chacune avec un gain mesurable.
+        </p>
+        <ul>
+          <li>Lit le rapport iOS natif — aucune permission supplémentaire.</li>
+          <li>Score calculé en local en moins de 2 secondes.</li>
+          <li>Recommandations triées par impact, pas par marketing.</li>
+          <li>Suit votre score semaine après semaine.</li>
+          <li class="has-x">Pas de cloud, pas de compte, pas de tracking.</li>
+        </ul>
+        <a href="#download" class="btn-comic primary">
+          <span class="material-icons-round">download</span>
+          Télécharger
+        </a>
+      </div>
+
+      <div class="reveal-phone">
+        <div class="zap z1">+45 PTS</div>
+        <div class="zap z2">SCAN&nbsp;OK</div>
+        <div class="ph">
+          <img src="assets/screen-recommendations.png" alt="Recommandations"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     INSIDE THE APP — 4 cards
+============================================================ -->
+<section class="inside">
+  <div class="inside-head r">
+    <span class="section-tag">CHAPITRE 03</span>
+    <h2>Quatre onglets.<br/>Quatre angles.</h2>
+  </div>
+
+  <div class="inside-grid">
+
+    <article class="inside-card r">
+      <div class="num">01</div>
+      <div class="sticker">NEW</div>
+      <div>
+        <h3>Dashboard</h3>
+        <p>Votre score, vos traceurs détectés, vos apps géolocalisées, votre DNS, votre VPN. Tout d'un coup d'œil.</p>
+      </div>
+      <div class="ph"><img src="assets/screen-dashboard.png" alt="Dashboard"/></div>
+    </article>
+
+    <article class="inside-card r">
+      <div class="num">02</div>
+      <div class="sticker" style="background:var(--green); color:#fff;">+POINTS</div>
+      <div>
+        <h3>Recommandations</h3>
+        <p>« Désactivez le tracking pub. +5 pts. » « Activez un DNS chiffré. +8 pts. » Vous appliquez ce que vous voulez.</p>
+      </div>
+      <div class="ph"><img src="assets/screen-recommendations.png" alt="Recommandations"/></div>
+    </article>
+
+    <article class="inside-card r">
+      <div class="num">03</div>
+      <div class="sticker" style="background:var(--blue); color:#fff;">↑ TRENDING</div>
+      <div>
+        <h3>Évolution</h3>
+        <p>Chaque scan, un point sur la courbe. Voyez votre score monter, semaine après semaine.</p>
+      </div>
+      <div class="ph"><img src="assets/screen-evolution.png" alt="Évolution"/></div>
+    </article>
+
+    <article class="inside-card r">
+      <div class="num">04</div>
+      <div class="sticker" style="background:var(--red); color:#fff;">HARDCORE</div>
+      <div>
+        <h3>Réseau</h3>
+        <p>Le détail brut : qui parle à qui, par pays, par entreprise. Pour ceux qui veulent comprendre.</p>
+      </div>
+      <div class="ph"><img src="assets/screen-network.png" alt="Réseau"/></div>
+    </article>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     MANIFESTO — trust pillars
+============================================================ -->
+<section class="manifesto">
+  <div class="story-head r" style="margin-bottom: 20px;">
+    <span class="section-tag" style="background:var(--ink); color:var(--paper);">CHAPITRE 04 · LE MANIFESTE</span>
+  </div>
+  <h2 class="r">CE QUE PRIVACY SCORE<br/><span style="color:var(--red)">NE FAIT PAS.</span></h2>
+
+  <div class="man-grid r">
+    <div class="man-c">
+      <div class="x">✗</div>
+      <h3>PAS DE SERVEUR</h3>
+      <p>Pas d'API maison. Pas d'analytics. URLSession&nbsp;: 0.</p>
+    </div>
+    <div class="man-c">
+      <div class="x">✗</div>
+      <h3>PAS DE COMPTE</h3>
+      <p>Aucune inscription. Aucun email. Aucun mot de passe.</p>
+    </div>
+    <div class="man-c">
+      <div class="x">✗</div>
+      <h3>PAS DE CLOUD</h3>
+      <p>Le rapport vit dans la sandbox iOS. Et nulle part ailleurs.</p>
+    </div>
+    <div class="man-c">
+      <div class="x">✗</div>
+      <h3>PAS DE PANIQUE</h3>
+      <p>Pas de badge rouge. Pas de notif d'urgence. Aucun « 47 menaces&nbsp;! ».</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CTA
+============================================================ -->
+<section class="cta" id="download">
+  <div class="cta-poster r">
+    <img class="icon" src="assets/app-icon-512.png" alt="" />
+    <h2>Reprenez le contrôle.<br/>En 60 secondes.</h2>
+    <p>
+      Importez le rapport iOS. Voyez votre score.
+      Appliquez les fixes. La prochaine fuite ne sera pas la vôtre.
+    </p>
+    <div class="row">
+      <a href="#" class="btn-comic primary">
+        <span class="material-icons-round">download</span>
+        App Store
+      </a>
+      <a href="#" class="btn-comic ghost">Voir le code source</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="foot">
+  <div class="row">
+    <div class="brand">
+      <img src="assets/app-icon-256.png" alt=""/> PRIVACY SCORE
+    </div>
+    <div class="links">
+      <a href="#">Légal</a>
+      <a href="#">Confidentialité</a>
+      <a href="#">Code source</a>
+      <a href="mailto:hello@privacyscore.fr">Contact</a>
+    </div>
+    <div>© 2026 · MADE IN FRANCE</div>
+  </div>
+</footer>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('in'), i * 60);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.r').forEach(el => io.observe(el));
+});
+</script>
+</body>
+</html>

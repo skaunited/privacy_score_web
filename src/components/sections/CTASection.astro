@@ -1,0 +1,44 @@
+---
+/**
+ * CTASection.astro — final "Download" call to action.
+ * Matches `variation-illustrated.html` lines 1426-1448.
+ * `href="#"` is a placeholder until the App Store URL is confirmed.
+ */
+interface Props {
+  cta: {
+    title: string;
+    body: string;
+    primary: string;
+    note: string; // HTML-safe
+  };
+}
+
+const { cta } = Astro.props;
+---
+
+<section id="download" class="cta" aria-labelledby="cta-h2">
+  <div class="orb orb-f"></div>
+  <div class="container cta-inner">
+    <div class="cta-copy reveal">
+      <h2 id="cta-h2">{cta.title}</h2>
+      <p>{cta.body}</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-primary btn-big">
+          <span class="material-icons-round" aria-hidden="true">download</span>
+          {cta.primary}
+        </a>
+        <span class="cta-note" set:html={cta.note}></span>
+      </div>
+    </div>
+    <div class="cta-mark">
+      <img
+        src="/assets/app-icon-512.png"
+        alt=""
+        width="512"
+        height="512"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  </div>
+</section>

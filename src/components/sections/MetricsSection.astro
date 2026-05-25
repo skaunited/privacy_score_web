@@ -1,0 +1,33 @@
+---
+/**
+ * MetricsSection.astro — 4-up "Privacy Score by the numbers" band.
+ * Matches `variation-illustrated.html` lines 1326-1347.
+ * Each .metric-num wraps a [data-count-to] span that `site.js` animates.
+ */
+interface Metric {
+  countTo: number;
+  label: string;
+}
+
+interface Props {
+  metrics: {
+    ariaLabel: string;
+    items: Metric[];
+  };
+}
+
+const { metrics } = Astro.props;
+---
+
+<section class="metrics" aria-label={metrics.ariaLabel}>
+  <div class="container">
+    <div class="metric-row reveal">
+      {metrics.items.map((m) => (
+        <div class="metric">
+          <div class="metric-num"><span data-count-to={m.countTo}>0</span></div>
+          <div class="metric-label">{m.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,433 @@
+/* ============================================================
+   PrivacyScore Design System — Foundations  (v2)
+   --------------------------------------------------------------
+   Aligned to the real `SPGColor` Swift package (src-of-truth).
+   The brand's canonical Trust Blue is Apple Blue #007AFF in
+   light mode and the brighter #60A5FA in dark mode. The sky /
+   blue scales remain available as accents but are NOT the
+   primary brand colour.
+
+   Aesthetic: Liquid Glass / Privacy-Calm.
+   ============================================================ */
+
+
+/* ---------- 1. Webfonts -------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Round');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+
+/* ============================================================
+   2. LIGHT MODE TOKENS  (default)
+   ============================================================ */
+:root {
+
+  /* ── Brand: Trust Blue (canonical) ─────────────────────────
+     Maps to SPGColor.trustBlue in the iOS app. */
+  --trust-blue:        #007AFF;   /* Apple Blue — THE brand colour */
+  --trust-blue-dark:   #3E97FF;   /* hover / accent variant */
+  --trust-light:       #E3F2FD;   /* soft tint behind trust-blue accents */
+  --system-blue:       #0A84FF;   /* iOS system blue (alternative) */
+  --calm-blue:         #60A5FA;   /* dark-mode counterpart of trust-blue */
+
+  /* ── Sky / Blue accent scales ──────────────────────────────
+     These appear in score gauges, glow strokes, gradients —
+     NOT in primary chrome. */
+  --blue-50:           #F0F9FF;
+  --blue-100:          #E0F2FE;
+  --blue-150:          #DBEAFE;
+  --blue-200:          #BFDBFE;
+  --blue-300:          #93C5FD;
+  --blue-400:          #38BDF8;
+  --blue-500:          #0EA5E9;
+  --blue-500-tw:       #3B82F6;
+  --blue-600:          #0284C7;
+  --blue-700:          #0369A1;
+  --blue-700-solid:    #1D4ED8;
+  --blue-2563eb:       #2563EB;
+  --blue-900:          #1E3A8A;
+
+  --sky-50:            #F0F9FF;
+  --sky-200:           #BAE6FD;
+  --sky-300:           #7DD3FC;
+  --sky-400:           #38BDF8;
+  --sky-500:           #0EA5E9;
+  --sky-600:           #0284C7;
+  --sky-900:           #0C4A6E;
+
+  --cyan-200:          #A5F3FC;
+  --cyan-300:          #67E8F9;
+  --cyan-500:          #06B6D4;
+
+  /* ── Slate / Gray neutrals ─────────────────────────────────
+     Slate is preferred. Gray exists for compatibility. */
+  --slate-100:         #F1F5F9;
+  --slate-200:         #E2E8F0;
+  --slate-300:         #CBD5E1;
+  --slate-400:         #94A3B8;
+  --slate-500:         #64748B;
+  --slate-600:         #475569;
+  --slate-700:         #334155;
+  --slate-800:         #1E293B;
+  --slate-900:         #0F172A;
+  --slate-950:         #020617;
+
+  --gray-100:          #F3F4F6;
+  --gray-200:          #E5E5EA;
+  --gray-300:          #D1D5DB;
+  --gray-400:          #9CA3AF;
+  --gray-500:          #6B7280;
+
+  /* ── Semantic text (adaptive — light values here) ──────────
+     Maps to SPGColor.textPrimary/Secondary/Tertiary. */
+  --text-primary:      #1C1C1E;   /* near-black, NOT pure black */
+  --text-secondary:    #636366;
+  --text-tertiary:     #AEAEB2;
+  --text-inverse:      #FFFFFF;
+  --text-accent:       var(--trust-blue);
+
+  /* ── Backgrounds ───────────────────────────────────────────
+     Maps to SPGColor.bgBase / bgDeep. */
+  --bg-base:           #F2F2F7;
+  --bg-deep:           #F2F2F7;
+  --bg-app-gradient:   linear-gradient(180deg, #F0F9FF 0%, #FFFFFF 50%, #F0F9FF 100%);
+
+  /* ── Status colours (same in light + dark) ─────────────────*/
+  --success:           #10B981;
+  --warning:           #F59E0B;
+  --danger:            #EF4444;
+  --coral:             #FB7185;
+  --indigo:            #6366F1;
+
+  /* ── Status light backgrounds (light values) ───────────────
+     Pair: bg = -light, border = -border, text = the saturated
+     accent. */
+  --success-light:     #F0FDF4;
+  --success-border:    #BBF7D0;
+  --danger-light:      #FEF2F2;
+  --danger-border:     #FECACA;
+  --warning-light:     #FFF7ED;
+  --warning-border:    #FED7AA;
+  --indigo-light:      #EEF2FF;
+  --orange-light:      #FFF7ED;
+  --caution-light:     #FEFCE8;
+  --caution-border:    #FEF08A;
+  --caution-yellow:    #CA8A04;
+
+  /* ── Green ── */
+  --green-100:         #DCFCE7;
+  --green-600:         #16A34A;
+
+  /* ── Orange ── */
+  --orange-50:         #FFF7ED;
+  --orange-100:        #FFEDD5;
+  --orange-400:        #FB923C;
+  --orange-500:        #F97316;
+  --orange-600:        #EA580C;
+
+  /* ── Purple / Indigo / Violet ── */
+  --purple-500:        #A855F7;
+  --indigo-50:         #EEF2FF;
+  --indigo-100:        #E0E7FF;
+  --indigo-400:        #818CF8;
+  --indigo-500:        #6366F1;
+  --indigo-600:        #4F46E5;
+  --indigo-900:        #312E81;
+  --indigo-950:        #1E1B4B;
+  --violet-100:        #EDE9FE;
+  --violet-500:        #8B5CF6;
+  --violet-600:        #7C3AED;
+  --violet-900:        #4C1D95;
+
+  /* ── Red ── */
+  --red-50:            #FEF2F2;
+  --red-100:           #FEE2E2;
+  --red-400:           #F87171;
+  --red-500:           #EF4444;
+  --red-600:           #DC2626;
+
+  /* ── Amber ── */
+  --amber-100:         #FEF3C7;
+  --amber-300:         #FCD34D;
+  --amber-400:         #FBBF24;
+  --amber-500:         #F59E0B;
+
+  /* ── Teal ── */
+  --teal-50:           #F0FDFA;
+  --teal-600:          #0D9488;
+
+  /* ── Emerald ── */
+  --emerald-50:        #ECFDF5;
+  --emerald-100:       #D1FAE5;
+  --emerald-400:       #34D399;
+  --emerald-600:       #059669;
+  --emerald-900:       #064E3B;
+
+  /* ── Glass surfaces ──────────────────────────────────────── */
+  --glass-surface:        rgba(255, 255, 255, 0.75);
+  --glass-surface-strong: rgba(255, 255, 255, 0.85);
+  --glass-surface-soft:   rgba(255, 255, 255, 0.50);
+  --glass-border:         rgba(255, 255, 255, 0.80);
+  --glass-blur:           20px;
+  --glass-blur-sm:        12px;
+  --glass-blur-xs:        8px;
+
+  --paper-surface:        #FFFFFF;
+  --paper-shadow:         rgba(0, 0, 0, 0.08);
+  --section-divider:      rgba(229, 229, 234, 0.50);
+  --glass-header-bg:      rgba(242, 242, 247, 0.85);
+  --glass-shadow:         rgba(0, 0, 0, 0.06);
+
+  /* ── Ambient orbs ── */
+  --orb-blue:             rgba(0, 122, 255, 0.08);
+  --orb-indigo:           rgba(99, 102, 241, 0.06);
+  --orb-sky:              rgba(14, 165, 233, 0.06);
+
+
+  /* ---------- 3. Typography ---------------------------------
+     The iOS app uses SF Pro Rounded for Display/Headline (via
+     `.system(design: .rounded)`) and the default SF for everything
+     else. For web/non-Apple surfaces, Manrope is the substitute
+     because Apple's system rounded isn't available off-platform —
+     it matches SF Rounded's geometry closely. */
+  --font-display: -apple-system-rounded, ui-rounded, 'SF Pro Rounded', 'SF Pro Display', Manrope, system-ui, sans-serif;
+  --font-body:    -apple-system, BlinkMacSystemFont, 'SF Pro Text', Manrope, system-ui, sans-serif;
+  --font-mono:    ui-monospace, 'SF Mono', 'JetBrains Mono', SFMono-Regular, Menlo, monospace;
+
+  /* Weights used by SPGTypography */
+  --fw-regular:   400;
+  --fw-medium:    500;
+  --fw-semibold:  600;
+  --fw-bold:      700;
+  --fw-heavy:     800;   /* `.heavy` in SwiftUI */
+
+  /* Type ramp — mirrors SPGTypography 1:1 (sizes in pt). */
+  /* Display — rounded, bold/heavy */
+  --fs-display-lg:    34px;   /* SPGTypography.displayLarge   · bold */
+  --fs-display-md:    28px;   /* SPGTypography.displayMedium  · bold */
+  --fs-display-sm:    24px;   /* SPGTypography.displaySmall   · heavy */
+  /* Headline — rounded, bold */
+  --fs-headline-lg:   22px;
+  --fs-headline-md:   20px;
+  --fs-headline-sm:   18px;
+  /* Title — default, semibold */
+  --fs-title-lg:      17px;
+  --fs-title-md:      15px;
+  --fs-title-sm:      14px;
+  /* Body — default, regular */
+  --fs-body-lg:       17px;
+  --fs-body-md:       15px;
+  --fs-body-sm:       13px;
+  /* Label — default, medium/bold */
+  --fs-label-lg:      14px;
+  --fs-label-md:      12px;
+  --fs-label-sm:      10px;
+  /* Mono — monospaced */
+  --fs-mono:          14px;
+
+  --lh-tight:  1.15;
+  --lh-snug:   1.30;
+  --lh-normal: 1.45;
+  --lh-loose:  1.60;
+  --tracking-tight:  -0.02em;
+  --tracking-normal:  0;
+  --tracking-wide:   0.04em;
+  --tracking-widest: 0.18em;
+
+
+  /* ---------- 4. Spacing — mirrors SPGSpacing exactly ------- */
+  --space-xs:   4px;
+  --space-sm:   8px;
+  --space-md:  12px;
+  --space-lg:  16px;
+  --space-xl:  20px;
+  --space-xxl: 24px;
+  --space-xxxl: 32px;
+
+
+  /* ---------- 5. Radii — mirrors SPGRadius exactly ---------- */
+  --radius-sm:    8px;
+  --radius-md:   12px;
+  --radius-lg:   16px;   /* default for glass cards */
+  --radius-xl:   24px;
+  --radius-full: 9999px;
+
+
+  /* ---------- 6. Elevation ---------------------------------- */
+  --shadow-glass:        0 8px 32px 0 rgba(31, 38, 135, 0.10);
+  --shadow-glass-soft:   0 4px 16px 0 rgba(31, 38, 135, 0.07);
+  --shadow-glass-strong: 0 12px 40px 0 rgba(31, 38, 135, 0.15);
+  --shadow-glow-blue:    0 10px 40px -10px rgba(0, 122, 255, 0.45);
+  --shadow-glow-trust:   0 4px 15px rgba(0, 122, 255, 0.40);
+  --shadow-inner-light:  inset 0 2px 10px rgba(255, 255, 255, 0.80),
+                         inset 0 -2px 10px rgba(0, 122, 255, 0.08);
+  --shadow-tile:         0 2px 10px rgba(0, 122, 255, 0.04);
+
+
+  /* ---------- 7. Motion ------------------------------------- */
+  --ease-out:     cubic-bezier(0.16, 1, 0.30, 1);
+  --ease-in-out:  cubic-bezier(0.45, 0, 0.55, 1);
+  --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-instant:  120ms;
+  --dur-fast:     200ms;
+  --dur-base:     280ms;
+  --dur-slow:     480ms;
+}
+
+
+/* ============================================================
+   DARK MODE TOKENS — applied via [data-theme="dark"] or
+   `prefers-color-scheme: dark`. Mirrors SPGColor's adaptive
+   helper.
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --trust-blue:        #60A5FA;  /* brighter in dark */
+    --trust-light:       #1E293B;
+    --text-primary:      #F8FAFC;
+    --text-secondary:    #94A3B8;
+    --text-tertiary:     #64748B;
+    --bg-base:           #0F172A;
+    --bg-deep:           #020617;
+    --bg-app-gradient:   linear-gradient(180deg, #0F172A 0%, #020617 50%, #0F172A 100%);
+
+    --success-light:     rgba(16, 185, 129, 0.10);
+    --success-border:    rgba(16, 185, 129, 0.20);
+    --danger-light:      rgba(239, 68, 68, 0.10);
+    --danger-border:     rgba(239, 68, 68, 0.20);
+    --warning-light:     rgba(249, 115, 22, 0.10);
+    --warning-border:    rgba(249, 115, 22, 0.20);
+    --indigo-light:      rgba(99, 102, 241, 0.10);
+    --orange-light:      rgba(249, 115, 22, 0.10);
+    --caution-light:     rgba(202, 138, 4, 0.10);
+    --caution-border:    rgba(202, 138, 4, 0.20);
+
+    --green-100:         rgba(22, 163, 74, 0.15);
+    --orange-100:        rgba(234, 88, 12, 0.15);
+    --indigo-50:         rgba(99, 102, 241, 0.10);
+    --indigo-100:        rgba(99, 102, 241, 0.15);
+    --violet-100:        rgba(124, 58, 237, 0.15);
+    --red-50:            rgba(239, 68, 68, 0.10);
+    --red-100:           rgba(239, 68, 68, 0.15);
+    --amber-100:         rgba(251, 191, 36, 0.15);
+    --orange-50:         rgba(249, 115, 22, 0.08);
+    --teal-50:           rgba(13, 148, 136, 0.10);
+    --emerald-50:        rgba(5, 150, 105, 0.10);
+    --emerald-100:       rgba(5, 150, 105, 0.15);
+
+    --glass-surface:        rgba(30, 41, 59, 0.45);
+    --glass-surface-strong: rgba(30, 41, 59, 0.65);
+    --glass-surface-soft:   rgba(30, 41, 59, 0.30);
+    --glass-border:         rgba(255, 255, 255, 0.08);
+    --paper-surface:        #121212;
+    --paper-shadow:         rgba(0, 0, 0, 0.40);
+    --section-divider:      rgba(255, 255, 255, 0.05);
+    --glass-header-bg:      rgba(15, 23, 42, 0.80);
+    --glass-shadow:         rgba(0, 0, 0, 0.30);
+
+    --orb-blue:             rgba(30, 58, 138, 0.30);
+    --orb-indigo:           rgba(49, 46, 129, 0.20);
+    --orb-sky:              rgba(12, 74, 110, 0.20);
+  }
+}
+
+/* Force-light / force-dark overrides for design-mode toggles. */
+:root[data-theme="dark"] {
+  --trust-blue:        #60A5FA;
+  --trust-light:       #1E293B;
+  --text-primary:      #F8FAFC;
+  --text-secondary:    #94A3B8;
+  --text-tertiary:     #64748B;
+  --bg-base:           #0F172A;
+  --bg-deep:           #020617;
+  --bg-app-gradient:   linear-gradient(180deg, #0F172A 0%, #020617 50%, #0F172A 100%);
+  --glass-surface:        rgba(30, 41, 59, 0.45);
+  --glass-surface-strong: rgba(30, 41, 59, 0.65);
+  --glass-surface-soft:   rgba(30, 41, 59, 0.30);
+  --glass-border:         rgba(255, 255, 255, 0.08);
+  --paper-surface:        #121212;
+}
+
+
+/* ============================================================
+   SEMANTIC STYLES
+   ============================================================ */
+html, body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body-md);
+  line-height: var(--lh-normal);
+  color: var(--text-primary);
+  background: var(--bg-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.display-xl,
+h1.display {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-lg);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+}
+
+h1, .h1 { font-family: var(--font-display); font-size: var(--fs-display-md); font-weight: var(--fw-bold); line-height: var(--lh-tight); letter-spacing: var(--tracking-tight); color: var(--text-primary); margin: 0; }
+h2, .h2 { font-family: var(--font-display); font-size: var(--fs-display-sm); font-weight: var(--fw-heavy); line-height: var(--lh-tight); letter-spacing: var(--tracking-tight); margin: 0; }
+h3, .h3 { font-family: var(--font-display); font-size: var(--fs-headline-lg); font-weight: var(--fw-bold); line-height: var(--lh-snug); margin: 0; }
+h4, .h4 { font-family: var(--font-display); font-size: var(--fs-headline-md); font-weight: var(--fw-bold); line-height: var(--lh-snug); margin: 0; }
+h5, .h5 { font-family: var(--font-display); font-size: var(--fs-headline-sm); font-weight: var(--fw-bold); line-height: var(--lh-snug); margin: 0; }
+
+p, .body { font-size: var(--fs-body-md); line-height: var(--lh-normal); color: var(--text-secondary); margin: 0; }
+.body-lg  { font-size: var(--fs-body-lg); line-height: var(--lh-normal); }
+.body-sm  { font-size: var(--fs-body-sm); line-height: var(--lh-normal); }
+.label-md { font-size: var(--fs-label-md); font-weight: var(--fw-bold); }
+
+.overline {
+  font-size: var(--fs-label-sm);
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--text-tertiary);
+}
+
+.score-number {
+  font-family: var(--font-display);
+  font-size: 64px;
+  font-weight: var(--fw-heavy);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--text-primary);
+  font-feature-settings: 'tnum' 1;
+}
+
+code, .mono { font-family: var(--font-mono); font-size: 0.92em; }
+
+
+/* ============================================================
+   UTILITY: GLASS PANEL + AMBIENT ORB
+   ============================================================ */
+.glass-panel {
+  background: var(--glass-surface);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glass);
+}
+.glass-panel--strong { background: var(--glass-surface-strong); box-shadow: var(--shadow-glass-strong); }
+.glass-panel--soft   { background: var(--glass-surface-soft);   backdrop-filter: blur(var(--glass-blur-sm)); -webkit-backdrop-filter: blur(var(--glass-blur-sm)); box-shadow: var(--shadow-glass-soft); }
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+.ambient-orb--blue   { background: var(--orb-blue);   }
+.ambient-orb--cyan   { background: var(--orb-sky);    }
+.ambient-orb--indigo { background: var(--orb-indigo); }
+.ambient-orb--white  { background: rgba(255, 255, 255, 0.80); }

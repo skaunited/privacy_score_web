@@ -1,0 +1,1119 @@
+<!doctype html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Privacy Score — Reprenez le contrôle de vos données.</title>
+<link rel="icon" type="image/png" href="assets/app-icon-256.png" />
+<link rel="stylesheet" href="assets/ds.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" />
+
+<style>
+/* ===========================================================
+   PRIVACY SCORE — GLASS / LIQUID VARIATION
+   Light mode, layered translucent surfaces, pastel sky.
+   =========================================================== */
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; padding: 0;
+  font-family: var(--font-body);
+  color: #1C1C1E;
+  background: #F5F7FB;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+.container { max-width: 1180px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
+.material-icons-round { font-family: 'Material Icons Round'; font-size: 18px; line-height: 1; vertical-align: -3px; }
+
+/* ── Variation chooser (top-right) ────────────────────────── */
+.var-switch {
+  position: fixed; top: 18px; right: 18px; z-index: 200;
+  display: inline-flex; gap: 4px;
+  background: rgba(255,255,255,0.70);
+  backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.8);
+  border-radius: 9999px;
+  padding: 5px;
+  box-shadow: 0 6px 24px rgba(0,40,120,0.10);
+  font-size: 12px; font-weight: 600;
+}
+.var-switch a { padding: 7px 12px; border-radius: 9999px; color: #6B7280; }
+.var-switch a.active { background: #1C1C1E; color: #fff; }
+
+/* ============================================================
+   AMBIENT — pastel sky behind everything
+============================================================ */
+.sky {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(60% 50% at 80% 10%, #C7E0FF 0%, transparent 60%),
+    radial-gradient(50% 40% at 10% 30%, #E1D5FF 0%, transparent 60%),
+    radial-gradient(50% 40% at 50% 90%, #C8F4E4 0%, transparent 60%),
+    linear-gradient(180deg, #F5F7FB 0%, #FFFFFF 50%, #F0F4FA 100%);
+}
+.grain {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  opacity: 0.4;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.7 0 0 0 0 0.75 0 0 0 0 0.85 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+/* ============================================================
+   NAV — floating capsule, very iOS
+============================================================ */
+.gnav {
+  position: fixed; top: 18px; left: 50%; transform: translateX(-50%);
+  z-index: 100;
+  display: flex; align-items: center; gap: 18px;
+  background: rgba(255,255,255,0.68);
+  backdrop-filter: blur(28px) saturate(180%); -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.9);
+  border-radius: 9999px;
+  padding: 7px 7px 7px 18px;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.7) inset,
+    0 12px 36px rgba(8,30,60,0.10);
+}
+.gnav .brand { display: inline-flex; align-items: center; gap: 9px; font-weight: 700; font-size: 14px; letter-spacing: -0.01em; }
+.gnav .brand img { width: 22px; height: 22px; border-radius: 6px; }
+.gnav .links { display: flex; gap: 22px; }
+.gnav .links a { font-size: 13px; color: #4B5563; font-weight: 500; transition: color .2s; }
+.gnav .links a:hover { color: #007AFF; }
+.gnav .cta {
+  background: #1C1C1E; color: #fff;
+  padding: 9px 16px; border-radius: 9999px;
+  font-size: 13px; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: transform .15s, box-shadow .2s;
+}
+.gnav .cta:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,0.20); }
+.gnav .cta .material-icons-round { font-size: 15px; }
+
+@media (max-width: 760px) {
+  .gnav .links { display: none; }
+}
+
+/* ============================================================
+   HERO
+============================================================ */
+.ghero {
+  position: relative;
+  min-height: 100vh;
+  padding: 130px 32px 80px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.ghero-inner {
+  width: 100%; max-width: 1180px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 40px; align-items: center;
+  position: relative; z-index: 5;
+}
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(0, 122, 255, 0.18);
+  color: #007AFF;
+  padding: 7px 14px; border-radius: 9999px;
+  font-size: 12px; font-weight: 600;
+  backdrop-filter: blur(12px);
+}
+.eyebrow::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 10px #10B981;
+}
+.ghero h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(48px, 6vw, 92px);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  color: #0B1730;
+  margin: 24px 0 22px;
+  text-wrap: balance;
+}
+.ghero h1 .grad {
+  background: linear-gradient(120deg, #007AFF 0%, #6366F1 50%, #007AFF 100%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  background-size: 200% 100%;
+  animation: gradMove 6s ease-in-out infinite;
+}
+@keyframes gradMove {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.ghero .lede {
+  font-size: 19px; line-height: 1.55; color: #4B5563;
+  max-width: 480px; margin: 0 0 32px;
+}
+.ghero .lede strong { color: #0B1730; font-weight: 600; }
+.ghero .cta-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.gbtn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 22px; border-radius: 9999px;
+  font-weight: 600; font-size: 15px;
+  font-family: var(--font-display);
+  cursor: pointer; transition: transform .15s, box-shadow .2s, background .2s;
+  border: 1px solid transparent;
+}
+.gbtn:active { transform: scale(0.97); }
+.gbtn-primary {
+  background: #1C1C1E; color: #fff;
+  box-shadow: 0 14px 32px -10px rgba(0,0,0,0.30);
+}
+.gbtn-primary:hover { transform: translateY(-1px); box-shadow: 0 18px 38px -10px rgba(0,0,0,0.45); }
+.gbtn-ghost {
+  background: rgba(255,255,255,0.7);
+  border-color: rgba(15,23,42,0.10);
+  color: #0B1730;
+  backdrop-filter: blur(12px);
+}
+.gbtn-ghost:hover { background: rgba(255,255,255,0.9); }
+
+.hero-trust {
+  display: flex; align-items: center; gap: 18px; margin-top: 38px;
+  font-size: 12.5px; color: #6B7280;
+}
+.hero-trust .avs { display: flex; }
+.hero-trust .av {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 2px solid #fff;
+  background: linear-gradient(135deg, #93C5FD, #6366F1);
+  margin-left: -8px;
+}
+.hero-trust .av:nth-child(1){ background: linear-gradient(135deg, #FDE68A, #F59E0B); margin-left: 0; }
+.hero-trust .av:nth-child(2){ background: linear-gradient(135deg, #BBF7D0, #10B981); }
+.hero-trust .av:nth-child(3){ background: linear-gradient(135deg, #DDD6FE, #8B5CF6); }
+.hero-trust .av:nth-child(4){ background: linear-gradient(135deg, #FECACA, #EF4444); }
+
+/* ── Right side: stacked glass cards + phone ── */
+.ghero-stage {
+  position: relative;
+  height: 600px;
+  display: flex; justify-content: center; align-items: center;
+}
+.gphone {
+  position: relative; z-index: 5;
+  width: 280px;
+  border-radius: 44px;
+  padding: 11px;
+  background: linear-gradient(180deg, #F7F8FA 0%, #E8EEF6 100%);
+  border: 1px solid rgba(255,255,255,0.95);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,1) inset,
+    0 30px 80px rgba(20, 50, 110, 0.20),
+    0 60px 120px rgba(20, 50, 110, 0.10);
+}
+.gphone img {
+  border-radius: 34px; width: 100%; display: block;
+}
+
+/* Floating glass cards */
+.gcard {
+  position: absolute;
+  background: rgba(255,255,255,0.66);
+  backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.9);
+  border-radius: 22px;
+  padding: 16px 18px;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.9) inset,
+    0 18px 48px rgba(8,30,60,0.12);
+  z-index: 4;
+}
+.gcard-score {
+  top: 30px; left: -30px;
+  display: flex; align-items: center; gap: 14px;
+  animation: floatA 7s ease-in-out infinite;
+}
+.gcard-score .ring {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: conic-gradient(#007AFF 0% 77%, rgba(0,122,255,0.10) 77% 100%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.gcard-score .ring::after {
+  content: ""; position: absolute; inset: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+}
+.gcard-score .ring strong {
+  position: relative; z-index: 2;
+  font-family: var(--font-display); font-weight: 800; font-size: 19px;
+  color: #007AFF;
+  font-feature-settings: 'tnum' 1;
+}
+.gcard-score .meta { font-size: 11px; color: #6B7280; letter-spacing: 0.04em; text-transform: uppercase; }
+.gcard-score .meta strong { display: block; color: #0B1730; font-size: 15px; letter-spacing: -0.01em; text-transform: none; margin-top: 2px; }
+
+.gcard-trackers {
+  top: 200px; right: -40px;
+  width: 200px;
+  animation: floatB 8s ease-in-out infinite;
+  animation-delay: -2s;
+}
+.gcard-trackers .row { display: flex; align-items: center; justify-content: space-between; }
+.gcard-trackers .ic {
+  width: 32px; height: 32px;
+  border-radius: 10px;
+  background: rgba(239, 68, 68, 0.10);
+  color: #EF4444;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.gcard-trackers .label { font-size: 11px; color: #6B7280; text-transform: uppercase; letter-spacing: 0.04em; }
+.gcard-trackers .num { font-family: var(--font-display); font-weight: 800; font-size: 28px; color: #0B1730; letter-spacing: -0.02em; }
+.gcard-trackers .delta { font-size: 11px; color: #10B981; font-weight: 600; }
+
+.gcard-dns {
+  bottom: 80px; left: -60px;
+  display: flex; align-items: center; gap: 10px;
+  animation: floatA 9s ease-in-out infinite;
+  animation-delay: -4s;
+}
+.gcard-dns .ic {
+  width: 30px; height: 30px; border-radius: 9px;
+  background: rgba(16, 185, 129, 0.12); color: #10B981;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.gcard-dns .t { font-size: 11px; color: #6B7280; letter-spacing: 0.04em; text-transform: uppercase; }
+.gcard-dns strong { display: block; font-size: 14px; color: #0B1730; }
+
+@keyframes floatA { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-12px) rotate(-2deg); } }
+@keyframes floatB { 0%,100% { transform: translateY(0) rotate(2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
+
+.gcard-score { transform: rotate(-2deg); }
+.gcard-trackers { transform: rotate(2deg); }
+.gcard-dns { transform: rotate(-2deg); }
+
+@media (max-width: 900px) {
+  .ghero-inner { grid-template-columns: 1fr; }
+  .ghero-stage { height: 540px; transform: scale(0.85); }
+}
+
+
+/* ============================================================
+   STORY — quiet glass cards in a vertical stream
+============================================================ */
+.gstory {
+  padding: 120px 0 120px;
+  position: relative; z-index: 2;
+}
+.gstory-head {
+  max-width: 800px; margin: 0 auto 60px;
+  text-align: center;
+}
+.kicker {
+  display: inline-block;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+  color: #007AFF;
+  margin-bottom: 18px;
+}
+.gstory-head h2 {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(30px, 4vw, 54px);
+  line-height: 1.1; letter-spacing: -0.025em;
+  color: #0B1730; margin: 0 0 20px;
+  text-wrap: balance;
+}
+.gstory-head h2 .hl {
+  position: relative; display: inline-block;
+}
+.gstory-head h2 .hl::after {
+  content: ""; position: absolute; inset: auto -2px 4%; height: 28%;
+  background: linear-gradient(90deg, #FECACA, #FCA5A5);
+  z-index: -1; border-radius: 4px;
+}
+.gstory-head p {
+  font-size: 17px; color: #4B5563; line-height: 1.6;
+  max-width: 580px; margin: 0 auto;
+}
+
+.gstory-stream {
+  max-width: 760px; margin: 0 auto;
+  display: flex; flex-direction: column; gap: 18px;
+}
+.gstory-card {
+  background: rgba(255,255,255,0.62);
+  backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.95);
+  border-radius: 26px;
+  padding: 28px 30px;
+  display: grid; grid-template-columns: 60px 1fr;
+  gap: 22px; align-items: center;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.9) inset,
+    0 14px 36px rgba(8,30,60,0.07);
+  transition: transform .35s var(--ease-out), box-shadow .3s;
+}
+.gstory-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.9) inset,
+    0 20px 48px rgba(8,30,60,0.12);
+}
+.gstory-card .ic {
+  width: 60px; height: 60px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(0,122,255,0.16), rgba(99,102,241,0.16));
+  border: 1px solid rgba(0,122,255,0.20);
+  display: flex; align-items: center; justify-content: center;
+  color: #007AFF;
+}
+.gstory-card .ic .material-icons-round { font-size: 26px; }
+.gstory-card h3 {
+  margin: 0 0 6px; font-family: var(--font-display); font-weight: 700;
+  font-size: 19px; color: #0B1730; letter-spacing: -0.01em;
+}
+.gstory-card p {
+  margin: 0; font-size: 14.5px; line-height: 1.55; color: #4B5563;
+}
+.gstory-card .stat {
+  margin-top: 10px;
+  display: inline-flex; align-items: baseline; gap: 8px;
+  font-family: var(--font-display);
+  color: #007AFF;
+}
+.gstory-card .stat b { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; font-feature-settings: 'tnum' 1; }
+.gstory-card .stat span { font-size: 12px; color: #6B7280; font-weight: 500; }
+
+.story-pivot {
+  margin: 80px auto 0; text-align: center; max-width: 720px;
+}
+.story-pivot p {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.6vw, 34px);
+  line-height: 1.25; font-weight: 700;
+  color: #0B1730; letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.story-pivot p em {
+  font-style: normal;
+  background: linear-gradient(120deg, #007AFF, #6366F1);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* ============================================================
+   PRODUCT SHOWCASE — full-bleed glass panel
+============================================================ */
+.gshowcase {
+  padding: 60px 32px 140px;
+  position: relative; z-index: 2;
+}
+.gshow-wrap {
+  max-width: 1180px; margin: 0 auto;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(30px) saturate(180%); -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.95);
+  border-radius: 36px;
+  padding: 64px 60px;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.9) inset,
+    0 24px 60px rgba(8,30,60,0.10);
+  position: relative;
+  overflow: hidden;
+}
+.gshow-wrap::before {
+  content: "";
+  position: absolute; top: -40%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0,122,255,0.18), transparent 60%);
+  border-radius: 50%;
+}
+.gshow-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center;
+  position: relative; z-index: 2;
+}
+.gshow-text h2 {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(34px, 4.6vw, 56px);
+  line-height: 1.05; letter-spacing: -0.03em;
+  color: #0B1730; margin: 16px 0 22px;
+  text-wrap: balance;
+}
+.gshow-text p {
+  font-size: 17px; color: #4B5563; line-height: 1.6;
+  max-width: 460px; margin-bottom: 28px;
+}
+.gshow-list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.gshow-list li {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 15px; color: #1C1C1E;
+}
+.gshow-list .check {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: #10B981; color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 13px;
+}
+
+.gshow-phone {
+  display: flex; justify-content: center;
+  position: relative;
+}
+.gshow-phone .ph {
+  width: 300px;
+  border-radius: 44px;
+  padding: 12px;
+  background: linear-gradient(180deg, #F7F8FA, #E8EEF6);
+  border: 1px solid rgba(255,255,255,0.95);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,1) inset,
+    0 30px 80px rgba(20, 50, 110, 0.25);
+}
+.gshow-phone img { width: 100%; border-radius: 34px; }
+.gshow-phone .pin {
+  position: absolute;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.95);
+  border-radius: 14px;
+  padding: 8px 12px;
+  font-size: 12px; color: #0B1730; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 6px;
+  box-shadow: 0 10px 30px rgba(8,30,60,0.15);
+}
+.gshow-phone .pin .material-icons-round { font-size: 14px; color: #007AFF; }
+.gshow-phone .pin-1 { top: 60px; right: -30px; animation: floatA 7s ease-in-out infinite; }
+.gshow-phone .pin-2 { bottom: 120px; left: -40px; animation: floatB 8s ease-in-out infinite; animation-delay: -2s; }
+
+@media (max-width: 900px) {
+  .gshow-wrap { padding: 40px 24px; }
+  .gshow-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+
+
+/* ============================================================
+   TAB CAROUSEL — minimal, calm
+============================================================ */
+.gfeatures {
+  padding: 120px 32px;
+  position: relative; z-index: 2;
+}
+.gfeatures-head {
+  max-width: 760px; margin: 0 auto 50px;
+  text-align: center;
+}
+.gfeatures-head h2 {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: 1.1; letter-spacing: -0.025em;
+  color: #0B1730; margin: 14px 0;
+}
+.gtabs {
+  max-width: 800px; margin: 0 auto 48px;
+  display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;
+  background: rgba(255,255,255,0.55);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.95);
+  border-radius: 9999px;
+  padding: 6px;
+  box-shadow: 0 8px 24px rgba(8,30,60,0.06);
+}
+.gtab {
+  background: transparent; border: none; cursor: pointer;
+  padding: 9px 16px; border-radius: 9999px;
+  font-family: var(--font-body); font-weight: 600; font-size: 13.5px;
+  color: #6B7280;
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: background .2s, color .2s;
+}
+.gtab .material-icons-round { font-size: 15px; }
+.gtab:hover { color: #0B1730; }
+.gtab.is-active { background: #1C1C1E; color: #fff; }
+
+.gstage {
+  max-width: 1100px; margin: 0 auto;
+  position: relative;
+  min-height: 540px;
+}
+.gpane {
+  position: absolute; inset: 0;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .4s, transform .4s;
+  transform: translateY(16px);
+}
+.gpane.is-active { opacity: 1; pointer-events: auto; transform: none; }
+.gpane .shot {
+  display: flex; justify-content: center;
+}
+.gpane .shot img {
+  width: 290px;
+  border-radius: 38px;
+  border: 11px solid #fff;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,1) inset,
+    0 40px 100px rgba(20,50,110,0.22);
+}
+.gpane h3 {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 36px; line-height: 1.1; letter-spacing: -0.025em;
+  color: #0B1730; margin: 14px 0 18px;
+}
+.gpane p {
+  font-size: 16.5px; line-height: 1.6; color: #4B5563;
+  margin: 0 0 22px; max-width: 460px;
+}
+.gpane .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.gpane .chip {
+  background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(15,23,42,0.08);
+  color: #1C1C1E;
+  border-radius: 9999px;
+  padding: 6px 12px;
+  font-size: 12px; font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .gstage { min-height: 0; }
+  .gpane { position: relative; grid-template-columns: 1fr; gap: 30px; text-align: center; }
+  .gpane:not(.is-active) { display: none; }
+}
+
+
+/* ============================================================
+   TRUST — quiet 4-cell glass grid
+============================================================ */
+.gtrust {
+  padding: 120px 32px;
+  position: relative; z-index: 2;
+}
+.gtrust-head {
+  max-width: 760px; margin: 0 auto 50px;
+  text-align: center;
+}
+.gtrust-head h2 {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(30px, 4vw, 50px); line-height: 1.1; letter-spacing: -0.025em;
+  margin: 14px 0; color: #0B1730;
+}
+.gtrust-head p { font-size: 17px; color: #4B5563; max-width: 540px; margin: 0 auto; }
+.gtrust-grid {
+  max-width: 1080px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.gtrust-c {
+  background: rgba(255,255,255,0.66);
+  backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.95);
+  border-radius: 24px;
+  padding: 28px 24px;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 14px 36px rgba(8,30,60,0.07);
+  transition: transform .3s, box-shadow .3s;
+}
+.gtrust-c:hover { transform: translateY(-4px); box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 22px 50px rgba(8,30,60,0.12); }
+.gtrust-c .ic {
+  width: 46px; height: 46px; border-radius: 14px;
+  background: linear-gradient(135deg, rgba(0,122,255,0.18), rgba(99,102,241,0.18));
+  display: flex; align-items: center; justify-content: center;
+  color: #007AFF;
+}
+.gtrust-c .ic .material-icons-round { font-size: 22px; }
+.gtrust-c h3 {
+  margin: 18px 0 8px; font-family: var(--font-display); font-weight: 700;
+  font-size: 17px; color: #0B1730; letter-spacing: -0.01em;
+}
+.gtrust-c p { font-size: 13.5px; line-height: 1.5; color: #4B5563; margin: 0 0 14px; }
+.gtrust-c code {
+  background: rgba(0,122,255,0.08);
+  color: #007AFF;
+  border-radius: 7px;
+  padding: 3px 8px;
+  font-size: 11.5px;
+  font-family: var(--font-mono, ui-monospace, SF Mono, Menlo, monospace);
+}
+
+@media (max-width: 900px) { .gtrust-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .gtrust-grid { grid-template-columns: 1fr; } }
+
+
+/* ============================================================
+   FINAL CTA
+============================================================ */
+.gcta {
+  padding: 140px 32px;
+  position: relative; z-index: 2;
+}
+.gcta-wrap {
+  max-width: 1180px; margin: 0 auto;
+  background:
+    linear-gradient(135deg, rgba(0,122,255,0.85), rgba(99,102,241,0.85));
+  border-radius: 40px;
+  padding: 80px 60px;
+  position: relative; overflow: hidden;
+  color: #fff;
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: 60px; align-items: center;
+  box-shadow: 0 40px 80px rgba(0,122,255,0.25);
+}
+.gcta-wrap::before {
+  content: "";
+  position: absolute; top: -30%; right: -10%; width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,255,255,0.4), transparent 60%);
+  border-radius: 50%;
+}
+.gcta-wrap::after {
+  content: ""; position: absolute; bottom: -50%; left: -10%; width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(199, 224, 255, 0.4), transparent 60%);
+  border-radius: 50%;
+}
+.gcta-wrap h2 {
+  position: relative; z-index: 2;
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(36px, 5vw, 64px); line-height: 1.02; letter-spacing: -0.03em;
+  margin: 0 0 22px; color: #fff;
+  text-wrap: balance;
+}
+.gcta-wrap p {
+  position: relative; z-index: 2;
+  font-size: 18px; line-height: 1.5; color: rgba(255,255,255,0.85);
+  margin: 0 0 32px; max-width: 460px;
+}
+.gcta-wrap .row { position: relative; z-index: 2; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+.gcta-wrap .gbtn-primary { background: #fff; color: #0B1730; }
+.gcta-wrap .gbtn-ghost {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.30);
+  color: #fff;
+}
+.gcta-wrap .gbtn-ghost:hover { background: rgba(255,255,255,0.25); }
+.gcta-wrap .mark {
+  position: relative; z-index: 2;
+  display: flex; justify-content: center; align-items: center;
+}
+.gcta-wrap .mark img {
+  width: 220px; height: 220px; border-radius: 50px;
+  filter: drop-shadow(0 30px 80px rgba(0,0,0,0.35));
+  animation: floatA 6s ease-in-out infinite;
+}
+@media (max-width: 900px) {
+  .gcta-wrap { grid-template-columns: 1fr; padding: 60px 32px; text-align: center; }
+  .gcta-wrap p { margin-left: auto; margin-right: auto; }
+  .gcta-wrap .row { justify-content: center; }
+  .gcta-wrap .mark img { width: 160px; height: 160px; }
+}
+
+
+/* ============================================================
+   FOOTER
+============================================================ */
+.gfoot {
+  padding: 60px 32px 30px;
+  position: relative; z-index: 2;
+  border-top: 1px solid rgba(15,23,42,0.06);
+  color: #6B7280; font-size: 13px;
+}
+.gfoot .row {
+  max-width: 1180px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  flex-wrap: wrap;
+}
+.gfoot .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; color: #0B1730; }
+.gfoot .brand img { width: 28px; height: 28px; border-radius: 7px; }
+.gfoot .links { display: flex; gap: 24px; }
+.gfoot .links a:hover { color: #007AFF; }
+
+
+/* ============================================================
+   REVEAL
+============================================================ */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
+.reveal.in { opacity: 1; transform: none; }
+</style>
+</head>
+
+<body>
+
+<div class="sky"></div>
+<div class="grain"></div>
+
+<!-- Variation switcher (top-right) -->
+<div class="var-switch">
+  <a href="index.html">Dark</a>
+  <a href="variation-glass.html" class="active">Glass</a>
+  <a href="variation-comic.html">Comic</a>
+</div>
+
+<!-- ============================================================
+     NAV
+============================================================ -->
+<nav class="gnav">
+  <a class="brand" href="#top">
+    <img src="assets/app-icon-256.png" alt=""/> Privacy Score
+  </a>
+  <div class="links">
+    <a href="#story">Histoire</a>
+    <a href="#showcase">L'app</a>
+    <a href="#features">Onglets</a>
+    <a href="#trust">Confiance</a>
+  </div>
+  <a href="#download" class="cta">
+    <span class="material-icons-round">download</span>
+    Télécharger
+  </a>
+</nav>
+
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="ghero" id="top">
+  <div class="ghero-inner">
+    <div class="hero-copy">
+      <span class="eyebrow">Disponible sur l'App Store</span>
+      <h1>
+        Votre vie privée,<br/>
+        <span class="grad">enfin lisible.</span>
+      </h1>
+      <p class="lede">
+        Privacy Score lit le Rapport de Confidentialité d'iOS, calcule
+        un <strong>score sur 100</strong>, et vous dit exactement
+        comment le faire monter. <strong>Rien ne quitte votre iPhone.</strong>
+      </p>
+      <div class="cta-row">
+        <a class="gbtn gbtn-primary" href="#download">
+          <span class="material-icons-round">download</span>
+          App Store
+        </a>
+        <a class="gbtn gbtn-ghost" href="#story">
+          Pourquoi ça compte
+          <span class="material-icons-round">arrow_downward</span>
+        </a>
+      </div>
+
+      <div class="hero-trust">
+        <div class="avs">
+          <div class="av"></div><div class="av"></div><div class="av"></div><div class="av"></div>
+        </div>
+        <span>4,8 ★ · plus de <strong style="color:#0B1730;">12&nbsp;000</strong> utilisateurs ont récupéré le contrôle</span>
+      </div>
+    </div>
+
+    <div class="ghero-stage">
+
+      <div class="gcard gcard-score">
+        <div class="ring"><strong>77</strong></div>
+        <div class="meta">
+          <span>Privacy Score</span>
+          <strong>Bon</strong>
+        </div>
+      </div>
+
+      <div class="gcard gcard-trackers">
+        <div class="row">
+          <span class="ic"><span class="material-icons-round">ads_click</span></span>
+          <span class="delta">−40% 7j</span>
+        </div>
+        <div style="margin-top:10px;">
+          <div class="num">2 487</div>
+          <div class="label">Traceurs bloqués aujourd'hui</div>
+        </div>
+      </div>
+
+      <div class="gcard gcard-dns">
+        <span class="ic"><span class="material-icons-round">dns</span></span>
+        <div>
+          <span class="t">DNS chiffré</span>
+          <strong>Actif · Quad9</strong>
+        </div>
+      </div>
+
+      <div class="gphone">
+        <img src="assets/screen-dashboard.png" alt="Dashboard Privacy Score" />
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     STORY
+============================================================ -->
+<section class="gstory" id="story">
+  <div class="container">
+    <div class="gstory-head reveal">
+      <span class="kicker">L'histoire qui a tout déclenché</span>
+      <h2>
+        En 2024, des journalistes ont identifié
+        <span class="hl">26 agents du Secret Service</span>
+        — en achetant des données publicitaires.
+      </h2>
+      <p>
+        Pas de piratage. Pas de fuite. Un simple fichier acheté
+        à un courtier en données — comme n'importe qui peut le faire.
+      </p>
+    </div>
+
+    <div class="gstory-stream">
+      <article class="gstory-card reveal">
+        <div class="ic"><span class="material-icons-round">location_on</span></div>
+        <div>
+          <h3>Vos apps revendent votre position.</h3>
+          <p>Une app météo, un jeu, un calendrier. Chacune envoie en arrière-plan votre GPS à des dizaines de courtiers — sans que vous le sachiez jamais.</p>
+          <div class="stat"><b>909</b><span>traceurs sur un iPhone moyen / 7 jours.</span></div>
+        </div>
+      </article>
+
+      <article class="gstory-card reveal">
+        <div class="ic"><span class="material-icons-round">map</span></div>
+        <div>
+          <h3>Les apps de fitness ont déjà trahi des bases militaires.</h3>
+          <p>La heatmap mondiale d'une app de course a révélé les itinéraires de patrouille de soldats américains au Moyen-Orient. Visibles depuis n'importe quel navigateur.</p>
+          <div class="stat"><b>2018</b><span>Strava — bases militaires exposées au monde.</span></div>
+        </div>
+      </article>
+
+      <article class="gstory-card reveal">
+        <div class="ic"><span class="material-icons-round">store</span></div>
+        <div>
+          <h3>Le marché des données est légal et public.</h3>
+          <p>Annonceur, employeur, gouvernement étranger, ex-conjoint : n'importe qui peut acheter ces données. Vous ne saurez jamais qui vous a regardé.</p>
+          <div class="stat"><b>200 €</b><span>le prix moyen pour 1&nbsp;million d'enregistrements.</span></div>
+        </div>
+      </article>
+    </div>
+
+    <div class="story-pivot reveal">
+      <p>
+        Vous ne pouvez pas <em>supprimer</em> ces données.<br/>
+        Mais vous pouvez <em>arrêter d'en produire.</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SHOWCASE
+============================================================ -->
+<section class="gshowcase" id="showcase">
+  <div class="gshow-wrap reveal">
+    <div class="gshow-grid">
+      <div class="gshow-text">
+        <span class="kicker">Privacy Score</span>
+        <h2>Un score. Trois actions. Aucune anxiété.</h2>
+        <p>
+          On lit le rapport que votre iPhone génère déjà.
+          On le croise avec la base de DuckDuckGo Tracker Radar.
+          Et on vous propose entre 3 et 5 fixes immédiats —
+          chacun avec un gain en points mesuré.
+        </p>
+        <ul class="gshow-list">
+          <li><span class="check"><span class="material-icons-round" style="font-size:13px;">check</span></span>Lit le rapport iOS natif — aucune permission supplémentaire.</li>
+          <li><span class="check"><span class="material-icons-round" style="font-size:13px;">check</span></span>Calcule un score en moins de 2 secondes, en local.</li>
+          <li><span class="check"><span class="material-icons-round" style="font-size:13px;">check</span></span>Recommandations triées par impact, pas par marketing.</li>
+          <li><span class="check"><span class="material-icons-round" style="font-size:13px;">check</span></span>Suit votre progression semaine après semaine.</li>
+        </ul>
+      </div>
+
+      <div class="gshow-phone">
+        <div class="ph">
+          <img src="assets/screen-recommendations.png" alt="Recommandations" />
+        </div>
+        <div class="pin pin-1"><span class="material-icons-round">trending_up</span> +45 points</div>
+        <div class="pin pin-2"><span class="material-icons-round">verified</span> Hors-ligne</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FEATURES
+============================================================ -->
+<section class="gfeatures" id="features">
+  <div class="container">
+    <div class="gfeatures-head reveal">
+      <span class="kicker">À l'intérieur</span>
+      <h2>Quatre vues, quatre angles sur votre exposition.</h2>
+    </div>
+
+    <div class="gtabs reveal">
+      <button class="gtab is-active" data-pane="dashboard"><span class="material-icons-round">dashboard</span> Dashboard</button>
+      <button class="gtab" data-pane="recos"><span class="material-icons-round">lightbulb</span> Recommandations</button>
+      <button class="gtab" data-pane="evolution"><span class="material-icons-round">analytics</span> Évolution</button>
+      <button class="gtab" data-pane="network"><span class="material-icons-round">hub</span> Réseau</button>
+    </div>
+
+    <div class="gstage">
+      <div class="gpane is-active" data-pane="dashboard">
+        <div class="shot"><img src="assets/screen-dashboard.png" alt="Dashboard"/></div>
+        <div>
+          <span class="kicker">Onglet 1 · Dashboard</span>
+          <h3>Votre score, d'un coup d'œil.</h3>
+          <p>Un seul nombre pour résumer votre exposition. En dessous : traceurs, géoloc, DNS, Wi-Fi, VPN. Chaque vecteur. Chaque statut.</p>
+          <div class="chips">
+            <span class="chip">DNS chiffré</span>
+            <span class="chip">VPN actif</span>
+            <span class="chip">Tracking pub</span>
+            <span class="chip">Hygiène</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="gpane" data-pane="recos">
+        <div class="shot"><img src="assets/screen-recommendations.png" alt="Recommandations"/></div>
+        <div>
+          <span class="kicker">Onglet 2 · Recommandations</span>
+          <h3>Des fixes, pas des discours.</h3>
+          <p>Chaque carte commence par un verbe d'action et finit par un gain mesurable. « Désactiver le suivi pub. +5 pts. » Vous appliquez ce que vous voulez.</p>
+          <div class="chips">
+            <span class="chip">+5 pts</span>
+            <span class="chip">+8 pts</span>
+            <span class="chip">+12 pts</span>
+            <span class="chip">Critique</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="gpane" data-pane="evolution">
+        <div class="shot"><img src="assets/screen-evolution.png" alt="Évolution"/></div>
+        <div>
+          <span class="kicker">Onglet 3 · Évolution</span>
+          <h3>Votre score monte. Et vous le voyez.</h3>
+          <p>Chaque import est un point sur une courbe. Les semaines où vous avez baissé la garde, les fixes qui ont vraiment compté, la pente qui repart vers le haut.</p>
+          <div class="chips">
+            <span class="chip">Historique</span>
+            <span class="chip">Score & grade</span>
+            <span class="chip">Trackers / scan</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="gpane" data-pane="network">
+        <div class="shot"><img src="assets/screen-network.png" alt="Trafic réseau"/></div>
+        <div>
+          <span class="kicker">Onglet 4 · Trafic réseau</span>
+          <h3>Qui parle à qui — par pays, par entreprise.</h3>
+          <p>Le détail brut. Quelles apps contactent Facebook ? Vers quels pays partent les données ? Quels domaines reviennent le plus ? Trois vues pour comprendre.</p>
+          <div class="chips">
+            <span class="chip">26 pays</span>
+            <span class="chip">Top trackers</span>
+            <span class="chip">Companies</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     TRUST
+============================================================ -->
+<section class="gtrust" id="trust">
+  <div class="container">
+    <div class="gtrust-head reveal">
+      <span class="kicker">Notre promesse</span>
+      <h2>Une app de confidentialité doit, d'abord, être irréprochable.</h2>
+      <p>Le code est public. Voici, ligne par ligne, ce que Privacy Score ne fait pas.</p>
+    </div>
+
+    <div class="gtrust-grid reveal">
+      <div class="gtrust-c">
+        <div class="ic"><span class="material-icons-round">cloud_off</span></div>
+        <h3>Aucun serveur</h3>
+        <p>Pas d'API maison. Pas d'analytics. Aucune requête sortante n'est lancée par l'app.</p>
+        <code>URLSession · 0</code>
+      </div>
+      <div class="gtrust-c">
+        <div class="ic"><span class="material-icons-round">person_off</span></div>
+        <h3>Aucun compte</h3>
+        <p>Pas d'inscription. Pas d'email. Pas de "Sign in with Apple". Vous téléchargez, vous utilisez.</p>
+        <code>Auth · 0</code>
+      </div>
+      <div class="gtrust-c">
+        <div class="ic"><span class="material-icons-round">phone_iphone</span></div>
+        <h3>Tout en local</h3>
+        <p>Le rapport ne quitte jamais votre iPhone. Désinstallez l'app et tout disparaît, point.</p>
+        <code>Sandbox iOS</code>
+      </div>
+      <div class="gtrust-c">
+        <div class="ic"><span class="material-icons-round">notifications_off</span></div>
+        <h3>Pas de panique</h3>
+        <p>Aucun badge rouge, aucune notif d'urgence. Pas de « 47 menaces&nbsp;! ». Une app de privacy ne devrait pas vous stresser.</p>
+        <code>Badge · jamais</code>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CTA
+============================================================ -->
+<section class="gcta" id="download">
+  <div class="gcta-wrap reveal">
+    <div>
+      <h2>Reprenez le contrôle.<br/>En soixante secondes.</h2>
+      <p>
+        Importez le rapport. Voyez votre score. Appliquez les fixes.
+        Et la prochaine fois que vous croisez une histoire de fuite de données,
+        ce ne sera pas la vôtre.
+      </p>
+      <div class="row">
+        <a href="#" class="gbtn gbtn-primary">
+          <span class="material-icons-round">download</span>
+          Télécharger sur l'App Store
+        </a>
+        <a href="#" class="gbtn gbtn-ghost">Lire le code source</a>
+      </div>
+    </div>
+    <div class="mark">
+      <img src="assets/app-icon-512.png" alt="" />
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="gfoot">
+  <div class="row">
+    <div class="brand">
+      <img src="assets/app-icon-256.png" alt=""/> Privacy Score
+    </div>
+    <div class="links">
+      <a href="#">Mentions légales</a>
+      <a href="#">Confidentialité</a>
+      <a href="#">Code source</a>
+      <a href="mailto:hello@privacyscore.fr">Contact</a>
+    </div>
+    <div>© 2026 — Made in France</div>
+  </div>
+</footer>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Tabs
+  const tabs = document.querySelectorAll('.gtab');
+  const panes = document.querySelectorAll('.gpane');
+  tabs.forEach(t => t.addEventListener('click', () => {
+    const k = t.dataset.pane;
+    tabs.forEach(x => x.classList.toggle('is-active', x === t));
+    panes.forEach(p => p.classList.toggle('is-active', p.dataset.pane === k));
+  }));
+});
+</script>
+</body>
+</html>

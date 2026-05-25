@@ -1,0 +1,105 @@
+---
+/**
+ * BaseLayout.astro
+ *
+ * The single document shell for every page on privacyscore.fr.
+ *
+ * Responsibilities:
+ *   - Emit the `<!doctype html><html><head>…</head><body>…</body></html>` wrapper.
+ *   - Set `lang` from the page's locale and force `data-theme="dark"` as the
+ *     default surface (the design system in `ds.css` is dark-first).
+ *   - Delegate all SEO-related `<head>` tags to `<SEO />`.
+ *   - Inject any number of JSON-LD blobs (single object or array) via
+ *     `<script is:inline type="application/ld+json">`. `is:inline` is REQUIRED:
+ *     without it Astro tries to bundle the JSON as a module and errors out.
+ *   - Expose a named `head` slot so individual pages can add page-specific
+ *     `<head>` elements (e.g. extra preloads, alternate JSON-LD).
+ *   - Globally import `ds.css` + `site.css`; Vite hashes and links them.
+ *   - Inject the global vanilla JS bundle at end-of-body via a processed
+ *     `<script>` tag (Astro will bundle, hash, and emit the right <script src>).
+ */
+import type { Locale } from '@i18n/utils';
+import { htmlLang } from '@i18n/utils';
+import SEO from '@components/SEO.astro';
+
+// Global stylesheets — Vite handles bundling, hashing and <link> injection.
+import '../styles/ds.css';
+import '../styles/site.css';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  jsonLd?: object | object[];
+}
+
+const {
+  locale,
+  title,
+  description,
+  ogTitle,
+  ogDescription,
+  jsonLd,
+} = Astro.props;
+
+const jsonLdEntries: object[] = jsonLd
+  ? Array.isArray(jsonLd)
+    ? jsonLd
+    : [jsonLd]
+  : [];
+
+const pathname = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang={htmlLang[locale]} data-theme="dark" class="no-js">
+  <head>
+    {/*
+      Strip the `no-js` class as early as possible so JS-enabled clients
+      never paint the no-js fallback styles. Inline + `is:inline` keeps it
+      synchronous and out of the bundle (~50 bytes). If JS is disabled the
+      class stays and `.no-js .reveal` in `site.css` keeps content visible
+      for crawlers and privacy-conscious no-JS users.
+    */}
+    <script is:inline>document.documentElement.classList.remove('no-js');</script>
+
+    <SEO
+      locale={locale}
+      title={title}
+      description={description}
+      ogTitle={ogTitle}
+      ogDescription={ogDescription}
+      pathname={pathname}
+    />
+
+    {/*
+      JSON-LD payloads. `is:inline` is mandatory — Astro otherwise treats the
+      tag as a module script and errors on the `application/ld+json` MIME.
+    */}
+    {jsonLdEntries.map((data) => (
+      <script
+        is:inline
+        type="application/ld+json"
+        set:html={JSON.stringify(data)}
+      />
+    ))}
+
+    {/* Page-specific head additions (extra preloads, page-only JSON-LD, …). */}
+    <slot name="head" />
+  </head>
+
+  <body>
+    <slot />
+
+    {/*
+      Global vanilla JS bundle. Astro processes the import, bundles via Vite
+      and emits a hashed <script src="…"> automatically. Do not add type or
+      is:inline here — we want full processing.
+    */}
+    <script>
+      import '../assets/site.js';
+    </script>
+  </body>
+</html>

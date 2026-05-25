@@ -1,0 +1,35 @@
+{
+  "mcpServers": {
+    "google-search-console": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "mcp-gsc"],
+      "env": {
+        "GOOGLE_GSC_CREDENTIALS_PATH": "${GOOGLE_GSC_CREDENTIALS_PATH}"
+      },
+      "timeout": 60000,
+      "alwaysLoad": false
+    },
+    "dataforseo": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "dataforseo-mcp-server"],
+      "env": {
+        "DATAFORSEO_USERNAME": "support@privacyscore.fr",
+        "DATAFORSEO_PASSWORD": "cIkfon-3fyzfo-duhsuh"
+      },
+      "timeout": 60000,
+      "alwaysLoad": true
+    },
+    "screaming-frog": {
+      "type": "stdio",
+      "command": "screamingfrogseospider",
+      "args": ["--mcp-server"],
+      "env": {
+        "SF_LICENSE_KEY": "${SF_LICENSE_KEY}"
+      },
+      "timeout": 120000,
+      "alwaysLoad": false
+    }
+  }
+}

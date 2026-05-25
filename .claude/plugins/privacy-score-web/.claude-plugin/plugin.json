@@ -1,0 +1,11 @@
+{
+  "name": "privacy-score-web",
+  "description": "Complete web development plugin for the privacyscore.fr marketing site. Astro 6.x, SEO-first, FR+EN native copywriting, OWASP security, Nginx deployment.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Skander Bahri",
+    "email": "contact@codevelop.fr"
+  },
+  "homepage": "https://privacyscore.fr",
+  "license": "MIT"
+}

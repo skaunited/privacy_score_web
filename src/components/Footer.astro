@@ -1,0 +1,76 @@
+---
+/**
+ * Footer.astro — site footer.
+ *
+ * Matches `variation-illustrated.html` lines 1454-1491. Three columns of links,
+ * brand block on the left, tagline + copyright + version row at the bottom.
+ */
+import type { Locale } from '@i18n/utils';
+
+interface FooterLink {
+  label: string;
+  href: string;
+}
+
+interface FooterColumn {
+  heading: string;
+  links: FooterLink[];
+}
+
+interface Props {
+  footer: {
+    tagline: string;
+    columns: {
+      app: FooterColumn;
+      legal: FooterColumn;
+      contact: FooterColumn;
+    };
+    copyright: string;
+    version: string;
+  };
+  locale: Locale;
+}
+
+const { footer } = Astro.props;
+const cols: FooterColumn[] = [
+  footer.columns.app,
+  footer.columns.legal,
+  footer.columns.contact,
+];
+---
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div>
+      <div class="foot-brand">
+        <img
+          src="/assets/app-icon-256.png"
+          alt=""
+          width="256"
+          height="256"
+          loading="lazy"
+          decoding="async"
+        />
+        <strong style="color:#F8FAFC; font-family: var(--font-display); font-weight: 700;">Privacy Score</strong>
+      </div>
+      <p class="foot-sub" style="max-width: 320px; margin-top: 14px;">
+        {footer.tagline}
+      </p>
+    </div>
+    <div class="foot-cols">
+      {cols.map((col) => (
+        <nav aria-label={col.heading}>
+          <div class="foot-h">{col.heading}</div>
+          {col.links.map((link) => (
+            <a href={link.href}>{link.label}</a>
+          ))}
+        </nav>
+      ))}
+    </div>
+  </div>
+  <div class="footer-rule"></div>
+  <div class="container footer-foot">
+    <span>{footer.copyright}</span>
+    <span>{footer.version}</span>
+  </div>
+</footer>

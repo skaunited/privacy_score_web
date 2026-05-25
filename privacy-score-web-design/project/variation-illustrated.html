@@ -1,0 +1,1616 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Privacy Score — Reprenez le contrôle de vos données.</title>
+<link rel="icon" type="image/png" href="assets/app-icon-256.png" />
+<link rel="stylesheet" href="assets/ds.css" />
+<link rel="stylesheet" href="assets/site.css" />
+
+<style>
+/* ============================================================
+   VARIATION — ILLUSTRATED (dark + storyboard)
+   Adds the 8-panel narrative, 4-card feature grid, and
+   "Ne fait pas" manifesto. Reuses the dark design system.
+============================================================ */
+
+/* Variation switcher (top-right) */
+.var-switch {
+  position: fixed; top: 20px; right: 24px; z-index: 200;
+  display: inline-flex; gap: 4px;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 9999px;
+  padding: 5px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  font-size: 12px; font-weight: 600;
+}
+.var-switch a { padding: 7px 12px; border-radius: 9999px; color: #94A3B8; }
+.var-switch a.active { background: rgba(96,165,250,0.18); color: #60A5FA; }
+
+
+/* ===========================================================
+   Chapter etiquette — narrative spine across sections
+   =========================================================== */
+.chapter {
+  display: inline-flex; align-items: center; gap: 14px;
+  margin-bottom: 4px;
+  flex-wrap: wrap; justify-content: center;
+}
+.ch-pill {
+  background: rgba(96,165,250,0.10);
+  border: 1px solid rgba(96,165,250,0.28);
+  color: #60A5FA;
+  padding: 7px 14px;
+  border-radius: 9999px;
+  font-family: var(--font-mono, ui-monospace, SF Mono, Menlo, monospace);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.ch-pill .ch-current { color: #F8FAFC; }
+.ch-pill .ch-total   { color: rgba(96,165,250,0.55); }
+.ch-label {
+  font-family: var(--font-mono, ui-monospace, SF Mono, Menlo, monospace);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: #94A3B8;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.ch-label::before {
+  content: ""; width: 22px; height: 1px;
+  background: rgba(96,165,250,0.40);
+}
+
+
+/* ============================================================
+   STORYBOARD — replaces .story section
+============================================================ */
+.story-board {
+  position: relative;
+  padding: 140px 32px 120px;
+  background: linear-gradient(180deg, #020617 0%, #050B21 100%);
+  overflow: hidden;
+}
+.story-board .orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(120px); pointer-events: none; z-index: 0;
+}
+.story-board .orb-1 { width: 520px; height: 520px; background: rgba(99,102,241,0.18); top: 100px; right: -120px; }
+.story-board .orb-2 { width: 460px; height: 460px; background: rgba(59,130,246,0.18); bottom: 120px; left: -120px; }
+
+.sb-head { max-width: 880px; margin: 0 auto 70px; text-align: center; position: relative; z-index: 2; }
+.sb-head .overline { color: #60A5FA; font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; }
+.sb-head h2 {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(28px, 3.6vw, 48px);
+  line-height: 1.15; letter-spacing: -0.02em;
+  color: #F8FAFC; margin: 18px 0;
+  text-wrap: pretty;
+}
+.sb-head h2 .hi {
+  color: #FB7185;
+  position: relative; display: inline-block;
+  padding: 0 6px;
+}
+.sb-head h2 .hi::after {
+  content: ""; position: absolute; inset: 0;
+  background: rgba(251,113,133,0.10);
+  border-radius: 6px; z-index: -1;
+}
+.sb-head p {
+  font-size: 18px; line-height: 1.55; color: #94A3B8;
+  max-width: 620px; margin: 0 auto;
+}
+
+/* 8-panel grid */
+.sb-strip {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  position: relative; z-index: 2;
+}
+.sb-panel {
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  transition: transform .35s var(--ease-out), border-color .3s, box-shadow .3s;
+}
+.sb-panel:hover {
+  transform: translateY(-4px);
+  border-color: rgba(96,165,250,0.30);
+  box-shadow: 0 20px 50px -10px rgba(96,165,250,0.18);
+}
+.sb-panel .num {
+  display: flex; align-items: center;
+  padding: 14px 18px 8px;
+  font-family: var(--font-mono, ui-monospace, SF Mono, Menlo, monospace);
+  font-size: 11px; font-weight: 600;
+  color: #60A5FA; letter-spacing: 0.16em;
+}
+.sb-panel .num::before {
+  content: ""; display: inline-block; width: 18px; height: 1px;
+  background: rgba(96,165,250,0.5); vertical-align: middle; margin-right: 8px;
+}
+.sb-panel .scene {
+  display: block; width: 100%;
+  aspect-ratio: 1 / 0.92;
+  background: linear-gradient(180deg, #0E1A33 0%, #0A1428 100%);
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.sb-panel .scene svg.scene-svg { display: block; width: 100%; height: 100%; }
+
+/* Floating label inside scene (replaces speech bubble) */
+.sb-tag {
+  position: absolute; z-index: 4;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(96,165,250,0.30);
+  color: #60A5FA;
+  border-radius: 9999px;
+  padding: 5px 12px;
+  font-family: var(--font-display);
+  font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.10em; text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+.sb-tag.tl { top: 12px; left: 12px; }
+.sb-tag.tr { top: 12px; right: 12px; }
+.sb-tag.bl { bottom: 12px; left: 12px; }
+.sb-tag.br { bottom: 12px; right: 12px; }
+.sb-tag.alert { border-color: rgba(251,113,133,0.40); color: #FB7185; }
+
+/* Caption */
+.sb-panel .caption {
+  padding: 18px 18px 22px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #94A3B8;
+}
+.sb-panel .caption strong {
+  color: #F8FAFC; font-weight: 700;
+  display: block; margin-bottom: 4px;
+  font-family: var(--font-display);
+  font-size: 14.5px; letter-spacing: -0.01em;
+}
+
+/* Strip responsive */
+@media (max-width: 1100px) { .sb-strip { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .sb-strip { grid-template-columns: 1fr; } }
+
+/* Pivot */
+.sb-pivot {
+  margin: 100px auto 0;
+  text-align: center;
+  position: relative; z-index: 2;
+}
+.sb-pivot .line {
+  width: 1px; height: 60px; margin: 0 auto 24px;
+  background: linear-gradient(180deg, transparent, #60A5FA, transparent);
+}
+.sb-pivot p {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.4vw, 32px);
+  line-height: 1.3; color: #F8FAFC;
+  font-weight: 700; letter-spacing: -0.015em;
+}
+.sb-pivot p strong { color: #60A5FA; font-weight: 800; }
+.sb-pivot p em { color: #FB7185; font-style: normal; }
+
+
+/* ============================================================
+   FOUR-CARD GRID — replaces .features section
+============================================================ */
+.angles {
+  position: relative; overflow: hidden;
+  padding: 140px 32px;
+  background: linear-gradient(180deg, #020617 0%, #050D29 100%);
+}
+.angles .orb-x {
+  position: absolute; width: 600px; height: 600px;
+  background: rgba(59,130,246,0.16);
+  border-radius: 50%; filter: blur(120px);
+  top: -100px; left: -100px;
+}
+.angles .head {
+  max-width: 760px; margin: 0 auto 60px; text-align: center;
+  position: relative; z-index: 2;
+}
+.angles .head .overline { color: #60A5FA; font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; }
+.angles .head h2 {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(28px, 3.6vw, 48px);
+  line-height: 1.15; letter-spacing: -0.02em;
+  color: #F8FAFC; margin: 14px 0;
+  text-wrap: pretty;
+}
+
+.angles-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px;
+  position: relative; z-index: 2;
+}
+.angle-card {
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 24px;
+  padding: 30px;
+  display: grid; grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px; align-items: center;
+  position: relative;
+  transition: transform .3s var(--ease-out), border-color .3s, box-shadow .3s;
+}
+.angle-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(96,165,250,0.25);
+  box-shadow: 0 24px 50px -12px rgba(96,165,250,0.15);
+}
+.angle-card .num {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 11px; font-weight: 600; color: #60A5FA;
+  letter-spacing: 0.16em; margin-bottom: 14px;
+  display: block;
+}
+.angle-card h3 {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 26px; color: #F8FAFC;
+  letter-spacing: -0.015em;
+  margin: 0 0 12px;
+}
+.angle-card p {
+  font-size: 14.5px; line-height: 1.55; color: #94A3B8;
+  margin: 0 0 18px;
+}
+.angle-card .meta {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: #60A5FA;
+  font-family: var(--font-mono, monospace);
+  border-top: 1px dashed rgba(255,255,255,0.08);
+  padding-top: 12px;
+}
+
+/* Floating callout pill (replaces sticker) */
+.angle-card .callout {
+  position: absolute; top: 18px; right: 18px;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  font-family: var(--font-display);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.10em; text-transform: uppercase;
+}
+.angle-card .callout .material-icons-round { font-size: 14px; }
+.callout.new      { background: rgba(96,165,250,0.14); color: #60A5FA; border: 1px solid rgba(96,165,250,0.30); }
+.callout.points   { background: rgba(16,185,129,0.14); color: #10B981; border: 1px solid rgba(16,185,129,0.30); }
+.callout.trending { background: rgba(99,102,241,0.14); color: #818CF8; border: 1px solid rgba(99,102,241,0.35); }
+.callout.detail   { background: rgba(251,113,133,0.14); color: #FB7185; border: 1px solid rgba(251,113,133,0.35); }
+
+/* Phone shot inside */
+.angle-card .shot {
+  background: linear-gradient(170deg, #1E293B 0%, #0F172A 100%);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 26px;
+  padding: 8px;
+  box-shadow: 0 30px 80px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.03) inset;
+}
+.angle-card .shot img {
+  width: 100%; border-radius: 20px; display: block;
+}
+
+@media (max-width: 900px) {
+  .angles-grid { grid-template-columns: 1fr; }
+  .angle-card { grid-template-columns: 1fr; }
+}
+
+
+/* ============================================================
+   MANIFESTO — replaces .trust section
+============================================================ */
+.manifesto {
+  position: relative; overflow: hidden;
+  padding: 140px 32px;
+  background: #020617;
+}
+.manifesto::before {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, transparent 0 28px, rgba(96,165,250,0.04) 28px 29px);
+  pointer-events: none;
+}
+.manifesto .head {
+  max-width: 1000px; margin: 0 auto 60px; text-align: center;
+  position: relative; z-index: 2;
+}
+.manifesto .head .overline {
+  color: #60A5FA; font-size: 11px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+}
+.manifesto .head h2 {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(36px, 5.2vw, 72px);
+  line-height: 1.02; letter-spacing: -0.03em;
+  color: #F8FAFC; margin: 18px 0;
+}
+.manifesto .head h2 .neg {
+  color: #FB7185;
+  display: block;
+}
+.manifesto .head p {
+  font-size: 17px; line-height: 1.55; color: #94A3B8;
+  max-width: 580px; margin: 0 auto;
+}
+
+.man-grid {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  position: relative; z-index: 2;
+}
+.man-card {
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 20px;
+  padding: 32px 26px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform .3s var(--ease-out), border-color .3s;
+}
+.man-card::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  border-radius: 20px 20px 0 0;
+  background: linear-gradient(90deg, transparent, #FB7185, transparent);
+}
+.man-card:hover { transform: translateY(-4px); border-color: rgba(251,113,133,0.30); }
+
+.man-card .x {
+  width: 64px; height: 64px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: rgba(251,113,133,0.10);
+  border: 1px solid rgba(251,113,133,0.30);
+  display: flex; align-items: center; justify-content: center;
+}
+.man-card .x svg { width: 28px; height: 28px; stroke: #FB7185; stroke-width: 3; fill: none; stroke-linecap: round; }
+.man-card .x .material-icons-round { font-size: 28px; color: #FB7185; }
+
+.man-card h3 {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: 19px; color: #F8FAFC;
+  letter-spacing: -0.01em;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+.man-card p {
+  font-size: 13.5px; line-height: 1.5; color: #94A3B8;
+  margin: 0 0 14px;
+}
+.man-card code {
+  display: inline-block;
+  background: rgba(251,113,133,0.08);
+  border: 1px solid rgba(251,113,133,0.20);
+  color: #FB7185;
+  border-radius: 8px;
+  padding: 4px 9px;
+  font-size: 11.5px;
+  font-family: var(--font-mono, monospace);
+}
+
+@media (max-width: 900px) { .man-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .man-grid { grid-template-columns: 1fr; } }
+
+
+/* ============================================================
+   Final CTA (reuse styles from site.css; just keep DOM)
+============================================================ */
+</style>
+</head>
+<body>
+
+<!-- Variation switcher -->
+<div class="var-switch">
+  <a href="index.html">Dark</a>
+  <a href="variation-illustrated.html" class="active">Illustré</a>
+  <a href="variation-glass.html">Glass</a>
+  <a href="variation-comic.html">Comic</a>
+</div>
+
+
+<!-- ============================================================
+     NAV — identical to index.html
+============================================================ -->
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top" aria-label="Privacy Score">
+      <img class="brand-mark" src="assets/app-icon-256.png" alt="" />
+      <span class="brand-word">Privacy Score</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#story">L'histoire</a>
+      <a href="#angles">L'app</a>
+      <a href="#manifesto">Confiance</a>
+      <a href="#download">Télécharger</a>
+    </nav>
+    <a href="#download" class="nav-cta">
+      <span class="material-icons-round">download</span>
+      Télécharger
+    </a>
+  </div>
+</header>
+
+
+<!-- ============================================================
+     HERO — identical to index.html
+============================================================ -->
+<section id="top" class="hero">
+  <div class="orb orb-a"></div>
+  <div class="orb orb-b"></div>
+  <div class="orb orb-c"></div>
+  <div class="dot-grid"></div>
+
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <span class="overline hero-overline">
+        <span class="live-dot"></span> Disponible sur l'App&nbsp;Store
+      </span>
+      <h1 class="hero-title">
+        Vous pensez être <em>anonyme</em>.<br/>
+        Vous ne l'êtes <span class="hero-strike">pas</span>.
+      </h1>
+      <p class="hero-lede">
+        Chaque app sur votre iPhone parle dans votre dos —
+        votre position, vos centres d'intérêt, vos déplacements.
+        <strong>Privacy Score</strong> les écoute. Localement.
+        Sans serveur. Sans compte.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#download" class="btn btn-primary">
+          <span class="material-icons-round">download</span>
+          Télécharger sur l'App&nbsp;Store
+        </a>
+        <a href="#story" class="btn btn-ghost">
+          Voir comment
+          <span class="material-icons-round">arrow_downward</span>
+        </a>
+      </div>
+
+      <div class="hero-pillars">
+        <div class="pillar">
+          <span class="material-icons-round">cloud_off</span>
+          <div>
+            <div class="pillar-title">Aucun serveur</div>
+            <div class="pillar-sub">Rien ne quitte votre appareil.</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <span class="material-icons-round">person_off</span>
+          <div>
+            <div class="pillar-title">Aucun compte</div>
+            <div class="pillar-sub">Aucune adresse, aucun mot de passe.</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <span class="material-icons-round">phone_iphone</span>
+          <div>
+            <div class="pillar-title">Tout en local</div>
+            <div class="pillar-sub">Analyse sur l'iPhone, hors-ligne.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-phone">
+        <div class="phone-screen">
+          <div class="phone-statusbar">
+            <span>09:41</span>
+            <span class="material-icons-round" style="font-size:14px;">near_me</span>
+            <span class="phone-rs"><span class="material-icons-round" style="font-size:14px;">signal_cellular_alt</span><span class="material-icons-round" style="font-size:14px;">wifi</span><span class="material-icons-round" style="font-size:14px;">battery_full</span></span>
+          </div>
+
+          <h2 class="phone-h1">Dashboard</h2>
+
+          <div class="phone-status">
+            <span class="overline">Statut</span>
+            <div class="phone-status-row">
+              <span class="status-dot"></span>
+              <strong>Appareil protégé</strong>
+            </div>
+          </div>
+
+          <div class="gauge-card">
+            <svg class="gauge" viewBox="0 0 220 220" aria-hidden="true">
+              <defs>
+                <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#60A5FA"/>
+                  <stop offset="100%" stop-color="#3B82F6"/>
+                </linearGradient>
+                <filter id="gaugeGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="6" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <circle cx="110" cy="110" r="92" stroke="rgba(255,255,255,0.06)" stroke-width="14" fill="none"/>
+              <circle id="gaugeArc" cx="110" cy="110" r="92"
+                      stroke="url(#gaugeGrad)" stroke-width="14" fill="none"
+                      stroke-linecap="round"
+                      filter="url(#gaugeGlow)"
+                      transform="rotate(-90 110 110)"
+                      stroke-dasharray="578" stroke-dashoffset="578"/>
+            </svg>
+            <div class="gauge-center">
+              <div class="gauge-num" id="gaugeNum">0</div>
+              <div class="gauge-grade">Bon</div>
+            </div>
+          </div>
+
+          <div class="phone-meta">
+            <strong>Privacy Score</strong>
+            <span>909 traceurs détectés, 5 apps&nbsp;géolocalisées.</span>
+          </div>
+
+          <button class="phone-cta">Améliorer le score</button>
+        </div>
+      </div>
+
+      <div class="float-chip chip-trackers">
+        <span class="material-icons-round">ads_click</span>
+        <div>
+          <div class="chip-label">Traceurs bloqués aujourd'hui</div>
+          <div class="chip-value"><span data-count-to="2487">0</span></div>
+        </div>
+      </div>
+      <div class="float-chip chip-dns">
+        <span class="material-icons-round">dns</span>
+        <div>
+          <div class="chip-label">DNS chiffré</div>
+          <div class="chip-value chip-good">Actif</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue" aria-hidden="true">
+    <span>Faites défiler</span>
+    <span class="material-icons-round">expand_more</span>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     STORYBOARD — 8 panels (dark, illustrated)
+============================================================ -->
+<section class="story-board" id="story">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <div class="sb-head reveal">
+    <div class="chapter">
+      <span class="ch-pill">Chapitre <span class="ch-current">01</span> <span class="ch-total">/ 05</span></span>
+      <span class="ch-label">L'histoire</span>
+    </div>
+    <h2>
+      En 2024, des journalistes ont identifié
+      <span class="hi">26 agents du Secret Service</span>
+      — en achetant des données publicitaires.
+    </h2>
+    <p>
+      Pas de fuite. Pas de piratage. Juste un fichier acheté
+      à un courtier en données, comme n'importe qui peut le faire.
+      L'histoire en huit cases.
+    </p>
+  </div>
+
+  <div class="sb-strip">
+
+    <!-- ── PANEL 01 — Washington 2024 ──────────────────────────── -->
+    <article class="sb-panel reveal">
+      <div class="num">01/08</div>
+      <div class="scene">
+        <span class="sb-tag tr">Jan 2024</span>
+        <svg class="scene-svg" viewBox="0 0 200 184" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="ill1-sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#162447"/>
+              <stop offset="100%" stop-color="#0A1428"/>
+            </linearGradient>
+            <radialGradient id="ill1-moon" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#60A5FA" stop-opacity="0.5"/>
+              <stop offset="100%" stop-color="#60A5FA" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="200" height="184" fill="url(#ill1-sky)"/>
+          <!-- moon glow -->
+          <circle cx="160" cy="40" r="40" fill="url(#ill1-moon)"/>
+          <circle cx="160" cy="40" r="9" fill="#CBD5E1"/>
+          <!-- stars -->
+          <g fill="#CBD5E1" opacity="0.6">
+            <circle cx="30" cy="22" r="0.8"/><circle cx="62" cy="36" r="0.8"/>
+            <circle cx="98" cy="18" r="1.2"/><circle cx="120" cy="44" r="0.8"/>
+            <circle cx="14" cy="50" r="0.8"/><circle cx="190" cy="78" r="0.8"/>
+          </g>
+          <!-- ground -->
+          <rect x="0" y="135" width="200" height="49" fill="#0F1A33"/>
+          <line x1="0" y1="135" x2="200" y2="135" stroke="rgba(96,165,250,0.15)" stroke-width="1"/>
+          <!-- White House silhouette -->
+          <g>
+            <polygon points="60,80 140,80 100,62" fill="#1E293B" stroke="rgba(96,165,250,0.25)" stroke-width="1"/>
+            <rect x="60" y="80" width="80" height="55" fill="#1E293B" stroke="rgba(96,165,250,0.25)" stroke-width="1"/>
+            <!-- columns lit windows -->
+            <g fill="#60A5FA" opacity="0.85">
+              <rect x="68" y="98" width="6" height="20"/>
+              <rect x="82" y="98" width="6" height="20"/>
+              <rect x="96" y="98" width="6" height="20"/>
+              <rect x="110" y="98" width="6" height="20"/>
+              <rect x="124" y="98" width="6" height="20"/>
+            </g>
+            <!-- flag pole -->
+            <line x1="100" y1="62" x2="100" y2="48" stroke="#CBD5E1" stroke-width="1"/>
+            <rect x="100" y="48" width="10" height="6" fill="#FB7185"/>
+          </g>
+          <!-- 2 agent silhouettes -->
+          <g fill="#0B1730" stroke="rgba(96,165,250,0.40)" stroke-width="1">
+            <g transform="translate(20,108)">
+              <circle cx="6" cy="0" r="5"/>
+              <rect x="0" y="5" width="12" height="22"/>
+            </g>
+            <g transform="translate(170,108)">
+              <circle cx="6" cy="0" r="5"/>
+              <rect x="0" y="5" width="12" height="22"/>
+            </g>
+          </g>
+          <!-- discreet earpiece dots glowing -->
+          <circle cx="27" cy="106" r="1.5" fill="#FB7185"/>
+          <circle cx="177" cy="106" r="1.5" fill="#FB7185"/>
+        </svg>
+      </div>
+      <div class="caption">
+        <strong>Washington, D.C.</strong>
+        Le Secret Service protège le Président — jour et nuit, discrètement. C'est leur métier.
+      </div>
+    </article>
+
+    <!-- ── PANEL 02 — Data market $200 ─────────────────────────── -->
+    <article class="sb-panel reveal">
+      <div class="num">02/08</div>
+      <div class="scene">
+        <span class="sb-tag tr alert" data-comment-anchor="ec8afcb590-span">Marché ouvert</span>
+        <svg class="scene-svg" viewBox="0 0 200 184" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="ill2-bg" cx="50%" cy="40%">
+              <stop offset="0%" stop-color="#162447"/>
+              <stop offset="100%" stop-color="#0A1428"/>
+            </radialGradient>
+          </defs>
+          <rect width="200" height="184" fill="url(#ill2-bg)"/>
+          <!-- desk surface -->
+          <rect x="0" y="130" width="200" height="54" fill="#0B1730"/>
+          <line x1="0" y1="130" x2="200" y2="130" stroke="rgba(255,255,255,0.06)"/>
+          <!-- laptop -->
+          <g transform="translate(50,40)">
+            <rect x="0" y="0" width="100" height="68" rx="6" fill="#1E293B" stroke="rgba(96,165,250,0.30)" stroke-width="1"/>
+            <rect x="5" y="5" width="90" height="58" rx="3" fill="#020617"/>
+            <!-- terminal lines -->
+            <g font-family="ui-monospace, monospace" fill="#60A5FA">
+              <text x="11" y="18" font-size="6" opacity="0.5">$ buy --dataset gps</text>
+              <text x="11" y="28" font-size="6" opacity="0.5">100M records ......</text>
+              <text x="11" y="38" font-size="6" opacity="0.7">PRICE: $200</text>
+              <text x="11" y="50" font-size="7" font-weight="700" fill="#FB7185">▶ CHECKOUT</text>
+            </g>
+            <!-- base -->
+            <rect x="-12" y="68" width="124" height="6" rx="2" fill="#0B1730" stroke="rgba(255,255,255,0.05)"/>
+            <rect x="42" y="68" width="16" height="3" fill="#020617"/>
+          </g>
+          <!-- coin -->
+          <g transform="translate(36,90)">
+            <circle cx="0" cy="0" r="14" fill="#0F1A33" stroke="#60A5FA" stroke-width="1.5"/>
+            <text x="0" y="4" text-anchor="middle" font-family="ui-monospace, monospace" font-size="12" font-weight="700" fill="#60A5FA">$</text>
+          </g>
+          <!-- coffee cup -->
+          <g transform="translate(168,108)">
+            <rect x="0" y="0" width="18" height="20" rx="2" fill="#1E293B" stroke="rgba(255,255,255,0.10)"/>
+            <ellipse cx="9" cy="0" rx="9" ry="2" fill="#60A5FA" opacity="0.35"/>
+            <path d="M 18 5 Q 24 5 24 11 Q 24 17 18 17" stroke="rgba(255,255,255,0.10)" fill="none" stroke-width="1"/>
+          </g>
+        </svg>
+      </div>
+      <div class="caption">
+        <strong>Des journalistes achètent un jeu de données pub.</strong>
+        Cent millions de pings GPS — pour le prix d'un repas. Cent pour cent légal.
+      </div>
+    </article>
+
+    <!-- ── PANEL 03 — 26 dots map ─────────────────────────────── -->
+    <article class="sb-panel reveal">
+      <div class="num">03/08</div>
+      <div class="scene">
+        <span class="sb-tag tl" data-comment-anchor="6bf5b14ffb-span">26 points rouges</span>
+        <svg class="scene-svg" viewBox="0 0 200 184" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="ill3-bg" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#0F1A33"/>
+              <stop offset="100%" stop-color="#040814"/>
+            </radialGradient>
+            <pattern id="ill3-grid" x="0" y="0" width="18" height="18" patternUnits="userSpaceOnUse">
+              <circle cx="9" cy="9" r="0.8" fill="#60A5FA" opacity="0.18"/>
+            </pattern>
+            <filter id="redGlow" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="2" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="200" height="184" fill="url(#ill3-bg)"/>
+          <rect width="200" height="184" fill="url(#ill3-grid)"/>
+          <!-- subtle latitude curves -->
+          <g stroke="rgba(96,165,250,0.20)" stroke-width="0.6" fill="none">
+            <path d="M 0 50 Q 60 60 120 45 T 200 70"/>
+            <path d="M 0 100 Q 70 95 130 110 T 200 95"/>
+            <path d="M 0 140 Q 60 130 130 145 T 200 135"/>
+          </g>
+          <!-- 26 dots, glowing red -->
+          <g fill="#FB7185" filter="url(#redGlow)">
+            <circle cx="40" cy="40" r="3"/><circle cx="58" cy="55" r="3"/>
+            <circle cx="74" cy="46" r="3"/><circle cx="92" cy="62" r="3"/>
+            <circle cx="110" cy="48" r="3"/><circle cx="128" cy="66" r="3"/>
+            <circle cx="146" cy="54" r="3"/><circle cx="166" cy="68" r="3"/>
+            <circle cx="34" cy="90" r="3"/><circle cx="52" cy="100" r="3"/>
+            <circle cx="72" cy="92" r="3"/><circle cx="94" cy="106" r="3"/>
+            <circle cx="116" cy="96" r="3"/><circle cx="138" cy="108" r="3"/>
+            <circle cx="158" cy="98" r="3"/><circle cx="178" cy="112" r="3"/>
+            <circle cx="42" cy="140" r="3"/><circle cx="62" cy="150" r="3"/>
+            <circle cx="84" cy="138" r="3"/><circle cx="104" cy="156" r="3"/>
+            <circle cx="124" cy="142" r="3"/><circle cx="144" cy="158" r="3"/>
+            <circle cx="166" cy="146" r="3"/><circle cx="184" cy="158" r="3"/>
+            <circle cx="76" cy="170" r="3"/><circle cx="120" cy="172" r="3"/>
+          </g>
+          <!-- label -->
+          <text x="100" y="22" text-anchor="middle" font-family="ui-monospace, monospace"
+                font-size="8" font-weight="600" letter-spacing="2" fill="#94A3B8">WASHINGTON · DC</text>
+        </svg>
+      </div>
+      <div class="caption">
+        <strong>Le fichier cartographie 26 personnes.</strong>
+        Entrant, sortant, jour après jour, autour de la Maison Blanche.
+      </div>
+    </article>
+
+    <!-- ── PANEL 04 — Dossier identifiés ──────────────────────── -->
+    <article class="sb-panel reveal">
+      <div class="num">04/08</div>
+      <div class="scene">
+        <span class="sb-tag br alert">Identifiés</span>
+        <svg class="scene-svg" viewBox="0 0 200 184" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="200" height="184" fill="#0A1428"/>
+          <!-- file -->
+          <g transform="translate(28,16) rotate(-2 80 76)">
+            <rect x="0" y="0" width="160" height="152" rx="6" fill="#0F1A33" stroke="rgba(96,165,250,0.30)" stroke-width="1"/>
+            <line x1="0" y1="22" x2="160" y2="22" stroke="rgba(96,165,250,0.30)"/>
+            <text x="10" y="16" font-family="ui-monospace, monospace" font-size="8" font-weight="700" fill="#60A5FA" letter-spacing="1.5">DOSSIER · 2024-26</text>
+            <!-- redaction bars -->
+            <g fill="#1E293B">
+              <rect x="10" y="30" width="74" height="6" rx="1"/>
+              <rect x="92" y="30" width="58" height="6" rx="1"/>
+              <rect x="10" y="42" width="100" height="6" rx="1"/>
+              <rect x="116" y="42" width="32" height="6" rx="1"/>
+              <rect x="10" y="54" width="60" height="6" rx="1"/>
+              <rect x="76" y="54" width="74" height="6" rx="1"/>
+              <rect x="10" y="66" width="120" height="6" rx="1"/>
+              <rect x="10" y="78" width="80" height="6" rx="1"/>
+              <rect x="98" y="78" width="52" height="6" rx="1"/>
+              <rect x="10" y="90" width="100" height="6" rx="1"/>
+              <rect x="10" y="102" width="60" height="6" rx="1"/>
+              <rect x="78" y="102" width="50" height="6" rx="1"/>
+            </g>
+            <!-- 26 small avatar dots, like an identified list -->
+            <g transform="translate(10,118)">
+              <g fill="#60A5FA" opacity="0.9">
+                <circle cx="4" cy="6" r="3"/><circle cx="14" cy="6" r="3"/><circle cx="24" cy="6" r="3"/>
+                <circle cx="34" cy="6" r="3"/><circle cx="44" cy="6" r="3"/><circle cx="54" cy="6" r="3"/>
+                <circle cx="64" cy="6" r="3"/><circle cx="74" cy="6" r="3"/><circle cx="84" cy="6" r="3"/>
+                <circle cx="94" cy="6" r="3"/><circle cx="104" cy="6" r="3"/><circle cx="114" cy="6" r="3"/>
+                <circle cx="124" cy="6" r="3"/>
+                <circle cx="4" cy="18" r="3"/><circle cx="14" cy="18" r="3"/><circle cx="24" cy="18" r="3"/>
+                <circle cx="34" cy="18" r="3"/><circle cx="44" cy="18" r="3"/><circle cx="54" cy="18" r="3"/>
+                <circle cx="64" cy="18" r="3"/><circle cx="74" cy="18" r="3"/><circle cx="84" cy="18" r="3"/>
+                <circle cx="94" cy="18" r="3"/><circle cx="104" cy="18" r="3"/><circle cx="114" cy="18" r="3"/>
+                <circle cx="124" cy="18" r="3"/>
+              </g>
+            </g>
+            <!-- stamp -->
+            <g transform="translate(108,138) rotate(-12)">
+              <rect x="-26" y="-9" width="52" height="20" fill="none" stroke="#FB7185" stroke-width="1.5" rx="2"/>
+              <text x="0" y="4" text-anchor="middle" font-family="ui-monospace, monospace" font-size="8" font-weight="700" fill="#FB7185" letter-spacing="1.5">IDENTIFIÉS</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="caption">
+        <strong>26 noms. 26 visages.</strong>
+        Recoupé avec quelques données publiques. Pas un piratage. Légal — c'est ça, le problème.
+      </div>
+    </article>
+
+    <!-- ── PANEL 05 — Strava 2018 ─────────────────────────────── -->
+    <article class="sb-panel reveal">
+      <div class="num">05/08</div>
+      <div class="scene">
+        <span class="sb-tag tl" data-comment-anchor="9293ca99be-span">Strava · 2018</span>
+        <svg class="scene-svg" viewBox="0 0 200 184" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="ill5-sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1A1845"/>
+              <stop offset="60%" stop-color="#3B2A4D"/>
+              <stop offset="100%" stop-color="#0A1428"/>
+            </linearGradient>
+            <filter id="trailGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="2.5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="200" height="120" fill="url(#ill5-sky)"/>
+          <!-- desert dunes -->
+          <path d="M 0 120 Q 50 110 100 122 T 200 116 L 200 184 L 0 184 Z" fill="#0B1730"/>
+          <line x1="0" y1="120" x2="200" y2="120" stroke="rgba(96,165,250,0.20)"/>
+          <!-- sun setting -->
+          <circle cx="40" cy="60" r="20" fill="#FB7185" opacity="0.40"/>
+          <circle cx="40" cy="60" r="11" fill="#FB7185"/>
+          <!-- base -->
+          <g transform="translate(118,82)">
+            <rect x="0" y="0" width="56" height="32" fill="#1E293B" stroke="rgba(96,165,250,0.25)" stroke-width="1"/>
+            <g fill="#60A5FA" opacity="0.7">
+              <rect x="6" y="6" width="6" height="6"/>
+              <rect x="18" y="6" width="6" height="6"/>
+              <rect x="30" y="6" width="6" height="6"/>
+              <rect x="42" y="6" width="6" height="6"/>
+            </g>
+            <rect x="-6" y="32" width="68" height="4" fill="#0B1730"/>
+            <line x1="28" y1="0" x2="28" y2="-14" stroke="#94A3B8" stroke-width="1"/>
+            <circle cx="28" cy="-15" r="2" fill="#FB7185"/>
+          </g>
+          <!-- glowing red route -->
+          <g filter="url(#trailGlow)">
+            <path d="M 20 156 Q 60 144 100 150 T 180 138" stroke="#FB7185" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </g>
+          <g fill="#FB7185" filter="url(#trailGlow)">
+            <circle cx="20" cy="156" r="2.5"/>
+            <circle cx="60" cy="146" r="2.5"/>
+            <circle cx="100" cy="150" r="2.5"/>
+            <circle cx="140" cy="142" r="2.5"/>
+            <circle cx="180" cy="138" r="2.5"/>
+          </g>
+        </svg>
+      </div>
+      <div class="caption">
+        <strong>2018 — déjà.</strong>
+        Une app de fitness révèle les routes de patrouille de soldats américains au Moyen-Orient. Au monde entier.
+      </div>
+    </article>
+
+    <!-- ── PANEL 06 — Your iPhone ─────────────────────────────── -->
+    <article class="sb-panel reveal">
+      <div class="num">06/08</div>
+      <div class="scene">
+        <span class="sb-tag tr alert">Votre iPhone</span>
+        <svg class="scene-svg" viewBox="0 0 200 184" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="ill6-bg" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#162447"/>
+              <stop offset="100%" stop-color="#040814"/>
+            </radialGradient>
+            <filter id="leakGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="1.5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="200" height="184" fill="url(#ill6-bg)"/>
+          <!-- phone -->
+          <g transform="translate(72,18)">
+            <rect x="0" y="0" width="56" height="148" rx="10" fill="#0F172A" stroke="rgba(96,165,250,0.30)" stroke-width="1"/>
+            <rect x="3" y="6" width="50" height="136" rx="6" fill="#020617"/>
+            <!-- notch -->
+            <rect x="20" y="3" width="16" height="2" rx="1" fill="#0B1730"/>
+            <!-- 9 app icons -->
+            <g>
+              <rect x="8" y="12" width="11" height="11" rx="2.5" fill="#60A5FA"/>
+              <rect x="22" y="12" width="11" height="11" rx="2.5" fill="#FB7185"/>
+              <rect x="36" y="12" width="11" height="11" rx="2.5" fill="#10B981"/>
+              <rect x="8" y="26" width="11" height="11" rx="2.5" fill="#FBBF24"/>
+              <rect x="22" y="26" width="11" height="11" rx="2.5" fill="#818CF8"/>
+              <rect x="36" y="26" width="11" height="11" rx="2.5" fill="#60A5FA"/>
+              <rect x="8" y="40" width="11" height="11" rx="2.5" fill="#FB7185"/>
+              <rect x="22" y="40" width="11" height="11" rx="2.5" fill="#10B981"/>
+              <rect x="36" y="40" width="11" height="11" rx="2.5" fill="#FBBF24"/>
+            </g>
+            <!-- progress fake -->
+            <rect x="8" y="58" width="40" height="2" rx="1" fill="rgba(96,165,250,0.20)"/>
+            <rect x="8" y="58" width="26" height="2" rx="1" fill="#60A5FA"/>
+          </g>
+          <!-- leak lines & labels -->
+          <g stroke="#FB7185" stroke-width="1.5" fill="none" stroke-dasharray="3 3" filter="url(#leakGlow)">
+            <path d="M 72 60 Q 40 50 26 30"/>
+            <path d="M 128 60 Q 160 50 174 30"/>
+            <path d="M 72 110 Q 40 110 22 130"/>
+            <path d="M 128 110 Q 160 110 176 130"/>
+          </g>
+          <g font-family="ui-monospace, monospace" font-size="7" font-weight="700" fill="#FB7185">
+            <text x="16" y="22" text-anchor="middle">→ PUB</text>
+            <text x="180" y="22" text-anchor="middle">→ GPS</text>
+            <text x="16" y="146" text-anchor="middle">→ ID</text>
+            <text x="180" y="146" text-anchor="middle">→ AGE</text>
+          </g>
+        </svg>
+      </div>
+      <div class="caption">
+        <strong>Maintenant — votre iPhone.</strong>
+        909 traceurs par semaine en moyenne. Votre position part dans 26 pays. Sans que vous le sachiez.
+      </div>
+    </article>
+
+    <!-- ── PANEL 07 — Privacy Score appears ───────────────────── -->
+    <article class="sb-panel reveal">
+      <div class="num">07/08</div>
+      <div class="scene">
+        <span class="sb-tag tl" data-comment-anchor="d0eca9f2bf-span">Un outil apparaît</span>
+        <svg class="scene-svg" viewBox="0 0 200 184" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="ill7-burst" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#60A5FA" stop-opacity="0.65"/>
+              <stop offset="50%" stop-color="#3B82F6" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="#0A1428" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="ill7-ring" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#60A5FA"/>
+              <stop offset="100%" stop-color="#3B82F6"/>
+            </linearGradient>
+            <filter id="ringGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="200" height="184" fill="#040814"/>
+          <!-- radial burst -->
+          <rect width="200" height="184" fill="url(#ill7-burst)"/>
+          <!-- subtle rays -->
+          <g stroke="rgba(96,165,250,0.20)" stroke-width="0.6">
+            <line x1="100" y1="92" x2="100" y2="0"/>
+            <line x1="100" y1="92" x2="200" y2="92"/>
+            <line x1="100" y1="92" x2="100" y2="184"/>
+            <line x1="100" y1="92" x2="0" y2="92"/>
+            <line x1="100" y1="92" x2="180" y2="20"/>
+            <line x1="100" y1="92" x2="20" y2="20"/>
+            <line x1="100" y1="92" x2="180" y2="164"/>
+            <line x1="100" y1="92" x2="20" y2="164"/>
+          </g>
+          <!-- app icon -->
+          <g transform="translate(100,92)">
+            <rect x="-30" y="-30" width="60" height="60" rx="14" fill="#0F172A" stroke="rgba(96,165,250,0.50)" stroke-width="1.5"/>
+            <circle cx="0" cy="0" r="18" fill="none" stroke="rgba(96,165,250,0.20)" stroke-width="3"/>
+            <circle cx="0" cy="0" r="18" fill="none" stroke="url(#ill7-ring)" stroke-width="3"
+                    stroke-linecap="round" stroke-dasharray="113" stroke-dashoffset="26"
+                    transform="rotate(-90)" filter="url(#ringGlow)"/>
+            <text x="0" y="4" text-anchor="middle" font-family="Manrope, system-ui, sans-serif"
+                  font-size="17" font-weight="800" fill="#F8FAFC" letter-spacing="-1">77</text>
+          </g>
+          <text x="100" y="158" text-anchor="middle" font-family="Manrope, system-ui, sans-serif"
+                font-size="9" font-weight="700" letter-spacing="3" fill="#60A5FA">PRIVACY SCORE</text>
+        </svg>
+      </div>
+      <div class="caption">
+        <strong>Privacy Score.</strong>
+        Lit le rapport iOS. Calcule un score sur 100. Vous dit exactement quoi corriger. Tout en local.
+      </div>
+    </article>
+
+    <!-- ── PANEL 08 — Your turn ──────────────────────────────── -->
+    <article class="sb-panel reveal">
+      <div class="num">08/08</div>
+      <div class="scene">
+        <span class="sb-tag br">+ 45 points</span>
+        <svg class="scene-svg" viewBox="0 0 200 184" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="ill8-burst" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="#10B981" stop-opacity="0.45"/>
+              <stop offset="60%" stop-color="#10B981" stop-opacity="0.10"/>
+              <stop offset="100%" stop-color="#020617" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="checkGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="200" height="184" fill="#040814"/>
+          <rect width="200" height="184" fill="url(#ill8-burst)"/>
+          <!-- score history bars climbing -->
+          <g>
+            <rect x="12"  y="130" width="6" height="22" rx="1" fill="rgba(96,165,250,0.30)"/>
+            <rect x="22"  y="120" width="6" height="32" rx="1" fill="rgba(96,165,250,0.40)"/>
+            <rect x="32"  y="106" width="6" height="46" rx="1" fill="rgba(96,165,250,0.55)"/>
+            <rect x="42"  y="92"  width="6" height="60" rx="1" fill="rgba(96,165,250,0.70)"/>
+            <rect x="52"  y="78"  width="6" height="74" rx="1" fill="#60A5FA"/>
+            <rect x="62"  y="62"  width="6" height="90" rx="1" fill="#60A5FA"/>
+
+            <rect x="138" y="62"  width="6" height="90" rx="1" fill="#60A5FA"/>
+            <rect x="148" y="78"  width="6" height="74" rx="1" fill="#60A5FA"/>
+            <rect x="158" y="92"  width="6" height="60" rx="1" fill="rgba(96,165,250,0.70)"/>
+            <rect x="168" y="106" width="6" height="46" rx="1" fill="rgba(96,165,250,0.55)"/>
+            <rect x="178" y="120" width="6" height="32" rx="1" fill="rgba(96,165,250,0.40)"/>
+          </g>
+          <!-- check circle -->
+          <g transform="translate(100,86)" filter="url(#checkGlow)">
+            <circle r="34" fill="#0F1A33" stroke="#10B981" stroke-width="2"/>
+            <path d="M -14 2 L -4 14 L 16 -10" stroke="#10B981" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <text x="100" y="156" text-anchor="middle" font-family="Manrope, system-ui, sans-serif"
+                font-size="9" font-weight="700" letter-spacing="3" fill="#10B981">À VOUS DE JOUER</text>
+        </svg>
+      </div>
+      <div class="caption">
+        <strong>Soixante secondes.</strong>
+        Un score. Trois fixes. La prochaine fuite de données — ce ne sera pas la vôtre.
+      </div>
+    </article>
+
+  </div>
+
+  <div class="sb-pivot reveal">
+    <div class="line"></div>
+    <p>
+      Vous ne pouvez pas <em>supprimer</em> ces données.<br/>
+      Mais vous pouvez <strong>arrêter d'en produire.</strong>
+    </p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     PRODUCT INTRO — from index.html
+============================================================ -->
+<section id="product-intro" class="product-intro">
+  <div class="container">
+    <div class="intro-grid">
+      <div class="intro-copy reveal">
+        <div class="intro-mark">
+          <img src="assets/app-icon-256.png" alt="" />
+        </div>
+        <div class="chapter" style="justify-content: flex-start;">
+          <span class="ch-pill">Chapitre <span class="ch-current">02</span> <span class="ch-total">/ 05</span></span>
+          <span class="ch-label">Le produit</span>
+        </div>
+        <h2 class="intro-h">
+          Un score sur 100.<br/>
+          Trois actions concrètes.<br/>
+          Aucun discours alarmiste.
+        </h2>
+        <p class="intro-p">
+          Privacy Score lit le <strong>Rapport de Confidentialité</strong>
+          qu'iOS génère déjà sur votre iPhone. Il croise chaque domaine
+          contacté par vos apps avec la base de DuckDuckGo Tracker Radar,
+          puis calcule un score — et vous dit exactement quoi corriger.
+        </p>
+        <ul class="intro-bullets">
+          <li><span class="material-icons-round">check</span> Lit le rapport iOS natif (pas d'accès supplémentaire).</li>
+          <li><span class="material-icons-round">check</span> Calcule le score localement, en 2 secondes.</li>
+          <li><span class="material-icons-round">check</span> Recommande 3 à 5 fixes immédiats.</li>
+          <li><span class="material-icons-round">check</span> Suit l'évolution semaine après semaine.</li>
+        </ul>
+      </div>
+
+      <div class="intro-visual reveal">
+        <div class="intro-phone">
+          <img src="assets/screen-dashboard.png" alt="Écran principal de Privacy Score" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     HOW IT WORKS — from index.html
+============================================================ -->
+<section id="how" class="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="chapter">
+        <span class="ch-pill">Chapitre <span class="ch-current">03</span> <span class="ch-total">/ 05</span></span>
+        <span class="ch-label">La méthode</span>
+      </div>
+      <h2>Trois étapes. Soixante secondes. Hors-ligne.</h2>
+    </div>
+
+    <div class="steps">
+      <article class="step reveal" data-delay="0">
+        <div class="step-number">1</div>
+        <div class="step-icon"><span class="material-icons-round">ios_share</span></div>
+        <h3>Exportez votre Rapport</h3>
+        <p>
+          Réglages iOS → Confidentialité & sécurité → Rapport sur l'App&nbsp;Privacy.
+          Vous l'avez déjà : iOS l'enregistre en silence.
+        </p>
+        <div class="step-meta mono">Format&nbsp;: .ndjson · 100% Apple</div>
+      </article>
+
+      <article class="step reveal" data-delay="120">
+        <div class="step-number">2</div>
+        <div class="step-icon"><span class="material-icons-round">radar</span></div>
+        <h3>Privacy Score l'analyse</h3>
+        <p>
+          Tout se passe sur votre iPhone. Nous croisons les domaines avec la
+          base ouverte de DuckDuckGo et calculons un score sur 100.
+        </p>
+        <div class="step-meta mono">0 octet transmis · 2 sec</div>
+      </article>
+
+      <article class="step reveal" data-delay="240">
+        <div class="step-number">3</div>
+        <div class="step-icon"><span class="material-icons-round">trending_up</span></div>
+        <h3>Vous corrigez. Vous voyez la courbe monter.</h3>
+        <p>
+          Chaque recommandation indique combien de points elle vous rapporte.
+          Vous appliquez celles que vous voulez. Vous mesurez le progrès.
+        </p>
+        <div class="step-meta mono">+5 à +45 points · par fix</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     ANGLES — 4-card grid with screenshots
+============================================================ -->
+<section class="angles" id="angles">
+  <div class="orb-x"></div>
+
+  <div class="head reveal">
+    <div class="chapter">
+      <span class="ch-pill">Chapitre <span class="ch-current">04</span> <span class="ch-total">/ 05</span></span>
+      <span class="ch-label">L'app</span>
+    </div>
+    <h2>Quatre onglets. Quatre angles sur votre exposition.</h2>
+  </div>
+
+  <div class="angles-grid">
+
+    <article class="angle-card reveal">
+      <span class="callout new">
+        <span class="material-icons-round">dashboard</span> Vue d'ensemble
+      </span>
+      <div>
+        <span class="num">01/04</span>
+        <h3>Dashboard</h3>
+        <p>Votre score, vos traceurs détectés, vos apps géolocalisées, votre DNS, votre VPN. Tout d'un coup d'œil.</p>
+        <div class="meta">Score · Statuts · 7 vecteurs</div>
+      </div>
+      <div class="shot"><img src="assets/screen-dashboard.png" alt="Dashboard"/></div>
+    </article>
+
+    <article class="angle-card reveal">
+      <span class="callout points">
+        <span class="material-icons-round">add</span> +5 à +45 pts
+      </span>
+      <div>
+        <span class="num">02/04</span>
+        <h3>Recommandations</h3>
+        <p>« Désactivez le tracking pub. +5 pts. » « Activez un DNS chiffré. +8 pts. » Vous appliquez ce que vous voulez.</p>
+        <div class="meta">Triées par impact, pas par marketing</div>
+      </div>
+      <div class="shot"><img src="assets/screen-recommendations.png" alt="Recommandations"/></div>
+    </article>
+
+    <article class="angle-card reveal">
+      <span class="callout trending">
+        <span class="material-icons-round">trending_up</span> Tendance
+      </span>
+      <div>
+        <span class="num">03/04</span>
+        <h3>Évolution</h3>
+        <p>Chaque scan, un point sur la courbe. Voyez votre score monter, semaine après semaine.</p>
+        <div class="meta">Historique · Trackers par scan</div>
+      </div>
+      <div class="shot"><img src="assets/screen-evolution.png" alt="Évolution"/></div>
+    </article>
+
+    <article class="angle-card reveal">
+      <span class="callout detail">
+        <span class="material-icons-round">hub</span> Détail brut
+      </span>
+      <div>
+        <span class="num">04/04</span>
+        <h3>Réseau</h3>
+        <p>Qui parle à qui, par pays, par entreprise. Pour ceux qui veulent vraiment comprendre.</p>
+        <div class="meta">26 pays · 909 domaines · 121 apps</div>
+      </div>
+      <div class="shot"><img src="assets/screen-network.png" alt="Réseau"/></div>
+    </article>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     MANIFESTO — what Privacy Score does NOT do
+============================================================ -->
+<section class="manifesto" id="manifesto">
+  <div class="head reveal">
+    <div class="chapter">
+      <span class="ch-pill">Chapitre <span class="ch-current">05</span> <span class="ch-total">/ 05</span></span>
+      <span class="ch-label">La promesse</span>
+    </div>
+    <h2>
+      Ce que Privacy Score
+      <span class="neg">ne fait pas.</span>
+    </h2>
+    <p>
+      Une app de confidentialité doit être irréprochable. Le code est public.
+      Voici, ligne par ligne, ce que nous refusons.
+    </p>
+  </div>
+
+  <div class="man-grid reveal">
+
+    <article class="man-card c-1">
+      <div class="x">
+        <span class="material-icons-round">cloud_off</span>
+      </div>
+      <h3>Pas de serveur</h3>
+      <p>Pas d'API maison. Pas d'analytics. Aucune requête sortante.</p>
+      <code>URLSession · 0</code>
+    </article>
+
+    <article class="man-card c-2">
+      <div class="x">
+        <span class="material-icons-round">person_off</span>
+      </div>
+      <h3>Pas de compte</h3>
+      <p>Aucune inscription. Aucun email. Aucun mot de passe.</p>
+      <code>Auth · 0</code>
+    </article>
+
+    <article class="man-card c-3">
+      <div class="x">
+        <span class="material-icons-round">phone_iphone</span>
+      </div>
+      <h3>Pas de cloud</h3>
+      <p>Le rapport vit dans la sandbox iOS. Et nulle part ailleurs.</p>
+      <code>Sandbox · SwiftData</code>
+    </article>
+
+    <article class="man-card c-4">
+      <div class="x">
+        <span class="material-icons-round">notifications_off</span>
+      </div>
+      <h3>Pas de panique</h3>
+      <p>Pas de badge rouge. Pas de notif d'urgence. Aucun « 47 menaces ! ».</p>
+      <code>Badge · jamais</code>
+    </article>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     TRUST QUOTE — from index.html
+============================================================ -->
+<section class="trust" style="padding: 100px 32px 60px;">
+  <div class="container">
+    <div class="trust-quote reveal">
+      <span class="qmark">"</span>
+      <p>
+        Privacy Guard ne voit jamais votre trafic.
+        Il vous montre ce que les <em>autres</em> en voient.
+      </p>
+      <footer>— Pied de page de l'écran Réglages, dans l'app.</footer>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     METRICS BAND — from index.html
+============================================================ -->
+<section class="metrics">
+  <div class="container">
+    <div class="metric-row reveal">
+      <div class="metric">
+        <div class="metric-num"><span data-count-to="100">0</span></div>
+        <div class="metric-label">Score sur 100</div>
+      </div>
+      <div class="metric">
+        <div class="metric-num"><span data-count-to="0">0</span></div>
+        <div class="metric-label">Octet envoyé en ligne</div>
+      </div>
+      <div class="metric">
+        <div class="metric-num"><span data-count-to="4">0</span></div>
+        <div class="metric-label">Onglets, c'est tout</div>
+      </div>
+      <div class="metric">
+        <div class="metric-num"><span data-count-to="2">0</span></div>
+        <div class="metric-label">Secondes d'analyse</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FAQ — from index.html
+============================================================ -->
+<section class="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="overline">Questions fréquentes</span>
+      <h2>Tout ce que vous vous demandez encore.</h2>
+    </div>
+
+    <div class="faq-list reveal">
+      <details>
+        <summary>
+          Est-ce que Privacy Score voit mon historique de navigation ?
+          <span class="material-icons-round chev">expand_more</span>
+        </summary>
+        <p>
+          Non. Privacy Score lit uniquement le <em>Rapport de Confidentialité</em>
+          qu'iOS génère lui-même — c'est-à-dire la liste des apps qui ont accédé
+          à vos capteurs et des domaines qu'elles ont contactés.
+          Votre Safari, vos messages, vos photos&nbsp;: jamais touchés.
+        </p>
+      </details>
+      <details>
+        <summary>
+          Vous gagnez de l'argent comment, alors ?
+          <span class="material-icons-round chev">expand_more</span>
+        </summary>
+        <p>
+          L'app est gratuite à télécharger. Dans l'onglet Réglages, nous proposons
+          un catalogue de fournisseurs DNS et VPN. Deux d'entre eux (NordVPN, Surfshark)
+          nous rémunèrent si vous vous abonnez via notre lien. C'est marqué.
+          Vous n'êtes obligé à rien.
+        </p>
+      </details>
+      <details>
+        <summary>
+          L'app fonctionne sur Android ?
+          <span class="material-icons-round chev">expand_more</span>
+        </summary>
+        <p>
+          Pas encore. Privacy Score s'appuie sur le rapport natif d'iOS,
+          une fonctionnalité qu'Apple a ouverte en 2021. Une version
+          Android dépendra de Google.
+        </p>
+      </details>
+      <details>
+        <summary>
+          Et si je désinstalle l'app ?
+          <span class="material-icons-round chev">expand_more</span>
+        </summary>
+        <p>
+          Tout disparaît. Le rapport, l'historique de scores, vos préférences —
+          tout vit dans la sandbox iOS de l'app. Apple efface l'ensemble
+          à la désinstallation. Aucune copie ailleurs.
+        </p>
+      </details>
+      <details>
+        <summary>
+          Le code source est-il ouvert ?
+          <span class="material-icons-round chev">expand_more</span>
+        </summary>
+        <p>
+          Le dépôt iOS est public et auditable. Les promesses « aucun serveur,
+          aucun compte, tout local » sont vérifiables en cherchant « URLSession »
+          dans le code&nbsp;: aucun résultat actif.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CTA — reuse existing style from site.css
+============================================================ -->
+<section id="download" class="cta">
+  <div class="orb orb-f"></div>
+  <div class="container cta-inner">
+    <div class="cta-copy reveal">
+      <h2>Reprenez le contrôle de vos données.</h2>
+      <p>
+        Soixante secondes pour importer votre rapport.
+        Un score. Trois fixes. Et la satisfaction de savoir
+        exactement où vous fuyiez — et où vous ne fuyez plus.
+      </p>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-primary btn-big">
+          <span class="material-icons-round">download</span>
+          Télécharger sur l'App&nbsp;Store
+        </a>
+        <span class="cta-note">iPhone · iPadOS 17+ · gratuit · français &amp; anglais</span>
+      </div>
+    </div>
+    <div class="cta-mark">
+      <img src="assets/app-icon-512.png" alt="" />
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="foot-brand">
+        <img src="assets/app-icon-256.png" alt="" />
+        <strong style="color:#F8FAFC; font-family: var(--font-display); font-weight: 700;">Privacy Score</strong>
+      </div>
+      <p class="foot-sub" style="max-width: 320px; margin-top: 14px;">
+        Une app indépendante, faite en France. Open-source. Sans cloud, sans compte, sans pisteurs.
+      </p>
+    </div>
+    <div class="foot-cols">
+      <div>
+        <div class="foot-h">App</div>
+        <a href="#">App Store</a>
+        <a href="#">Notes de version</a>
+        <a href="#">Code source</a>
+      </div>
+      <div>
+        <div class="foot-h">Légal</div>
+        <a href="#">Mentions légales</a>
+        <a href="#">Politique de confidentialité</a>
+        <a href="#">CGU</a>
+      </div>
+      <div>
+        <div class="foot-h">Contact</div>
+        <a href="mailto:hello@privacyscore.fr">hello@privacyscore.fr</a>
+        <a href="#">Mastodon</a>
+        <a href="#">Bluesky</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-rule"></div>
+  <div class="container footer-foot">
+    <span>© 2026 Privacy Score — Made in France</span>
+    <span>v 1.4.0 · iOS 17+</span>
+  </div>
+</footer>
+
+
+<script>
+/* ===========================================================
+   Privacy Score — Marketing site interactions
+   - Reveal on scroll
+   - Animated counters (data-count-to)
+   - Animated gauge draw + number
+   - Feature tabs switcher
+   =========================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ────────────────────────────────────────────────────────────
+  // Reveal on scroll
+  // ────────────────────────────────────────────────────────────
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const delay = parseInt(el.dataset.delay || '0', 10);
+        setTimeout(() => el.classList.add('in'), delay);
+        revealIO.unobserve(el);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  revealEls.forEach(el => revealIO.observe(el));
+
+  // ────────────────────────────────────────────────────────────
+  // Counter animation
+  // ────────────────────────────────────────────────────────────
+  const animateCount = (el) => {
+    const target = parseInt(el.dataset.countTo, 10);
+    if (isNaN(target)) return;
+    const duration = 1600;
+    const start = performance.now();
+    const startVal = 0;
+    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+    const step = (now) => {
+      const elapsed = now - start;
+      const t = Math.min(elapsed / duration, 1);
+      const val = Math.round(startVal + (target - startVal) * easeOut(t));
+      el.textContent = val.toLocaleString('fr-FR');
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = target.toLocaleString('fr-FR');
+    };
+    requestAnimationFrame(step);
+  };
+
+  const counterIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCount(entry.target);
+        counterIO.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count-to]').forEach(el => counterIO.observe(el));
+
+  // ────────────────────────────────────────────────────────────
+  // Hero gauge animation (score number + ring)
+  // ────────────────────────────────────────────────────────────
+  const gaugeArc = document.getElementById('gaugeArc');
+  const gaugeNum = document.getElementById('gaugeNum');
+  if (gaugeArc && gaugeNum) {
+    const targetScore = 77;
+    const circ = 2 * Math.PI * 92;          // ≈ 577.9
+    const targetOffset = circ * (1 - targetScore / 100);
+
+    // Delay slightly so the hero feels alive
+    setTimeout(() => {
+      gaugeArc.style.transition = 'stroke-dashoffset 1.6s cubic-bezier(0.16, 1, 0.30, 1)';
+      gaugeArc.style.strokeDashoffset = targetOffset;
+
+      const start = performance.now();
+      const duration = 1600;
+      const step = (now) => {
+        const t = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        gaugeNum.textContent = Math.round(targetScore * eased);
+        if (t < 1) requestAnimationFrame(step);
+        else gaugeNum.textContent = targetScore;
+      };
+      requestAnimationFrame(step);
+    }, 350);
+  }
+
+  // ────────────────────────────────────────────────────────────
+  // Feature tabs
+  // ────────────────────────────────────────────────────────────
+  const tabs  = document.querySelectorAll('.tab');
+  const panes = document.querySelectorAll('.feature-pane');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      tabs.forEach(t => t.classList.toggle('tab-active', t === tab));
+      panes.forEach(p => p.classList.toggle('feature-active', p.dataset.pane === target));
+    });
+  });
+
+  // ────────────────────────────────────────────────────────────
+  // Mild parallax on orbs (perf-cheap)
+  // ────────────────────────────────────────────────────────────
+  const orbs = document.querySelectorAll('.orb');
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        orbs.forEach((orb, i) => {
+          const speed = (i % 3 + 1) * 0.04;
+          orb.style.transform = `translateY(${y * speed * -1}px)`;
+        });
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+});
+
+</script>
+</body>
+</html>

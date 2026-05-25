@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Privacy Score — Reprenez le contrôle de vos données.</title>
+<link rel="icon" type="image/png" href="assets/app-icon-256.png" />
+<link rel="stylesheet" href="assets/ds.css" />
+<link rel="stylesheet" href="assets/site.css" />
+</head>
+<body>
+
+<!-- ============================================================
+     NAV
+============================================================ -->
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top" aria-label="Privacy Score">
+      <img class="brand-mark" src="assets/app-icon-256.png" alt="" />
+      <span class="brand-word">Privacy Score</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#story">L'histoire</a>
+      <a href="#how">Comment ça marche</a>
+      <a href="#features">L'app</a>
+      <a href="#trust">Confiance</a>
+    </nav>
+    <a href="#download" class="nav-cta">
+      <span class="material-icons-round">download</span>
+      Télécharger
+    </a>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section id="top" class="hero">
+  <div class="orb orb-a"></div>
+  <div class="orb orb-b"></div>
+  <div class="orb orb-c"></div>
+  <div class="dot-grid"></div>
+
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <span class="overline hero-overline">
+        <span class="live-dot"></span> Disponible sur l'App&nbsp;Store
+      </span>
+      <h1 class="hero-title">
+        Vous pensez être <em>anonyme</em>.<br/>
+        Vous ne l'êtes <span class="hero-strike">pas</span>.
+      </h1>
+      <p class="hero-lede">
+        Chaque app sur votre iPhone parle dans votre dos —
+        votre position, vos centres d'intérêt, vos déplacements.
+        <strong>Privacy Score</strong> les écoute. Localement.
+        Sans serveur. Sans compte.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#download" class="btn btn-primary">
+          <span class="material-icons-round">download</span>
+          Télécharger sur l'App&nbsp;Store
+        </a>
+        <a href="#story" class="btn btn-ghost">
+          Voir comment
+          <span class="material-icons-round">arrow_downward</span>
+        </a>
+      </div>
+
+      <div class="hero-pillars">
+        <div class="pillar">
+          <span class="material-icons-round">cloud_off</span>
+          <div>
+            <div class="pillar-title">Aucun serveur</div>
+            <div class="pillar-sub">Rien ne quitte votre appareil.</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <span class="material-icons-round">person_off</span>
+          <div>
+            <div class="pillar-title">Aucun compte</div>
+            <div class="pillar-sub">Aucune adresse, aucun mot de passe.</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <span class="material-icons-round">phone_iphone</span>
+          <div>
+            <div class="pillar-title">Tout en local</div>
+            <div class="pillar-sub">Analyse sur l'iPhone, hors-ligne.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right side: hero gauge -->
+    <div class="hero-visual">
+      <div class="hero-phone">
+        <div class="phone-screen">
+          <div class="phone-statusbar">
+            <span>09:41</span>
+            <span class="material-icons-round" style="font-size:14px;">near_me</span>
+            <span class="phone-rs"><span class="material-icons-round" style="font-size:14px;">signal_cellular_alt</span><span class="material-icons-round" style="font-size:14px;">wifi</span><span class="material-icons-round" style="font-size:14px;">battery_full</span></span>
+          </div>
+
+          <h2 class="phone-h1">Dashboard</h2>
+
+          <div class="phone-status">
+            <span class="overline">Statut</span>
+            <div class="phone-status-row">
+              <span class="status-dot"></span>
+              <strong>Appareil protégé</strong>
+            </div>
+          </div>
+
+          <div class="gauge-card">
+            <svg class="gauge" viewBox="0 0 220 220" aria-hidden="true">
+              <defs>
+                <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#60A5FA"/>
+                  <stop offset="100%" stop-color="#3B82F6"/>
+                </linearGradient>
+                <filter id="gaugeGlow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="6" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <circle cx="110" cy="110" r="92" stroke="rgba(255,255,255,0.06)" stroke-width="14" fill="none"/>
+              <circle id="gaugeArc" cx="110" cy="110" r="92"
+                      stroke="url(#gaugeGrad)" stroke-width="14" fill="none"
+                      stroke-linecap="round"
+                      filter="url(#gaugeGlow)"
+                      transform="rotate(-90 110 110)"
+                      stroke-dasharray="578" stroke-dashoffset="578"/>
+            </svg>
+            <div class="gauge-center">
+              <div class="gauge-num" id="gaugeNum">0</div>
+              <div class="gauge-grade">Bon</div>
+            </div>
+          </div>
+
+          <div class="phone-meta">
+            <strong>Privacy Score</strong>
+            <span>909 traceurs détectés, 5 apps&nbsp;géolocalisées.</span>
+          </div>
+
+          <button class="phone-cta">Améliorer le score</button>
+        </div>
+      </div>
+
+      <!-- floating chips -->
+      <div class="float-chip chip-trackers">
+        <span class="material-icons-round">ads_click</span>
+        <div>
+          <div class="chip-label">Traceurs bloqués aujourd'hui</div>
+          <div class="chip-value"><span data-count-to="2487">0</span></div>
+        </div>
+      </div>
+      <div class="float-chip chip-dns">
+        <span class="material-icons-round">dns</span>
+        <div>
+          <div class="chip-label">DNS chiffré</div>
+          <div class="chip-value chip-good">Actif</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue" aria-hidden="true">
+    <span>Faites défiler</span>
+    <span class="material-icons-round">expand_more</span>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     STORY — THE HOOK
+============================================================ -->
+<section id="story" class="story">
+  <div class="orb orb-d"></div>
+
+  <div class="container">
+
+    <div class="story-headline-wrap reveal">
+      <span class="overline">L'histoire vraie qui a tout déclenché</span>
+      <h2 class="story-headline">
+        En 2024, des journalistes ont acheté des données publicitaires
+        sur le marché ouvert. Ils ont identifié
+        <span class="hi">26 agents du Secret Service</span>
+        qui protégeaient le Président.
+      </h2>
+      <p class="story-sub">
+        Pas de fuite. Pas de piratage. Juste un fichier acheté
+        à un courtier en données, comme n'importe qui peut le faire.
+      </p>
+    </div>
+
+    <!-- Reveal stack: 3 facts -->
+    <div class="story-stack">
+      <article class="story-card reveal" data-delay="0">
+        <div class="story-num">01</div>
+        <h3>Vos apps revendent votre position.</h3>
+        <p>
+          Une app météo, un jeu, un calendrier — chacun envoie en arrière-plan
+          votre GPS à des dizaines de courtiers. Aucune n'a besoin de vous le dire.
+        </p>
+        <div class="story-stat">
+          <span class="stat-num" data-count-to="909">0</span>
+          <span class="stat-label">traceurs sur un iPhone moyen, sur 7 jours.</span>
+        </div>
+      </article>
+
+      <article class="story-card reveal" data-delay="120">
+        <div class="story-num">02</div>
+        <h3>Les apps de fitness ont déjà trahi des bases militaires.</h3>
+        <p>
+          La carte mondiale d'une app de course à pied a révélé les itinéraires
+          de patrouille de soldats américains au Moyen-Orient. Les bases secrètes
+          dessinées en jaune fluo, visibles depuis n'importe quel navigateur.
+        </p>
+        <div class="story-stat">
+          <span class="stat-num">2018</span>
+          <span class="stat-label">Strava heatmap — bases militaires exposées.</span>
+        </div>
+      </article>
+
+      <article class="story-card reveal" data-delay="240">
+        <div class="story-num">03</div>
+        <h3>Le marché des données est <em>légal</em> et <em>public</em>.</h3>
+        <p>
+          N'importe qui — annonceur, employeur, ex-conjoint, gouvernement étranger —
+          peut acheter ces données. Vous ne saurez jamais qui vous a regardé.
+        </p>
+        <div class="story-stat">
+          <span class="stat-num">200 €</span>
+          <span class="stat-label">Le prix moyen pour 1&nbsp;million d'enregistrements.</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="story-pivot reveal">
+      <div class="pivot-line"></div>
+      <p class="pivot-text">
+        Vous ne pouvez pas <em>supprimer</em> ces données.<br/>
+        Mais vous pouvez <strong>arrêter d'en produire</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     PRODUCT INTRO
+============================================================ -->
+<section id="product-intro" class="product-intro">
+  <div class="container">
+    <div class="intro-grid">
+      <div class="intro-copy reveal">
+        <div class="intro-mark">
+          <img src="assets/app-icon-256.png" alt="" />
+        </div>
+        <span class="overline">Privacy Score</span>
+        <h2 class="intro-h">
+          Un score sur 100.<br/>
+          Trois actions concrètes.<br/>
+          Aucun discours alarmiste.
+        </h2>
+        <p class="intro-p">
+          Privacy Score lit le <strong>Rapport de Confidentialité</strong>
+          qu'iOS génère déjà sur votre iPhone. Il croise chaque domaine
+          contacté par vos apps avec la base de DuckDuckGo Tracker Radar,
+          puis calcule un score — et vous dit exactement quoi corriger.
+        </p>
+        <ul class="intro-bullets">
+          <li><span class="material-icons-round">check</span> Lit le rapport iOS natif (pas d'accès supplémentaire).</li>
+          <li><span class="material-icons-round">check</span> Calcule le score localement, en 2 secondes.</li>
+          <li><span class="material-icons-round">check</span> Recommande 3 à 5 fixes immédiats.</li>
+          <li><span class="material-icons-round">check</span> Suit l'évolution semaine après semaine.</li>
+        </ul>
+      </div>
+
+      <div class="intro-visual reveal">
+        <div class="intro-phone">
+          <img src="assets/screen-dashboard.png" alt="Écran principal de Privacy Score" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     HOW IT WORKS
+============================================================ -->
+<section id="how" class="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="overline">Comment ça marche</span>
+      <h2>Trois étapes. Soixante secondes. Hors-ligne.</h2>
+    </div>
+
+    <div class="steps">
+      <article class="step reveal" data-delay="0">
+        <div class="step-number">1</div>
+        <div class="step-icon"><span class="material-icons-round">ios_share</span></div>
+        <h3>Exportez votre Rapport</h3>
+        <p>
+          Réglages iOS → Confidentialité & sécurité → Rapport sur l'App&nbsp;Privacy.
+          Vous l'avez déjà : iOS l'enregistre en silence.
+        </p>
+        <div class="step-meta mono">Format&nbsp;: .ndjson · 100% Apple</div>
+      </article>
+
+      <article class="step reveal" data-delay="120">
+        <div class="step-number">2</div>
+        <div class="step-icon"><span class="material-icons-round">radar</span></div>
+        <h3>Privacy Score l'analyse</h3>
+        <p>
+          Tout se passe sur votre iPhone. Nous croisons les domaines avec la
+          base ouverte de DuckDuckGo et calculons un score sur 100.
+        </p>
+        <div class="step-meta mono">0 octet transmis · 2 sec</div>
+      </article>
+
+      <article class="step reveal" data-delay="240">
+        <div class="step-number">3</div>
+        <div class="step-icon"><span class="material-icons-round">trending_up</span></div>
+        <h3>Vous corrigez. Vous voyez la courbe monter.</h3>
+        <p>
+          Chaque recommandation indique combien de points elle vous rapporte.
+          Vous appliquez celles que vous voulez. Vous mesurez le progrès.
+        </p>
+        <div class="step-meta mono">+5 à +45 points · par fix</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FEATURES — APP SCREEN TOUR
+============================================================ -->
+<section id="features" class="features">
+  <div class="orb orb-e"></div>
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="overline">À l'intérieur de l'app</span>
+      <h2>Quatre onglets. Quatre façons de comprendre votre exposition.</h2>
+    </div>
+
+    <div class="tabs-row reveal">
+      <button class="tab tab-active" data-tab="dashboard">
+        <span class="material-icons-round">dashboard</span> Dashboard
+      </button>
+      <button class="tab" data-tab="recos">lightbulb
+Recommandations</button>
+      <button class="tab" data-tab="evolution">
+        <span class="material-icons-round">analytics</span> Évolution
+      </button>
+      <button class="tab" data-tab="network">
+        <span class="material-icons-round">hub</span> Réseau
+      </button>
+    </div>
+
+    <div class="feature-stage">
+      <div class="feature-pane feature-active" data-pane="dashboard">
+        <div class="feature-shot">
+          <img src="assets/screen-dashboard.png" alt="Dashboard Privacy Score" />
+        </div>
+        <div class="feature-text">
+          <span class="overline">Onglet 1 · Dashboard</span>
+          <h3>Votre score, d'un coup d'œil.</h3>
+          <p>
+            Un seul nombre pour résumer votre exposition.
+            En dessous : traceurs détectés, apps géolocalisées,
+            DNS, Wi-Fi, VPN, tracking publicitaire — chaque vecteur,
+            chaque statut.
+          </p>
+          <div class="feature-chips">
+            <span class="chip">DNS chiffré</span>
+            <span class="chip">VPN actif</span>
+            <span class="chip">Tracking publicitaire</span>
+            <span class="chip">Hygiène numérique</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-pane" data-pane="recos">
+        <div class="feature-shot">
+          <img src="assets/screen-recommendations.png" alt="Recommandations" />
+        </div>
+        <div class="feature-text">
+          <span class="overline">Onglet 2 · Recommandations</span>
+          <h3>Des fixes, pas des discours.</h3>
+          <p>
+            Chaque carte commence par un verbe d'action et se termine
+            par un gain mesurable.
+            « Désactiver le suivi publicitaire. +5 points. »
+            « Activer un DNS chiffré. +8 points. »
+            Vous appliquez ce que vous voulez.
+          </p>
+          <div class="feature-chips">
+            <span class="chip">+5 points</span>
+            <span class="chip">+8 points</span>
+            <span class="chip">+12 points</span>
+            <span class="chip">Critique</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-pane" data-pane="evolution">
+        <div class="feature-shot">
+          <img src="assets/screen-evolution.png" alt="Évolution du score" />
+        </div>
+        <div class="feature-text">
+          <span class="overline">Onglet 3 · Évolution</span>
+          <h3>Voyez votre score monter.</h3>
+          <p>
+            Chaque import devient un point sur une courbe.
+            Vous voyez les semaines où vous avez baissé la garde,
+            les fixes qui ont vraiment compté, et la pente
+            qui — semaine après semaine — repart vers le haut.
+          </p>
+          <div class="feature-chips">
+            <span class="chip">Historique complet</span>
+            <span class="chip">Score &amp; grade</span>
+            <span class="chip">Traceurs par scan</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-pane" data-pane="network">
+        <div class="feature-shot">
+          <img src="assets/screen-network.png" alt="Trafic réseau" />
+        </div>
+        <div class="feature-text">
+          <span class="overline">Onglet 4 · Trafic réseau</span>
+          <h3>Qui parle à qui, par pays et par entreprise.</h3>
+          <p>
+            Le détail brut, pour ceux qui veulent comprendre.
+            Quelles apps contactent Facebook ? Vers quels pays partent
+            les données ? Quels domaines reviennent le plus souvent ?
+            Trois vues : Destinations, Domaines, Réseaux d'entreprises.
+          </p>
+          <div class="feature-chips">
+            <span class="chip">26 pays</span>
+            <span class="chip">Top trackers</span>
+            <span class="chip">Companies</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     TRUST PILLARS
+============================================================ -->
+<section id="trust" class="trust">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="overline">Notre promesse</span>
+      <h2>Une app de confidentialité doit, elle-même, être irréprochable.</h2>
+      <p class="section-sub">
+        Le code est public, vérifiable. Voici, ligne par ligne, ce que Privacy Score
+        <em>ne fait pas</em>.
+      </p>
+    </div>
+
+    <div class="trust-grid reveal">
+      <div class="trust-card">
+        <div class="trust-icon"><span class="material-icons-round">cloud_off</span></div>
+        <h3>Aucun serveur.</h3>
+        <p>
+          Pas d'API maison. Pas d'analytics tiers
+          (ni Firebase, ni Mixpanel, ni Sentry).
+          Aucune requête sortante n'est lancée par l'application.
+        </p>
+        <code class="mono">URLSession calls&nbsp;: 0</code>
+      </div>
+
+      <div class="trust-card">
+        <div class="trust-icon"><span class="material-icons-round">person_off</span></div>
+        <h3>Aucun compte.</h3>
+        <p>
+          Pas d'inscription. Pas d'email. Pas de mot de passe.
+          Aucun « Sign in with Apple ». Vous téléchargez,
+          vous ouvrez, vous utilisez.
+        </p>
+        <code class="mono">Auth backends&nbsp;: 0</code>
+      </div>
+
+      <div class="trust-card">
+        <div class="trust-icon"><span class="material-icons-round">phone_iphone</span></div>
+        <h3>Tout en local.</h3>
+        <p>
+          Le rapport est lu, parsé, scoré et stocké sur votre iPhone.
+          Il ne quitte jamais l'appareil. Désinstallez l'app
+          et tout disparaît, point.
+        </p>
+        <code class="mono">Sandbox iOS · SwiftData</code>
+      </div>
+
+      <div class="trust-card">
+        <div class="trust-icon"><span class="material-icons-round">badge</span></div>
+        <h3>Pas de badge anxiogène.</h3>
+        <p>
+          Aucun compteur rouge sur l'icône. Aucune notification d'urgence.
+          Pas de « 47 menaces détectées ! ». Une app de confidentialité
+          ne devrait pas vous faire flipper.
+        </p>
+        <code class="mono">UIApplicationBadge · jamais</code>
+      </div>
+    </div>
+
+    <div class="trust-quote reveal">
+      <span class="qmark">"</span>
+      <p>
+        Privacy Guard ne voit jamais votre trafic.
+        Il vous montre ce que les <em>autres</em> en voient.
+      </p>
+      <footer>— Pied de page de l'écran Réglages, dans l'app.</footer>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     METRICS BAND
+============================================================ -->
+<section class="metrics">
+  <div class="container">
+    <div class="metric-row reveal">
+      <div class="metric">
+        <div class="metric-num"><span data-count-to="100">0</span></div>
+        <div class="metric-label">Score sur 100</div>
+      </div>
+      <div class="metric">
+        <div class="metric-num"><span data-count-to="0">0</span></div>
+        <div class="metric-label">Octet envoyé en ligne</div>
+      </div>
+      <div class="metric">
+        <div class="metric-num"><span data-count-to="4">0</span></div>
+        <div class="metric-label">Onglets, c'est tout</div>
+      </div>
+      <div class="metric">
+        <div class="metric-num"><span data-count-to="2">0</span></div>
+        <div class="metric-label">Secondes d'analyse</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FAQ
+============================================================ -->
+<section class="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="overline">Questions fréquentes</span>
+      <h2>Tout ce que vous vous demandez encore.</h2>
+    </div>
+
+    <div class="faq-list reveal">
+      <details>
+        <summary>
+          Est-ce que Privacy Score voit mon historique de navigation ?
+          <span class="material-icons-round chev">expand_more</span>
+        </summary>
+        <p>
+          Non. Privacy Score lit uniquement le <em>Rapport de Confidentialité</em>
+          qu'iOS génère lui-même — c'est-à-dire la liste des apps qui ont accédé
+          à vos capteurs et des domaines qu'elles ont contactés.
+          Votre Safari, vos messages, vos photos&nbsp;: jamais touchés.
+        </p>
+      </details>
+      <details>
+        <summary>
+          Vous gagnez de l'argent comment, alors ?
+          <span class="material-icons-round chev">expand_more</span>
+        </summary>
+        <p>
+          L'app est gratuite à télécharger. Dans l'onglet Réglages, nous proposons
+          un catalogue de fournisseurs DNS et VPN. Deux d'entre eux (NordVPN, Surfshark)
+          nous rémunèrent si vous vous abonnez via notre lien. C'est marqué.
+          Vous n'êtes obligé à rien.
+        </p>
+      </details>
+      <details>
+        <summary>
+          L'app fonctionne sur Android ?
+          <span class="material-icons-round chev">expand_more</span>
+        </summary>
+        <p>
+          Pas encore. Privacy Score s'appuie sur le rapport natif d'iOS,
+          une fonctionnalité qu'Apple a ouverte en 2021. Une version
+          Android dépendra de Google.
+        </p>
+      </details>
+      <details>
+        <summary>
+          Et si je désinstalle l'app ?
+          <span class="material-icons-round chev">expand_more</span>
+        </summary>
+        <p>
+          Tout disparaît. Le rapport, l'historique de scores, vos préférences —
+          tout vit dans la sandbox iOS de l'app. Apple efface l'ensemble
+          à la désinstallation. Aucune copie ailleurs.
+        </p>
+      </details>
+      <details>
+        <summary>
+          Le code source est-il ouvert ?
+          <span class="material-icons-round chev">expand_more</span>
+        </summary>
+        <p>
+          Le dépôt iOS est public et auditable. Les promesses « aucun serveur,
+          aucun compte, tout local » sont vérifiables en cherchant « URLSession »
+          dans le code&nbsp;: aucun résultat actif.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FINAL CTA
+============================================================ -->
+<section id="download" class="cta">
+  <div class="orb orb-f"></div>
+  <div class="container cta-inner">
+    <div class="cta-copy reveal">
+      <h2>Reprenez le contrôle de vos données.</h2>
+      <p>
+        Soixante secondes pour importer votre rapport.
+        Un score. Trois fixes. Et la satisfaction de savoir
+        exactement où vous fuyiez — et où vous ne fuyez plus.
+      </p>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-primary btn-big">
+          <span class="material-icons-round">download</span>
+          Télécharger sur l'App&nbsp;Store
+        </a>
+        <span class="cta-note">
+          iPhone · iPadOS 17+ · gratuit · français &amp; anglais
+        </span>
+      </div>
+    </div>
+    <div class="cta-mark reveal">
+      <img src="assets/app-icon-512.png" alt="Privacy Score app icon" />
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="foot-brand">
+      <img src="assets/app-icon-256.png" alt="" />
+      <div>
+        <div class="brand-word">Privacy Score</div>
+        <div class="foot-sub">Reprenez le contrôle de vos données.</div>
+      </div>
+    </div>
+
+    <div class="foot-cols">
+      <div>
+        <div class="foot-h">Produit</div>
+        <a href="#features">Fonctionnalités</a>
+        <a href="#how">Comment ça marche</a>
+        <a href="#trust">Confidentialité</a>
+      </div>
+      <div>
+        <div class="foot-h">Société</div>
+        <a href="#">À propos</a>
+        <a href="#">Presse</a>
+        <a href="mailto:contact@privacyscore.fr">Contact</a>
+      </div>
+      <div>
+        <div class="foot-h">Légal</div>
+        <a href="#">Politique de confidentialité</a>
+        <a href="#">Conditions d'utilisation</a>
+        <a href="#">Mentions légales</a>
+        <a href="#">Affiliations</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-rule"></div>
+  <div class="container footer-foot">
+    <span>© 2026 Privacy Score · Édité depuis la France</span>
+    <span class="mono">v0.0.7</span>
+  </div>
+</footer>
+
+
+<script>
+/* ===========================================================
+   Privacy Score — Marketing site interactions
+   - Reveal on scroll
+   - Animated counters (data-count-to)
+   - Animated gauge draw + number
+   - Feature tabs switcher
+   =========================================================== */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  // ────────────────────────────────────────────────────────────
+  // Reveal on scroll
+  // ────────────────────────────────────────────────────────────
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const delay = parseInt(el.dataset.delay || '0', 10);
+        setTimeout(() => el.classList.add('in'), delay);
+        revealIO.unobserve(el);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  revealEls.forEach(el => revealIO.observe(el));
+
+  // ────────────────────────────────────────────────────────────
+  // Counter animation
+  // ────────────────────────────────────────────────────────────
+  const animateCount = (el) => {
+    const target = parseInt(el.dataset.countTo, 10);
+    if (isNaN(target)) return;
+    const duration = 1600;
+    const start = performance.now();
+    const startVal = 0;
+    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+    const step = (now) => {
+      const elapsed = now - start;
+      const t = Math.min(elapsed / duration, 1);
+      const val = Math.round(startVal + (target - startVal) * easeOut(t));
+      el.textContent = val.toLocaleString('fr-FR');
+      if (t < 1) requestAnimationFrame(step);
+      else el.textContent = target.toLocaleString('fr-FR');
+    };
+    requestAnimationFrame(step);
+  };
+
+  const counterIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCount(entry.target);
+        counterIO.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count-to]').forEach(el => counterIO.observe(el));
+
+  // ────────────────────────────────────────────────────────────
+  // Hero gauge animation (score number + ring)
+  // ────────────────────────────────────────────────────────────
+  const gaugeArc = document.getElementById('gaugeArc');
+  const gaugeNum = document.getElementById('gaugeNum');
+  if (gaugeArc && gaugeNum) {
+    const targetScore = 77;
+    const circ = 2 * Math.PI * 92;          // ≈ 577.9
+    const targetOffset = circ * (1 - targetScore / 100);
+
+    // Delay slightly so the hero feels alive
+    setTimeout(() => {
+      gaugeArc.style.transition = 'stroke-dashoffset 1.6s cubic-bezier(0.16, 1, 0.30, 1)';
+      gaugeArc.style.strokeDashoffset = targetOffset;
+
+      const start = performance.now();
+      const duration = 1600;
+      const step = (now) => {
+        const t = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        gaugeNum.textContent = Math.round(targetScore * eased);
+        if (t < 1) requestAnimationFrame(step);
+        else gaugeNum.textContent = targetScore;
+      };
+      requestAnimationFrame(step);
+    }, 350);
+  }
+
+  // ────────────────────────────────────────────────────────────
+  // Feature tabs
+  // ────────────────────────────────────────────────────────────
+  const tabs  = document.querySelectorAll('.tab');
+  const panes = document.querySelectorAll('.feature-pane');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      tabs.forEach(t => t.classList.toggle('tab-active', t === tab));
+      panes.forEach(p => p.classList.toggle('feature-active', p.dataset.pane === target));
+    });
+  });
+
+  // ────────────────────────────────────────────────────────────
+  // Mild parallax on orbs (perf-cheap)
+  // ────────────────────────────────────────────────────────────
+  const orbs = document.querySelectorAll('.orb');
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        orbs.forEach((orb, i) => {
+          const speed = (i % 3 + 1) * 0.04;
+          orb.style.transform = `translateY(${y * speed * -1}px)`;
+        });
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+});
+
+</script>
+</body>
+</html>

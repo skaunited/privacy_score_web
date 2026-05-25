@@ -1,0 +1,132 @@
+---
+/**
+ * Header.astro — site navigation bar.
+ *
+ * Pixel-matches the design (`variation-illustrated.html` lines 435-452) and
+ * adds a single new element: the FR↔EN language switcher pill, positioned in
+ * `.nav-inner` between `.nav-links` and the download `.nav-cta`. The switcher
+ * uses `localizedPath()` to compute the same-page URL in the other locale.
+ */
+import type { Locale } from '@i18n/utils';
+import { LOCALES, localizedPath, stripLocalePrefix } from '@i18n/utils';
+
+interface Props {
+  locale: Locale;
+  pathname: string;
+  nav: {
+    brand: string;
+    aria: {
+      brand: string;
+      nav: string;
+      switcher: string;
+    };
+    links: {
+      story: string;
+      app: string;
+      trust: string;
+      download: string;
+    };
+    cta: string;
+    switcher: {
+      fr: string;
+      en: string;
+    };
+  };
+}
+
+const { locale, pathname, nav } = Astro.props;
+
+// Locale-neutral tail (e.g. "/" or "/faq/") — drives switcher targets.
+const tail = stripLocalePrefix(pathname || `/${locale}/`).replace(/^\/+/, '');
+---
+
+<header class="site-nav" role="banner">
+  <div class="nav-inner">
+    <a class="brand" href={`/${locale}/`} aria-label={nav.aria.brand}>
+      <img
+        class="brand-mark"
+        src="/assets/app-icon-256.png"
+        alt=""
+        width="256"
+        height="256"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
+      <span class="brand-word">{nav.brand}</span>
+    </a>
+
+    <nav class="nav-links" aria-label={nav.aria.nav}>
+      <a href="#story">{nav.links.story}</a>
+      <a href="#angles">{nav.links.app}</a>
+      <a href="#manifesto">{nav.links.trust}</a>
+      <a href="#download">{nav.links.download}</a>
+    </nav>
+
+    <div class="nav-trailing">
+      <div class="lang-switch" role="group" aria-label={nav.aria.switcher}>
+        {LOCALES.map((l) => (
+          <a
+            href={localizedPath(l, tail)}
+            class:list={["lang-pill", { active: l === locale }]}
+            hreflang={l === 'fr' ? 'fr-FR' : 'en-US'}
+            aria-current={l === locale ? 'page' : undefined}
+          >
+            {l === 'fr' ? nav.switcher.fr : nav.switcher.en}
+          </a>
+        ))}
+      </div>
+
+      <a href="#download" class="nav-cta">
+        <span class="material-icons-round" aria-hidden="true">download</span>
+        {nav.cta}
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  /* Wrap the right-side controls so we can place the language switcher
+     next to the download CTA without touching the global .nav-inner rule. */
+  .nav-trailing {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* FR↔EN switcher pill — inspired by `.var-switch` in the design preview,
+     renamed to `.lang-switch` to avoid colliding with that name. */
+  .lang-switch {
+    display: inline-flex;
+    gap: 4px;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 9999px;
+    padding: 4px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .lang-switch .lang-pill {
+    padding: 6px 11px;
+    border-radius: 9999px;
+    color: #94A3B8;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .lang-switch .lang-pill:hover {
+    background: rgba(96, 165, 250, 0.10);
+    color: #60A5FA;
+  }
+  .lang-switch .lang-pill.active {
+    background: rgba(96, 165, 250, 0.18);
+    color: #60A5FA;
+  }
+
+  @media (max-width: 760px) {
+    .lang-switch { display: none; }
+  }
+</style>

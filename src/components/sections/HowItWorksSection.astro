@@ -1,0 +1,53 @@
+---
+/**
+ * HowItWorksSection.astro — Chapter 03/05 "La méthode".
+ * Matches `variation-illustrated.html` lines 1125-1170.
+ * Icons + stagger delays are layout-only, hard-coded here (not in dict).
+ */
+interface Step {
+  title: string;
+  body: string; // HTML-safe
+  meta: string; // HTML-safe
+}
+
+interface Props {
+  how: {
+    title: string;
+    steps: Step[];
+  };
+  chapters: {
+    word: string;
+    method: { label: string };
+  };
+}
+
+const { how, chapters } = Astro.props;
+
+// Material Icons + stagger delays per step, layout-only.
+const stepIcons = ['ios_share', 'radar', 'trending_up'] as const;
+const stepDelays = [0, 120, 240] as const;
+---
+
+<section id="how" class="how" aria-labelledby="how-h2">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="chapter">
+        <span class="ch-pill">{chapters.word} <span class="ch-current">03</span> <span class="ch-total">/ 05</span></span>
+        <span class="ch-label">{chapters.method.label}</span>
+      </div>
+      <h2 id="how-h2">{how.title}</h2>
+    </div>
+
+    <ol class="steps">
+      {how.steps.map((step, i) => (
+        <article class="step reveal" data-delay={stepDelays[i]}>
+          <div class="step-number" aria-hidden="true">{i + 1}</div>
+          <div class="step-icon"><span class="material-icons-round" aria-hidden="true">{stepIcons[i]}</span></div>
+          <h3>{step.title}</h3>
+          <p set:html={step.body}></p>
+          <div class="step-meta mono" set:html={step.meta}></div>
+        </article>
+      ))}
+    </ol>
+  </div>
+</section>

@@ -1,0 +1,159 @@
+---
+/**
+ * SEO.astro
+ *
+ * Renders ONLY the `<head>` children required for SEO and social sharing.
+ * The surrounding `<!doctype html><html><head>…</head>…</html>` wrapper is
+ * provided by `BaseLayout.astro` — this component MUST NOT emit any of it.
+ *
+ * Responsibilities:
+ *   - charset / viewport / theme-color (dark + light)
+ *   - <title> + meta description
+ *   - canonical (absolute, with trailing slash — site uses trailingSlash: 'always')
+ *   - hreflang fr-FR / en-US / x-default
+ *   - Open Graph + Twitter card
+ *   - robots, format-detection
+ *   - favicon + apple-touch-icon
+ *   - font preconnects
+ */
+import type { Locale } from '@i18n/utils';
+import {
+  SITE_ORIGIN,
+  hreflangTag,
+  htmlLang,
+  stripLocalePrefix,
+  toAbsoluteUrl,
+} from '@i18n/utils';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  pathname: string;
+  ogImage?: string;
+}
+
+const {
+  locale,
+  title,
+  description,
+  ogTitle,
+  ogDescription,
+  pathname,
+  ogImage,
+} = Astro.props;
+
+// ---------------------------------------------------------------------------
+// URL helpers
+// ---------------------------------------------------------------------------
+
+/** Ensure exactly one leading slash and one trailing slash. */
+function normalizeWithTrailingSlash(path: string): string {
+  let p = (path || '/').trim();
+  if (!p.startsWith('/')) p = `/${p}`;
+  if (!p.endsWith('/')) p = `${p}/`;
+  return p;
+}
+
+const normalizedPathname = normalizeWithTrailingSlash(pathname);
+
+/** Locale-neutral remainder, e.g. `/fr/faq/` -> `/faq/`, `/fr/` -> `/`. */
+const remainder = stripLocalePrefix(normalizedPathname);
+const remainderWithSlashes = normalizeWithTrailingSlash(remainder);
+
+/** Build `/{locale}{remainder}` with guaranteed trailing slash. */
+function localizedUrl(loc: Locale): string {
+  const tail = remainderWithSlashes === '/' ? '/' : remainderWithSlashes;
+  return toAbsoluteUrl(`/${loc}${tail}`);
+}
+
+const canonical = localizedUrl(locale);
+const frUrl = localizedUrl('fr');
+const enUrl = localizedUrl('en');
+const xDefaultUrl = frUrl;
+
+// ---------------------------------------------------------------------------
+// Open Graph helpers
+// ---------------------------------------------------------------------------
+
+/** OG locale uses underscore form (fr_FR / en_US). */
+const ogLocaleMap: Record<Locale, string> = {
+  fr: 'fr_FR',
+  en: 'en_US',
+};
+const ogLocale = ogLocaleMap[locale];
+const ogAlternateLocale = locale === 'fr' ? ogLocaleMap.en : ogLocaleMap.fr;
+
+const resolvedOgTitle = ogTitle ?? title;
+const resolvedOgDescription = ogDescription ?? description;
+
+const resolvedOgImagePath = ogImage ?? '/assets/app-icon-512.png';
+const absoluteOgImage = resolvedOgImagePath.startsWith('http')
+  ? resolvedOgImagePath
+  : toAbsoluteUrl(resolvedOgImagePath);
+
+// Sanity check — silences unused-var warnings in strict mode when SITE_ORIGIN
+// is re-exported elsewhere; also documents intent.
+void SITE_ORIGIN;
+void htmlLang;
+---
+
+{/* 1. Charset */}
+<meta charset="utf-8" />
+
+{/* 2. Viewport */}
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+{/* 3. Theme color — dark first (site default), then light */}
+<meta name="theme-color" content="#020617" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)" />
+
+{/* 4. Title */}
+<title>{title}</title>
+
+{/* 5. Description */}
+<meta name="description" content={description} />
+
+{/* 6. Canonical */}
+<link rel="canonical" href={canonical} />
+
+{/* 7. hreflang */}
+<link rel="alternate" hreflang={hreflangTag.fr} href={frUrl} />
+<link rel="alternate" hreflang={hreflangTag.en} href={enUrl} />
+<link rel="alternate" hreflang="x-default" href={xDefaultUrl} />
+
+{/* 8. Open Graph */}
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Privacy Score" />
+<meta property="og:locale" content={ogLocale} />
+<meta property="og:locale:alternate" content={ogAlternateLocale} />
+<meta property="og:title" content={resolvedOgTitle} />
+<meta property="og:description" content={resolvedOgDescription} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={absoluteOgImage} />
+<meta property="og:image:width" content="512" />
+<meta property="og:image:height" content="512" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:alt" content="Privacy Score" />
+
+{/* 9. Twitter */}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={resolvedOgTitle} />
+<meta name="twitter:description" content={resolvedOgDescription} />
+<meta name="twitter:image" content={absoluteOgImage} />
+
+{/* 10. Robots */}
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+
+{/* 11. Format detection — prevent iOS from auto-linking phone-shaped digits */}
+<meta name="format-detection" content="telephone=no" />
+
+{/* 12. Favicon + apple touch icon */}
+<link rel="icon" type="image/png" sizes="256x256" href="/assets/app-icon-256.png" />
+<link rel="apple-touch-icon" sizes="512x512" href="/assets/app-icon-512.png" />
+
+{/* 13. Font preconnects */}
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
