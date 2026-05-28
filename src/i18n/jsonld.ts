@@ -82,16 +82,17 @@ export function softwareApplicationJsonLd(locale: Locale, dict: Dictionary) {
       url: SITE_ORIGIN,
     },
     image: `${SITE_ORIGIN}/assets/app-icon-512.png`,
-    softwareVersion: '1.4.0',
+    softwareVersion: '0.1.0',
   };
 }
 
 /**
  * Organization — the legal entity behind the site/app. Kept locale-neutral.
  *
- * `sameAs` is empty until the footer Mastodon/Bluesky links resolve to real
- * profiles; emitting placeholder `#` URLs would be a structured-data quality
- * regression.
+ * `sameAs` is empty: CoDevelop has no public social profiles to advertise
+ * (intentional — see CLAUDE.md decision log). Re-populate when official
+ * channels exist; emitting placeholder URLs would be a structured-data
+ * quality regression.
  */
 export function organizationJsonLd() {
   return {
@@ -101,7 +102,7 @@ export function organizationJsonLd() {
     legalName: 'Codevelop',
     url: SITE_ORIGIN,
     logo: `${SITE_ORIGIN}/assets/app-icon-512.png`,
-    email: 'hello@privacyscore.fr',
+    email: 'support@privacyscore.fr',
     sameAs: [],
   };
 }

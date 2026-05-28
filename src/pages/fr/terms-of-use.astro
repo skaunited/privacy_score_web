@@ -1,0 +1,29 @@
+---
+/**
+ * /fr/terms-of-use/
+ *
+ * Renders the canonical CGU markdown.
+ * Source of truth: src/content/legal/fr/terms-of-use.md
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import { getDictionary } from '@i18n/utils';
+import { Content, frontmatter } from '../../content/legal/fr/terms-of-use.md';
+
+const locale = 'fr' as const;
+const dict = getDictionary(locale);
+
+const title = `${frontmatter.title} — Privacy Score`;
+const description = "CGU de l'application iOS Privacy Score : abonnement annuel ou semestriel, premier scan gratuit a vie, resiliation par l'App Store, mediateur CM2C.";
+---
+
+<BaseLayout locale={locale} title={title} description={description}>
+  <Header locale={locale} pathname={Astro.url.pathname} nav={dict.nav} />
+  <main class="legal-page">
+    <article class="legal-content">
+      <Content />
+    </article>
+  </main>
+  <Footer footer={dict.footer} locale={locale} />
+</BaseLayout>

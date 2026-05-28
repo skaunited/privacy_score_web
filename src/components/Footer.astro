@@ -70,7 +70,11 @@ const cols: FooterColumn[] = [
   </div>
   <div class="footer-rule"></div>
   <div class="container footer-foot">
-    <span>{footer.copyright}</span>
+    {/* `set:html` is needed because the copyright string contains an inline
+        anchor link to the publisher's site (codevelop.fr). The content is
+        trusted (controlled by the i18n dictionary, not user input), so the
+        XSS surface is null. */}
+    <span set:html={footer.copyright}></span>
     <span>{footer.version}</span>
   </div>
 </footer>

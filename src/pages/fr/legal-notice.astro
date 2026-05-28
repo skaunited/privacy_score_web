@@ -1,0 +1,29 @@
+---
+/**
+ * /fr/legal-notice/
+ *
+ * Renders the canonical Mentions legales markdown via direct .md import.
+ * Source of truth: src/content/legal/fr/legal-notice.md
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import { getDictionary } from '@i18n/utils';
+import { Content, frontmatter } from '../../content/legal/fr/legal-notice.md';
+
+const locale = 'fr' as const;
+const dict = getDictionary(locale);
+
+const title = `${frontmatter.title} — Privacy Score`;
+const description = "Mentions legales du site privacyscore.fr et de l'application iOS Privacy Score, editee par Skander BAHRI exercant sous le nom commercial CoDevelop. SIREN 852 583 558.";
+---
+
+<BaseLayout locale={locale} title={title} description={description}>
+  <Header locale={locale} pathname={Astro.url.pathname} nav={dict.nav} />
+  <main class="legal-page">
+    <article class="legal-content">
+      <Content />
+    </article>
+  </main>
+  <Footer footer={dict.footer} locale={locale} />
+</BaseLayout>

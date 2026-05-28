@@ -5,16 +5,24 @@
     "ogTitle": "Privacy Score — Reprenez le contrôle de vos données.",
     "ogDescription": "Un score de confidentialité sur 100, calculé localement à partir du Rapport iOS. Trois fixes concrets. Aucun serveur, aucun compte, aucun cloud."
   },
-
   "chapters": {
     "word": "Chapitre",
-    "story":   { "label": "L'histoire" },
-    "product": { "label": "Le produit" },
-    "method":  { "label": "La méthode" },
-    "app":     { "label": "L'app" },
-    "promise": { "label": "La promesse" }
+    "story": {
+      "label": "L'histoire"
+    },
+    "product": {
+      "label": "Le produit"
+    },
+    "method": {
+      "label": "La méthode"
+    },
+    "app": {
+      "label": "L'app"
+    },
+    "promise": {
+      "label": "La promesse"
+    }
   },
-
   "nav": {
     "brand": "Privacy Score",
     "aria": {
@@ -34,7 +42,6 @@
       "en": "EN"
     }
   },
-
   "hero": {
     "overline": "Disponible sur l'App Store",
     "title": {
@@ -51,9 +58,18 @@
       "ghost": "Voir comment"
     },
     "pillars": {
-      "cloud":  { "title": "Aucun serveur", "sub": "Rien ne quitte votre appareil." },
-      "person": { "title": "Aucun compte",  "sub": "Aucune adresse, aucun mot de passe." },
-      "phone":  { "title": "Tout en local", "sub": "Analyse sur l'iPhone, hors-ligne." }
+      "cloud": {
+        "title": "Aucun serveur",
+        "sub": "Rien ne quitte votre appareil."
+      },
+      "person": {
+        "title": "Aucun compte",
+        "sub": "Aucune adresse, aucun mot de passe."
+      },
+      "phone": {
+        "title": "Tout en local",
+        "sub": "Analyse sur l'iPhone, hors-ligne."
+      }
     },
     "phone": {
       "statusbarTime": "09:41",
@@ -77,7 +93,6 @@
     },
     "scrollCue": "Faites défiler"
   },
-
   "story": {
     "title": {
       "pre": "En 2024, des journalistes ont identifié ",
@@ -135,7 +150,6 @@
       "line2Strong": "arrêter d'en produire."
     }
   },
-
   "product": {
     "title": {
       "line1": "Un score sur 100.",
@@ -151,7 +165,6 @@
     ],
     "phoneAlt": "Écran principal de Privacy Score"
   },
-
   "how": {
     "title": "Trois étapes. Soixante secondes. Hors-ligne.",
     "steps": [
@@ -172,7 +185,6 @@
       }
     ]
   },
-
   "angles": {
     "title": "Quatre onglets. Quatre angles sur votre exposition.",
     "cards": [
@@ -206,7 +218,6 @@
       }
     ]
   },
-
   "manifesto": {
     "title": {
       "line1": "Ce que Privacy Score",
@@ -236,33 +247,42 @@
       }
     ]
   },
-
   "quote": {
     "body": "Privacy Guard ne voit jamais votre trafic. Il vous montre ce que les <em>autres</em> en voient.",
     "attribution": "— Pied de page de l'écran Réglages, dans l'app."
   },
-
   "metrics": {
     "ariaLabel": "Privacy Score en chiffres",
     "items": [
-      { "countTo": 100, "label": "Score sur 100" },
-      { "countTo": 0,   "label": "Octet envoyé en ligne" },
-      { "countTo": 4,   "label": "Onglets, c'est tout" },
-      { "countTo": 2,   "label": "Secondes d'analyse" }
+      {
+        "countTo": 100,
+        "label": "Score sur 100"
+      },
+      {
+        "countTo": 0,
+        "label": "Octet envoyé en ligne"
+      },
+      {
+        "countTo": 4,
+        "label": "Onglets, c'est tout"
+      },
+      {
+        "countTo": 2,
+        "label": "Secondes d'analyse"
+      }
     ]
   },
-
   "faq": {
     "overline": "Questions fréquentes",
     "title": "Tout ce que vous vous demandez encore.",
     "items": [
       {
         "q": "Est-ce que Privacy Score voit mon historique de navigation ?",
-        "a": "Non. Privacy Score lit uniquement le <em>Rapport de Confidentialité</em> qu'iOS génère lui-même — c'est-à-dire la liste des apps qui ont accédé à vos capteurs et des domaines qu'elles ont contactés. Votre Safari, vos messages, vos photos&nbsp;: jamais touchés."
+        "a": "Non. Privacy Score lit uniquement le <em>Rapport de Confidentialité</em> qu'iOS génère lui-même, c'est-à-dire la liste des apps qui ont accédé à vos capteurs et des domaines qu'elles ont contactés. Votre Safari, vos messages, vos photos&nbsp;: jamais touchés."
       },
       {
         "q": "Vous gagnez de l'argent comment, alors ?",
-        "a": "L'app est gratuite à télécharger. Dans l'onglet Réglages, nous proposons un catalogue de fournisseurs DNS et VPN. Deux d'entre eux (NordVPN, Surfshark) nous rémunèrent si vous vous abonnez via notre lien. C'est marqué. Vous n'êtes obligé à rien."
+        "a": "L'application est gratuite à télécharger et à utiliser pour un premier scan complet, conservé à vie sur votre iPhone. Pour importer un nouveau rapport, vous souscrivez un abonnement géré par Apple&nbsp;: <strong>23,88&nbsp;€ par an</strong> ou <strong>20,94&nbsp;€ par six mois</strong>. C'est notre seule source de revenu. Pas de publicité, pas de revente de données, aucun partenaire ne nous rémunère."
       },
       {
         "q": "L'app fonctionne sur Android ?",
@@ -270,7 +290,7 @@
       },
       {
         "q": "Et si je désinstalle l'app ?",
-        "a": "Tout disparaît. Le rapport, l'historique de scores, vos préférences — tout vit dans la sandbox iOS de l'app. Apple efface l'ensemble à la désinstallation. Aucune copie ailleurs."
+        "a": "Tout disparaît. Le rapport, l'historique de scores, vos préférences&nbsp;: tout vit dans la sandbox iOS de l'app. Apple efface l'ensemble à la désinstallation. Aucune copie ailleurs."
       },
       {
         "q": "Le code source est-il ouvert ?",
@@ -278,43 +298,60 @@
       }
     ]
   },
-
   "cta": {
     "title": "Reprenez le contrôle de vos données.",
     "body": "Soixante secondes pour importer votre rapport. Un score. Trois fixes. Et la satisfaction de savoir exactement où vous fuyiez — et où vous ne fuyez plus.",
     "primary": "Télécharger sur l'App Store",
     "note": "iPhone · iPadOS 17+ · gratuit · français & anglais"
   },
-
   "footer": {
     "tagline": "Une app indépendante, faite en France. Open-source. Sans cloud, sans compte, sans pisteurs.",
     "columns": {
       "app": {
         "heading": "App",
         "links": [
-          { "label": "App Store",        "href": "#" },
-          { "label": "Notes de version", "href": "#" },
-          { "label": "Code source",      "href": "#" }
+          {
+            "label": "App Store",
+            "href": "#"
+          },
+          {
+            "label": "Notes de version",
+            "href": "#"
+          },
+          {
+            "label": "Code source",
+            "href": "#"
+          }
         ]
       },
       "legal": {
         "heading": "Légal",
         "links": [
-          { "label": "Mentions légales",              "href": "#" },
-          { "label": "Politique de confidentialité",  "href": "#" },
-          { "label": "CGU",                            "href": "#" }
+          {
+            "label": "Mentions légales",
+            "href": "/fr/legal-notice/"
+          },
+          {
+            "label": "Politique de confidentialité",
+            "href": "/fr/privacy-policy/"
+          },
+          {
+            "label": "CGU",
+            "href": "/fr/terms-of-use/"
+          }
         ]
       },
       "contact": {
         "heading": "Contact",
         "links": [
-          { "label": "hello@privacyscore.fr", "href": "mailto:hello@privacyscore.fr" },
-          { "label": "Mastodon",              "href": "#" },
-          { "label": "Bluesky",               "href": "#" }
+          {
+            "label": "support@privacyscore.fr",
+            "href": "mailto:support@privacyscore.fr"
+          }
         ]
       }
     },
-    "copyright": "© 2026 Privacy Score — Made in France",
-    "version": "v 1.4.0 · iOS 17+"
+    "copyright": "© 2026 Privacy Score — Made by <a href=\"https://codevelop.fr\" rel=\"external\">CoDevelop</a>",
+    "version": "v 0.1.0 · iOS 17+"
   }
 }

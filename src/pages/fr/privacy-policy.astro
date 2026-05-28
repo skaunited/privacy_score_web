@@ -1,0 +1,29 @@
+---
+/**
+ * /fr/privacy-policy/
+ *
+ * Renders the canonical Politique de confidentialite markdown.
+ * Source of truth: src/content/legal/fr/privacy-policy.md
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import { getDictionary } from '@i18n/utils';
+import { Content, frontmatter } from '../../content/legal/fr/privacy-policy.md';
+
+const locale = 'fr' as const;
+const dict = getDictionary(locale);
+
+const title = `${frontmatter.title} — Privacy Score`;
+const description = "Politique de confidentialite de l'application iOS Privacy Score : traitement local sur l'iPhone, aucun serveur, aucun compte, aucun outil d'analyse. Conformite RGPD et CNIL.";
+---
+
+<BaseLayout locale={locale} title={title} description={description}>
+  <Header locale={locale} pathname={Astro.url.pathname} nav={dict.nav} />
+  <main class="legal-page">
+    <article class="legal-content">
+      <Content />
+    </article>
+  </main>
+  <Footer footer={dict.footer} locale={locale} />
+</BaseLayout>

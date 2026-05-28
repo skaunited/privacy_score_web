@@ -5,16 +5,24 @@
     "ogTitle": "Privacy Score — Take back control of your data.",
     "ogDescription": "See what every app on your iPhone shares behind your back. On-device analysis of Apple's App Privacy Report — a score out of 100, three fixes."
   },
-
   "chapters": {
     "word": "Chapter",
-    "story":   { "label": "The story" },
-    "product": { "label": "The product" },
-    "method":  { "label": "The method" },
-    "app":     { "label": "The app" },
-    "promise": { "label": "The promise" }
+    "story": {
+      "label": "The story"
+    },
+    "product": {
+      "label": "The product"
+    },
+    "method": {
+      "label": "The method"
+    },
+    "app": {
+      "label": "The app"
+    },
+    "promise": {
+      "label": "The promise"
+    }
   },
-
   "nav": {
     "brand": "Privacy Score",
     "aria": {
@@ -34,7 +42,6 @@
       "en": "EN"
     }
   },
-
   "hero": {
     "overline": "Available on the App Store",
     "title": {
@@ -86,7 +93,6 @@
     },
     "scrollCue": "Scroll"
   },
-
   "story": {
     "title": {
       "pre": "In 2024, reporters identified ",
@@ -144,7 +150,6 @@
       "line2Strong": "stop producing more of it."
     }
   },
-
   "product": {
     "title": {
       "line1": "A score out of 100.",
@@ -160,7 +165,6 @@
     ],
     "phoneAlt": "Privacy Score main dashboard"
   },
-
   "how": {
     "title": "Three steps. Sixty seconds. Offline.",
     "steps": [
@@ -181,7 +185,6 @@
       }
     ]
   },
-
   "angles": {
     "title": "Four tabs. Four angles on your exposure.",
     "cards": [
@@ -215,7 +218,6 @@
       }
     ]
   },
-
   "manifesto": {
     "title": {
       "line1": "What Privacy Score",
@@ -245,33 +247,42 @@
       }
     ]
   },
-
   "quote": {
     "body": "Privacy Guard never sees your traffic. It shows you what <em>everyone else</em> sees of it.",
     "attribution": "— Footer of the Settings screen, inside the app."
   },
-
   "metrics": {
     "ariaLabel": "Privacy Score by the numbers",
     "items": [
-      { "countTo": 100, "label": "Score out of 100" },
-      { "countTo": 0,   "label": "Bytes sent online" },
-      { "countTo": 4,   "label": "Tabs, that's it" },
-      { "countTo": 2,   "label": "Seconds to analyze" }
+      {
+        "countTo": 100,
+        "label": "Score out of 100"
+      },
+      {
+        "countTo": 0,
+        "label": "Bytes sent online"
+      },
+      {
+        "countTo": 4,
+        "label": "Tabs, that's it"
+      },
+      {
+        "countTo": 2,
+        "label": "Seconds to analyze"
+      }
     ]
   },
-
   "faq": {
     "overline": "Frequently asked",
     "title": "Everything you're still wondering.",
     "items": [
       {
         "q": "Does Privacy Score see my browsing history?",
-        "a": "No. Privacy Score only reads the <em>App Privacy Report</em> that iOS generates itself — that is, the list of apps that accessed your sensors and the domains they contacted. Your Safari history, your messages, your photos: never touched."
+        "a": "No. Privacy Score only reads the <em>App Privacy Report</em> that iOS generates itself: the list of apps that accessed your sensors and the domains they contacted. Your Safari history, your messages, your photos: never touched."
       },
       {
         "q": "So how do you make money?",
-        "a": "The app is free to download. In the Settings tab we feature a curated catalog of DNS and VPN providers. Two of them — <strong>NordVPN</strong> and <strong>Surfshark</strong> — pay us a commission if you subscribe through our link. It's labeled in the app. You're under no obligation. Other partners listed (Mullvad, Proton VPN, Quad9 and the rest) pay us nothing."
+        "a": "The app is free to download and free to use for your first complete scan, which stays accessible on your iPhone for life. To import a new report, you subscribe through Apple: <strong>€23.88 per year</strong> or <strong>€20.94 per six months</strong>. That is our only source of revenue. No advertising, no data resale, no partner pays us a commission."
       },
       {
         "q": "Does it work on Android?",
@@ -279,7 +290,7 @@
       },
       {
         "q": "What happens if I uninstall the app?",
-        "a": "Everything goes. The report, the score history, your preferences — it all lives inside the iOS sandbox. Apple wipes it on uninstall. No copy anywhere else."
+        "a": "Everything goes. The report, the score history, your preferences: it all lives inside the iOS sandbox. Apple wipes it on uninstall. No copy anywhere else."
       },
       {
         "q": "Is the source code open?",
@@ -287,43 +298,60 @@
       }
     ]
   },
-
   "cta": {
     "title": "Take back control of your data.",
     "body": "Sixty seconds to import your report. One score. Three fixes. And the quiet satisfaction of knowing exactly where you were leaking — and where you no longer are.",
     "primary": "Download on the App Store",
     "note": "iPhone · iPadOS 17+ · free · English &amp; French"
   },
-
   "footer": {
     "tagline": "An independent app, made in France. Open-source. No cloud, no account, no trackers.",
     "columns": {
       "app": {
         "heading": "App",
         "links": [
-          { "label": "App Store", "href": "#" },
-          { "label": "Release notes", "href": "#" },
-          { "label": "Source code", "href": "#" }
+          {
+            "label": "App Store",
+            "href": "#"
+          },
+          {
+            "label": "Release notes",
+            "href": "#"
+          },
+          {
+            "label": "Source code",
+            "href": "#"
+          }
         ]
       },
       "legal": {
         "heading": "Legal",
         "links": [
-          { "label": "Legal notice", "href": "#" },
-          { "label": "Privacy policy", "href": "#" },
-          { "label": "Terms of use", "href": "#" }
+          {
+            "label": "Legal notice",
+            "href": "/en/legal-notice/"
+          },
+          {
+            "label": "Privacy policy",
+            "href": "/en/privacy-policy/"
+          },
+          {
+            "label": "Terms of use",
+            "href": "/en/terms-of-use/"
+          }
         ]
       },
       "contact": {
         "heading": "Contact",
         "links": [
-          { "label": "hello@privacyscore.fr", "href": "mailto:hello@privacyscore.fr" },
-          { "label": "Mastodon", "href": "#" },
-          { "label": "Bluesky", "href": "#" }
+          {
+            "label": "support@privacyscore.fr",
+            "href": "mailto:support@privacyscore.fr"
+          }
         ]
       }
     },
-    "copyright": "© 2026 Privacy Score — Made in France",
-    "version": "v 1.4.0 · iOS 17+"
+    "copyright": "© 2026 Privacy Score — Made by <a href=\"https://codevelop.fr\" rel=\"external\">CoDevelop</a>",
+    "version": "v 0.1.0 · iOS 17+"
   }
 }
