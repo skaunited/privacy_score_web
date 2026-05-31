@@ -1,6 +1,6 @@
 ---
 /**
- * StoryboardSection.astro — Chapter 01/05 "L'histoire".
+ * StoryboardSection.astro - Chapter 01/05 "L'histoire".
  *
  * 8 narrative panels with verbatim inline SVG illustrations copy-pasted
  * byte-for-byte from `variation-illustrated.html` (lines 620-1065).
@@ -38,7 +38,7 @@ interface Props {
 
 const { story, chapters } = Astro.props;
 
-// Tag pill layout — never i18n, see spec section 3.
+// Tag pill layout - never i18n, see spec section 3.
 type Pos = 'tl' | 'tr' | 'bl' | 'br';
 const tagLayout: { position: Pos; alert?: boolean }[] = [
   { position: 'tr' },                  // 01 Washington
@@ -69,7 +69,7 @@ const tagLayout: { position: Pos; alert?: boolean }[] = [
 
   <div class="sb-strip" role="list">
 
-    <!-- ── PANEL 01 — Washington 2024 ──────────────────────────── -->
+    <!-- ── PANEL 01 - Washington 2024 ──────────────────────────── -->
     <article class="sb-panel reveal" role="listitem">
       <div class="num">01/08</div>
       <div class="scene">
@@ -136,7 +136,7 @@ const tagLayout: { position: Pos; alert?: boolean }[] = [
       </div>
     </article>
 
-    <!-- ── PANEL 02 — Data market $200 ─────────────────────────── -->
+    <!-- ── PANEL 02 - Data market $200 ─────────────────────────── -->
     <article class="sb-panel reveal" role="listitem">
       <div class="num">02/08</div>
       <div class="scene">
@@ -186,7 +186,7 @@ const tagLayout: { position: Pos; alert?: boolean }[] = [
       </div>
     </article>
 
-    <!-- ── PANEL 03 — 26 dots map ─────────────────────────────── -->
+    <!-- ── PANEL 03 - 26 dots map ─────────────────────────────── -->
     <article class="sb-panel reveal" role="listitem">
       <div class="num">03/08</div>
       <div class="scene">
@@ -240,7 +240,7 @@ const tagLayout: { position: Pos; alert?: boolean }[] = [
       </div>
     </article>
 
-    <!-- ── PANEL 04 — Dossier identifiés ──────────────────────── -->
+    <!-- ── PANEL 04 - Dossier identifiés ──────────────────────── -->
     <article class="sb-panel reveal" role="listitem">
       <div class="num">04/08</div>
       <div class="scene">
@@ -296,7 +296,7 @@ const tagLayout: { position: Pos; alert?: boolean }[] = [
       </div>
     </article>
 
-    <!-- ── PANEL 05 — Strava 2018 ─────────────────────────────── -->
+    <!-- ── PANEL 05 - Strava 2018 ─────────────────────────────── -->
     <article class="sb-panel reveal" role="listitem">
       <div class="num">05/08</div>
       <div class="scene">
@@ -352,7 +352,7 @@ const tagLayout: { position: Pos; alert?: boolean }[] = [
       </div>
     </article>
 
-    <!-- ── PANEL 06 — Your iPhone ─────────────────────────────── -->
+    <!-- ── PANEL 06 - Your iPhone ─────────────────────────────── -->
     <article class="sb-panel reveal" role="listitem">
       <div class="num">06/08</div>
       <div class="scene">
@@ -412,7 +412,7 @@ const tagLayout: { position: Pos; alert?: boolean }[] = [
       </div>
     </article>
 
-    <!-- ── PANEL 07 — Privacy Score appears ───────────────────── -->
+    <!-- ── PANEL 07 - Privacy Score appears ───────────────────── -->
     <article class="sb-panel reveal" role="listitem">
       <div class="num">07/08</div>
       <div class="scene">
@@ -467,7 +467,7 @@ const tagLayout: { position: Pos; alert?: boolean }[] = [
       </div>
     </article>
 
-    <!-- ── PANEL 08 — Your turn ──────────────────────────────── -->
+    <!-- ── PANEL 08 - Your turn ──────────────────────────────── -->
     <article class="sb-panel reveal" role="listitem">
       <div class="num">08/08</div>
       <div class="scene">
@@ -529,7 +529,7 @@ const tagLayout: { position: Pos; alert?: boolean }[] = [
 
 <style>
   /* ============================================================
-     STORYBOARD — scoped styles (design lines 70-210)
+     STORYBOARD - scoped styles (design lines 70-210)
      Chapter etiquette (.chapter, .ch-pill, .ch-label) lives in
      `site.css` since 5 sections share it.
   ============================================================ */

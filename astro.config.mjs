@@ -16,6 +16,28 @@ const excludedSitemapUrls = new Set([
   `${SITE}/404/`,
 ]);
 
+// 301 redirects for the FR slug rename (2026-06-01).
+//
+// Background: the FR legal pages briefly used English slugs
+// (/fr/legal-notice/, /fr/privacy-policy/, /fr/terms-of-use/) as a temporary
+// workaround for the naive language switcher. The slugs are now native French
+// (/fr/mentions-legales/, /fr/politique-de-confidentialite/, /fr/cgu/) for
+// better French SEO. Any inbound link, sitemap snapshot, or AI-Overview
+// citation pointing at the old URLs lands on the right page.
+//
+// Astro emits these as static `<meta http-equiv="refresh" content="0; url=...">`
+// stubs at build time (since output: 'static' has no server to issue a real
+// 301). Nginx will be configured to emit proper 301s server-side as well; the
+// meta-refresh is the belt-and-braces fallback if the Nginx rule is missed.
+// `trailingSlash: 'always'` is set below, so only the trailing-slash variants
+// belong here. Nginx will canonicalize non-trailing-slash inbound paths to
+// the trailing-slash form before they ever hit the static file lookup.
+const REDIRECTS = {
+  '/fr/legal-notice/':    '/fr/mentions-legales/',
+  '/fr/privacy-policy/':  '/fr/politique-de-confidentialite/',
+  '/fr/terms-of-use/':    '/fr/cgu/',
+};
+
 // https://astro.build/config
 export default defineConfig({
   site: SITE,
@@ -24,9 +46,17 @@ export default defineConfig({
   compressHTML: true,
   prefetch: true,
 
+  // Map old FR slugs to their new native-French slugs.
+  redirects: REDIRECTS,
+
   build: {
     format: 'directory',
-    inlineStylesheets: 'auto',
+    // 'always' inlines every CSS bundle into the page <head>. On a marketing
+    // site where each route is a single document, this eliminates one
+    // render-blocking stylesheet request and improves LCP. Trade-off: pages
+    // get slightly larger HTML, but we ship only ~10 routes and the CSS
+    // per page is small (Tailwind + a couple of section overrides).
+    inlineStylesheets: 'always',
   },
 
   // Astro's built-in i18n. We always prefix the URL with the locale so that

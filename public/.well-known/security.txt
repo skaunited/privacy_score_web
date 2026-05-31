@@ -2,3 +2,6 @@ Contact: mailto:security@privacyscore.fr
 Expires: 2027-05-26T00:00:00.000Z
 Preferred-Languages: fr, en
 Canonical: https://www.privacyscore.fr/.well-known/security.txt
+Policy: https://www.privacyscore.fr/en/security-policy/
+Acknowledgments: https://www.privacyscore.fr/en/security-policy/#acknowledgments
+Hiring: https://www.privacyscore.fr/en/about/

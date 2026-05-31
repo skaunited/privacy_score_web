@@ -1,5 +1,5 @@
 /**
- * jsonld.ts — schema.org JSON-LD builders for privacyscore.fr.
+ * jsonld.ts - schema.org JSON-LD builders for privacyscore.fr.
  *
  * Each builder is a pure function returning a plain object that BaseLayout
  * serialises via `<script type="application/ld+json">`. They are intentionally
@@ -7,7 +7,7 @@
  *
  * Rationale on what is included vs. omitted:
  *   - We DO include WebSite, MobileApplication, Organization, and FAQPage on
- *     the homepage — these are the four high-signal types Google recognises
+ *     the homepage - these are the four high-signal types Google recognises
  *     for a single-app product site and are safe to ship without third-party
  *     verifications.
  *   - We DO NOT emit `aggregateRating` on MobileApplication because we have no
@@ -31,7 +31,7 @@ const inLanguageFor: Record<Locale, string> = {
 };
 
 /**
- * WebSite — the site itself, per locale. Emits `inLanguage` so Google can
+ * WebSite - the site itself, per locale. Emits `inLanguage` so Google can
  * distinguish the FR and EN variants instead of treating them as duplicates.
  */
 export function websiteJsonLd(locale: Locale, dict: Dictionary) {
@@ -50,13 +50,13 @@ export function websiteJsonLd(locale: Locale, dict: Dictionary) {
 }
 
 /**
- * MobileApplication — the iOS app the site exists to promote.
+ * MobileApplication - the iOS app the site exists to promote.
  *
  * `softwareVersion` is set to the version surfaced in the site footer so the
  * structured data is consistent with what a crawler also sees rendered on the
  * page. Real shipping build version is tracked separately in APP_RECAP.
  *
- * `aggregateRating` is intentionally omitted — we have no verified App Store
+ * `aggregateRating` is intentionally omitted - we have no verified App Store
  * rating data to surface, and Google's rich-results policy forbids fabricated
  * or self-asserted ratings.
  */
@@ -87,12 +87,23 @@ export function softwareApplicationJsonLd(locale: Locale, dict: Dictionary) {
 }
 
 /**
- * Organization — the legal entity behind the site/app. Kept locale-neutral.
+ * Organization - the legal entity behind the site/app. Kept locale-neutral.
  *
- * `sameAs` is empty: CoDevelop has no public social profiles to advertise
- * (intentional — see CLAUDE.md decision log). Re-populate when official
- * channels exist; emitting placeholder URLs would be a structured-data
- * quality regression.
+ * `sameAs` is intentionally empty for v1: CoDevelop has no public social
+ * profiles to advertise. Emitting placeholder URLs would be a structured-data
+ * quality regression that hurts E-E-A-T signals.
+ *
+ * Populate the array when official channels go live. Recommended additions
+ * (in order of SEO weight for a French B2C app):
+ *   1. GitHub repo of the iOS app (signals real product + real code)
+ *   2. Producthunt launch page
+ *   3. App Store URL once published (NOT a `sameAs` per Google guidance, use
+ *      MobileApplication.installUrl instead - see softwareApplicationJsonLd)
+ *   4. Mastodon / Bluesky handles (low SEO weight, niche audience)
+ *   5. LinkedIn page (only if a verified company page is created)
+ *
+ * Each URL must be the official, verified profile (Google cross-checks).
+ * Do NOT add personal accounts unless they are clearly tied to CoDevelop.
  */
 export function organizationJsonLd() {
   return {
@@ -103,12 +114,13 @@ export function organizationJsonLd() {
     url: SITE_ORIGIN,
     logo: `${SITE_ORIGIN}/assets/app-icon-512.png`,
     email: 'support@privacyscore.fr',
+    // sameAs: add verified official profiles here. See JSDoc above.
     sameAs: [],
   };
 }
 
 /**
- * FAQPage — built from `dict.faq.items`. Answers may legitimately contain
+ * FAQPage - built from `dict.faq.items`. Answers may legitimately contain
  * inline `<em>` / `<strong>` tags; schema.org allows safe HTML in
  * `Answer.text` and Google renders it.
  *
@@ -140,7 +152,7 @@ export function faqJsonLd(dict: Dictionary) {
 }
 
 /**
- * BreadcrumbList — generated for sub-pages so SERPs render the breadcrumb
+ * BreadcrumbList - generated for sub-pages so SERPs render the breadcrumb
  * trail above the page title. Takes the trail as an ordered list of
  * (name, absolute URL) tuples. The first item is conventionally "Home /
  * Accueil"; the last is the current page.
@@ -157,5 +169,94 @@ export function breadcrumbListJsonLd(
       name: item.name,
       item: item.url,
     })),
+  };
+}
+
+/**
+ * Person - emitted on the About page so search engines can attribute the site
+ * and the iOS app to a real human author. Strong E-E-A-T signal (Experience,
+ * Expertise, Authoritativeness, Trustworthiness) for a single-developer product
+ * site that competes with venture-funded privacy apps.
+ *
+ * `worksFor` ties Skander to CoDevelop, mirroring the Organization JSON-LD on
+ * the homepage. `jobTitle` is locale-specific (passed by the caller).
+ *
+ * `sameAs` is intentionally left empty until the developer has at least one
+ * official public profile (GitHub of the iOS app, LinkedIn, etc.) - same
+ * rationale as `organizationJsonLd`.
+ */
+export function personJsonLd(opts: {
+  locale: Locale;
+  url: string;
+  jobTitle: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Skander Bahri',
+    givenName: 'Skander',
+    familyName: 'Bahri',
+    url: opts.url,
+    jobTitle: opts.jobTitle,
+    nationality: 'French',
+    inLanguage: inLanguageFor[opts.locale],
+    worksFor: {
+      '@type': 'Organization',
+      name: 'CoDevelop',
+      url: SITE_ORIGIN,
+    },
+    // sameAs: see organizationJsonLd JSDoc for population guidance.
+    sameAs: [],
+  };
+}
+
+/**
+ * BlogPosting - emitted on every blog post for AI-Overview citation
+ * eligibility and richer SERP snippets. Tied to the Person + Organization
+ * already declared on the about / homepage so Google can build the entity
+ * graph (Author -> Org -> WebSite).
+ *
+ * `wordCount` and `keywords` are optional but improve Discover surfacing.
+ * Pass them when the post frontmatter exposes them.
+ */
+export function blogPostingJsonLd(opts: {
+  locale: Locale;
+  url: string;
+  title: string;
+  description: string;
+  publishedAt: Date;
+  updatedAt?: Date;
+  authorName?: string;
+  authorUrl?: string;
+  imageUrl?: string;
+  wordCount?: number;
+  keywords?: string[];
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    mainEntityOfPage: { '@type': 'WebPage', '@id': opts.url },
+    headline: opts.title,
+    description: opts.description,
+    inLanguage: inLanguageFor[opts.locale],
+    datePublished: opts.publishedAt.toISOString(),
+    dateModified: (opts.updatedAt ?? opts.publishedAt).toISOString(),
+    author: {
+      '@type': 'Person',
+      name: opts.authorName ?? 'Skander Bahri',
+      url: opts.authorUrl ?? `${SITE_ORIGIN}/${opts.locale}/${opts.locale === 'fr' ? 'a-propos' : 'about'}/`,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'CoDevelop',
+      url: SITE_ORIGIN,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_ORIGIN}/assets/app-icon-512.png`,
+      },
+    },
+    image: opts.imageUrl ?? `${SITE_ORIGIN}/assets/app-icon-512.png`,
+    ...(opts.wordCount ? { wordCount: opts.wordCount } : {}),
+    ...(opts.keywords && opts.keywords.length ? { keywords: opts.keywords.join(', ') } : {}),
   };
 }

@@ -4,12 +4,12 @@
  *
  * Renders ONLY the `<head>` children required for SEO and social sharing.
  * The surrounding `<!doctype html><html><head>…</head>…</html>` wrapper is
- * provided by `BaseLayout.astro` — this component MUST NOT emit any of it.
+ * provided by `BaseLayout.astro` - this component MUST NOT emit any of it.
  *
  * Responsibilities:
  *   - charset / viewport / theme-color (dark + light)
  *   - <title> + meta description
- *   - canonical (absolute, with trailing slash — site uses trailingSlash: 'always')
+ *   - canonical (absolute, with trailing slash - site uses trailingSlash: 'always')
  *   - hreflang fr-FR / en-US / x-default
  *   - Open Graph + Twitter card
  *   - robots, format-detection
@@ -23,6 +23,7 @@ import {
   htmlLang,
   stripLocalePrefix,
   toAbsoluteUrl,
+  getAlternateLocaleUrl,
 } from '@i18n/utils';
 
 interface Props {
@@ -69,9 +70,19 @@ function localizedUrl(loc: Locale): string {
   return toAbsoluteUrl(`/${loc}${tail}`);
 }
 
+// Canonical is always the current page (use the path as-is).
 const canonical = localizedUrl(locale);
-const frUrl = localizedUrl('fr');
-const enUrl = localizedUrl('en');
+
+// hreflang URLs MUST use the locale-aware slug mapping so that, for example,
+// /fr/mentions-legales/ correctly advertises /en/legal-notice/ as its English
+// counterpart (not the broken /en/mentions-legales/ a naive swap would emit).
+const altEntries = getAlternateLocaleUrl(locale, normalizedPathname);
+const altMap: Partial<Record<Locale, string>> = {};
+for (const e of altEntries) altMap[e.locale] = toAbsoluteUrl(e.url);
+
+const frUrl = locale === 'fr' ? canonical : (altMap.fr ?? localizedUrl('fr'));
+const enUrl = locale === 'en' ? canonical : (altMap.en ?? localizedUrl('en'));
+// x-default points to the FR variant of THIS page (primary market).
 const xDefaultUrl = frUrl;
 
 // ---------------------------------------------------------------------------
@@ -94,7 +105,7 @@ const absoluteOgImage = resolvedOgImagePath.startsWith('http')
   ? resolvedOgImagePath
   : toAbsoluteUrl(resolvedOgImagePath);
 
-// Sanity check — silences unused-var warnings in strict mode when SITE_ORIGIN
+// Sanity check - silences unused-var warnings in strict mode when SITE_ORIGIN
 // is re-exported elsewhere; also documents intent.
 void SITE_ORIGIN;
 void htmlLang;
@@ -106,7 +117,7 @@ void htmlLang;
 {/* 2. Viewport */}
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
-{/* 3. Theme color — dark first (site default), then light */}
+{/* 3. Theme color - dark first (site default), then light */}
 <meta name="theme-color" content="#020617" media="(prefers-color-scheme: dark)" />
 <meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)" />
 
@@ -147,7 +158,7 @@ void htmlLang;
 {/* 10. Robots */}
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
 
-{/* 11. Format detection — prevent iOS from auto-linking phone-shaped digits */}
+{/* 11. Format detection - prevent iOS from auto-linking phone-shaped digits */}
 <meta name="format-detection" content="telephone=no" />
 
 {/* 12. Favicon + apple touch icon */}

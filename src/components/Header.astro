@@ -1,6 +1,6 @@
 ---
 /**
- * Header.astro — site navigation bar.
+ * Header.astro - site navigation bar.
  *
  * Pixel-matches the design (`variation-illustrated.html` lines 435-452) and
  * adds a single new element: the FR↔EN language switcher pill, positioned in
@@ -8,7 +8,12 @@
  * uses `localizedPath()` to compute the same-page URL in the other locale.
  */
 import type { Locale } from '@i18n/utils';
-import { LOCALES, localizedPath, stripLocalePrefix } from '@i18n/utils';
+import {
+  LOCALES,
+  localizedPath,
+  stripLocalePrefix,
+  getAlternateLocaleUrl,
+} from '@i18n/utils';
 
 interface Props {
   locale: Locale;
@@ -36,8 +41,23 @@ interface Props {
 
 const { locale, pathname, nav } = Astro.props;
 
-// Locale-neutral tail (e.g. "/" or "/faq/") — drives switcher targets.
+// Locale-neutral tail (e.g. "/" or "/faq/") - drives the fallback case below.
 const tail = stripLocalePrefix(pathname || `/${locale}/`).replace(/^\/+/, '');
+
+// Pre-resolve the alternate-locale URLs using the slug mapping. This is what
+// makes /fr/mentions-legales/ switch correctly to /en/legal-notice/ (rather
+// than the broken /en/mentions-legales/ a naive swap would produce).
+const altUrls = new Map<Locale, string>(
+  getAlternateLocaleUrl(locale, pathname || `/${locale}/`).map((e) => [
+    e.locale,
+    e.url,
+  ]),
+);
+
+function switcherHref(target: Locale): string {
+  if (target === locale) return `/${locale}/${tail ? tail + '/' : ''}`;
+  return altUrls.get(target) ?? localizedPath(target, tail);
+}
 ---
 
 <header class="site-nav" role="banner">
@@ -67,7 +87,7 @@ const tail = stripLocalePrefix(pathname || `/${locale}/`).replace(/^\/+/, '');
       <div class="lang-switch" role="group" aria-label={nav.aria.switcher}>
         {LOCALES.map((l) => (
           <a
-            href={localizedPath(l, tail)}
+            href={switcherHref(l)}
             class:list={["lang-pill", { active: l === locale }]}
             hreflang={l === 'fr' ? 'fr-FR' : 'en-US'}
             aria-current={l === locale ? 'page' : undefined}
@@ -94,7 +114,7 @@ const tail = stripLocalePrefix(pathname || `/${locale}/`).replace(/^\/+/, '');
     gap: 12px;
   }
 
-  /* FR↔EN switcher pill — inspired by `.var-switch` in the design preview,
+  /* FR↔EN switcher pill - inspired by `.var-switch` in the design preview,
      renamed to `.lang-switch` to avoid colliding with that name. */
   .lang-switch {
     display: inline-flex;

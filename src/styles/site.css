@@ -1,5 +1,5 @@
 /* ===========================================================
-   Privacy Score — Marketing site styles
+   Privacy Score - Marketing site styles
    Dark mode first. Built on ds.css (SPGColor + SPGTypography).
    =========================================================== */
 
@@ -625,7 +625,7 @@ em { font-style: normal; color: var(--trust-blue); }
 
 
 /* ===========================================================
-   FEATURES — APP TOUR
+   FEATURES - APP TOUR
 =========================================================== */
 .features {
   position: relative; overflow: hidden;
@@ -987,7 +987,7 @@ em { font-style: normal; color: var(--trust-blue); }
 /* Respect prefers-reduced-motion (WCAG 2.3.3): show everything statically,
    disable all transforms/transitions, freeze parallax and the gauge draw.
    The counters still resolve to their final value (JS short-circuits the
-   tween via this same media query is not possible — counters are JS-only —
+   tween via this same media query is not possible - counters are JS-only -
    but the visual jump is instant and harmless). */
 @media (prefers-reduced-motion: reduce) {
   .reveal,
@@ -1015,7 +1015,7 @@ em { font-style: normal; color: var(--trust-blue); }
 
 
 /* ===========================================================
-   Chapter etiquette — narrative spine across sections
+   Chapter etiquette - narrative spine across sections
    (Used by Storyboard, ProductIntro, HowItWorks, Angles, Manifesto)
    =========================================================== */
 .chapter {
@@ -1052,7 +1052,7 @@ em { font-style: normal; color: var(--trust-blue); }
 
 
 /* ===========================================================
-   LEGAL PAGES — long-form prose (Legal Notice, Privacy Policy, Terms of Use)
+   LEGAL PAGES - long-form prose (Legal Notice, Privacy Policy, Terms of Use)
    Used by src/pages/{fr,en}/{legal-notice,privacy-policy,terms-of-use}.astro
    FR + EN now share identical URL slugs (decision 2026-05-28, see CLAUDE.md).
    =========================================================== */
@@ -1081,7 +1081,7 @@ em { font-style: normal; color: var(--trust-blue); }
   color: var(--text-primary);
 }
 
-/* H1 — document title (e.g. "Mentions légales") */
+/* H1 - document title (e.g. "Mentions légales") */
 .legal-content > h1 {
   font-family: var(--font-display);
   font-size: clamp(36px, 5vw, 52px);
@@ -1102,7 +1102,7 @@ em { font-style: normal; color: var(--trust-blue); }
   margin: 0 0 48px;
 }
 
-/* H2 — main sections */
+/* H2 - main sections */
 .legal-content h2 {
   font-family: var(--font-display);
   font-size: clamp(24px, 3vw, 30px);
@@ -1123,7 +1123,7 @@ em { font-style: normal; color: var(--trust-blue); }
   margin-top: 32px;
 }
 
-/* H3 — subsections (e.g. "5.1 Formules tarifaires") */
+/* H3 - subsections (e.g. "5.1 Formules tarifaires") */
 .legal-content h3 {
   font-family: var(--font-display);
   font-size: 19px;
@@ -1133,7 +1133,7 @@ em { font-style: normal; color: var(--trust-blue); }
   margin: 32px 0 14px;
 }
 
-/* H4 and beyond — kept simple */
+/* H4 and beyond - kept simple */
 .legal-content h4,
 .legal-content h5,
 .legal-content h6 {

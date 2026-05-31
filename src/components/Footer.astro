@@ -1,6 +1,6 @@
 ---
 /**
- * Footer.astro — site footer.
+ * Footer.astro - site footer.
  *
  * Matches `variation-illustrated.html` lines 1454-1491. Three columns of links,
  * brand block on the left, tagline + copyright + version row at the bottom.
@@ -23,6 +23,7 @@ interface Props {
     columns: {
       app: FooterColumn;
       legal: FooterColumn;
+      resources?: FooterColumn;
       contact: FooterColumn;
     };
     copyright: string;
@@ -35,6 +36,7 @@ const { footer } = Astro.props;
 const cols: FooterColumn[] = [
   footer.columns.app,
   footer.columns.legal,
+  ...(footer.columns.resources ? [footer.columns.resources] : []),
   footer.columns.contact,
 ];
 ---

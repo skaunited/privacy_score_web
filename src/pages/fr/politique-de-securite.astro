@@ -1,0 +1,88 @@
+---
+/**
+ * /fr/politique-de-securite/ - FR mirror of the security-policy stub.
+ *
+ * security.txt itself points at the EN page (security researchers report in
+ * English by convention), but the FR slug exists so the language switcher and
+ * the hreflang declarations have a valid reciprocal target. The page content
+ * mirrors the EN version with a short FR introduction.
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import { getDictionary } from '@i18n/utils';
+import { breadcrumbListJsonLd } from '@i18n/jsonld';
+
+const locale = 'fr' as const;
+const dict = getDictionary(locale);
+
+const title = `Politique de sécurité et divulgation responsable | Privacy Score`;
+const description = "Politique de divulgation responsable de Privacy Score. Comment signaler une vulnérabilité et ce à quoi nous nous engageons.";
+
+const breadcrumb = breadcrumbListJsonLd([
+  { name: 'Accueil', url: 'https://www.privacyscore.fr/fr/' },
+  { name: 'Politique de sécurité', url: 'https://www.privacyscore.fr/fr/politique-de-securite/' },
+]);
+---
+
+<BaseLayout
+  locale={locale}
+  title={title}
+  description={description}
+  jsonLd={breadcrumb}
+>
+  <Header locale={locale} pathname={Astro.url.pathname} nav={dict.nav} />
+  <main class="legal-page">
+    <article class="legal-content">
+      <h1>Politique de sécurité</h1>
+      <p>
+        Privacy Score est développée par un seul développeur et publie un seul
+        binaire iOS. Si vous avez identifié une vulnérabilité affectant
+        l'application ou le site privacyscore.fr, merci de la signaler de
+        manière responsable via le contact ci-dessous.
+      </p>
+
+      <h2>Comment signaler</h2>
+      <p>
+        Écrivez à <a href="mailto:security@privacyscore.fr">security@privacyscore.fr</a>
+        avec une description courte, les étapes de reproduction et, si
+        possible, une preuve de concept. Réponse sous 5 jours ouvrés. Une clé
+        PGP sera publiée sur cette page lorsqu'elle sera générée. En attendant,
+        merci d'envoyer en clair et de ne joindre aucune information sensible.
+      </p>
+
+      <h2>Nos engagements</h2>
+      <ul>
+        <li>Accusé de réception sous 5 jours ouvrés.</li>
+        <li>Mise à jour de statut sous 14 jours, avec la fenêtre de correction prévue.</li>
+        <li>Crédit public sur cette page une fois le correctif livré, si vous le souhaitez.</li>
+        <li>Aucune action en justice contre une recherche de bonne foi respectant cette politique.</li>
+      </ul>
+
+      <h2>Périmètre</h2>
+      <ul>
+        <li>L'application iOS Privacy Score (dernière version App Store).</li>
+        <li>Le site privacyscore.fr et ses ressources <code>/.well-known/</code>.</li>
+      </ul>
+      <p>
+        Hors périmètre : services tiers (Apple, Hostinger, Cloudflare), ingénierie sociale,
+        déni de service, sortie d'un scanner automatique non vérifiée manuellement.
+      </p>
+
+      <h2 id="remerciements">Remerciements</h2>
+      <p>
+        Les personnes ayant divulgué responsablement des vulnérabilités seront
+        listées ici, avec leur accord. La liste est vide pour le moment :
+        l'application n'a pas encore été publiée sur l'App Store.
+      </p>
+
+      <h2>Documents associés</h2>
+      <ul>
+        <li><a href="/.well-known/security.txt">security.txt</a> (lisible par machine)</li>
+        <li><a href="/fr/politique-de-confidentialite/">Politique de confidentialité</a></li>
+        <li><a href="/fr/mentions-legales/">Mentions légales</a></li>
+      </ul>
+    </article>
+  </main>
+  <Footer footer={dict.footer} locale={locale} />
+</BaseLayout>

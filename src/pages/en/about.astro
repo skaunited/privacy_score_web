@@ -1,0 +1,53 @@
+---
+/**
+ * /en/about/ - About page (EN).
+ *
+ * Same structure as /fr/a-propos/. Renders src/content/about/en.md and emits
+ * Person + BreadcrumbList JSON-LD. Person entity is tied to the Organization
+ * already declared on the homepage so search engines can resolve the
+ * Author -> Org -> WebSite entity graph (E-E-A-T).
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import { getDictionary } from '@i18n/utils';
+import { breadcrumbListJsonLd, personJsonLd } from '@i18n/jsonld';
+import { getEntry, render } from 'astro:content';
+
+const locale = 'en' as const;
+const dict = getDictionary(locale);
+
+const entry = await getEntry('about', 'en');
+if (!entry) throw new Error('[about] EN entry not found');
+const { Content } = await render(entry);
+
+const title = `About: Skander Bahri, founder of Privacy Score`;
+const description = entry.data.description;
+
+const breadcrumb = breadcrumbListJsonLd([
+  { name: 'Home', url: 'https://www.privacyscore.fr/en/' },
+  { name: 'About', url: 'https://www.privacyscore.fr/en/about/' },
+]);
+
+const person = personJsonLd({
+  locale: 'en',
+  url: 'https://www.privacyscore.fr/en/about/',
+  jobTitle: 'Independent iOS developer, founder of CoDevelop',
+});
+---
+
+<BaseLayout
+  locale={locale}
+  title={title}
+  description={description}
+  jsonLd={[breadcrumb, person]}
+>
+  <Header locale={locale} pathname={Astro.url.pathname} nav={dict.nav} />
+  <main class="legal-page">
+    <article class="legal-content">
+      <h1>{entry.data.title}</h1>
+      <Content />
+    </article>
+  </main>
+  <Footer footer={dict.footer} locale={locale} />
+</BaseLayout>

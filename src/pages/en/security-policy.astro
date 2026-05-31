@@ -1,0 +1,90 @@
+---
+/**
+ * /en/security-policy/ - Stub responsible-disclosure page (EN).
+ *
+ * Referenced from `public/.well-known/security.txt` Policy + Acknowledgments
+ * fields. Stub for now; expand once a real PGP key + disclosure workflow are
+ * in place. The page is intentionally English-only at v1 because security
+ * researchers conventionally publish in English; the FR mirror is a stub
+ * pointer.
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import { getDictionary } from '@i18n/utils';
+import { breadcrumbListJsonLd } from '@i18n/jsonld';
+
+const locale = 'en' as const;
+const dict = getDictionary(locale);
+
+const title = `Security Policy & Responsible Disclosure | Privacy Score`;
+const description = "Responsible disclosure policy for Privacy Score. How to report a vulnerability, what we commit to, and the acknowledgments wall.";
+
+const breadcrumb = breadcrumbListJsonLd([
+  { name: 'Home', url: 'https://www.privacyscore.fr/en/' },
+  { name: 'Security Policy', url: 'https://www.privacyscore.fr/en/security-policy/' },
+]);
+---
+
+<BaseLayout
+  locale={locale}
+  title={title}
+  description={description}
+  jsonLd={breadcrumb}
+>
+  <Header locale={locale} pathname={Astro.url.pathname} nav={dict.nav} />
+  <main class="legal-page">
+    <article class="legal-content">
+      <h1>Security Policy</h1>
+      <p>
+        Privacy Score is built by a single developer and ships a single iOS
+        binary. If you have found a vulnerability that affects the application
+        or the privacyscore.fr website, please disclose it responsibly using
+        the contact below.
+      </p>
+
+      <h2>How to report</h2>
+      <p>
+        Email <a href="mailto:security@privacyscore.fr">security@privacyscore.fr</a>
+        with a short description, reproduction steps and, if possible, a
+        proof-of-concept. Replies are sent within 5 business days. A PGP key
+        will be published here when one is generated; until then, send plain
+        text and avoid attaching anything sensitive.
+      </p>
+
+      <h2>What we commit to</h2>
+      <ul>
+        <li>Acknowledgment within 5 business days.</li>
+        <li>Status update within 14 days, including the planned fix window.</li>
+        <li>Public credit on this page once the fix ships, if you want it.</li>
+        <li>No legal action for good-faith research that respects this policy.</li>
+      </ul>
+
+      <h2>Scope</h2>
+      <ul>
+        <li>The Privacy Score iOS app (latest App Store build).</li>
+        <li>The privacyscore.fr website and its <code>/.well-known/</code> resources.</li>
+      </ul>
+      <p>
+        Out of scope: third-party services (Apple, Hostinger, Cloudflare),
+        social-engineering, denial of service, automated scanner output without
+        manual verification.
+      </p>
+
+      <h2 id="acknowledgments">Acknowledgments</h2>
+      <p>
+        Researchers who have responsibly disclosed vulnerabilities will be
+        listed here, with their consent. This wall is currently empty because
+        the app has not yet shipped to the public App Store.
+      </p>
+
+      <h2>Related documents</h2>
+      <ul>
+        <li><a href="/.well-known/security.txt">security.txt</a> (machine-readable)</li>
+        <li><a href="/en/privacy-policy/">Privacy Policy</a></li>
+        <li><a href="/en/legal-notice/">Legal Notice</a></li>
+      </ul>
+    </article>
+  </main>
+  <Footer footer={dict.footer} locale={locale} />
+</BaseLayout>

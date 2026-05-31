@@ -1,5 +1,5 @@
 /* ============================================================
-   PrivacyScore Design System — Foundations  (v2)
+   PrivacyScore Design System - Foundations  (v2)
    --------------------------------------------------------------
    Aligned to the real `SPGColor` Swift package (src-of-truth).
    The brand's canonical Trust Blue is Apple Blue #007AFF in
@@ -34,14 +34,14 @@
 
   /* ── Brand: Trust Blue (canonical) ─────────────────────────
      Maps to SPGColor.trustBlue in the iOS app. */
-  --trust-blue:        #007AFF;   /* Apple Blue — THE brand colour */
+  --trust-blue:        #007AFF;   /* Apple Blue - THE brand colour */
   --trust-blue-dark:   #3E97FF;   /* hover / accent variant */
   --trust-light:       #E3F2FD;   /* soft tint behind trust-blue accents */
   --system-blue:       #0A84FF;   /* iOS system blue (alternative) */
   --calm-blue:         #60A5FA;   /* dark-mode counterpart of trust-blue */
 
   /* ── Sky / Blue accent scales ──────────────────────────────
-     These appear in score gauges, glow strokes, gradients —
+     These appear in score gauges, glow strokes, gradients -
      NOT in primary chrome. */
   --blue-50:           #F0F9FF;
   --blue-100:          #E0F2FE;
@@ -88,7 +88,7 @@
   --gray-400:          #9CA3AF;
   --gray-500:          #6B7280;
 
-  /* ── Semantic text (adaptive — light values here) ──────────
+  /* ── Semantic text (adaptive - light values here) ──────────
      Maps to SPGColor.textPrimary/Secondary/Tertiary. */
   --text-primary:      #1C1C1E;   /* near-black, NOT pure black */
   --text-secondary:    #636366;
@@ -198,7 +198,7 @@
      The iOS app uses SF Pro Rounded for Display/Headline (via
      `.system(design: .rounded)`) and the default SF for everything
      else. For web/non-Apple surfaces, Manrope is the substitute
-     because Apple's system rounded isn't available off-platform —
+     because Apple's system rounded isn't available off-platform -
      it matches SF Rounded's geometry closely. */
   --font-display: -apple-system-rounded, ui-rounded, 'SF Pro Rounded', 'SF Pro Display', Manrope, system-ui, sans-serif;
   --font-body:    -apple-system, BlinkMacSystemFont, 'SF Pro Text', Manrope, system-ui, sans-serif;
@@ -211,28 +211,28 @@
   --fw-bold:      700;
   --fw-heavy:     800;   /* `.heavy` in SwiftUI */
 
-  /* Type ramp — mirrors SPGTypography 1:1 (sizes in pt). */
-  /* Display — rounded, bold/heavy */
+  /* Type ramp - mirrors SPGTypography 1:1 (sizes in pt). */
+  /* Display - rounded, bold/heavy */
   --fs-display-lg:    34px;   /* SPGTypography.displayLarge   · bold */
   --fs-display-md:    28px;   /* SPGTypography.displayMedium  · bold */
   --fs-display-sm:    24px;   /* SPGTypography.displaySmall   · heavy */
-  /* Headline — rounded, bold */
+  /* Headline - rounded, bold */
   --fs-headline-lg:   22px;
   --fs-headline-md:   20px;
   --fs-headline-sm:   18px;
-  /* Title — default, semibold */
+  /* Title - default, semibold */
   --fs-title-lg:      17px;
   --fs-title-md:      15px;
   --fs-title-sm:      14px;
-  /* Body — default, regular */
+  /* Body - default, regular */
   --fs-body-lg:       17px;
   --fs-body-md:       15px;
   --fs-body-sm:       13px;
-  /* Label — default, medium/bold */
+  /* Label - default, medium/bold */
   --fs-label-lg:      14px;
   --fs-label-md:      12px;
   --fs-label-sm:      10px;
-  /* Mono — monospaced */
+  /* Mono - monospaced */
   --fs-mono:          14px;
 
   --lh-tight:  1.15;
@@ -245,7 +245,7 @@
   --tracking-widest: 0.18em;
 
 
-  /* ---------- 4. Spacing — mirrors SPGSpacing exactly ------- */
+  /* ---------- 4. Spacing - mirrors SPGSpacing exactly ------- */
   --space-xs:   4px;
   --space-sm:   8px;
   --space-md:  12px;
@@ -255,7 +255,7 @@
   --space-xxxl: 32px;
 
 
-  /* ---------- 5. Radii — mirrors SPGRadius exactly ---------- */
+  /* ---------- 5. Radii - mirrors SPGRadius exactly ---------- */
   --radius-sm:    8px;
   --radius-md:   12px;
   --radius-lg:   16px;   /* default for glass cards */
@@ -286,7 +286,7 @@
 
 
 /* ============================================================
-   DARK MODE TOKENS — applied via [data-theme="dark"] or
+   DARK MODE TOKENS - applied via [data-theme="dark"] or
    `prefers-color-scheme: dark`. Mirrors SPGColor's adaptive
    helper.
    ============================================================ */

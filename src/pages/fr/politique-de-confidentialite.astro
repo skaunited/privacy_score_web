@@ -1,26 +1,29 @@
 ---
 /**
- * /fr/terms-of-use/
+ * /fr/politique-de-confidentialite/
  *
- * Renders the canonical CGU markdown.
- * Source of truth: src/content/legal/fr/terms-of-use.md
+ * Renders the canonical Politique de confidentialite markdown.
+ * Source of truth: src/content/legal/fr/politique-de-confidentialite.md
+ *
+ * Slug history: previously served at /fr/privacy-policy/. Restored to its
+ * native French slug on 2026-06-01 with a 301 redirect from the old URL.
  */
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import { getDictionary } from '@i18n/utils';
 import { breadcrumbListJsonLd } from '@i18n/jsonld';
-import { Content, frontmatter } from '../../content/legal/fr/terms-of-use.md';
+import { Content, frontmatter } from '../../content/legal/fr/politique-de-confidentialite.md';
 
 const locale = 'fr' as const;
 const dict = getDictionary(locale);
 
-const title = `Conditions Générales d'Utilisation : Privacy Score`;
-const description = "CGU de l'application iOS Privacy Score : abonnement annuel ou semestriel, premier scan gratuit à vie, résiliation par l'App Store, médiateur CM2C.";
+const title = `Politique de confidentialité : Privacy Score, app iOS`;
+const description = "Politique de confidentialité Privacy Score : traitement 100% local, aucun serveur, aucun compte, aucun analytics. Conforme RGPD et CNIL.";
 
 const breadcrumb = breadcrumbListJsonLd([
   { name: 'Accueil', url: 'https://www.privacyscore.fr/fr/' },
-  { name: "Conditions Générales d'Utilisation", url: 'https://www.privacyscore.fr/fr/terms-of-use/' },
+  { name: 'Politique de confidentialité', url: 'https://www.privacyscore.fr/fr/politique-de-confidentialite/' },
 ]);
 ---
 

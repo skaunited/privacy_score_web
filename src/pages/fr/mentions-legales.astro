@@ -1,0 +1,40 @@
+---
+/**
+ * /fr/mentions-legales/
+ *
+ * Renders the canonical Mentions legales markdown via direct .md import.
+ * Source of truth: src/content/legal/fr/mentions-legales.md
+ *
+ * Slug history: this page was briefly served at /fr/legal-notice/ (English
+ * slug) for compatibility with the naive language switcher. The slug was
+ * restored to its native French form on 2026-06-01, with a 301 redirect from
+ * the old URL configured in astro.config.mjs.
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import { getDictionary } from '@i18n/utils';
+import { breadcrumbListJsonLd } from '@i18n/jsonld';
+import { Content, frontmatter } from '../../content/legal/fr/mentions-legales.md';
+
+const locale = 'fr' as const;
+const dict = getDictionary(locale);
+
+const title = `Mentions légales : Privacy Score (audit iPhone)`;
+const description = "Mentions légales du site privacyscore.fr et de l'application iOS Privacy Score, éditée par Skander BAHRI sous le nom CoDevelop. SIREN 852 583 558.";
+
+const breadcrumb = breadcrumbListJsonLd([
+  { name: 'Accueil', url: 'https://www.privacyscore.fr/fr/' },
+  { name: 'Mentions légales', url: 'https://www.privacyscore.fr/fr/mentions-legales/' },
+]);
+---
+
+<BaseLayout locale={locale} title={title} description={description} jsonLd={breadcrumb}>
+  <Header locale={locale} pathname={Astro.url.pathname} nav={dict.nav} />
+  <main class="legal-page">
+    <article class="legal-content">
+      <Content />
+    </article>
+  </main>
+  <Footer footer={dict.footer} locale={locale} />
+</BaseLayout>

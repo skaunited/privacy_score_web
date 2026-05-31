@@ -1,26 +1,30 @@
 ---
 /**
- * /fr/legal-notice/
+ * /fr/cgu/
  *
- * Renders the canonical Mentions legales markdown via direct .md import.
- * Source of truth: src/content/legal/fr/legal-notice.md
+ * Renders the canonical CGU markdown.
+ * Source of truth: src/content/legal/fr/cgu.md
+ *
+ * Slug history: previously served at /fr/terms-of-use/. Restored to its
+ * native French slug (CGU = Conditions Generales d'Utilisation) on
+ * 2026-06-01 with a 301 redirect from the old URL.
  */
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import { getDictionary } from '@i18n/utils';
 import { breadcrumbListJsonLd } from '@i18n/jsonld';
-import { Content, frontmatter } from '../../content/legal/fr/legal-notice.md';
+import { Content, frontmatter } from '../../content/legal/fr/cgu.md';
 
 const locale = 'fr' as const;
 const dict = getDictionary(locale);
 
-const title = `Mentions légales : Privacy Score (audit iPhone)`;
-const description = "Mentions légales du site privacyscore.fr et de l'application iOS Privacy Score, éditée par Skander BAHRI sous le nom CoDevelop. SIREN 852 583 558.";
+const title = `Conditions Générales d'Utilisation : Privacy Score`;
+const description = "CGU de l'application iOS Privacy Score : abonnement annuel ou semestriel, premier scan gratuit à vie, résiliation par l'App Store, médiateur CM2C.";
 
 const breadcrumb = breadcrumbListJsonLd([
   { name: 'Accueil', url: 'https://www.privacyscore.fr/fr/' },
-  { name: 'Mentions légales', url: 'https://www.privacyscore.fr/fr/legal-notice/' },
+  { name: "Conditions Générales d'Utilisation", url: 'https://www.privacyscore.fr/fr/cgu/' },
 ]);
 ---
 

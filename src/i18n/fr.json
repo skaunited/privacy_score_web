@@ -164,7 +164,7 @@
       "Recommande 3 à 5 fixes immédiats.",
       "Suit l'évolution semaine après semaine."
     ],
-    "phoneAlt": "Écran principal de Privacy Score"
+    "phoneAlt": "Privacy Score : score de 67 sur 100 avec son contexte"
   },
   "how": {
     "title": "Trois étapes. Soixante secondes. Hors-ligne.",
@@ -194,28 +194,28 @@
         "title": "Dashboard",
         "body": "Votre score, vos traceurs détectés, vos apps géolocalisées, votre DNS, votre VPN. Tout d'un coup d'œil.",
         "meta": "Score · Statuts · 7 vecteurs",
-        "imageAlt": "Dashboard"
+        "imageAlt": "Privacy Score : tableau de bord avec score de confidentialité"
       },
       {
         "callout": "+5 à +45 pts",
         "title": "Recommandations",
         "body": "« Désactivez le tracking pub. +5 pts. » « Activez un DNS chiffré. +8 pts. » Vous appliquez ce que vous voulez.",
         "meta": "Triées par impact, pas par marketing",
-        "imageAlt": "Recommandations"
+        "imageAlt": "Privacy Score : recommandations classées par impact"
       },
       {
         "callout": "Tendance",
         "title": "Évolution",
         "body": "Chaque scan, un point sur la courbe. Voyez votre score monter, semaine après semaine.",
         "meta": "Historique · Trackers par scan",
-        "imageAlt": "Évolution"
+        "imageAlt": "Privacy Score : score historique sur 30 jours"
       },
       {
         "callout": "Détail brut",
         "title": "Réseau",
         "body": "Qui parle à qui, par pays, par entreprise. Pour ceux qui veulent vraiment comprendre.",
         "meta": "26 pays · 909 domaines · 121 apps",
-        "imageAlt": "Réseau"
+        "imageAlt": "Privacy Score : graphe des sociétés et trackers connectés"
       }
     ]
   },
@@ -279,7 +279,7 @@
     "items": [
       {
         "q": "Est-ce que Privacy Score voit mon historique de navigation ?",
-        "a": "Non. Privacy Score lit uniquement le <em>Rapport de Confidentialité</em> qu'iOS génère lui-même, c'est-à-dire la liste des apps qui ont accédé à vos capteurs et des domaines qu'elles ont contactés. Votre Safari, vos messages, vos photos&nbsp;: jamais touchés."
+        "a": "Non. Privacy Score lit uniquement le <em>Rapport de Confidentialité des apps</em> qu'iOS génère lui-même (<a href=\"https://support.apple.com/guide/iphone/iphd34a4cdf7/ios\" rel=\"external\">documentation Apple</a>), c'est-à-dire la liste des apps qui ont accédé à vos capteurs et des domaines qu'elles ont contactés. Votre Safari, vos messages, vos photos&nbsp;: jamais touchés."
       },
       {
         "q": "Vous gagnez de l'argent comment, alors ?",
@@ -330,15 +330,28 @@
         "links": [
           {
             "label": "Mentions légales",
-            "href": "/fr/legal-notice/"
+            "href": "/fr/mentions-legales/"
           },
           {
             "label": "Politique de confidentialité",
-            "href": "/fr/privacy-policy/"
+            "href": "/fr/politique-de-confidentialite/"
           },
           {
             "label": "CGU",
-            "href": "/fr/terms-of-use/"
+            "href": "/fr/cgu/"
+          }
+        ]
+      },
+      "resources": {
+        "heading": "Ressources",
+        "links": [
+          {
+            "label": "Blog",
+            "href": "/fr/blog/"
+          },
+          {
+            "label": "À propos",
+            "href": "/fr/a-propos/"
           }
         ]
       },

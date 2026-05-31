@@ -1,10 +1,10 @@
 ---
 /**
- * Root `/` — Accept-Language sniffer.
+ * Root `/` - Accept-Language sniffer.
  *
  * - JS sniffer in <head> redirects to /fr/ or /en/ based on navigator.languages.
  * - <meta http-equiv="refresh"> is the no-JS fallback (-> /fr/).
- * - <meta name="robots" content="noindex,nofollow"> — must NOT appear in search.
+ * - <meta name="robots" content="noindex,nofollow"> - must NOT appear in search.
  * - Body has plain <a> links as a final fallback if both above fail.
  */
 const TITLE = 'Privacy Score';
@@ -23,7 +23,7 @@ const TITLE = 'Privacy Score';
     <link rel="alternate" hreflang="x-default" href="https://www.privacyscore.fr/fr/" />
     <link rel="canonical" href="https://www.privacyscore.fr/fr/" />
 
-    {/* JS-first sniffer — runs synchronously, before paint. */}
+    {/* JS-first sniffer - runs synchronously, before paint. */}
     <script is:inline>
       (function () {
         try {
@@ -43,7 +43,7 @@ const TITLE = 'Privacy Score';
       })();
     </script>
 
-    {/* No-JS fallback — defaults to FR (primary market). */}
+    {/* No-JS fallback - defaults to FR (primary market). */}
     <meta http-equiv="refresh" content="0; url=/fr/" />
   </head>
   <body>

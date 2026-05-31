@@ -1,0 +1,53 @@
+---
+/**
+ * /fr/a-propos/ - About page (FR).
+ *
+ * Renders src/content/about/fr.md and emits Person + BreadcrumbList JSON-LD.
+ * The Person schema tied to the homepage Organization gives Google an entity
+ * graph (Author -> Org -> WebSite), which is a strong E-E-A-T signal for a
+ * single-developer privacy product competing with venture-funded apps.
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import { getDictionary } from '@i18n/utils';
+import { breadcrumbListJsonLd, personJsonLd } from '@i18n/jsonld';
+import { getEntry, render } from 'astro:content';
+
+const locale = 'fr' as const;
+const dict = getDictionary(locale);
+
+const entry = await getEntry('about', 'fr');
+if (!entry) throw new Error('[about] FR entry not found');
+const { Content } = await render(entry);
+
+const title = `À propos : Skander Bahri, créateur de Privacy Score`;
+const description = entry.data.description;
+
+const breadcrumb = breadcrumbListJsonLd([
+  { name: 'Accueil', url: 'https://www.privacyscore.fr/fr/' },
+  { name: 'À propos', url: 'https://www.privacyscore.fr/fr/a-propos/' },
+]);
+
+const person = personJsonLd({
+  locale: 'fr',
+  url: 'https://www.privacyscore.fr/fr/a-propos/',
+  jobTitle: 'Développeur iOS indépendant, fondateur de CoDevelop',
+});
+---
+
+<BaseLayout
+  locale={locale}
+  title={title}
+  description={description}
+  jsonLd={[breadcrumb, person]}
+>
+  <Header locale={locale} pathname={Astro.url.pathname} nav={dict.nav} />
+  <main class="legal-page">
+    <article class="legal-content">
+      <h1>{entry.data.title}</h1>
+      <Content />
+    </article>
+  </main>
+  <Footer footer={dict.footer} locale={locale} />
+</BaseLayout>

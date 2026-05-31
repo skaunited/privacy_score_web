@@ -4,10 +4,10 @@ language: fr
 version: 1.0
 last_updated: 2026-05-29
 publisher: Skander BAHRI (entrepreneur individuel), CoDevelop
-url_canonique: https://www.privacyscore.fr/fr/terms-of-use
+url_canonique: https://www.privacyscore.fr/fr/cgu
 liens_croises:
-  - legal-notice: https://www.privacyscore.fr/fr/legal-notice
-  - privacy-policy: https://www.privacyscore.fr/fr/privacy-policy
+  - legal-notice: https://www.privacyscore.fr/fr/mentions-legales
+  - privacy-policy: https://www.privacyscore.fr/fr/politique-de-confidentialite
 ---
 
 # Conditions Générales d'Utilisation
@@ -126,7 +126,7 @@ Toute reproduction ou réutilisation en dehors de ce cadre est interdite et expo
 
 ## 9. Données personnelles
 
-Le traitement de vos données est décrit dans la [politique de confidentialité](https://www.privacyscore.fr/fr/privacy-policy), qui forme avec les présentes CGU un ensemble contractuel cohérent.
+Le traitement de vos données est décrit dans la [politique de confidentialité](https://www.privacyscore.fr/fr/politique-de-confidentialite), qui forme avec les présentes CGU un ensemble contractuel cohérent.
 
 ## 10. Responsabilité
 

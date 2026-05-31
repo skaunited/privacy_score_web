@@ -4,10 +4,10 @@ language: fr
 version: 1.0
 last_updated: 2026-05-27
 publisher: Skander BAHRI (entrepreneur individuel), CoDevelop
-url_canonique: https://www.privacyscore.fr/fr/privacy-policy
+url_canonique: https://www.privacyscore.fr/fr/politique-de-confidentialite
 liens_croises:
-  - legal-notice: https://www.privacyscore.fr/fr/legal-notice
-  - terms-of-use: https://www.privacyscore.fr/fr/terms-of-use
+  - legal-notice: https://www.privacyscore.fr/fr/mentions-legales
+  - terms-of-use: https://www.privacyscore.fr/fr/cgu
 ---
 
 # Politique de confidentialité
@@ -34,7 +34,7 @@ Cette liste reflète la version 1.0 de l'application. Toute évolution future qu
 
 Le responsable du traitement au sens de l'article 4.7 du Règlement (UE) 2016/679 (RGPD) est :
 
-**Skander BAHRI**, entrepreneur individuel exerçant sous le nom commercial **CoDevelop**, dont les coordonnées figurent dans les [mentions légales](https://www.privacyscore.fr/fr/legal-notice).
+**Skander BAHRI**, entrepreneur individuel exerçant sous le nom commercial **CoDevelop**, dont les coordonnées figurent dans les [mentions légales](https://www.privacyscore.fr/fr/mentions-legales).
 
 Contact pour toute question relative à vos données : `support@privacyscore.fr`.
 

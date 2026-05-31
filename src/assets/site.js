@@ -1,5 +1,5 @@
 /* ===========================================================
-   Privacy Score — Marketing site interactions
+   Privacy Score - Marketing site interactions
    - Reveal on scroll
    - Animated counters (data-count-to)
    - Animated gauge draw + number

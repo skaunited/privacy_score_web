@@ -164,7 +164,7 @@
       "Surfaces 3 to 5 fixes you can apply right now.",
       "Tracks your progress week after week."
     ],
-    "phoneAlt": "Privacy Score main dashboard"
+    "phoneAlt": "Privacy Score: privacy score of 67 out of 100 in context"
   },
   "how": {
     "title": "Three steps. Sixty seconds. Offline.",
@@ -194,28 +194,28 @@
         "title": "Dashboard",
         "body": "Your score, the trackers detected, the apps using your location, your DNS, your VPN. All at a glance.",
         "meta": "Score · Statuses · 7 vectors",
-        "imageAlt": "Dashboard screen"
+        "imageAlt": "Privacy Score: dashboard with privacy score and detected trackers"
       },
       {
         "callout": "+5 to +45 pts",
         "title": "Recommendations",
         "body": "“Turn off ad tracking. +5 pts.” “Turn on encrypted DNS. +8 pts.” You apply what you want.",
         "meta": "Sorted by impact, not by marketing",
-        "imageAlt": "Recommendations screen"
+        "imageAlt": "Privacy Score: recommendations ranked by privacy impact"
       },
       {
         "callout": "Trend",
         "title": "Evolution",
         "body": "Each scan, one point on the curve. Watch your score climb, week after week.",
         "meta": "History · Trackers per scan",
-        "imageAlt": "Evolution screen"
+        "imageAlt": "Privacy Score: 30-day historical privacy score trend"
       },
       {
         "callout": "Raw detail",
         "title": "Network",
         "body": "Who's talking to whom, by country, by company. For when you actually want to understand.",
         "meta": "26 countries · 909 domains · 121 apps",
-        "imageAlt": "Network screen"
+        "imageAlt": "Privacy Score: company and tracker connection graph"
       }
     ]
   },
@@ -279,7 +279,7 @@
     "items": [
       {
         "q": "Does Privacy Score see my browsing history?",
-        "a": "No. Privacy Score only reads the <em>App Privacy Report</em> that iOS generates itself: the list of apps that accessed your sensors and the domains they contacted. Your Safari history, your messages, your photos: never touched."
+        "a": "No. Privacy Score only reads the <em>App Privacy Report</em> that iOS generates itself (<a href=\"https://support.apple.com/guide/iphone/iphd34a4cdf7/ios\" rel=\"external\">Apple documentation</a>): the list of apps that accessed your sensors and the domains they contacted. Your Safari history, your messages, your photos: never touched."
       },
       {
         "q": "So how do you make money?",
@@ -339,6 +339,19 @@
           {
             "label": "Terms of use",
             "href": "/en/terms-of-use/"
+          }
+        ]
+      },
+      "resources": {
+        "heading": "Resources",
+        "links": [
+          {
+            "label": "Blog",
+            "href": "/en/blog/"
+          },
+          {
+            "label": "About",
+            "href": "/en/about/"
           }
         ]
       },

@@ -1,15 +1,15 @@
 /* TEAM */
 Author: Skander Bahri
-Company: Codevelop
+Company: CoDevelop
 Country: France
-Contact: hello [at] privacyscore.fr
+Contact: support [at] privacyscore.fr
 
 /* SITE */
-Last update: 2026-05-26
+Last update: 2026-06-01
 Standards: HTML5, CSS3
 Built with: Astro
 Stack: Static site, no tracker, no cookie, no analytics
 
 /* THANKS */
-The Apple App Privacy Report team — for opening this data to users.
-DuckDuckGo Tracker Radar — open tracker database we use to classify domains.
+The Apple App Privacy Report team, for opening this data to users.
+DuckDuckGo Tracker Radar, the open tracker database we use to classify domains.
