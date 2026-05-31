@@ -9,16 +9,22 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import { getDictionary } from '@i18n/utils';
+import { breadcrumbListJsonLd } from '@i18n/jsonld';
 import { Content, frontmatter } from '../../content/legal/fr/terms-of-use.md';
 
 const locale = 'fr' as const;
 const dict = getDictionary(locale);
 
-const title = `${frontmatter.title} — Privacy Score`;
-const description = "CGU de l'application iOS Privacy Score : abonnement annuel ou semestriel, premier scan gratuit a vie, resiliation par l'App Store, mediateur CM2C.";
+const title = `Conditions Générales d'Utilisation : Privacy Score`;
+const description = "CGU de l'application iOS Privacy Score : abonnement annuel ou semestriel, premier scan gratuit à vie, résiliation par l'App Store, médiateur CM2C.";
+
+const breadcrumb = breadcrumbListJsonLd([
+  { name: 'Accueil', url: 'https://www.privacyscore.fr/fr/' },
+  { name: "Conditions Générales d'Utilisation", url: 'https://www.privacyscore.fr/fr/terms-of-use/' },
+]);
 ---
 
-<BaseLayout locale={locale} title={title} description={description}>
+<BaseLayout locale={locale} title={title} description={description} jsonLd={breadcrumb}>
   <Header locale={locale} pathname={Astro.url.pathname} nav={dict.nav} />
   <main class="legal-page">
     <article class="legal-content">

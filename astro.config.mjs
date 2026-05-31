@@ -2,7 +2,10 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-const SITE = 'https://privacyscore.fr';
+// Canonical host is www (Cloudflare also redirects apex → www). All Astro-emitted
+// URLs (sitemap, canonical, hreflang, og:url) must use this exact origin so the
+// site has a single, search-engine-visible identity.
+const SITE = 'https://www.privacyscore.fr';
 
 // Excluded routes from the sitemap:
 //  - The root `/` is a client-side language sniffer that 0-meta-refreshes to /fr/.

@@ -1262,3 +1262,50 @@ em { font-style: normal; color: var(--trust-blue); }
   margin: 4px 0 0 16px;
   color: var(--text-secondary);
 }
+
+
+/* ===========================================================
+   DISABLED / "COMING SOON" BUTTON STATE
+   Used for pre-launch CTAs that point at the App Store. Once the app ships
+   the markup goes back to <a href={appStoreUrl}> and these rules become inert.
+   =========================================================== */
+.btn:disabled,
+.btn[aria-disabled="true"],
+.btn[disabled] {
+  cursor: not-allowed;
+  opacity: 0.62;
+  filter: saturate(0.7);
+  pointer-events: none;
+  box-shadow: none;
+  transform: none;
+}
+.btn:disabled:hover,
+.btn[aria-disabled="true"]:hover {
+  /* Cancel the lift/glow hover that .btn-primary normally applies. */
+  box-shadow: none;
+  transform: none;
+}
+
+
+/* ===========================================================
+   HERO SEO H1
+   Real <h1> that carries the page's primary keyword, sized as a
+   discreet eyebrow above the dramatic display copy (which is the H2).
+   See Pattern A in /docs/seo-audit-2026-05-31.md §4.
+   =========================================================== */
+.hero-h1 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+  color: var(--text-secondary);
+  margin: 0 0 18px;
+  max-width: 540px;
+}
+@media (max-width: 640px) {
+  .hero-h1 {
+    font-size: 15px;
+    margin-bottom: 14px;
+  }
+}

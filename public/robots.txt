@@ -66,4 +66,4 @@ Allow: /
 User-agent: Bytespider
 Disallow: /
 
-Sitemap: https://privacyscore.fr/sitemap-index.xml
+Sitemap: https://www.privacyscore.fr/sitemap-index.xml

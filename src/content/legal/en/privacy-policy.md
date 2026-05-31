@@ -4,10 +4,10 @@ language: en
 version: 1.0
 last_updated: 2026-05-27
 publisher: Skander BAHRI (French sole proprietor), CoDevelop
-canonical_url: https://privacyscore.fr/en/privacy-policy
+canonical_url: https://www.privacyscore.fr/en/privacy-policy
 cross_links:
-  - legal-notice: https://privacyscore.fr/en/legal-notice
-  - terms-of-use: https://privacyscore.fr/en/terms-of-use
+  - legal-notice: https://www.privacyscore.fr/en/legal-notice
+  - terms-of-use: https://www.privacyscore.fr/en/terms-of-use
 ---
 
 # Privacy Policy
@@ -34,7 +34,7 @@ This list reflects version 1.0 of the app. Any future change to the scope of pro
 
 The data controller within the meaning of Article 4.7 of Regulation (EU) 2016/679 (GDPR) is:
 
-**Skander BAHRI**, a French sole proprietor (`entrepreneur individuel`) trading as **CoDevelop**, whose contact details are listed in the [Legal Notice](https://privacyscore.fr/en/legal-notice).
+**Skander BAHRI**, a French sole proprietor (`entrepreneur individuel`) trading as **CoDevelop**, whose contact details are listed in the [Legal Notice](https://www.privacyscore.fr/en/legal-notice).
 
 For any question about your data: `support@privacyscore.fr`.
 

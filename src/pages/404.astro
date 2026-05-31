@@ -1,8 +1,12 @@
 ---
 /**
  * 404.astro — bilingual not-found page.
+ *
  * Uses BaseLayout with locale='fr' as the default surface; renders FR + EN side by side.
- * Adds <meta name="robots" content="noindex"> via the head slot.
+ * Overrides the head with a `noindex,nofollow` robots tag (crawlers must neither
+ * index this page nor follow its links) and a self-referential canonical so the
+ * SEO component does not emit a hreflang pair pointing to nonexistent
+ * `/fr/404/` and `/en/404/` URLs.
  */
 import BaseLayout from '@layouts/BaseLayout.astro';
 
@@ -11,10 +15,13 @@ const locale = 'fr' as const;
 
 <BaseLayout
   locale={locale}
-  title="404 — Page introuvable | Privacy Score"
-  description="Cette page n'existe pas. This page does not exist."
+  title="Page introuvable / Page not found | Privacy Score"
+  description="Cette page n'existe pas sur privacyscore.fr. This page does not exist on privacyscore.fr."
 >
-  <meta slot="head" name="robots" content="noindex" />
+  <Fragment slot="head">
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="canonical" href="https://www.privacyscore.fr/404/" />
+  </Fragment>
 
   <main style="min-height: 70vh; display: grid; place-items: center; text-align: center; padding: 64px 24px;">
     <div>

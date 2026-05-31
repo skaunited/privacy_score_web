@@ -9,16 +9,22 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import { getDictionary } from '@i18n/utils';
+import { breadcrumbListJsonLd } from '@i18n/jsonld';
 import { Content, frontmatter } from '../../content/legal/en/legal-notice.md';
 
 const locale = 'en' as const;
 const dict = getDictionary(locale);
 
-const title = `${frontmatter.title} — Privacy Score`;
+const title = `Legal Notice : Privacy Score (iPhone privacy audit)`;
 const description = "Legal notice for privacyscore.fr and the Privacy Score iOS app, published by Skander BAHRI trading as CoDevelop, a French sole proprietor. SIREN 852 583 558.";
+
+const breadcrumb = breadcrumbListJsonLd([
+  { name: 'Home', url: 'https://www.privacyscore.fr/en/' },
+  { name: 'Legal Notice', url: 'https://www.privacyscore.fr/en/legal-notice/' },
+]);
 ---
 
-<BaseLayout locale={locale} title={title} description={description}>
+<BaseLayout locale={locale} title={title} description={description} jsonLd={breadcrumb}>
   <Header locale={locale} pathname={Astro.url.pathname} nav={dict.nav} />
   <main class="legal-page">
     <article class="legal-content">

@@ -4,10 +4,10 @@ language: fr
 version: 1.0
 last_updated: 2026-05-27
 publisher: Skander BAHRI (entrepreneur individuel), CoDevelop
-url_canonique: https://privacyscore.fr/fr/legal-notice
+url_canonique: https://www.privacyscore.fr/fr/legal-notice
 liens_croises:
-  - privacy-policy: https://privacyscore.fr/fr/privacy-policy
-  - terms-of-use: https://privacyscore.fr/fr/terms-of-use
+  - privacy-policy: https://www.privacyscore.fr/fr/privacy-policy
+  - terms-of-use: https://www.privacyscore.fr/fr/terms-of-use
 ---
 
 # Mentions légales
@@ -63,11 +63,11 @@ Toute reproduction, représentation, modification, publication ou adaptation, to
 
 ## Données personnelles
 
-Le traitement des données à caractère personnel collectées dans le cadre de l'utilisation du site ou de l'application est décrit dans la [politique de confidentialité](https://privacyscore.fr/fr/privacy-policy).
+Le traitement des données à caractère personnel collectées dans le cadre de l'utilisation du site ou de l'application est décrit dans la [politique de confidentialité](https://www.privacyscore.fr/fr/privacy-policy).
 
 ## Conditions d'utilisation
 
-L'usage du site `privacyscore.fr` et de l'application **Privacy Score** est régi par les [conditions générales d'utilisation](https://privacyscore.fr/fr/terms-of-use).
+L'usage du site `privacyscore.fr` et de l'application **Privacy Score** est régi par les [conditions générales d'utilisation](https://www.privacyscore.fr/fr/terms-of-use).
 
 ## Loi applicable et juridiction compétente
 

@@ -44,7 +44,10 @@ export const LOCALES: readonly Locale[] = ['fr', 'en'] as const;
 export const DEFAULT_LOCALE: Locale = 'fr';
 
 /** Canonical site origin (no trailing slash). */
-export const SITE_ORIGIN = 'https://privacyscore.fr';
+// Must match `site` in astro.config.mjs. Canonical host is www
+// (Cloudflare also redirects apex → www); every URL emitted by SEO.astro
+// — canonical, hreflang, og:url, twitter:image — derives from this constant.
+export const SITE_ORIGIN = 'https://www.privacyscore.fr';
 
 /** `<html lang>` value per locale. Use regioned tags for SEO accuracy. */
 export const htmlLang: Record<Locale, string> = {

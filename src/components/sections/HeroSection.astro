@@ -14,8 +14,15 @@
  */
 import type { Locale } from '@i18n/utils';
 
+// hero.h1 is the SEO-friendly heading carrying the page's primary keyword
+// ("audit confidentialité iPhone" in FR, "App Privacy Report audit" in EN).
+// hero.title is the dramatic display copy demoted to H2 (Pattern A in the
+// 2026-05-31 SEO audit, §4 "Add a real H1 with the primary keyword on the
+// homepages"). The artistic content stays visible as a hero subtitle; SEO
+// crawlers get a proper H1 with the keyword early in the document.
 interface Props {
   hero: {
+    h1: string;
     overline: string;
     title: {
       line1Pre: string;
@@ -65,13 +72,14 @@ const { hero, locale } = Astro.props;
 
   <div class="hero-inner">
     <div class="hero-copy">
+      <h1 class="hero-h1" id="hero-h1">{hero.h1}</h1>
       <span class="overline hero-overline">
         <span class="live-dot" aria-hidden="true"></span> {hero.overline}
       </span>
-      <h1 class="hero-title" id="hero-h1">
+      <h2 class="hero-title" id="hero-h2">
         {hero.title.line1Pre}<em>{hero.title.line1Em}</em>{hero.title.line1Post}<br/>
         {hero.title.line2Pre}<span class="hero-strike">{hero.title.line2Strike}</span>{hero.title.line2Post}
-      </h1>
+      </h2>
       <p class="hero-lede" set:html={hero.lede}></p>
 
       <div class="hero-ctas">

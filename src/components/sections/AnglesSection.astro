@@ -28,10 +28,10 @@ const { angles, chapters } = Astro.props;
 
 // Layout-only mapping: icon, callout pill color class, screenshot path.
 const cardMeta = [
-  { icon: 'dashboard',    style: 'new',      img: '/assets/screen-dashboard.png'       },
-  { icon: 'add',          style: 'points',   img: '/assets/screen-recommendations.png' },
-  { icon: 'trending_up',  style: 'trending', img: '/assets/screen-evolution.png'       },
-  { icon: 'hub',          style: 'detail',   img: '/assets/screen-network.png'         },
+  { icon: 'dashboard',    style: 'new',      img: '/assets/screen-dashboard.webp'       },
+  { icon: 'add',          style: 'points',   img: '/assets/screen-recommendations.webp' },
+  { icon: 'trending_up',  style: 'trending', img: '/assets/screen-evolution.webp'       },
+  { icon: 'hub',          style: 'detail',   img: '/assets/screen-network.webp'         },
 ] as const;
 
 const pad = (n: number) => String(n).padStart(2, '0');

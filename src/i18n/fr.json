@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "Privacy Score — Reprenez le contrôle de vos données.",
+    "title": "Privacy Score : reprenez le contrôle de vos données",
     "description": "Un score sur 100, trois actions concrètes, aucun discours alarmiste. Privacy Score lit le Rapport de Confidentialité d'iOS, 100 % en local. Gratuit.",
-    "ogTitle": "Privacy Score — Reprenez le contrôle de vos données.",
+    "ogTitle": "Privacy Score : reprenez le contrôle de vos données",
     "ogDescription": "Un score de confidentialité sur 100, calculé localement à partir du Rapport iOS. Trois fixes concrets. Aucun serveur, aucun compte, aucun cloud."
   },
   "chapters": {
@@ -26,7 +26,7 @@
   "nav": {
     "brand": "Privacy Score",
     "aria": {
-      "brand": "Privacy Score — accueil",
+      "brand": "Privacy Score, accueil",
       "nav": "Navigation principale",
       "switcher": "Changer la langue du site"
     },
@@ -52,9 +52,9 @@
       "line2Strike": "pas",
       "line2Post": "."
     },
-    "lede": "Chaque app sur votre iPhone parle dans votre dos — votre position, vos centres d'intérêt, vos déplacements. <strong>Privacy Score</strong> les écoute. Localement. Sans serveur. Sans compte.",
+    "lede": "Chaque app sur votre iPhone parle dans votre dos. Votre position, vos centres d'intérêt, vos déplacements. <strong>Privacy Score</strong> les écoute. Localement. Sans serveur. Sans compte.",
     "ctas": {
-      "primary": "Télécharger sur l'App Store",
+      "primary": "Bientôt disponible sur l'App Store",
       "ghost": "Voir comment"
     },
     "pillars": {
@@ -91,25 +91,26 @@
         "value": "Actif"
       }
     },
-    "scrollCue": "Faites défiler"
+    "scrollCue": "Faites défiler",
+    "h1": "Privacy Score : votre audit de confidentialité iPhone, en local."
   },
   "story": {
     "title": {
       "pre": "En 2024, des journalistes ont identifié ",
       "hi": "26 agents du Secret Service",
-      "post": " — en achetant des données publicitaires."
+      "post": ", en achetant des données publicitaires."
     },
     "intro": "Pas de fuite. Pas de piratage. Juste un fichier acheté à un courtier en données, comme n'importe qui peut le faire. L'histoire en huit cases.",
     "panels": [
       {
         "tag": "Jan 2024",
         "captionStrong": "Washington, D.C.",
-        "caption": "Le Secret Service protège le Président — jour et nuit, discrètement. C'est leur métier."
+        "caption": "Le Secret Service protège le Président, jour et nuit, discrètement. C'est leur métier."
       },
       {
         "tag": "Marché ouvert",
         "captionStrong": "Des journalistes achètent un jeu de données pub.",
-        "caption": "Cent millions de pings GPS — pour le prix d'un repas. Cent pour cent légal."
+        "caption": "Cent millions de pings GPS, pour le prix d'un repas. Cent pour cent légal."
       },
       {
         "tag": "26 points rouges",
@@ -119,16 +120,16 @@
       {
         "tag": "Identifiés",
         "captionStrong": "26 noms. 26 visages.",
-        "caption": "Recoupé avec quelques données publiques. Pas un piratage. Légal — c'est ça, le problème."
+        "caption": "Recoupé avec quelques données publiques. Pas un piratage. Légal. C'est ça, le problème."
       },
       {
         "tag": "Strava · 2018",
-        "captionStrong": "2018 — déjà.",
+        "captionStrong": "2018, déjà.",
         "caption": "Une app de fitness révèle les routes de patrouille de soldats américains au Moyen-Orient. Au monde entier."
       },
       {
         "tag": "Votre iPhone",
-        "captionStrong": "Maintenant — votre iPhone.",
+        "captionStrong": "Aujourd'hui, votre iPhone.",
         "caption": "909 traceurs par semaine en moyenne. Votre position part dans 26 pays. Sans que vous le sachiez."
       },
       {
@@ -139,7 +140,7 @@
       {
         "tag": "+ 45 points",
         "captionStrong": "Soixante secondes.",
-        "caption": "Un score. Trois fixes. La prochaine fuite de données — ce ne sera pas la vôtre."
+        "caption": "Un score. Trois fixes. La prochaine fuite de données, ce ne sera pas la vôtre."
       }
     ],
     "pivot": {
@@ -156,7 +157,7 @@
       "line2": "Trois actions concrètes.",
       "line3": "Aucun discours alarmiste."
     },
-    "body": "Privacy Score lit le <strong>Rapport de Confidentialité</strong> qu'iOS génère déjà sur votre iPhone. Il croise chaque domaine contacté par vos apps avec la base de DuckDuckGo Tracker Radar, puis calcule un score — et vous dit exactement quoi corriger.",
+    "body": "Privacy Score lit le <strong>Rapport de Confidentialité</strong> qu'iOS génère déjà sur votre iPhone. Il croise chaque domaine contacté par vos apps avec la base de DuckDuckGo Tracker Radar, puis calcule un score, et vous dit exactement quoi corriger.",
     "bullets": [
       "Lit le rapport iOS natif (pas d'accès supplémentaire).",
       "Calcule le score localement, en 2 secondes.",
@@ -249,7 +250,7 @@
   },
   "quote": {
     "body": "Privacy Guard ne voit jamais votre trafic. Il vous montre ce que les <em>autres</em> en voient.",
-    "attribution": "— Pied de page de l'écran Réglages, dans l'app."
+    "attribution": "Pied de page de l'écran Réglages, dans l'app."
   },
   "metrics": {
     "ariaLabel": "Privacy Score en chiffres",
@@ -300,8 +301,8 @@
   },
   "cta": {
     "title": "Reprenez le contrôle de vos données.",
-    "body": "Soixante secondes pour importer votre rapport. Un score. Trois fixes. Et la satisfaction de savoir exactement où vous fuyiez — et où vous ne fuyez plus.",
-    "primary": "Télécharger sur l'App Store",
+    "body": "Soixante secondes pour importer votre rapport. Un score. Trois fixes. Et la satisfaction de savoir exactement où vous fuyiez. Et où vous ne fuyez plus.",
+    "primary": "Bientôt disponible sur l'App Store",
     "note": "iPhone · iPadOS 17+ · gratuit · français & anglais"
   },
   "footer": {
@@ -311,15 +312,15 @@
         "heading": "App",
         "links": [
           {
-            "label": "App Store",
+            "label": "App Store (bientôt)",
             "href": "#"
           },
           {
-            "label": "Notes de version",
+            "label": "Notes de version (bientôt)",
             "href": "#"
           },
           {
-            "label": "Code source",
+            "label": "Code source (bientôt)",
             "href": "#"
           }
         ]
@@ -351,7 +352,7 @@
         ]
       }
     },
-    "copyright": "© 2026 Privacy Score — Made by <a href=\"https://codevelop.fr\" rel=\"external\">CoDevelop</a>",
+    "copyright": "© 2026 Privacy Score · Made by <a href=\"https://codevelop.fr\" rel=\"external\">CoDevelop</a>",
     "version": "v 0.1.0 · iOS 17+"
   }
 }

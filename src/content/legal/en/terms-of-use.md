@@ -4,10 +4,10 @@ language: en
 version: 1.0
 last_updated: 2026-05-29
 publisher: Skander BAHRI (French sole proprietor), CoDevelop
-canonical_url: https://privacyscore.fr/en/terms-of-use
+canonical_url: https://www.privacyscore.fr/en/terms-of-use
 cross_links:
-  - legal-notice: https://privacyscore.fr/en/legal-notice
-  - privacy-policy: https://privacyscore.fr/en/privacy-policy
+  - legal-notice: https://www.privacyscore.fr/en/legal-notice
+  - privacy-policy: https://www.privacyscore.fr/en/privacy-policy
 ---
 
 # Terms of Use
@@ -126,7 +126,7 @@ Any reproduction or reuse beyond that scope is prohibited and exposes the user t
 
 ## 9. Personal Data
 
-The processing of your data is described in the [Privacy Policy](https://privacyscore.fr/en/privacy-policy), which together with these Terms forms a consistent contractual whole.
+The processing of your data is described in the [Privacy Policy](https://www.privacyscore.fr/en/privacy-policy), which together with these Terms forms a consistent contractual whole.
 
 ## 10. Liability
 

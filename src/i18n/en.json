@@ -1,9 +1,9 @@
 {
   "meta": {
-    "title": "Privacy Score — Take back control of your data.",
-    "description": "See what every app on your iPhone shares behind your back. On-device analysis of Apple's App Privacy Report — a score out of 100, three fixes.",
-    "ogTitle": "Privacy Score — Take back control of your data.",
-    "ogDescription": "See what every app on your iPhone shares behind your back. On-device analysis of Apple's App Privacy Report — a score out of 100, three fixes."
+    "title": "Privacy Score: App Privacy Report audit for iPhone",
+    "description": "See what every app on your iPhone shares behind your back. On-device analysis of Apple's App Privacy Report. A score out of 100, three fixes.",
+    "ogTitle": "Privacy Score: App Privacy Report audit for iPhone",
+    "ogDescription": "See what every app on your iPhone shares behind your back. On-device analysis of Apple's App Privacy Report. A score out of 100, three fixes."
   },
   "chapters": {
     "word": "Chapter",
@@ -26,7 +26,7 @@
   "nav": {
     "brand": "Privacy Score",
     "aria": {
-      "brand": "Privacy Score — home",
+      "brand": "Privacy Score, home",
       "nav": "Main navigation",
       "switcher": "Switch language"
     },
@@ -52,9 +52,9 @@
       "line2Strike": "not",
       "line2Post": "."
     },
-    "lede": "Every app on your iPhone is talking behind your back — your location, your interests, where you spend your evenings. <strong>Privacy Score</strong> listens in. Locally. No server. No account.",
+    "lede": "Every app on your iPhone is talking behind your back. Your location, your interests, where you spend your evenings. <strong>Privacy Score</strong> listens in. Locally. No server. No account.",
     "ctas": {
-      "primary": "Download on the App Store",
+      "primary": "Coming soon on the App Store",
       "ghost": "See how it works"
     },
     "pillars": {
@@ -91,25 +91,26 @@
         "value": "On"
       }
     },
-    "scrollCue": "Scroll"
+    "scrollCue": "Scroll",
+    "h1": "Privacy Score: your iPhone App Privacy Report audit, fully on-device."
   },
   "story": {
     "title": {
       "pre": "In 2024, reporters identified ",
       "hi": "26 Secret Service agents",
-      "post": " — just by buying advertising data."
+      "post": ", just by buying advertising data."
     },
     "intro": "No leak. No hack. Just a file purchased from a data broker, like anyone else can. The whole story in eight panels.",
     "panels": [
       {
         "tag": "Jan 2024",
         "captionStrong": "Washington, D.C.",
-        "caption": "The Secret Service protects the President — around the clock, in silence. That's the job."
+        "caption": "The Secret Service protects the President, around the clock, in silence. That's the job."
       },
       {
         "tag": "Open market",
         "captionStrong": "Reporters buy a commercial ad dataset.",
-        "caption": "A hundred million location pings — for less than the price of a dinner. Perfectly legal."
+        "caption": "A hundred million location pings, for less than the price of a dinner. Perfectly legal."
       },
       {
         "tag": "26 red dots",
@@ -119,16 +120,16 @@
       {
         "tag": "Identified",
         "captionStrong": "26 names. 26 faces.",
-        "caption": "Cross-referenced with a few public records. Not a hack. Legal — that's the problem."
+        "caption": "Cross-referenced with a few public records. Not a hack. Legal. That's the problem."
       },
       {
         "tag": "Strava · 2018",
-        "captionStrong": "2018 — it already happened.",
+        "captionStrong": "2018. It already happened.",
         "caption": "A fitness app's global heatmap exposed the patrol routes of U.S. military personnel deployed overseas. For the whole world to see."
       },
       {
         "tag": "Your iPhone",
-        "captionStrong": "Now — your iPhone.",
+        "captionStrong": "Today, your iPhone.",
         "caption": "Hundreds of trackers a week on a single phone. Your location shipped to dozens of countries. Without you ever knowing."
       },
       {
@@ -139,7 +140,7 @@
       {
         "tag": "+45 points",
         "captionStrong": "Sixty seconds.",
-        "caption": "One score. Three fixes. The next data leak — it won't be yours."
+        "caption": "One score. Three fixes. The next data leak? It won't be yours."
       }
     ],
     "pivot": {
@@ -156,7 +157,7 @@
       "line2": "Three concrete actions.",
       "line3": "Zero scare tactics."
     },
-    "body": "Privacy Score reads the <strong>App Privacy Report</strong> that iOS is already generating on your iPhone. It cross-references every domain your apps contact with the open DuckDuckGo Tracker Radar database, then calculates a score — and tells you exactly what to fix.",
+    "body": "Privacy Score reads the <strong>App Privacy Report</strong> that iOS is already generating on your iPhone. It cross-references every domain your apps contact with the open DuckDuckGo Tracker Radar database, then calculates a score, and tells you exactly what to fix.",
     "bullets": [
       "Reads Apple's native report (no extra permissions).",
       "Calculates the score on-device, in 2 seconds.",
@@ -249,7 +250,7 @@
   },
   "quote": {
     "body": "Privacy Guard never sees your traffic. It shows you what <em>everyone else</em> sees of it.",
-    "attribution": "— Footer of the Settings screen, inside the app."
+    "attribution": "Footer of the Settings screen, inside the app."
   },
   "metrics": {
     "ariaLabel": "Privacy Score by the numbers",
@@ -300,8 +301,8 @@
   },
   "cta": {
     "title": "Take back control of your data.",
-    "body": "Sixty seconds to import your report. One score. Three fixes. And the quiet satisfaction of knowing exactly where you were leaking — and where you no longer are.",
-    "primary": "Download on the App Store",
+    "body": "Sixty seconds to import your report. One score. Three fixes. And the quiet satisfaction of knowing exactly where you were leaking. And where you no longer are.",
+    "primary": "Coming soon on the App Store",
     "note": "iPhone · iPadOS 17+ · free · English &amp; French"
   },
   "footer": {
@@ -311,15 +312,15 @@
         "heading": "App",
         "links": [
           {
-            "label": "App Store",
+            "label": "App Store (coming soon)",
             "href": "#"
           },
           {
-            "label": "Release notes",
+            "label": "Release notes (coming soon)",
             "href": "#"
           },
           {
-            "label": "Source code",
+            "label": "Source code (coming soon)",
             "href": "#"
           }
         ]
@@ -351,7 +352,7 @@
         ]
       }
     },
-    "copyright": "© 2026 Privacy Score — Made by <a href=\"https://codevelop.fr\" rel=\"external\">CoDevelop</a>",
+    "copyright": "© 2026 Privacy Score · Made by <a href=\"https://codevelop.fr\" rel=\"external\">CoDevelop</a>",
     "version": "v 0.1.0 · iOS 17+"
   }
 }

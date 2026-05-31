@@ -2,7 +2,15 @@
 /**
  * CTASection.astro — final "Download" call to action.
  * Matches `variation-illustrated.html` lines 1426-1448.
- * `href="#"` is a placeholder until the App Store URL is confirmed.
+ *
+ * Pre-launch: the App Store URL does not yet exist, so the primary CTA renders
+ * as a semantically disabled `<button>` with `aria-disabled="true"`. The label
+ * surfaced via `cta.primary` already says "Bientôt disponible" / "Coming soon"
+ * so the disabled state is also communicated as plain text for screen readers
+ * and search-engine crawlers.
+ *
+ * When the App Store URL is confirmed, swap this `<button disabled>` back to
+ * `<a href={appStoreUrl}>` and revert the `cta.primary` string.
  */
 interface Props {
   cta: {
@@ -23,10 +31,10 @@ const { cta } = Astro.props;
       <h2 id="cta-h2">{cta.title}</h2>
       <p>{cta.body}</p>
       <div class="cta-buttons">
-        <a href="#" class="btn btn-primary btn-big">
-          <span class="material-icons-round" aria-hidden="true">download</span>
+        <button type="button" class="btn btn-primary btn-big" aria-disabled="true" disabled>
+          <span class="material-icons-round" aria-hidden="true">schedule</span>
           {cta.primary}
-        </a>
+        </button>
         <span class="cta-note" set:html={cta.note}></span>
       </div>
     </div>

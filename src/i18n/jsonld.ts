@@ -44,7 +44,7 @@ export function websiteJsonLd(locale: Locale, dict: Dictionary) {
     description: dict.meta.description,
     publisher: {
       '@type': 'Organization',
-      name: 'Codevelop',
+      name: 'CoDevelop',
     },
   };
 }
@@ -78,7 +78,7 @@ export function softwareApplicationJsonLd(locale: Locale, dict: Dictionary) {
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Codevelop',
+      name: 'CoDevelop',
       url: SITE_ORIGIN,
     },
     image: `${SITE_ORIGIN}/assets/app-icon-512.png`,
@@ -99,7 +99,7 @@ export function organizationJsonLd() {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Privacy Score',
-    legalName: 'Codevelop',
+    legalName: 'CoDevelop',
     url: SITE_ORIGIN,
     logo: `${SITE_ORIGIN}/assets/app-icon-512.png`,
     email: 'support@privacyscore.fr',
@@ -111,7 +111,18 @@ export function organizationJsonLd() {
  * FAQPage — built from `dict.faq.items`. Answers may legitimately contain
  * inline `<em>` / `<strong>` tags; schema.org allows safe HTML in
  * `Answer.text` and Google renders it.
+ *
+ * We normalise `&nbsp;` (used in the visible HTML for French typography:
+ * non-breaking space before colons, percentages, etc.) into a regular space
+ * inside the JSON-LD payload. Google's NLP and the AI search engines that
+ * ingest FAQPage treat the entity as gibberish in plain text, but the visible
+ * HTML keeps the proper non-breaking space so French typography rules still
+ * apply on the rendered page.
  */
+function normalizeForSchema(s: string): string {
+  return s.replace(/&nbsp;/g, ' ');
+}
+
 export function faqJsonLd(dict: Dictionary) {
   const items: Array<{ q: string; a: string }> = dict.faq.items ?? [];
   return {
@@ -119,11 +130,32 @@ export function faqJsonLd(dict: Dictionary) {
     '@type': 'FAQPage',
     mainEntity: items.map((item) => ({
       '@type': 'Question',
-      name: item.q,
+      name: normalizeForSchema(item.q),
       acceptedAnswer: {
         '@type': 'Answer',
-        text: item.a,
+        text: normalizeForSchema(item.a),
       },
+    })),
+  };
+}
+
+/**
+ * BreadcrumbList — generated for sub-pages so SERPs render the breadcrumb
+ * trail above the page title. Takes the trail as an ordered list of
+ * (name, absolute URL) tuples. The first item is conventionally "Home /
+ * Accueil"; the last is the current page.
+ */
+export function breadcrumbListJsonLd(
+  trail: Array<{ name: string; url: string }>,
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: trail.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url,
     })),
   };
 }
