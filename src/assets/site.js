@@ -10,8 +10,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ────────────────────────────────────────────────────────────
   // Reveal on scroll
+  //
+  // Order matters here:
+  //   PASS 1 — synchronously mark every above-the-fold .reveal as .in,
+  //            while CSS state is still "default visible".
+  //   PASS 2 — add .js-ready to body. Off-screen .reveal elements become
+  //            hidden via `.js-ready .reveal:not(.in)`. Above-the-fold
+  //            elements already have .in so they stay visible. No FOUC.
+  //   PASS 3 — IntersectionObserver fades in elements as they scroll in.
   // ────────────────────────────────────────────────────────────
   const revealEls = document.querySelectorAll('.reveal');
+  const viewportH = window.innerHeight;
+
+  // PASS 1
+  revealEls.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < viewportH && rect.bottom > 0) {
+      el.classList.add('in');
+    }
+  });
+
+  // PASS 2
+  document.body.classList.add('js-ready');
+
+  // PASS 3
   const revealIO = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -22,7 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-  revealEls.forEach(el => revealIO.observe(el));
+  revealEls.forEach(el => {
+    if (!el.classList.contains('in')) {
+      revealIO.observe(el);
+    }
+  });
 
   // ────────────────────────────────────────────────────────────
   // Counter animation
