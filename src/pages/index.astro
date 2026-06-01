@@ -17,6 +17,14 @@ const TITLE = 'Privacy Score';
     <title>{TITLE}</title>
     <meta name="robots" content="noindex,nofollow" />
 
+    {/*
+      Yandex Webmaster verification. The verified property is
+      https://www.privacyscore.fr/ (root), so the token MUST be present on
+      this exact URL even though it's a noindex sniffer. Verification is a
+      one-shot fetch by Yandex; the noindex only affects indexing.
+    */}
+    <meta name="yandex-verification" content="2b8c8907535df868" />
+
     {/* hreflang signals for crawlers that do reach here */}
     <link rel="alternate" hreflang="fr-FR" href="https://www.privacyscore.fr/fr/" />
     <link rel="alternate" hreflang="en-US" href="https://www.privacyscore.fr/en/" />
