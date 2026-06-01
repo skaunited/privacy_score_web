@@ -33,6 +33,10 @@ interface Props {
   ogTitle?: string;
   ogDescription?: string;
   jsonLd?: object | object[];
+  /** Forward to SEO.astro: emit only noindex,nofollow (no second robots tag). */
+  noindex?: boolean;
+  /** Forward to SEO.astro: pin canonical AND suppress hreflang emission. */
+  canonicalOverride?: string;
 }
 
 const {
@@ -42,6 +46,8 @@ const {
   ogTitle,
   ogDescription,
   jsonLd,
+  noindex,
+  canonicalOverride,
 } = Astro.props;
 
 const jsonLdEntries: object[] = jsonLd
@@ -72,6 +78,8 @@ const pathname = Astro.url.pathname;
       ogTitle={ogTitle}
       ogDescription={ogDescription}
       pathname={pathname}
+      noindex={noindex}
+      canonicalOverride={canonicalOverride}
     />
 
     {/*

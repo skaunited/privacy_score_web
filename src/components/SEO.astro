@@ -34,6 +34,17 @@ interface Props {
   ogDescription?: string;
   pathname: string;
   ogImage?: string;
+  /**
+   * When `true`, emit ONLY a `noindex,nofollow` robots meta (replacing the
+   * default index,follow). Used by 404.astro so the page is never indexed.
+   */
+  noindex?: boolean;
+  /**
+   * When set, overrides the computed canonical URL AND suppresses hreflang
+   * emission. Used by 404.astro so we don't emit fake `/fr/404/` + `/en/404/`
+   * hreflang pairs (those URLs don't exist; Astro emits a single /404/).
+   */
+  canonicalOverride?: string;
 }
 
 const {
@@ -44,6 +55,8 @@ const {
   ogDescription,
   pathname,
   ogImage,
+  noindex = false,
+  canonicalOverride,
 } = Astro.props;
 
 // ---------------------------------------------------------------------------
@@ -70,8 +83,10 @@ function localizedUrl(loc: Locale): string {
   return toAbsoluteUrl(`/${loc}${tail}`);
 }
 
-// Canonical is always the current page (use the path as-is).
-const canonical = localizedUrl(locale);
+// Canonical: either an explicit override (e.g. 404.astro forcing /404/) or
+// the computed current page URL. Overrides also suppress hreflang emission
+// since pages that need an override are typically standalone (no locale pairs).
+const canonical = canonicalOverride ?? localizedUrl(locale);
 
 // hreflang URLs MUST use the locale-aware slug mapping so that, for example,
 // /fr/mentions-legales/ correctly advertises /en/legal-notice/ as its English
@@ -84,6 +99,7 @@ const frUrl = locale === 'fr' ? canonical : (altMap.fr ?? localizedUrl('fr'));
 const enUrl = locale === 'en' ? canonical : (altMap.en ?? localizedUrl('en'));
 // x-default points to the FR variant of THIS page (primary market).
 const xDefaultUrl = frUrl;
+const emitHreflang = !canonicalOverride;
 
 // ---------------------------------------------------------------------------
 // Open Graph helpers
@@ -130,10 +146,14 @@ void htmlLang;
 {/* 6. Canonical */}
 <link rel="canonical" href={canonical} />
 
-{/* 7. hreflang */}
-<link rel="alternate" hreflang={hreflangTag.fr} href={frUrl} />
-<link rel="alternate" hreflang={hreflangTag.en} href={enUrl} />
-<link rel="alternate" hreflang="x-default" href={xDefaultUrl} />
+{/* 7. hreflang - suppressed when canonicalOverride is set (e.g. 404) */}
+{emitHreflang && (
+  <>
+    <link rel="alternate" hreflang={hreflangTag.fr} href={frUrl} />
+    <link rel="alternate" hreflang={hreflangTag.en} href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />
+  </>
+)}
 
 {/* 8. Open Graph */}
 <meta property="og:type" content="website" />
@@ -155,8 +175,12 @@ void htmlLang;
 <meta name="twitter:description" content={resolvedOgDescription} />
 <meta name="twitter:image" content={absoluteOgImage} />
 
-{/* 10. Robots */}
-<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+{/* 10. Robots - one tag, either index or noindex (never both) */}
+{noindex ? (
+  <meta name="robots" content="noindex,nofollow" />
+) : (
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+)}
 
 {/* 11. Format detection - prevent iOS from auto-linking phone-shaped digits */}
 <meta name="format-detection" content="telephone=no" />
@@ -166,7 +190,21 @@ void htmlLang;
 <link rel="apple-touch-icon" sizes="512x512" href="/assets/app-icon-512.png" />
 
 {/*
-  13. Font preconnects intentionally removed.
+  13. Search-engine site-ownership verification.
+
+  Each search engine accepts a meta-tag verification method as an alternative
+  to a DNS TXT or HTML-file upload. We keep the token here so it ships on every
+  page (the verified URL definitely has it, regardless of where Yandex / Google
+  / Bing crawl the site).
+
+  To add a new one: paste the engine's content token below with a comment
+  pointing at the source console.
+*/}
+{/* Yandex Webmaster - property: https://www.privacyscore.fr/ */}
+<meta name="yandex-verification" content="2b8c8907535df868" />
+
+{/*
+  14. Font preconnects intentionally removed.
       All web fonts (Manrope, JetBrains Mono, Material Icons Round) are now
       self-hosted via @fontsource-variable + the material-icons npm package.
       No third-party origin to warm up; visitor IPs no longer reach Google.
