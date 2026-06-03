@@ -26,7 +26,7 @@ const { metrics } = Astro.props;
     <div class="metric-row reveal">
       {metrics.items.map((m) => (
         <div class="metric">
-          <div class="metric-num">{m.countTo}</div>
+          <div class="metric-num" data-count-to={m.countTo}>{m.countTo}</div>
           <div class="metric-label">{m.label}</div>
         </div>
       ))}

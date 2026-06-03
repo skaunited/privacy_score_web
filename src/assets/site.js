@@ -1,28 +1,24 @@
 /* ===========================================================
    Privacy Score - Marketing site interactions
 
-   DESIGN PRINCIPLE (2026 rewrite):
-   This file contains ONLY genuine, event-driven interactivity.
-   It does NOT control visibility, run entrance animations, drive
-   scroll parallax, or use setTimeout/requestAnimationFrame tweening.
+   DESIGN PRINCIPLE:
+   Genuine, event-driven interactivity only. Nothing here controls
+   content VISIBILITY (all content is visible in the static HTML), runs
+   scroll parallax, or uses setTimeout for animation.
 
-   Why: the previous version hid every section with `opacity: 0` and
-   revealed it via IntersectionObserver + setTimeout, animated counters
-   from 0, drew the gauge with a timer, and moved background orbs on
-   every scroll frame. On mobile Safari that produced:
-     - content that "appeared with a delay" as you scrolled (by design),
-     - numbers stuck at 0 until JS ran,
-     - scroll stutter from per-frame transform writes on blurred layers,
-     - and excluded our text from LCP (opacity:0 is not an LCP candidate),
-       which hurts mobile SEO.
-
-   All visual content now renders fully and correctly in the static HTML.
-   Any future entrance animation must be pure CSS (animation-timeline:
-   view()), never JS timers. See site.css.
+   The number count-up below is an enhancement, not a dependency:
+     - the final value is already in the HTML (SEO-safe, correct with no JS),
+     - it animates 0 -> final ONLY when the element scrolls into view AND
+       the user has not asked for reduced motion,
+     - it uses requestAnimationFrame (the browser-native way to animate),
+       never setTimeout, and only writes textContent (no layout-thrash, no
+       blur, nothing that costs anything during scroll).
+   IntersectionObserver here is cheap and was never the scroll-perf issue
+   (that was blur repaints, now removed).
    =========================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Feature tabs — genuine click interaction, no timers, no animation loop.
+  // ── Feature tabs — genuine click interaction ──────────────────────────
   const tabs = document.querySelectorAll('.tab');
   const panes = document.querySelectorAll('.feature-pane');
   tabs.forEach((tab) => {
@@ -34,4 +30,46 @@ document.addEventListener('DOMContentLoaded', () => {
       );
     });
   });
+
+  // ── Number count-up (rAF, in-view, motion-aware) ──────────────────────
+  const reduceMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)',
+  ).matches;
+  const counters = document.querySelectorAll('[data-count-to]');
+
+  if (counters.length && !reduceMotion && 'IntersectionObserver' in window) {
+    const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+
+    const animate = (el) => {
+      const target = parseInt(el.dataset.countTo, 10);
+      if (Number.isNaN(target)) return;
+      const duration = 1500;
+      let startTs = null;
+      el.textContent = '0';
+      const step = (ts) => {
+        if (startTs === null) startTs = ts;
+        const p = Math.min((ts - startTs) / duration, 1);
+        el.textContent = String(Math.round(target * easeOut(p)));
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = String(target); // exact final value
+      };
+      requestAnimationFrame(step);
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animate(entry.target);
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.6 },
+    );
+
+    counters.forEach((el) => io.observe(el));
+  }
+  // If reduced-motion or no IntersectionObserver: the HTML's final values
+  // simply stay as-is. Nothing to do.
 });

@@ -287,6 +287,24 @@ em { font-style: normal; color: var(--trust-blue); }
   border-radius: 24px;
 }
 .gauge { width: 100%; height: 100%; transform: rotate(0deg); }
+
+/*
+   Gauge ring draw-in. Pure CSS, runs once on load. The circle's default
+   stroke-dashoffset="133" (77% filled) is the final + no-JS + reduced-motion
+   state. When motion is allowed, animate it from 578 (empty) to 133. This is
+   a single small SVG stroke painted only during the ~1.5s intro, NOT tied to
+   scroll and NOT a blur, so it has no scroll-perf cost. It visually pairs with
+   the gauge number counting 0 -> 77.
+*/
+@media (prefers-reduced-motion: no-preference) {
+  .gauge-arc {
+    animation: gauge-draw 1.5s cubic-bezier(0.16, 1, 0.30, 1) both;
+  }
+  @keyframes gauge-draw {
+    from { stroke-dashoffset: 578; }
+    to   { stroke-dashoffset: 133; }
+  }
+}
 .gauge-center {
   position: absolute; inset: 0;
   display: flex; flex-direction: column; align-items: center; justify-content: center;

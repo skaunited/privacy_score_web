@@ -156,7 +156,7 @@ const { hero, locale } = Astro.props;
               <circle cx="110" cy="110" r="92" stroke="rgba(255,255,255,0.06)" stroke-width="14" fill="none"/>
               {/* Static final state: ring filled to 77/100.
                   circumference = 2*pi*92 = 578; offset = 578 * (1 - 0.77) = 133. */}
-              <circle cx="110" cy="110" r="92"
+              <circle class="gauge-arc" cx="110" cy="110" r="92"
                       stroke="url(#gaugeGrad)" stroke-width="14" fill="none"
                       stroke-linecap="round"
                       filter="url(#gaugeGlow)"
@@ -164,7 +164,7 @@ const { hero, locale } = Astro.props;
                       stroke-dasharray="578" stroke-dashoffset="133"/>
             </svg>
             <div class="gauge-center">
-              <div class="gauge-num">77</div>
+              <div class="gauge-num" data-count-to="77">77</div>
               <div class="gauge-grade">{hero.phone.gaugeGrade}</div>
             </div>
           </div>
@@ -182,7 +182,7 @@ const { hero, locale } = Astro.props;
         <span class="material-icons-round" aria-hidden="true">ads_click</span>
         <div>
           <div class="chip-label">{hero.chips.trackers.label}</div>
-          <div class="chip-value">{hero.chips.trackers.countTo}</div>
+          <div class="chip-value" data-count-to={hero.chips.trackers.countTo}>{hero.chips.trackers.countTo}</div>
         </div>
       </div>
       <div class="float-chip chip-dns">
