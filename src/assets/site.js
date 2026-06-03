@@ -72,4 +72,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // If reduced-motion or no IntersectionObserver: the HTML's final values
   // simply stay as-is. Nothing to do.
+
+  // ── Gauge ring draw — trigger when it scrolls into view ───────────────
+  // CSS owns the animation (gated behind .gauge-card.gauge-animate AND the
+  // reduced-motion media query). JS only adds the trigger class once, when
+  // the gauge enters the viewport, so it plays where the user can see it
+  // (on mobile the gauge sits below the fold). Plays once, then static.
+  const gaugeCard = document.querySelector('.gauge-card');
+  if (gaugeCard && 'IntersectionObserver' in window) {
+    const gaugeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('gauge-animate');
+            gaugeObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 },
+    );
+    gaugeObserver.observe(gaugeCard);
+  }
 });
