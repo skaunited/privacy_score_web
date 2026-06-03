@@ -1,9 +1,9 @@
 {
   "meta": {
-    "title": "Privacy Score: App Privacy Report audit for iPhone",
-    "description": "See what every app on your iPhone shares behind your back. On-device analysis of Apple's App Privacy Report. A score out of 100, three fixes.",
-    "ogTitle": "Privacy Score: App Privacy Report audit for iPhone",
-    "ogDescription": "See what every app on your iPhone shares behind your back. On-device analysis of Apple's App Privacy Report. A score out of 100, three fixes."
+    "title": "App Privacy Report audit for iPhone | Privacy Score",
+    "description": "See what every app on your iPhone shares behind your back. Privacy Score reads the App Privacy Report on-device: a score out of 100 and three fixes. Free.",
+    "ogTitle": "You think you're anonymous. You're not.",
+    "ogDescription": "A privacy score out of 100, computed on your iPhone. Three concrete fixes. No server, no account, no cloud."
   },
   "chapters": {
     "word": "Chapter",

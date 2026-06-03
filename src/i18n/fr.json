@@ -1,9 +1,9 @@
 {
   "meta": {
-    "title": "Privacy Score : reprenez le contrôle de vos données",
-    "description": "Un score sur 100, trois actions concrètes, aucun discours alarmiste. Privacy Score lit le Rapport de Confidentialité d'iOS, 100 % en local. Gratuit.",
+    "title": "Rapport de confidentialité iPhone : le lire et agir | Privacy Score",
+    "description": "Privacy Score lit le Rapport de Confidentialité de votre iPhone, calcule un score sur 100 et trois actions concrètes. 100 % en local, sans compte. Gratuit.",
     "ogTitle": "Privacy Score : reprenez le contrôle de vos données",
-    "ogDescription": "Un score de confidentialité sur 100, calculé localement à partir du Rapport iOS. Trois fixes concrets. Aucun serveur, aucun compte, aucun cloud."
+    "ogDescription": "Un score de confidentialité sur 100, calculé localement sur votre iPhone. Trois actions concrètes. Aucun serveur, aucun compte, aucun cloud."
   },
   "chapters": {
     "word": "Chapitre",
