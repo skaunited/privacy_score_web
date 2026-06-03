@@ -44,7 +44,18 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'always',
   compressHTML: true,
-  prefetch: true,
+
+  // prefetch disabled on purpose. Astro's prefetch ships a client module that
+  // builds <link rel="prefetch"> via a viewport IntersectionObserver + hover
+  // setTimeout debounces. Safari ignores rel="prefetch" and falls back to
+  // fetch(), so on iOS this downloads next-page HTML in the background as
+  // links scroll into view — background network churn during scroll, for no
+  // real gain on a site whose pages are < 120 KB and already navigate
+  // instantly. Turning it off also removes the last setTimeout +
+  // IntersectionObserver from the shipped JS (the homepage's own JS is just a
+  // ~0.5 KB click handler for the feature tabs). Re-enable only if a real
+  // navigation-latency need appears.
+  prefetch: false,
 
   // Map old FR slugs to their new native-French slugs.
   redirects: REDIRECTS,

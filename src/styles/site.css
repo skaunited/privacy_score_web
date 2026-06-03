@@ -36,8 +36,12 @@ em { font-style: normal; color: var(--trust-blue); }
   pointer-events: auto;
   width: 100%; max-width: 1200px;
   display: flex; align-items: center; justify-content: space-between;
-  background: rgba(15, 23, 42, 0.55);
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  /* Solid-ish background, NO backdrop-filter. This bar is position:fixed, and
+     a fixed element with backdrop-filter forces Safari to re-sample + re-blur
+     the scrolling content behind it on every frame, a known scroll-jank /
+     blank-tile cause on iOS. A slightly more opaque dark pill reads the same
+     and costs nothing during scroll. */
+  background: rgba(13, 20, 38, 0.88);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 9999px;
   padding: 8px 8px 8px 16px;
@@ -103,17 +107,26 @@ em { font-style: normal; color: var(--trust-blue); }
 /* ===========================================================
    AMBIENT ORBS / DOT GRID
 =========================================================== */
+/*
+   Orbs are now RADIAL GRADIENTS, not blurred solid circles.
+   ---------------------------------------------------------
+   Previously each orb was a solid `background: rgba(...)` + `filter: blur(110px)`.
+   On iOS Safari, `filter: blur()` on large surfaces is re-rasterized during
+   scroll (WebKit bug #89475), which made whole tiles go blank ("checkerboard")
+   while scrolling. A radial gradient from the color to transparent looks the
+   same (a soft glow) but is essentially free to paint and never re-rasterizes
+   on scroll. No blur filter anywhere now.
+*/
 .orb {
   position: absolute; border-radius: 50%;
-  filter: blur(110px); pointer-events: none; z-index: 0;
-  will-change: transform;
+  pointer-events: none; z-index: 0;
 }
-.orb-a { width: 620px; height: 620px; background: rgba(59,130,246,0.32); top: -180px; left: -120px; }
-.orb-b { width: 480px; height: 480px; background: rgba(14,165,233,0.22); top: 200px; right: -120px; }
-.orb-c { width: 380px; height: 380px; background: rgba(99,102,241,0.18); bottom: -120px; left: 30%; }
-.orb-d { width: 520px; height: 520px; background: rgba(99,102,241,0.18); top: 200px; right: -100px; }
-.orb-e { width: 600px; height: 600px; background: rgba(59,130,246,0.18); top: -60px; left: -160px; }
-.orb-f { width: 700px; height: 700px; background: rgba(96,165,250,0.22); top: 50%; left: 50%; transform: translate(-50%,-50%); }
+.orb-a { width: 760px; height: 760px; background: radial-gradient(circle, rgba(59,130,246,0.30) 0%, rgba(59,130,246,0) 70%); top: -260px; left: -200px; }
+.orb-b { width: 620px; height: 620px; background: radial-gradient(circle, rgba(14,165,233,0.20) 0%, rgba(14,165,233,0) 70%); top: 140px; right: -200px; }
+.orb-c { width: 520px; height: 520px; background: radial-gradient(circle, rgba(99,102,241,0.16) 0%, rgba(99,102,241,0) 70%); bottom: -200px; left: 22%; }
+.orb-d { width: 660px; height: 660px; background: radial-gradient(circle, rgba(99,102,241,0.16) 0%, rgba(99,102,241,0) 70%); top: 140px; right: -180px; }
+.orb-e { width: 740px; height: 740px; background: radial-gradient(circle, rgba(59,130,246,0.16) 0%, rgba(59,130,246,0) 70%); top: -140px; left: -240px; }
+.orb-f { width: 860px; height: 860px; background: radial-gradient(circle, rgba(96,165,250,0.20) 0%, rgba(96,165,250,0) 70%); top: 50%; left: 50%; transform: translate(-50%,-50%); }
 
 .dot-grid {
   position: absolute; inset: 0; z-index: 1;
@@ -397,12 +410,13 @@ em { font-style: normal; color: var(--trust-blue); }
   max-width: 1200px; margin: 0 auto;
 }
 .story-card {
-  background: rgba(15,23,42,0.55);
+  /* Opaque-ish background instead of backdrop-filter: these 8 cards scroll
+     through the viewport, and a per-card blur re-samples each frame on iOS. */
+  background: rgba(17, 25, 45, 0.92);
   border: 1px solid rgba(255,255,255,0.06);
   border-radius: 20px;
   padding: 32px 28px;
   position: relative;
-  backdrop-filter: blur(12px);
   transition: transform .3s var(--ease-out), border-color .3s;
 }
 .story-card:hover {
@@ -571,8 +585,8 @@ em { font-style: normal; color: var(--trust-blue); }
 }
 .step {
   position: relative; z-index: 1;
-  background: rgba(15,23,42,0.55);
-  backdrop-filter: blur(12px);
+  /* Opaque-ish background instead of backdrop-filter (scroll-repaint cost). */
+  background: rgba(17, 25, 45, 0.92);
   border: 1px solid rgba(255,255,255,0.06);
   border-radius: 20px;
   padding: 28px;
@@ -965,46 +979,28 @@ em { font-style: normal; color: var(--trust-blue); }
 
 
 /* ===========================================================
-   REVEAL / OBSERVER
+   REVEAL — now a NO-OP (content visible by default)
+   -----------------------------------------------------------
+   `.reveal` used to set `opacity: 0; transform: translateY(30px)` and wait
+   for JS (IntersectionObserver + setTimeout) to add `.in`. That is removed:
+     - opacity:0 content is excluded from LCP and invisible to crawlers
+       until JS runs, which hurt mobile SEO,
+     - the setTimeout reveal is what made sections "appear with a delay"
+       while scrolling on mobile Safari.
+   The class is kept as a harmless no-op so the many components that carry it
+   don't all need editing. If we reintroduce entrance motion later it must be
+   pure CSS (animation-timeline: view()), guarded so content stays visible by
+   default. The class intentionally does nothing now.
 =========================================================== */
 .reveal {
-  opacity: 0; transform: translateY(30px);
-  transition: opacity .8s var(--ease-out), transform .8s var(--ease-out);
-}
-.reveal.in {
-  opacity: 1; transform: translateY(0);
+  opacity: 1;
+  transform: none;
 }
 
-/* No-JS fallback: if scripts are blocked the IntersectionObserver never
-   adds .in, so .reveal content would stay invisible forever. The <noscript>
-   tag in BaseLayout injects this override so SEO crawlers without JS and
-   privacy-conscious users with JS disabled still see the page. */
-.no-js .reveal {
-  opacity: 1 !important;
-  transform: none !important;
-}
-
-/* Respect prefers-reduced-motion (WCAG 2.3.3): show everything statically,
-   disable all transforms/transitions, freeze parallax and the gauge draw.
-   The counters still resolve to their final value (JS short-circuits the
-   tween via this same media query is not possible - counters are JS-only -
-   but the visual jump is instant and harmless). */
+/* Global reduced-motion safety net (WCAG 2.3.3): neutralise any decorative
+   animation/transition site-wide. No reveal/parallax/gauge JS remains to
+   special-case. */
 @media (prefers-reduced-motion: reduce) {
-  .reveal,
-  .reveal.in {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-  .orb {
-    transform: none !important;
-  }
-  #gaugeArc {
-    transition: none !important;
-    /* JS still rewrites stroke-dashoffset; with no transition it jumps to
-       final state instantly, which is the desired reduced-motion behavior. */
-  }
-  /* Kill all decorative hover lifts and card transitions globally. */
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

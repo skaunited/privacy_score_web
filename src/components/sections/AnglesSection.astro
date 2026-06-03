@@ -64,9 +64,9 @@ const pad = (n: number) => String(n).padStart(2, '0');
           <img
             src={cardMeta[i].img}
             alt={card.imageAlt}
-            width="1320"
-            height="2868"
-            loading="lazy"
+            width="720"
+            height="1565"
+            loading="eager"
             decoding="async"
           />
         </div>
@@ -85,10 +85,10 @@ const pad = (n: number) => String(n).padStart(2, '0');
     background: linear-gradient(180deg, #020617 0%, #050D29 100%);
   }
   .angles .orb-x {
-    position: absolute; width: 600px; height: 600px;
-    background: rgba(59,130,246,0.16);
-    border-radius: 50%; filter: blur(120px);
-    top: -100px; left: -100px;
+    position: absolute; width: 740px; height: 740px;
+    background: radial-gradient(circle, rgba(59,130,246,0.14) 0%, rgba(59,130,246,0) 70%);
+    border-radius: 50%;
+    top: -160px; left: -160px;
   }
   .angles .head {
     max-width: 760px; margin: 0 auto 60px; text-align: center;
@@ -109,8 +109,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
     position: relative; z-index: 2;
   }
   .angle-card {
-    background: rgba(15, 23, 42, 0.55);
-    backdrop-filter: blur(14px);
+    background: rgba(17, 25, 45, 0.92);
     border: 1px solid rgba(255,255,255,0.06);
     border-radius: 24px;
     padding: 30px;

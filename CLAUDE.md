@@ -609,6 +609,107 @@ Append a new entry at the END of this section whenever the user signals end of s
 - **DataForSEO MCP**: Configured with real credentials in `.claude/plugins/privacy-score-web/.mcp.json`. Use for keyword research when working on homepage SEO copy.
 - **Pricing in Apple App Store Connect**: When configuring the App Store listing, the IAP tier mappings are: Annual ~€23.88 (Tier 24 or closest Apple tier), 6-month ~€20.94 (closest Apple tier). Apple tier IDs may differ; verify in App Store Connect.
 
+### 2026-06-02 00:30 — Session #2
+
+**Worked on**:
+1. SEO audit (`docs/seo-audit-2026-05-31.md`) implemented end-to-end: all 6 P0 + 9 P1 + 11 P2 items.
+2. Pre-launch §12 GO/NO-GO checklist executed; site went live at https://www.privacyscore.fr/.
+3. Mobile Safari perf debug after launch (Safari was visibly slower than Brave on the same iPhone).
+
+**Completed**:
+
+*SEO + content (P0 + P1 + P2):*
+- ✅ Canonical = www; apex → www 301 via Cloudflare. `SITE_ORIGIN` in `src/i18n/utils.ts` + `site` in `astro.config.mjs` aligned.
+- ✅ All em-dashes purged from titles, descriptions, body copy, HTML comments (sed pass + linter cleanup). 7 page titles rewritten with `:` separator + 50-60 char target.
+- ✅ Self-hosted fonts via `@fontsource-variable/manrope`, `@fontsource-variable/jetbrains-mono`, `material-icons` npm packages. Google Fonts preconnects + imports removed.
+- ✅ CTAs converted to `<button disabled aria-disabled="true">` "Coming soon" state; footer "App" column links labeled `(bientôt)` / `(coming soon)`.
+- ✅ 404 page: SEO.astro refactored to accept `noindex` + `canonicalOverride` props. Result: exactly 1 robots meta (`noindex,nofollow`), 1 self-canonical to `/404/`, 0 fake hreflang.
+- ✅ FR meta descriptions: ASCII accents restored (é, à, ç, etc.); all ≤160 chars.
+- ✅ Real H1 with primary keyword added on `/fr/` + `/en/`; dramatic display demoted to H2.
+- ✅ Screenshots: 11 PNGs (18 MB) → 9 WebPs at 1320×2868 → resized to 660×1434 (380 KB total final, -98% from start).
+- ✅ `BreadcrumbList` JSON-LD on 16 pages (6 legal + 4 blog posts + 4 blog/about pages + 2 security-policy stubs).
+- ✅ EN homepage title + ogTitle now contain "App Privacy Report" keyword.
+- ✅ Brand normalization: every "Codevelop" → "CoDevelop" across i18n + jsonld + humans.txt.
+- ✅ `inlineStylesheets: 'always'` in `astro.config.mjs` for inline CSS on every page.
+- ✅ Alt-text rewrite: 4 phone screenshots + hero phone got keyword-rich, accessibility-friendly alts.
+- ✅ `&nbsp;` stripped from FAQ JSON-LD (visible HTML keeps proper French typography).
+- ✅ `Policy`, `Acknowledgments`, `Hiring` fields added to `security.txt`. PGP `Encryption` field omitted (no key yet).
+- ✅ Apple Support documentation link cited in FAQ #1 (AI Overview citation eligibility).
+- ✅ `/fr/a-propos/` + `/en/about/` pages built with native bilingual bios (~570-660 words each), Person JSON-LD tied to CoDevelop Org.
+- ✅ Blog Content Collection schema (`src/content.config.ts`); `/fr/blog/` + `/en/blog/` index pages; `[slug].astro` post template with BlogPosting JSON-LD.
+- ✅ 4 long-form blog posts written by dedicated copy-writer subagents (FR + EN, 1850-2337 words each, native keyword research via DataForSEO MCP, voice rules clean).
+- ✅ Legal slug localization with 301 redirects:
+   - `/fr/legal-notice/` → `/fr/mentions-legales/`
+   - `/fr/privacy-policy/` → `/fr/politique-de-confidentialite/`
+   - `/fr/terms-of-use/` → `/fr/cgu/`
+- ✅ Slug-mapping URL system in `src/i18n/utils.ts`: `PageKey` + `pageSlugs[locale]` + new `getAlternateLocaleUrl()` that returns the correct cross-locale URL even when slugs differ (used by Header switcher + SEO hreflang).
+- ✅ Footer 4th column "Ressources" / "Resources" → Blog + À propos / About links.
+- ✅ `Person` + `BlogPosting` JSON-LD builders added to `src/i18n/jsonld.ts`.
+- ✅ `Organization.sameAs` JSDoc enhanced with ordered priority list for when official profiles exist.
+
+*Pre-launch §12:*
+- ✅ Yandex Webmaster meta `<meta name="yandex-verification" content="2b8c8907535df868">` shipped on every page (incl. root sniffer).
+- ✅ Site deployed to user's Plesk + Cloudflare (Hostinger CDG).
+- ✅ Plesk Nginx `Additional nginx directives` field configured:
+   - 3× rewrite for FR slug 301s
+   - `proxy_intercept_errors on; error_page 404 /404.html;` (Plesk already declares the `location =` block; ours conflicted, removed)
+   - 8 security headers: HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, COOP, CORP, CSP
+- ✅ CSP: `script-src 'self' 'unsafe-inline'` (Astro inlines a small JS module; strict CSP broke animations + revealed FOUC; documented why this is safe given no third-party scripts and no user input).
+- ✅ Custom 404 routing verified via live curl: title = "Page introuvable / Page not found | Privacy Score", status code 404 (not 200).
+- ✅ Sitemap submitted to Google Search Console + Bing Webmaster Tools + Yandex Webmaster.
+- ✅ Yandex ownership verification completed.
+
+*Mobile perf optimization (post-launch fire-fighting):*
+- ✅ `.reveal` animation polarity inverted: visible by default, hidden only when `.js-ready` + not in viewport. Eliminates FOUC on hero.
+- ✅ Synchronous above-the-fold pass in `site.js`: `getBoundingClientRect()` marks visible elements `.in` BEFORE `.js-ready` is added (zero-frame flash).
+- ✅ IntersectionObserver tuned aggressive: `threshold: 0, rootMargin: '0px 0px 400px 0px'` (sections pre-render 400 px before viewport). 1.5 s safety net catches stuck elements.
+- ✅ Above-the-fold dashboard screenshot: `loading="eager"` + `fetchpriority="high"`.
+- ✅ Identified Cloudflare Email Address Obfuscation as Safari/Brave perf differential (Brave Shields blocks the injected `email-decode.min.js`; Safari runs it → DOM scan + replace + reflow = 200-800 ms blocking). **User disabled it in CF dashboard + purged cache; awaiting tomorrow's retest.**
+
+**In progress**:
+- 🟡 Mobile Safari smoothness verification — 95% — waiting until 2026-06-02 daytime for user retest after Cloudflare Email Obfuscation disable + cache purge. If still slow, next levers: defer the inline JS module (set Vite `build.assetsInlineLimit: 0`), subset inlined CSS, audit Cloudflare Rocket Loader + Auto Minify + Bot Fight Mode (still need user check).
+- 🟡 IndexNow setup (Tasks #88, #89) — 0% — explicitly deferred; do it when publishing the next blog post.
+- 🟡 Screaming Frog MCP crawl — 0% — failed mid-session because user had SF GUI open and DB was locked. Re-attempt next session after asking user to quit GUI.
+
+**Decisions made this session** (none had inline Decision Log entries; the major ones to consider promoting to formal entries):
+- Canonical host = www.privacyscore.fr (apex → www permanent 301 at Cloudflare).
+- CTA strategy at launch = "Coming soon" disabled buttons (defer App Store URL until iOS app ships).
+- FR legal slugs in native French (`/fr/mentions-legales/` etc.) with 301 redirects from English-style URLs.
+- CSP `script-src` includes `'unsafe-inline'` — accepted because (a) no third-party scripts, (b) no user input rendered to HTML, (c) Astro's inlined JS module would otherwise break.
+- WebP screenshots = 660×1434 px (down from 1320×2868) — 1.0× to 2.2× device-pixel density across all renders; resolves mobile decode latency.
+- Cloudflare Email Address Obfuscation = OFF. Reason: it injected the email-decode script that ran on Safari (not on Brave), causing the 3-4 sec mobile slowdown the user couldn't reproduce on desktop.
+- Custom 404 routing via Nginx `proxy_intercept_errors` directive — required because Plesk fronts Apache behind Nginx and the bare `error_page` directive isn't enough.
+
+**Priorities for next session** (in priority order):
+
+1. **Verify Safari mobile smoothness post-CF-obfuscation-disable.** First diagnostic: `curl -s https://www.privacyscore.fr/fr/ | grep -E 'cdn-cgi|cfemail'` should now return empty. If yes → ask user to hard-refresh Safari + test. If still slow: defer the inline JS module (Vite assetsInlineLimit:0) + re-run mobile Lighthouse.
+2. **Re-run the full Lighthouse mobile audit.** Pre-fix was 67/100 weighted; target post-fix is mid-90s. Compare against the original `docs/seo-audit-2026-05-31.md`.
+3. **Re-run Screaming Frog MCP crawl** (ask user to close SF GUI first). With `Follow Internal "nofollow"` enabled, the crawl should discover all 19 indexable pages and confirm no remaining indexing issues (the 4 warnings on the root sniffer are by-design and should be acknowledged as such).
+4. **Promote this session's major decisions to formal Decision Log entries** (canonical host, CTA strategy, CSP relaxation, etc.) so they're reachable from the "Decision log" table of contents.
+5. **IndexNow setup** when the user is ready to publish the next blog post (Tasks #88 + #89 have the full recipe).
+6. Optional: revisit Cloudflare Rocket Loader / Auto Minify / Bot Fight Mode if Safari is still slow (user hasn't checked these yet).
+
+**Open questions for the user**:
+- After Safari retest tomorrow: smooth or still gappy?
+- Did you also disable Cloudflare Rocket Loader + Auto Minify + Bot Fight Mode (recommended in session response), or just Email Obfuscation? Want me to verify those too?
+- When the iOS app ships → swap "Coming soon" CTAs for real App Store URL. Should I add a `data-app-store-url` config switch so it's a 1-line change at that point?
+- Plan to generate a PGP key for `security.txt`'s `Encryption:` field, or leave it indefinite?
+
+**Notes for next-Claude**:
+- **Site is live at https://www.privacyscore.fr/** behind Cloudflare → Plesk (Nginx + Apache) on Hostinger CDG.
+- **22 HTML pages** in `dist/`: 19 indexable, 1 root sniffer (noindex), 1 404, 3 FR-slug redirect stubs. Sitemap = 18 URLs. Total `dist/` ≈ 4 MB.
+- **Plesk Nginx config gotcha**: Plesk auto-generates a `location = /404.html { internal; }` block. Adding ours duplicates it and fails validation. Just use `proxy_intercept_errors on; error_page 404 /404.html;` — nothing else.
+- **CSP relaxation is intentional**: `script-src 'self' 'unsafe-inline'`. To tighten later, set Vite `build.assetsInlineLimit: 0` to force JS external, then remove `'unsafe-inline'`. The no-js stripper inline script can be moved to top of `site.js`.
+- **Yandex token**: `2b8c8907535df868`. Lives in `src/components/SEO.astro` (every page via BaseLayout) + `src/pages/index.astro` (the root sniffer, since it bypasses BaseLayout).
+- **Slug-mapping system**: `src/i18n/utils.ts` `PageKey` enum + `pageSlugs[locale]` constant. Add new locale-specific routes there. Blog posts are NOT in the map (they're native-per-locale, switcher routes to blog index).
+- **WebP screenshots in `public/assets/`**: now 660×1434 px each (32-55 KB). DO NOT regenerate to higher resolution without an explicit reason — mobile decode latency was the issue.
+- **`.reveal` animation system**: visible by default, hidden only with `.js-ready` body class. Above-the-fold elements are pre-marked `.in` in `site.js` PASS 1 (synchronous `getBoundingClientRect()`). DO NOT revert to opacity:0 default — it breaks FOUC.
+- **Cloudflare features to leave OFF**: Email Address Obfuscation (just disabled, was Safari perf killer). Likely candidates to also disable if Safari is still slow: Rocket Loader, Auto Minify, Bot Fight Mode.
+- **Subagents that worked well**: `privacy-score-web:copy-writer-fr` + `privacy-score-web:copy-writer-en` produced clean blog posts + about pages on first try, voice rules respected, native keyword research via DataForSEO MCP.
+- **MCP I missed using**: Screaming Frog. User called this out mid-session; was unable to use during session because user had the GUI open (DB lock conflict). Plan to retry next session.
+- **Plesk redirects field**: Don't add `location { internal; }` blocks; Plesk already declares them. Don't add non-trailing-slash redirect variants; `trailingSlash: 'always'` config + Nginx canonicalization handles them.
+- **Mobile Safari vs Brave differential**: not server-side. Brave Shields blocks Cloudflare-injected scripts and bypasses CSP; Safari runs everything. Identifying server-side contributors (like Email Obfuscation) is the lever, not CSP changes.
+
 ---
 
 ## References

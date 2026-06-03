@@ -7,10 +7,10 @@
  *   - hero copy (overline / h1 with strike / lede / 2 CTAs / 3 pillars)
  *   - hero visual (phone mockup with gauge SVG + 2 floating chips)
  *
- * Load-bearing IDs (do NOT rename - `src/assets/site.js` reads them):
- *   - #gaugeArc      (animated stroke-dashoffset)
- *   - #gaugeNum      (counts 0 → 77)
- *   - [data-count-to="2487"]
+ * The gauge ring, gauge number, and the tracker chip all render at their
+ * FINAL values in static HTML (no JS animation). Previously they started at
+ * 0 / empty ring and were tweened by site.js, so the hero showed "0" until
+ * JS ran. There are no JS-driven IDs in this component anymore.
  */
 import type { Locale } from '@i18n/utils';
 
@@ -154,15 +154,17 @@ const { hero, locale } = Astro.props;
                 </filter>
               </defs>
               <circle cx="110" cy="110" r="92" stroke="rgba(255,255,255,0.06)" stroke-width="14" fill="none"/>
-              <circle id="gaugeArc" cx="110" cy="110" r="92"
+              {/* Static final state: ring filled to 77/100.
+                  circumference = 2*pi*92 = 578; offset = 578 * (1 - 0.77) = 133. */}
+              <circle cx="110" cy="110" r="92"
                       stroke="url(#gaugeGrad)" stroke-width="14" fill="none"
                       stroke-linecap="round"
                       filter="url(#gaugeGlow)"
                       transform="rotate(-90 110 110)"
-                      stroke-dasharray="578" stroke-dashoffset="578"/>
+                      stroke-dasharray="578" stroke-dashoffset="133"/>
             </svg>
             <div class="gauge-center">
-              <div class="gauge-num" id="gaugeNum">0</div>
+              <div class="gauge-num">77</div>
               <div class="gauge-grade">{hero.phone.gaugeGrade}</div>
             </div>
           </div>
@@ -180,7 +182,7 @@ const { hero, locale } = Astro.props;
         <span class="material-icons-round" aria-hidden="true">ads_click</span>
         <div>
           <div class="chip-label">{hero.chips.trackers.label}</div>
-          <div class="chip-value"><span data-count-to={hero.chips.trackers.countTo}>0</span></div>
+          <div class="chip-value">{hero.chips.trackers.countTo}</div>
         </div>
       </div>
       <div class="float-chip chip-dns">

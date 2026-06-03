@@ -2,7 +2,9 @@
 /**
  * MetricsSection.astro - 4-up "Privacy Score by the numbers" band.
  * Matches `variation-illustrated.html` lines 1326-1347.
- * Each .metric-num wraps a [data-count-to] span that `site.js` animates.
+ * Numbers render at their final value in static HTML (no JS count-up).
+ * Previously each value started at 0 and animated up via site.js, which
+ * meant the band showed "0 / 0 / 0 / 0" until JS ran.
  */
 interface Metric {
   countTo: number;
@@ -24,7 +26,7 @@ const { metrics } = Astro.props;
     <div class="metric-row reveal">
       {metrics.items.map((m) => (
         <div class="metric">
-          <div class="metric-num"><span data-count-to={m.countTo}>0</span></div>
+          <div class="metric-num">{m.countTo}</div>
           <div class="metric-label">{m.label}</div>
         </div>
       ))}

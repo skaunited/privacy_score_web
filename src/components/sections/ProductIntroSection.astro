@@ -29,11 +29,11 @@ const { product, chapters } = Astro.props;
       <div class="intro-copy reveal">
         <div class="intro-mark">
           <img
-            src="/assets/app-icon-256.png"
+            src="/assets/app-icon-256.webp"
             alt=""
             width="256"
             height="256"
-            loading="lazy"
+            loading="eager"
             decoding="async"
           />
         </div>
@@ -62,9 +62,10 @@ const { product, chapters } = Astro.props;
           <img
             src="/assets/screen-dashboard.webp"
             alt={product.phoneAlt}
-            width="1320"
-            height="2868"
-            loading="lazy"
+            width="720"
+            height="1565"
+            loading="eager"
+            fetchpriority="high"
             decoding="async"
           />
         </div>
