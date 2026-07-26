@@ -41,8 +41,12 @@ interface Props {
 
 const { locale, pathname, nav } = Astro.props;
 
-// Locale-neutral tail (e.g. "/" or "/faq/") - drives the fallback case below.
-const tail = stripLocalePrefix(pathname || `/${locale}/`).replace(/^\/+/, '');
+// Locale-neutral tail (e.g. "" or "faq") - drives the fallback case below.
+// Strip BOTH leading and trailing slashes. Stripping only the leading slash
+// left a trailing one on sub-pages (e.g. "cgu/"), and switcherHref then
+// appended another "/", producing the double-slash URLs (/fr/cgu//) that
+// Google Search Console reported as "alternate page with proper canonical".
+const tail = stripLocalePrefix(pathname || `/${locale}/`).replace(/^\/+/, '').replace(/\/+$/, '');
 
 // Pre-resolve the alternate-locale URLs using the slug mapping. This is what
 // makes /fr/mentions-legales/ switch correctly to /en/legal-notice/ (rather
