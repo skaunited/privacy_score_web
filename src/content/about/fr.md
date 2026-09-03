@@ -17,7 +17,7 @@ Je m'appelle Skander Bahri. Je suis développeur iOS depuis dix ans et je travai
 
 CoDevelop n'est pas une régie publicitaire déguisée en application de confidentialité. Trois principes techniques le rendent vérifiable, pas seulement déclaratif.
 
-**Aucun serveur ne reçoit votre rapport.** Le parsing du Rapport de confidentialité des apps se fait à l'intérieur du bac à sable iOS, sur votre appareil. Le code source iOS est public&nbsp;; vous pouvez chercher `URLSession` ou `URLRequest` dans le dépôt et constater par vous-même qu'aucune requête sortante ne porte vos données.
+**Aucun serveur ne reçoit votre rapport.** Le parsing du Rapport de confidentialité des apps se fait à l'intérieur du bac à sable iOS, sur votre appareil. Vous pouvez le constater par vous-même&nbsp;: en mode Avion, l'application fonctionne toujours, et votre propre Rapport de confidentialité iOS ne montre aucune connexion sortante de Privacy Score.
 
 **Aucun compte n'est créé.** Vous ne saisissez pas d'adresse e-mail, pas de mot de passe, pas d'identifiant social. La seule association possible est votre identifiant Apple, gérée par l'App Store pour la facturation, et qui n'est jamais transmise à CoDevelop.
 

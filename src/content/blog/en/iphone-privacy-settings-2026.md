@@ -117,7 +117,7 @@ The next time you have a quiet ten minutes, do all seven. The audit ages well. M
 
 The App Privacy Report is brilliant. It's also a wall of JSON-style entries, ordered chronologically, without any sense of which domains are tracking infrastructure and which are legitimate app backends. Reading it raw is like reading server logs: possible, useful, exhausting.
 
-That's what we built [Privacy Score](/en/) for. You export the report from iOS (Settings, Privacy &amp; Security, App Privacy Report, Share). Privacy Score reads it on your iPhone, cross-references every domain against the open DuckDuckGo Tracker Radar database, and gives you a score out of 100 plus three to five concrete fixes ranked by how many points they earn back. No server, no account, no cloud. Search the public iOS codebase for `URLSession` and you'll find zero active calls.
+That's what we built [Privacy Score](/en/) for. You export the report from iOS (Settings, Privacy &amp; Security, App Privacy Report, Share). Privacy Score reads it on your iPhone, cross-references every domain against the open DuckDuckGo Tracker Radar database, and gives you a score out of 100 plus three to five concrete fixes ranked by how many points they earn back. No server, no account, no cloud. Turn on Airplane Mode and it still works, because the analysis never leaves your iPhone.
 
 We charge €23.88 per year or €20.94 per six months for new scans. The first scan is free for life. The point is to make iPhone privacy auditing something you do in 60 seconds, not 60 minutes, and to give you a number that climbs over time as you apply fixes. Read more about [how we treat your data](/en/privacy-policy/) (we don't).
 

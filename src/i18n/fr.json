@@ -54,7 +54,7 @@
     },
     "lede": "Chaque app sur votre iPhone parle dans votre dos. Votre position, vos centres d'intérêt, vos déplacements. <strong>Privacy Score</strong> les écoute. Localement. Sans serveur. Sans compte.",
     "ctas": {
-      "primary": "Bientôt disponible sur l'App Store",
+      "primary": "Télécharger sur l'App Store",
       "ghost": "Voir comment"
     },
     "pillars": {
@@ -224,7 +224,7 @@
       "line1": "Ce que Privacy Score",
       "negLine": "ne fait pas."
     },
-    "body": "Une app de confidentialité doit être irréprochable. Le code est public. Voici, ligne par ligne, ce que nous refusons.",
+    "body": "Une app de confidentialité doit être irréprochable. Voici, ligne par ligne, ce que nous refusons.",
     "cards": [
       {
         "title": "Pas de serveur",
@@ -294,34 +294,30 @@
         "a": "Tout disparaît. Le rapport, l'historique de scores, vos préférences&nbsp;: tout vit dans la sandbox iOS de l'app. Apple efface l'ensemble à la désinstallation. Aucune copie ailleurs."
       },
       {
-        "q": "Le code source est-il ouvert ?",
-        "a": "Le dépôt iOS est public et auditable. Les promesses « aucun serveur, aucun compte, tout local » sont vérifiables en cherchant « URLSession » dans le code&nbsp;: aucun résultat actif."
+        "q": "Comment vérifier que l'app ne collecte rien ?",
+        "a": "Privacy Score fonctionne entièrement hors ligne. Vous pouvez le constater vous-même&nbsp;: activez le mode Avion, l'app continue de fonctionner. Et dans votre propre Rapport de confidentialité iOS, Privacy Score ne contacte aucun domaine. Aucun serveur, aucun compte, aucune télémétrie."
       }
     ]
   },
   "cta": {
     "title": "Reprenez le contrôle de vos données.",
     "body": "Soixante secondes pour importer votre rapport. Un score. Trois fixes. Et la satisfaction de savoir exactement où vous fuyiez. Et où vous ne fuyez plus.",
-    "primary": "Bientôt disponible sur l'App Store",
+    "primary": "Télécharger sur l'App Store",
     "note": "iPhone · iPadOS 17+ · gratuit · français & anglais"
   },
   "footer": {
-    "tagline": "Une app indépendante, faite en France. Open-source. Sans cloud, sans compte, sans pisteurs.",
+    "tagline": "Une app indépendante, faite en France. Sans cloud, sans compte, sans pisteurs.",
     "columns": {
       "app": {
         "heading": "App",
         "links": [
           {
-            "label": "App Store (bientôt)",
-            "href": "#"
+            "label": "Télécharger sur l'App Store",
+            "href": "https://apps.apple.com/fr/app/privacy-score-tracker-audit/id6762229573"
           },
           {
-            "label": "Notes de version (bientôt)",
-            "href": "#"
-          },
-          {
-            "label": "Code source (bientôt)",
-            "href": "#"
+            "label": "Notes de version",
+            "href": "https://apps.apple.com/fr/app/privacy-score-tracker-audit/id6762229573"
           }
         ]
       },

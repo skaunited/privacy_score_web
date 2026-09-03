@@ -3,15 +3,13 @@
  * CTASection.astro - final "Download" call to action.
  * Matches `variation-illustrated.html` lines 1426-1448.
  *
- * Pre-launch: the App Store URL does not yet exist, so the primary CTA renders
- * as a semantically disabled `<button>` with `aria-disabled="true"`. The label
- * surfaced via `cta.primary` already says "Bientôt disponible" / "Coming soon"
- * so the disabled state is also communicated as plain text for screen readers
- * and search-engine crawlers.
- *
- * When the App Store URL is confirmed, swap this `<button disabled>` back to
- * `<a href={appStoreUrl}>` and revert the `cta.primary` string.
+ * The app shipped 2026-09 (Privacy Score: Tracker Audit, id6762229573), so the
+ * primary CTA is a real `<a href={APP_STORE_URL[locale]}>` opening the App Store
+ * in a new tab. (It previously rendered as a disabled "Coming soon" button.)
  */
+import type { Locale } from '@i18n/utils';
+import { APP_STORE_URL } from '@i18n/utils';
+
 interface Props {
   cta: {
     title: string;
@@ -19,9 +17,10 @@ interface Props {
     primary: string;
     note: string; // HTML-safe
   };
+  locale: Locale;
 }
 
-const { cta } = Astro.props;
+const { cta, locale } = Astro.props;
 ---
 
 <section id="download" class="cta" aria-labelledby="cta-h2">
@@ -31,10 +30,10 @@ const { cta } = Astro.props;
       <h2 id="cta-h2">{cta.title}</h2>
       <p>{cta.body}</p>
       <div class="cta-buttons">
-        <button type="button" class="btn btn-primary btn-big" aria-disabled="true" disabled>
-          <span class="material-icons-round" aria-hidden="true">schedule</span>
+        <a href={APP_STORE_URL[locale]} class="btn btn-primary btn-big" target="_blank" rel="noopener">
+          <span class="material-icons-round" aria-hidden="true">download</span>
           {cta.primary}
-        </button>
+        </a>
         <span class="cta-note" set:html={cta.note}></span>
       </div>
     </div>

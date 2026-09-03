@@ -10,6 +10,7 @@
 import type { Locale } from '@i18n/utils';
 import {
   LOCALES,
+  APP_STORE_URL,
   localizedPath,
   stripLocalePrefix,
   getAlternateLocaleUrl,
@@ -101,7 +102,7 @@ function switcherHref(target: Locale): string {
         ))}
       </div>
 
-      <a href="#download" class="nav-cta">
+      <a href={APP_STORE_URL[locale]} class="nav-cta" target="_blank" rel="noopener">
         <span class="material-icons-round" aria-hidden="true">download</span>
         {nav.cta}
       </a>

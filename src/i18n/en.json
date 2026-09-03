@@ -54,7 +54,7 @@
     },
     "lede": "Every app on your iPhone is talking behind your back. Your location, your interests, where you spend your evenings. <strong>Privacy Score</strong> listens in. Locally. No server. No account.",
     "ctas": {
-      "primary": "Coming soon on the App Store",
+      "primary": "Download on the App Store",
       "ghost": "See how it works"
     },
     "pillars": {
@@ -224,7 +224,7 @@
       "line1": "What Privacy Score",
       "negLine": "does not do."
     },
-    "body": "A privacy app has to be above reproach. The iOS source code is public. Here, line by line, is what we refuse to do.",
+    "body": "A privacy app has to be above reproach. Here, line by line, is what we refuse to do.",
     "cards": [
       {
         "title": "No server",
@@ -294,34 +294,30 @@
         "a": "Everything goes. The report, the score history, your preferences: it all lives inside the iOS sandbox. Apple wipes it on uninstall. No copy anywhere else."
       },
       {
-        "q": "Is the source code open?",
-        "a": "The iOS source code is public on GitHub and open to audit. The promises “no server, no account, fully on-device” are verifiable: search the codebase for &nbsp;<em>URLSession</em>&nbsp; and you'll find zero active calls."
+        "q": "How can I verify the app collects nothing?",
+        "a": "Privacy Score works entirely offline. You can confirm it yourself: turn on Airplane Mode and the app keeps working. And in your own iOS App Privacy Report, Privacy Score shows zero contacted domains. No server, no account, no telemetry."
       }
     ]
   },
   "cta": {
     "title": "Take back control of your data.",
     "body": "Sixty seconds to import your report. One score. Three fixes. And the quiet satisfaction of knowing exactly where you were leaking. And where you no longer are.",
-    "primary": "Coming soon on the App Store",
+    "primary": "Download on the App Store",
     "note": "iPhone · iPadOS 17+ · free · English &amp; French"
   },
   "footer": {
-    "tagline": "An independent app, made in France. Open-source. No cloud, no account, no trackers.",
+    "tagline": "An independent app, made in France. No cloud, no account, no trackers.",
     "columns": {
       "app": {
         "heading": "App",
         "links": [
           {
-            "label": "App Store (coming soon)",
-            "href": "#"
+            "label": "Download on the App Store",
+            "href": "https://apps.apple.com/app/privacy-score-tracker-audit/id6762229573"
           },
           {
-            "label": "Release notes (coming soon)",
-            "href": "#"
-          },
-          {
-            "label": "Source code (coming soon)",
-            "href": "#"
+            "label": "Release notes",
+            "href": "https://apps.apple.com/app/privacy-score-tracker-audit/id6762229573"
           }
         ]
       },

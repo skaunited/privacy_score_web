@@ -176,7 +176,7 @@ The most common combinations to fix, sorted by impact:
 
 Reading the App Privacy Report raw is doable but draining. There's no UI for "which of these domains are tracking infrastructure versus legitimate app backends?" That's a JSON-style log, scrolled chronologically, with no taxonomy.
 
-That's what [Privacy Score](/en/) does. You export the report from iOS (Settings, Privacy &amp; Security, App Privacy Report, Share). Privacy Score reads it on your iPhone, cross-references every contacted domain against the open DuckDuckGo Tracker Radar database, and shows you which apps are doing what. You get a score out of 100 and three to five concrete fixes ranked by how many points each one earns back. No server, no account, no cloud. The iOS source is public, and a grep for `URLSession` returns zero active calls. See our [privacy policy](/en/privacy-policy/) for the rest.
+That's what [Privacy Score](/en/) does. You export the report from iOS (Settings, Privacy &amp; Security, App Privacy Report, Share). Privacy Score reads it on your iPhone, cross-references every contacted domain against the open DuckDuckGo Tracker Radar database, and shows you which apps are doing what. You get a score out of 100 and three to five concrete fixes ranked by how many points each one earns back. No server, no account, no cloud. It runs entirely on your iPhone, so it keeps working in Airplane Mode. See our [privacy policy](/en/privacy-policy/) for the rest.
 
 The first scan is free for life. Subsequent scans are €23.88 per year or €20.94 per six months via Apple In-App Purchase. The point of the app is to compress the audit from an afternoon to a minute, and to give you a number that goes up over time.
 

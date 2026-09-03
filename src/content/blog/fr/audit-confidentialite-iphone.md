@@ -96,7 +96,7 @@ Faire les six étapes ci-dessus à la main demande, en moyenne, 45 minutes la pr
 Privacy Score reprend ce travail et l'exécute en 30 secondes sur votre iPhone&nbsp;:
 
 - Vous exportez votre Rapport de confidentialité depuis Réglages, et vous le déposez dans l'application.
-- L'analyse se fait **strictement localement**, dans le bac à sable iOS. Aucun serveur n'est contacté, aucun compte n'est créé, aucune télémétrie n'est envoyée. Vous pouvez vérifier ce point en lisant le code source publié et en cherchant `URLSession` ou `URLRequest` dans le dépôt&nbsp;: vous n'en trouverez pas pour des appels sortants liés aux données utilisateur.
+- L'analyse se fait **strictement localement**, dans le bac à sable iOS. Aucun serveur n'est contacté, aucun compte n'est créé, aucune télémétrie n'est envoyée. Vous pouvez vérifier ce point vous-même&nbsp;: en mode Avion, l'analyse fonctionne toujours, et Privacy Score n'apparaît dans aucune connexion sortante de votre Rapport de confidentialité.
 - Chaque domaine contacté est croisé avec la base <a href="https://github.com/duckduckgo/tracker-radar" rel="external">DuckDuckGo Tracker Radar</a> pour identifier la société propriétaire et la catégorie d'usage (publicité, mesure, hébergement).
 - Un score sur 100 résume l'exposition. Trois à cinq solutions concrètes sont proposées par ordre d'impact estimé.
 

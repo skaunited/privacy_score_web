@@ -88,7 +88,7 @@ Privacy Score est une application iOS native qui prend votre Rapport de confiden
 4. Un **score sur 100** est calculé, pondéré par le volume de traceurs uniques, leur réputation et leur concentration. Plus le score est élevé, plus votre exposition est faible.
 5. Trois à cinq **solutions concrètes** sont surfacées, par ordre d'impact estimé&nbsp;: supprimer telle application particulièrement bavarde, révoquer telle autorisation, activer le DNS chiffré, et ainsi de suite.
 
-Le code iOS est ouvert et auditable. La grille de notation est documentée. Le premier audit est gratuit à vie. C'est l'inverse exact du modèle des courtiers en données qui ont alimenté l'enquête sur les Services secrets&nbsp;: vous restez propriétaire de votre rapport, et personne d'autre n'y accède.
+L'analyse reste sur votre appareil, vérifiable en mode Avion. La grille de notation est documentée. Le premier audit est gratuit à vie. C'est l'inverse exact du modèle des courtiers en données qui ont alimenté l'enquête sur les Services secrets&nbsp;: vous restez propriétaire de votre rapport, et personne d'autre n'y accède.
 
 ### Pourquoi un croisement avec une base externe
 

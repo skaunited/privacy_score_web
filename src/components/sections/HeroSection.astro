@@ -13,6 +13,7 @@
  * JS ran. There are no JS-driven IDs in this component anymore.
  */
 import type { Locale } from '@i18n/utils';
+import { APP_STORE_URL } from '@i18n/utils';
 
 // hero.h1 is the SEO-friendly heading carrying the page's primary keyword
 // ("audit confidentialité iPhone" in FR, "App Privacy Report audit" in EN).
@@ -83,7 +84,7 @@ const { hero, locale } = Astro.props;
       <p class="hero-lede" set:html={hero.lede}></p>
 
       <div class="hero-ctas">
-        <a href="#download" class="btn btn-primary">
+        <a href={APP_STORE_URL[locale]} class="btn btn-primary" target="_blank" rel="noopener">
           <span class="material-icons-round" aria-hidden="true">download</span>
           {hero.ctas.primary}
         </a>

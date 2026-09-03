@@ -10,7 +10,7 @@ Privacy Score is built by Skander Bahri, an independent iOS developer based in B
 
 ## What CoDevelop is
 
-CoDevelop is a one-person micro-studio registered in France, run by Skander. It exists to make honest privacy tools that don't ask you to trust them on faith. The pattern most privacy apps land on is uncomfortable: they read your data, route it through their servers, and promise they won't keep anything. You have to believe them. CoDevelop is built on a different premise, that the only credible privacy promise is the one you can verify by reading the source code.
+CoDevelop is a one-person micro-studio registered in France, run by Skander. It exists to make honest privacy tools that don't ask you to trust them on faith. The pattern most privacy apps land on is uncomfortable: they read your data, route it through their servers, and promise they won't keep anything. You have to believe them. CoDevelop is built on a different premise: the only credible privacy promise is one you can verify yourself, on your own device, without taking anyone's word for it.
 
 ## What Privacy Score refuses to do
 
@@ -22,7 +22,7 @@ Three things it refuses to do, on purpose:
 - **No account.** No sign-up, no email, no password. Nothing about your usage can be tied back to you, because nothing about your usage is collected.
 - **No analytics.** No Firebase, no Sentry, no Amplitude, no "anonymized" usage reporting (which is rarely as anonymized as the marketing copy suggests).
 
-You don't have to take our word for any of this. The iOS source code is public on GitHub. A search for `URLSession`, the standard Apple class for making network requests, returns zero active calls. The promise is verifiable.
+You don't have to take our word for any of this. Turn on Airplane Mode and Privacy Score keeps working, because everything happens on your device. And in your own iOS App Privacy Report, Privacy Score shows zero contacted domains. The promise is verifiable, on your own iPhone.
 
 ## Why the first scan is free for life
 

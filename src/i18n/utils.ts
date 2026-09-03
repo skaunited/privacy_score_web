@@ -49,6 +49,18 @@ export const DEFAULT_LOCALE: Locale = 'fr';
 // - canonical, hreflang, og:url, twitter:image - derives from this constant.
 export const SITE_ORIGIN = 'https://www.privacyscore.fr';
 
+/**
+ * App Store URL of the shipped iOS app (Privacy Score: Tracker Audit,
+ * id6762229573). Single source of truth for every "Download" CTA on the site.
+ * FR points at the French storefront; EN uses the geo-agnostic form so Apple
+ * redirects each visitor to their own local store. If the app id ever changes,
+ * this is the only place to update.
+ */
+export const APP_STORE_URL: Record<Locale, string> = {
+  fr: 'https://apps.apple.com/fr/app/privacy-score-tracker-audit/id6762229573',
+  en: 'https://apps.apple.com/app/privacy-score-tracker-audit/id6762229573',
+};
+
 /** `<html lang>` value per locale. Use regioned tags for SEO accuracy. */
 export const htmlLang: Record<Locale, string> = {
   fr: 'fr-FR',
