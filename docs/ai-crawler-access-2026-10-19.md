@@ -74,3 +74,5 @@ Le premier article est revenu à 200 au contrôle immédiat. Le second est reven
 Pour diagnostiquer ce point, accès en lecture aux journaux Nginx/Apache/Plesk, à l’état du serveur et aux événements de pare-feu/Fail2Ban correspondant à ces heures (16:22 et 16:30 à Paris). Vérifier un éventuel refus ou redémarrage de service et les autorisations des plages IP Cloudflare. Ne pas désactiver le pare-feu ni élargir les accès sans cause identifiée. Aucun accès supplémentaire n’est requis pour les modifications Cloudflare déjà réalisées.
 
 Après publication du commit par le propriétaire et mise à jour Plesk, vérifier aussi `/llms.txt` en production ; il n’est pas encore déployé lors de cet audit.
+
+Le contrôle Plesk authentifié a ensuite identifié quatre relais Cloudflare bannis par `plesk-apache-badbot`, un filtre qui classe GPTBot comme mauvais robot et l’absence de restitution de l’IP visiteur dans Nginx. La correction serveur est préparée mais non appliquée : voir [le diagnostic et la proposition Plesk](origin-521-2026-10-19.md).

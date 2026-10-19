@@ -79,6 +79,8 @@ The owner supplied Privacy Score measurement ID **G-QT0QFTD7L5** (property **559
 
 ## Prepare the origin configuration
 
+Before changing server trust settings, see [the authenticated Plesk 521 diagnostic](docs/origin-521-2026-10-19.md). `deploy/cloudflare-realip.nginx.conf` is a separate, **pending** global HTTP-context proposal; it is not part of the domain's generated Additional nginx directives and must not be published to the document root or installed by the website pipeline. Its scope, validation and rollback are documented in that report.
+
 For the Additional nginx directives supplied by the owner on October 19, use **`deploy/plesk-additional.nginx.conf` as the complete replacement for that field**. Do not append it to the old text or paste the two component snippets a second time. It combines slash normalization, the generated migration redirects, custom 404 routing, the existing HSTS/COOP/CORP policies, the consent-compatible Analytics CSP, and cache settings. English `/` remains a 200 page, with no browser-language redirect. The generator and `--check` keep this combined file synchronized with the route registry and security snippet.
 
 HTML is revalidated (`no-cache`); hashed `/_astro/` assets retain a year of caching with `immutable`, and stable `/assets/` files use one hour. No `map` at http level or extra location block is required. Review the effective Plesk locations: their own headers/expiration directives can override server-level inheritance. Validate the panel's merged configuration before saving and check live GET responses afterward.
