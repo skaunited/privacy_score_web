@@ -1,4 +1,5 @@
 ---
+import Icon from '@components/Icon.astro';
 /**
  * Header.astro - site navigation bar.
  *
@@ -14,11 +15,14 @@ import {
   localizedPath,
   stripLocalePrefix,
   getAlternateLocaleUrl,
+  pathForPage,
+  type LocaleLink,
 } from '@i18n/utils';
 
 interface Props {
   locale: Locale;
   pathname: string;
+  alternates?: LocaleLink[];
   nav: {
     brand: string;
     aria: {
@@ -40,7 +44,7 @@ interface Props {
   };
 }
 
-const { locale, pathname, nav } = Astro.props;
+const { locale, pathname, nav, alternates } = Astro.props;
 
 // Locale-neutral tail (e.g. "" or "faq") - drives the fallback case below.
 // Strip BOTH leading and trailing slashes. Stripping only the leading slash
@@ -53,24 +57,24 @@ const tail = stripLocalePrefix(pathname || `/${locale}/`).replace(/^\/+/, '').re
 // makes /fr/mentions-legales/ switch correctly to /en/legal-notice/ (rather
 // than the broken /en/mentions-legales/ a naive swap would produce).
 const altUrls = new Map<Locale, string>(
-  getAlternateLocaleUrl(locale, pathname || `/${locale}/`).map((e) => [
+  (alternates ?? getAlternateLocaleUrl(locale, pathname)).map((e) => [
     e.locale,
     e.url,
   ]),
 );
 
 function switcherHref(target: Locale): string {
-  if (target === locale) return `/${locale}/${tail ? tail + '/' : ''}`;
+  if (target === locale) return pathname;
   return altUrls.get(target) ?? localizedPath(target, tail);
 }
 ---
 
 <header class="site-nav" role="banner">
   <div class="nav-inner">
-    <a class="brand" href={`/${locale}/`} aria-label={nav.aria.brand}>
+    <a class="brand" href={pathForPage(locale, 'home')} aria-label={nav.aria.brand}>
       <img
         class="brand-mark"
-        src="/assets/app-icon-256.png"
+        src="/assets/app-icon-96.webp"
         alt=""
         width="256"
         height="256"
@@ -82,10 +86,10 @@ function switcherHref(target: Locale): string {
     </a>
 
     <nav class="nav-links" aria-label={nav.aria.nav}>
-      <a href="#story">{nav.links.story}</a>
-      <a href="#angles">{nav.links.app}</a>
-      <a href="#manifesto">{nav.links.trust}</a>
-      <a href="#download">{nav.links.download}</a>
+      <a href={`${pathForPage(locale, 'home')}#how`}>{nav.links.story}</a>
+      <a href={`${pathForPage(locale, 'home')}#angles`}>{nav.links.app}</a>
+      <a href={pathForPage(locale, 'blog')}>Blog</a>
+      <a href={`${pathForPage(locale, 'home')}#download`}>{nav.links.download}</a>
     </nav>
 
     <div class="nav-trailing">
@@ -102,8 +106,8 @@ function switcherHref(target: Locale): string {
         ))}
       </div>
 
-      <a href={APP_STORE_URL[locale]} class="nav-cta" target="_blank" rel="noopener">
-        <span class="material-icons-round" aria-hidden="true">download</span>
+      <a href={APP_STORE_URL[locale]} class="nav-cta" target="_blank" rel="noopener" data-cta="header">
+        <Icon name="download" class="material-icons-round" />
         {nav.cta}
       </a>
     </div>
@@ -150,6 +154,9 @@ function switcherHref(target: Locale): string {
   }
 
   @media (max-width: 760px) {
-    .lang-switch { display: none; }
+    .nav-trailing { gap: 8px; }
+    .lang-switch .lang-pill { padding: 8px; min-width: 36px; text-align: center; }
+    .brand-word { display: none; }
+    .brand { min-width: 44px; min-height: 44px; }
   }
 </style>

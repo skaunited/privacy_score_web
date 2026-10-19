@@ -1,0 +1,85 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata, MarkdownHeading } from 'astro';
+import { render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import { getDictionary, pathForPage, APP_STORE_URL, toAbsoluteUrl, type Locale } from '../i18n/utils';
+import { breadcrumbListJsonLd, blogPostingJsonLd } from '../i18n/jsonld';
+import { publishedPosts, postPath, postAlternates } from '../content/blog';
+
+const { post } = Astro.props as { post: CollectionEntry<'blog'> };
+const locale: Locale = post.data.language;
+const fr = locale === 'fr';
+const dict = getDictionary(locale);
+const rendered = await render(post);
+const Content = rendered.Content;
+const headings: MarkdownHeading[] = rendered.headings;
+const all = await publishedPosts();
+const alternates = postAlternates(post, all);
+const related = all.filter((other) => other.data.language === locale && other.id !== post.id).slice(0, 3);
+const url = toAbsoluteUrl(postPath(post));
+const format = new Intl.DateTimeFormat(fr ? 'fr-FR' : 'en-US', { dateStyle: 'long' });
+const screenshots = import.meta.glob<{ default: ImageMetadata }>('/public/assets/screen-*.webp', { eager: true });
+const hero = post.data.hero?.src ? screenshots[`/public${post.data.hero.src}`]?.default : undefined;
+const breadcrumb = breadcrumbListJsonLd([
+  { name: fr ? 'Accueil' : 'Home', url: toAbsoluteUrl(pathForPage(locale, 'home')) },
+  { name: 'Blog', url: toAbsoluteUrl(pathForPage(locale, 'blog')) },
+  { name: post.data.title, url },
+]);
+const article = blogPostingJsonLd({
+  locale, url, title: post.data.title, description: post.data.description,
+  publishedAt: post.data.publishedAt, updatedAt: post.data.updatedAt,
+  authorName: post.data.author, authorUrl: toAbsoluteUrl(pathForPage(locale, 'about')),
+  keywords: post.data.tags,
+  imageUrl: post.data.hero?.src ? toAbsoluteUrl(post.data.hero.src) : undefined,
+});
+---
+<BaseLayout locale={locale} title={`${post.data.title} | Privacy Score`} description={post.data.description}
+  jsonLd={[breadcrumb, article]} alternates={alternates} ogType="article" ogImage={post.data.hero?.src}>
+  <Header locale={locale} pathname={Astro.url.pathname} nav={dict.nav} alternates={alternates.length ? alternates : undefined} />
+  <main id="main-content" class="legal-page">
+    <article class="legal-content blog-post">
+      <nav class="article-breadcrumb" aria-label={fr ? 'Fil d’Ariane' : 'Breadcrumb'}>
+        <a href={pathForPage(locale, 'home')}>{fr ? 'Accueil' : 'Home'}</a> / <a href={pathForPage(locale, 'blog')}>Blog</a>
+      </nav>
+      <h1>{post.data.title}</h1>
+      <p class="article-description">{post.data.description}</p>
+      <p class="article-meta"><a href={pathForPage(locale, 'about')}>{post.data.author}</a> · {fr ? 'Publié le' : 'Published'} <time datetime={post.data.publishedAt.toISOString()}>{format.format(post.data.publishedAt)}</time>
+        {post.data.updatedAt && <> · {fr ? 'Révisé le' : 'Reviewed'} <time datetime={post.data.updatedAt.toISOString()}>{format.format(post.data.updatedAt)}</time></>}
+      </p>
+      {headings.filter((heading) => heading.depth === 2).length > 1 && <nav class="article-toc" aria-label={fr ? 'Dans ce guide' : 'In this guide'}>
+        <h2>{fr ? 'Dans ce guide' : 'In this guide'}</h2>
+        <ul>{headings.filter((heading) => heading.depth === 2).map((heading) => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ul>
+      </nav>}
+      <div class="article-body"><Content /></div>
+      {hero && <figure class="article-screenshot">
+        <Image src={hero} width={300} alt={post.data.hero?.alt ?? ''} loading="lazy" format="webp" />
+        <figcaption>{fr ? 'Capture de l’application. Les valeurs et l’apparence correspondent à cet exemple ; elles ne décrivent pas votre appareil.' : 'App screenshot. Values and appearance belong to this example; they do not describe your device.'}</figcaption>
+      </figure>}
+      <aside class="article-cta">
+        <h2>{fr ? 'Analysez votre propre rapport' : 'Analyze your own report'}</h2>
+        <p>{fr ? 'Premier audit gratuit, traitement du rapport sur votre appareil. Les fonctions Premium sont proposées par achat intégré.' : 'Your first audit is free and report analysis happens on your device. Premium features are available through in-app purchases.'}</p>
+        <a class="btn btn-primary" href={APP_STORE_URL[locale]} data-cta="article">{fr ? 'Télécharger sur l’App Store' : 'Download on the App Store'}</a>
+      </aside>
+      <aside class="article-related">
+        <h2>{fr ? 'Pour continuer' : 'Keep reading'}</h2>
+        <ul>{related.map((other) => <li><a href={postPath(other)}>{other.data.title}</a></li>)}</ul>
+      </aside>
+    </article>
+  </main>
+  <Footer footer={dict.footer} locale={locale} />
+</BaseLayout>
+<style>
+  .article-breadcrumb,.article-meta { color:#b5c3d6; font-size:.875rem; line-height:1.8; }
+  a:not(.btn) { color:#93c5fd; text-decoration:underline; text-underline-offset:3px; }
+  .article-description { font-size:1.2rem; color:#cbd5e1; line-height:1.7; }
+  .article-toc,.article-cta { border:1px solid #38557f; background:#0d1628; padding:1.5rem; border-radius:18px; margin:2rem 0; }
+  .article-toc h2 { margin-top:0; font-size:1.1rem; }
+  .article-toc li,.article-related li { margin:.6rem 0; }
+  .article-screenshot { margin:2.5rem auto; text-align:center; }
+  .article-screenshot img { margin:0 auto; max-width:100%; height:auto; border-radius:24px; }
+  figcaption { font-size:.875rem; line-height:1.6; color:#b5c3d6; max-width:30rem; margin:1rem auto; }
+  .article-related { border-top:1px solid #38557f; margin-top:3rem; }
+</style>

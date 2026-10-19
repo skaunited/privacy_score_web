@@ -1,0 +1,96 @@
+{
+  "date": "2026-10-19",
+  "scope": "Local production build; not deployed to Plesk or Cloudflare",
+  "build": {
+    "astroErrors": 0,
+    "astroWarnings": 0,
+    "astroHints": 0,
+    "htmlFiles": 35,
+    "indexableUrls": 22,
+    "publishedArticles": 8,
+    "articleTranslationGroups": 2
+  },
+  "redirects": {
+    "legacyPaths": 12,
+    "canonicalRoutes": 22,
+    "rules": 34,
+    "checksPassed": 208,
+    "nginxSyntaxValidatedOnOrigin": false
+  },
+  "browser": {
+    "testsPassed": 7,
+    "productionAnalyticsRequestsSent": false,
+    "coverage": [
+      "initial consent and refusal",
+      "acceptance and withdrawal",
+      "cookie deletion",
+      "sanitized page and click parameters",
+      "expired consent",
+      "mobile layout and language controls",
+      "axe WCAG 2 A/AA on four representative pages"
+    ]
+  },
+  "externalLinks": {
+    "uniqueUrls": 27,
+    "successfulFinalHttp200": 27,
+    "evidence": "seo-links-2026-10-19.json",
+    "method": "GET, follow redirects; status is a dated availability check"
+  },
+  "lighthouse": {
+    "version": "13.5.0",
+    "fetchTime": "2026-10-19T07:35:48.946Z",
+    "url": "http://127.0.0.1:4325/",
+    "formFactor": "mobile",
+    "throttlingMethod": "simulate",
+    "scores": {
+      "performance": 99,
+      "accessibility": 100,
+      "best-practices": 100,
+      "seo": 100,
+      "agentic-browsing": 100
+    },
+    "metrics": {
+      "first-contentful-paint": {
+        "value": 1052.292,
+        "unit": "millisecond"
+      },
+      "largest-contentful-paint": {
+        "value": 2027.292,
+        "unit": "millisecond"
+      },
+      "speed-index": {
+        "value": 1052.292,
+        "unit": "millisecond"
+      },
+      "total-blocking-time": {
+        "value": 0,
+        "unit": "millisecond"
+      },
+      "cumulative-layout-shift": {
+        "value": 0,
+        "unit": "unitless"
+      }
+    },
+    "note": "One localhost mobile lab run. Does not measure production latency, edge policy or field Core Web Vitals."
+  },
+  "release": {
+    "archive": "artifacts/privacy-score-web-2026-10-19-final.tar.gz",
+    "sha256": "154de976f3c151b2eecf7c09dee740caadc4121643d8af73a593838e8bd8677f",
+    "regularFiles": 78,
+    "matchesCurrentDist": true,
+    "includesWellKnownSecurity": true,
+    "includesAppleDoubleMetadata": false
+  },
+  "analytics": {
+    "measurementId": "G-QT0QFTD7L5",
+    "propertyId": "559523211",
+    "loader": "after consent only",
+    "reportingConnectorStatus": 403,
+    "liveCollectionVerified": false
+  },
+  "limitations": [
+    "Origin nginx syntax, real 301 status codes, CSP and edge caching need live validation",
+    "GA4 Admin settings and real-time collection need validation after deployment",
+    "Indexing and acquisition changes require post-release Search Console data"
+  ]
+}

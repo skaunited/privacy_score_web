@@ -1,18 +1,18 @@
 ---
 title: Terms of Use
 language: en
-version: 1.0
-last_updated: 2026-05-29
+version: 1.1
+last_updated: 2026-10-19
 publisher: Skander BAHRI (French sole proprietor), CoDevelop
-canonical_url: https://www.privacyscore.fr/en/terms-of-use
+canonical_url: https://www.privacyscore.fr/terms-of-use/
 cross_links:
-  - legal-notice: https://www.privacyscore.fr/en/legal-notice
-  - privacy-policy: https://www.privacyscore.fr/en/privacy-policy
+  - legal-notice: https://www.privacyscore.fr/legal-notice/
+  - privacy-policy: https://www.privacyscore.fr/privacy-policy/
 ---
 
 # Terms of Use
 
-Last updated: May 29, 2026, version 1.0
+Last updated: October 19, 2026, version 1.1
 
 These Terms of Use (the "Terms") govern the use of the **Privacy Score** iOS application and the `privacyscore.fr` website, both published by **Skander BAHRI**, a French sole proprietor (`entrepreneur individuel`) trading as **CoDevelop** ("CoDevelop", "we"). They apply to any adult natural person using the app or the website ("you", "the user").
 
@@ -26,13 +26,13 @@ The `privacyscore.fr` website introduces the app, hosts the documentation, and p
 
 ## 2. Acceptance
 
-These Terms are accepted by any act of use: downloading the app, opening it, importing a report, subscribing, or browsing the website. The applicable version is the one in force at the time of use, available inside the app and at `privacyscore.fr/en/terms-of-use`.
+These Terms are accepted by any act of use: downloading the app, opening it, importing a report, subscribing, or browsing the website. The applicable version is the one in force at the time of use, available inside the app and at [www.privacyscore.fr/terms-of-use/](https://www.privacyscore.fr/terms-of-use/).
 
 ## 3. Access to the Service
 
 ### 3.1 Technical requirements
 
-- An iPhone running iOS 17 or later.
+- An iPhone running iOS 17.6 or later.
 - An active Apple ID is required to download the app from the App Store and to subscribe.
 - The user must have enabled the Apple Privacy Report beforehand at `Settings` &gt; `Privacy &amp; Security` &gt; `App Privacy Report`.
 
@@ -52,12 +52,12 @@ To import a second report and beyond, a paid subscription is required.
 
 CoDevelop offers two subscription plans:
 
-| Plan | Term | Price (incl. VAT) | Effective monthly rate |
-|---|---|---|---|
-| Annual | 12 months | €23.88 | €1.99 / month |
-| Six-month | 6 months | €20.94 | €3.49 / month |
+| French plan | Eligible launch offer | Renewal at current price |
+|---|---|---|
+| Annual | €23.88 for the first year | €59.99/year |
+| Six-month | €20.94 for the first six months | €39.99/six months |
 
-Prices include all taxes (French VAT at the standard 20% rate). Apple may charge slightly different amounts depending on your region, in accordance with its own pricing grid.
+French prices include tax. The launch offer applies only to the first period and eligible subscriptions. Apple displays local prices, eligibility and renewal terms before confirmation; prices may differ by country. Premium includes additional audits, DNS/VPN tools and report export.
 
 ### 5.2 Automatic Renewal (Article L. 215-1 of the French Consumer Code)
 
@@ -126,7 +126,7 @@ Any reproduction or reuse beyond that scope is prohibited and exposes the user t
 
 ## 9. Personal Data
 
-The processing of your data is described in the [Privacy Policy](https://www.privacyscore.fr/en/privacy-policy), which together with these Terms forms a consistent contractual whole.
+The processing of your data is described in the [Privacy Policy](https://www.privacyscore.fr/privacy-policy/), which together with these Terms forms a consistent contractual whole.
 
 ## 10. Liability
 

@@ -1,0 +1,34 @@
+---
+import type { Locale } from '../i18n/utils';
+import { PRODUCT } from '../config/product';
+const { locale } = Astro.props as { locale: Locale };
+const measurementId = (import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? PRODUCT.gaMeasurementId).trim();
+if (measurementId && !/^G-[A-Z0-9]+$/.test(measurementId)) {
+  throw new Error('PUBLIC_GA_MEASUREMENT_ID must be a GA4 measurement ID (G-…).');
+}
+const fr = locale === 'fr';
+---
+{measurementId && <section class="consent-panel" id="audience-consent" data-measurement-id={measurementId}
+  data-locale={locale} hidden aria-labelledby="consent-title" aria-describedby="consent-description">
+  <h2 id="consent-title">{fr ? 'Mesure d’audience facultative' : 'Optional audience measurement'}</h2>
+  <p id="consent-description">{fr
+    ? 'Avec votre accord, Google Analytics mesure les visites du site et les clics vers l’App Store. Aucun rapport de confidentialité n’est transmis. Vous pouvez refuser ou modifier votre choix dans le pied de page.'
+    : 'With your permission, Google Analytics measures website visits and App Store clicks. No privacy report is sent. You can decline or change your choice in the footer.'}</p>
+  <a href={fr ? '/fr/politique-de-confidentialite/#mesure-du-site' : '/privacy-policy/#website-measurement'}>{fr ? 'Détails sur la mesure du site' : 'Website measurement details'}</a>
+  <div class="consent-actions">
+    <button type="button" data-consent="denied">{fr ? 'Refuser' : 'Decline'}</button>
+    <button type="button" data-consent="granted">{fr ? 'Accepter' : 'Accept'}</button>
+  </div>
+</section>}
+<script>
+  import '../assets/analytics';
+</script>
+<style>
+  .consent-panel { position:fixed; bottom:20px; left:20px; z-index:200; max-width:480px; max-height:70vh; overflow:auto; margin-right:20px; padding:1.5rem; background:#0d1628; border:1px solid #7592bc; border-radius:20px; box-shadow:0 8px 32px #0009; }
+  .consent-panel[hidden] { display:none; }
+  h2 { font-size:1.15rem; margin:0 0 .75rem; }
+  p { color:#d5deec; line-height:1.6; font-size:.95rem; }
+  a { color:#93c5fd; text-decoration:underline; }
+  .consent-actions { display:flex; gap:12px; margin-top:1rem; }
+  button { background:#243957; border:1px solid #93c5fd; border-radius:999px; color:#f8fafc; padding:12px 20px; min-height:44px; font:inherit; cursor:pointer; flex:1; }
+</style>

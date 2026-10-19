@@ -1,0 +1,33 @@
+--- a/astro.config.mjs
++++ b/astro.config.mjs
+@@ -14,6 +14,9 @@
+ const excludedSitemapUrls = new Set([
+   `${SITE}/`,
+   `${SITE}/404/`,
++  // Temporary editorial quarantine: do not submit these pages for indexing.
++  `${SITE}/en/blog/iphone-permissions-guide/`,
++  `${SITE}/en/blog/iphone-privacy-settings-2026/`,
+ ]);
+ 
+ // 301 redirects for the FR slug rename (2026-06-01).
+--- a/src/pages/en/blog/[slug].astro
++++ b/src/pages/en/blog/[slug].astro
+@@ -61,6 +61,7 @@
+ 
+ <BaseLayout
+   locale={locale}
++  noindex={['iphone-permissions-guide', 'iphone-privacy-settings-2026'].includes(post.data.slug)}
+   title={title}
+   description={description}
+   jsonLd={[breadcrumb, article]}
+--- a/src/components/SEO.astro
++++ b/src/components/SEO.astro
+@@ -99,7 +99,7 @@
+ const enUrl = locale === 'en' ? canonical : (altMap.en ?? localizedUrl('en'));
+ // x-default points to the FR variant of THIS page (primary market).
+ const xDefaultUrl = frUrl;
+-const emitHreflang = !canonicalOverride;
++const emitHreflang = !canonicalOverride && !noindex;
+ 
+ // ---------------------------------------------------------------------------
+ // Open Graph helpers

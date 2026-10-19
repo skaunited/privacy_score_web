@@ -21,9 +21,9 @@ import {
   SITE_ORIGIN,
   hreflangTag,
   htmlLang,
-  stripLocalePrefix,
   toAbsoluteUrl,
-  getAlternateLocaleUrl,
+  getEquivalentLocaleUrls,
+  type LocaleLink,
 } from '@i18n/utils';
 
 interface Props {
@@ -45,6 +45,8 @@ interface Props {
    * hreflang pairs (those URLs don't exist; Astro emits a single /404/).
    */
   canonicalOverride?: string;
+  alternates?: LocaleLink[];
+  ogType?: 'website' | 'article';
 }
 
 const {
@@ -57,49 +59,15 @@ const {
   ogImage,
   noindex = false,
   canonicalOverride,
+  alternates,
+  ogType = 'website',
 } = Astro.props;
 
-// ---------------------------------------------------------------------------
-// URL helpers
-// ---------------------------------------------------------------------------
-
-/** Ensure exactly one leading slash and one trailing slash. */
-function normalizeWithTrailingSlash(path: string): string {
-  let p = (path || '/').trim();
-  if (!p.startsWith('/')) p = `/${p}`;
-  if (!p.endsWith('/')) p = `${p}/`;
-  return p;
-}
-
-const normalizedPathname = normalizeWithTrailingSlash(pathname);
-
-/** Locale-neutral remainder, e.g. `/fr/faq/` -> `/faq/`, `/fr/` -> `/`. */
-const remainder = stripLocalePrefix(normalizedPathname);
-const remainderWithSlashes = normalizeWithTrailingSlash(remainder);
-
-/** Build `/{locale}{remainder}` with guaranteed trailing slash. */
-function localizedUrl(loc: Locale): string {
-  const tail = remainderWithSlashes === '/' ? '/' : remainderWithSlashes;
-  return toAbsoluteUrl(`/${loc}${tail}`);
-}
-
-// Canonical: either an explicit override (e.g. 404.astro forcing /404/) or
-// the computed current page URL. Overrides also suppress hreflang emission
-// since pages that need an override are typically standalone (no locale pairs).
-const canonical = canonicalOverride ?? localizedUrl(locale);
-
-// hreflang URLs MUST use the locale-aware slug mapping so that, for example,
-// /fr/mentions-legales/ correctly advertises /en/legal-notice/ as its English
-// counterpart (not the broken /en/mentions-legales/ a naive swap would emit).
-const altEntries = getAlternateLocaleUrl(locale, normalizedPathname);
-const altMap: Partial<Record<Locale, string>> = {};
-for (const e of altEntries) altMap[e.locale] = toAbsoluteUrl(e.url);
-
-const frUrl = locale === 'fr' ? canonical : (altMap.fr ?? localizedUrl('fr'));
-const enUrl = locale === 'en' ? canonical : (altMap.en ?? localizedUrl('en'));
-// x-default points to the FR variant of THIS page (primary market).
-const xDefaultUrl = frUrl;
-const emitHreflang = !canonicalOverride;
+const normalizedPathname = pathname.endsWith('/') ? pathname : `${pathname}/`;
+const canonical = canonicalOverride ?? toAbsoluteUrl(normalizedPathname);
+const altEntries = alternates ?? getEquivalentLocaleUrls(normalizedPathname);
+const xDefaultUrl = altEntries.find((entry) => entry.locale === 'en')?.url;
+const emitHreflang = !canonicalOverride && !noindex && altEntries.length > 1;
 
 // ---------------------------------------------------------------------------
 // Open Graph helpers
@@ -117,6 +85,7 @@ const resolvedOgTitle = ogTitle ?? title;
 const resolvedOgDescription = ogDescription ?? description;
 
 const resolvedOgImagePath = ogImage ?? '/assets/app-icon-512.png';
+const isDefaultImage = !ogImage;
 const absoluteOgImage = resolvedOgImagePath.startsWith('http')
   ? resolvedOgImagePath
   : toAbsoluteUrl(resolvedOgImagePath);
@@ -149,14 +118,13 @@ void htmlLang;
 {/* 7. hreflang - suppressed when canonicalOverride is set (e.g. 404) */}
 {emitHreflang && (
   <>
-    <link rel="alternate" hreflang={hreflangTag.fr} href={frUrl} />
-    <link rel="alternate" hreflang={hreflangTag.en} href={enUrl} />
-    <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />
+    {altEntries.map((entry) => <link rel="alternate" hreflang={hreflangTag[entry.locale]} href={toAbsoluteUrl(entry.url)} />)}
+    {xDefaultUrl && <link rel="alternate" hreflang="x-default" href={toAbsoluteUrl(xDefaultUrl)} />}
   </>
 )}
 
 {/* 8. Open Graph */}
-<meta property="og:type" content="website" />
+<meta property="og:type" content={ogType} />
 <meta property="og:site_name" content="Privacy Score" />
 <meta property="og:locale" content={ogLocale} />
 <meta property="og:locale:alternate" content={ogAlternateLocale} />
@@ -164,9 +132,7 @@ void htmlLang;
 <meta property="og:description" content={resolvedOgDescription} />
 <meta property="og:url" content={canonical} />
 <meta property="og:image" content={absoluteOgImage} />
-<meta property="og:image:width" content="512" />
-<meta property="og:image:height" content="512" />
-<meta property="og:image:type" content="image/png" />
+{isDefaultImage && <><meta property="og:image:width" content="512" /><meta property="og:image:height" content="512" /><meta property="og:image:type" content="image/png" /></>}
 <meta property="og:image:alt" content="Privacy Score" />
 
 {/* 9. Twitter */}

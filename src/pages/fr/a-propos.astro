@@ -43,7 +43,7 @@ const person = personJsonLd({
   jsonLd={[breadcrumb, person]}
 >
   <Header locale={locale} pathname={Astro.url.pathname} nav={dict.nav} />
-  <main class="legal-page">
+  <main id="main-content" class="legal-page">
     <article class="legal-content">
       <h1>{entry.data.title}</h1>
       <Content />

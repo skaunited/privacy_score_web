@@ -1,4 +1,5 @@
 ---
+import Icon from '@components/Icon.astro';
 /**
  * ProductIntroSection.astro - Chapter 02/05 "Le produit".
  * Matches `variation-illustrated.html` lines 1082-1119.
@@ -29,11 +30,11 @@ const { product, chapters } = Astro.props;
       <div class="intro-copy reveal">
         <div class="intro-mark">
           <img
-            src="/assets/app-icon-256.webp"
+            src="/assets/app-icon-96.webp"
             alt=""
             width="256"
             height="256"
-            loading="eager"
+            loading="lazy"
             decoding="async"
           />
         </div>
@@ -50,7 +51,7 @@ const { product, chapters } = Astro.props;
         <ul class="intro-bullets">
           {product.bullets.map((bullet) => (
             <li>
-              <span class="material-icons-round" aria-hidden="true">check</span>
+              <Icon name="check" class="material-icons-round" />
               {bullet}
             </li>
           ))}
@@ -64,8 +65,7 @@ const { product, chapters } = Astro.props;
             alt={product.phoneAlt}
             width="720"
             height="1565"
-            loading="eager"
-            fetchpriority="high"
+            loading="lazy"
             decoding="async"
           />
         </div>

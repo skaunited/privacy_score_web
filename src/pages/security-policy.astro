@@ -21,8 +21,8 @@ const title = `Security Policy & Responsible Disclosure | Privacy Score`;
 const description = "Responsible disclosure policy for Privacy Score. How to report a vulnerability, what we commit to, and the acknowledgments wall.";
 
 const breadcrumb = breadcrumbListJsonLd([
-  { name: 'Home', url: 'https://www.privacyscore.fr/en/' },
-  { name: 'Security Policy', url: 'https://www.privacyscore.fr/en/security-policy/' },
+  { name: 'Home', url: 'https://www.privacyscore.fr/' },
+  { name: 'Security Policy', url: 'https://www.privacyscore.fr/security-policy/' },
 ]);
 ---
 
@@ -33,7 +33,7 @@ const breadcrumb = breadcrumbListJsonLd([
   jsonLd={breadcrumb}
 >
   <Header locale={locale} pathname={Astro.url.pathname} nav={dict.nav} />
-  <main class="legal-page">
+  <main id="main-content" class="legal-page">
     <article class="legal-content">
       <h1>Security Policy</h1>
       <p>
@@ -74,15 +74,14 @@ const breadcrumb = breadcrumbListJsonLd([
       <h2 id="acknowledgments">Acknowledgments</h2>
       <p>
         Researchers who have responsibly disclosed vulnerabilities will be
-        listed here, with their consent. This wall is currently empty because
-        the app has not yet shipped to the public App Store.
+        listed here, with their consent. No public acknowledgments have been recorded here yet.
       </p>
 
       <h2>Related documents</h2>
       <ul>
         <li><a href="/.well-known/security.txt">security.txt</a> (machine-readable)</li>
-        <li><a href="/en/privacy-policy/">Privacy Policy</a></li>
-        <li><a href="/en/legal-notice/">Legal Notice</a></li>
+        <li><a href="/privacy-policy/">Privacy Policy</a></li>
+        <li><a href="/legal-notice/">Legal Notice</a></li>
       </ul>
     </article>
   </main>

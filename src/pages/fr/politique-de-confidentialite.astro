@@ -13,13 +13,13 @@ import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import { getDictionary } from '@i18n/utils';
 import { breadcrumbListJsonLd } from '@i18n/jsonld';
-import { Content, frontmatter } from '../../content/legal/fr/politique-de-confidentialite.md';
+import { Content } from '../../content/legal/fr/politique-de-confidentialite.md';
 
 const locale = 'fr' as const;
 const dict = getDictionary(locale);
 
 const title = `Politique de confidentialité : Privacy Score, app iOS`;
-const description = "Politique de confidentialité Privacy Score : traitement 100% local, aucun serveur, aucun compte, aucun analytics. Conforme RGPD et CNIL.";
+const description = 'Traitement local des rapports dans l’application Privacy Score, et informations sur la mesure facultative du site web après consentement.';
 
 const breadcrumb = breadcrumbListJsonLd([
   { name: 'Accueil', url: 'https://www.privacyscore.fr/fr/' },
@@ -29,7 +29,7 @@ const breadcrumb = breadcrumbListJsonLd([
 
 <BaseLayout locale={locale} title={title} description={description} jsonLd={breadcrumb}>
   <Header locale={locale} pathname={Astro.url.pathname} nav={dict.nav} />
-  <main class="legal-page">
+  <main id="main-content" class="legal-page">
     <article class="legal-content">
       <Content />
     </article>

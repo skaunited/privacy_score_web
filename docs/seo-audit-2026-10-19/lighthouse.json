@@ -1,0 +1,1977 @@
+[
+  {
+    "url": "https://www.privacyscore.fr/fr/",
+    "finalUrl": "https://www.privacyscore.fr/fr/",
+    "version": "13.4.0",
+    "fetchTime": "2026-10-19T06:39:48.779Z",
+    "runWarnings": [],
+    "config": {
+      "output": [
+        "json"
+      ],
+      "maxWaitForFcp": 30000,
+      "maxWaitForLoad": 45000,
+      "pauseAfterFcpMs": 1000,
+      "pauseAfterLoadMs": 1000,
+      "networkQuietThresholdMs": 1000,
+      "cpuQuietThresholdMs": 1000,
+      "formFactor": "mobile",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "throttlingMethod": "simulate",
+      "screenEmulation": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      },
+      "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+      "auditMode": false,
+      "gatherMode": false,
+      "clearStorageTypes": [
+        "file_systems",
+        "shader_cache",
+        "service_workers",
+        "cache_storage"
+      ],
+      "disableStorageReset": true,
+      "debugNavigation": false,
+      "channel": "cli",
+      "usePassiveGathering": false,
+      "disableFullPageScreenshot": false,
+      "skipAboutBlank": false,
+      "blankPage": "about:blank",
+      "ignoreStatusCode": false,
+      "locale": "en-US",
+      "blockedUrlPatterns": null,
+      "additionalTraceCategories": null,
+      "extraHeaders": null,
+      "precomputedLanternData": null,
+      "onlyAudits": null,
+      "onlyCategories": [
+        "accessibility",
+        "best-practices",
+        "performance",
+        "seo"
+      ],
+      "skipAudits": [
+        "full-page-screenshot"
+      ]
+    },
+    "categories": {
+      "performance": {
+        "score": 0.99,
+        "title": "Performance"
+      },
+      "accessibility": {
+        "score": 0.92,
+        "title": "Accessibility"
+      },
+      "best-practices": {
+        "score": 0.92,
+        "title": "Best Practices"
+      },
+      "seo": {
+        "score": 1,
+        "title": "SEO"
+      }
+    },
+    "metrics": {
+      "first-contentful-paint": {
+        "score": 0.99,
+        "value": 1191.35,
+        "display": "1.2 s"
+      },
+      "largest-contentful-paint": {
+        "score": 0.97,
+        "value": 2022.35,
+        "display": "2.0 s"
+      },
+      "total-blocking-time": {
+        "score": 1,
+        "value": 11,
+        "display": "10 ms"
+      },
+      "cumulative-layout-shift": {
+        "score": 1,
+        "value": 0.007739977060379959,
+        "display": "0.008",
+        "details": {
+          "type": "debugdata",
+          "items": [
+            {
+              "cumulativeLayoutShiftMainFrame": 0.007739977060379959,
+              "newEngineResultDiffered": false
+            }
+          ]
+        }
+      },
+      "speed-index": {
+        "score": 1,
+        "value": 1191.35,
+        "display": "1.2 s"
+      },
+      "server-response-time": {
+        "score": 1,
+        "value": 89,
+        "display": "Root document took 90 ms",
+        "details": {
+          "type": "opportunity",
+          "headings": [
+            {
+              "key": "url",
+              "valueType": "url",
+              "label": "URL"
+            },
+            {
+              "key": "responseTime",
+              "valueType": "timespanMs",
+              "label": "Time Spent"
+            }
+          ],
+          "items": [
+            {
+              "url": "https://www.privacyscore.fr/fr/",
+              "responseTime": 89
+            }
+          ],
+          "overallSavingsMs": 0
+        }
+      },
+      "total-byte-weight": {
+        "score": 1,
+        "value": 855610,
+        "display": "Total size was 836 KiB",
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "url",
+              "valueType": "url",
+              "label": "URL"
+            },
+            {
+              "key": "totalBytes",
+              "valueType": "bytes",
+              "label": "Transfer Size"
+            }
+          ],
+          "items": [
+            {
+              "url": "https://www.privacyscore.fr/assets/app-icon-512.webp",
+              "totalBytes": 260404
+            },
+            {
+              "url": "https://www.privacyscore.fr/_astro/material-icons-round.DrirKXBx.woff2",
+              "totalBytes": 174118
+            },
+            {
+              "url": "https://www.privacyscore.fr/assets/app-icon-256.png",
+              "totalBytes": 147603
+            },
+            {
+              "url": "https://www.privacyscore.fr/assets/app-icon-256.webp",
+              "totalBytes": 71401
+            },
+            {
+              "url": "https://www.privacyscore.fr/assets/screen-recommendations.webp",
+              "totalBytes": 49561
+            },
+            {
+              "url": "https://www.privacyscore.fr/assets/screen-network.webp",
+              "totalBytes": 47710
+            },
+            {
+              "url": "https://www.privacyscore.fr/assets/screen-evolution.webp",
+              "totalBytes": 37042
+            },
+            {
+              "url": "https://www.privacyscore.fr/assets/screen-dashboard.webp",
+              "totalBytes": 36992
+            },
+            {
+              "url": "https://www.privacyscore.fr/fr/",
+              "totalBytes": 30779
+            }
+          ],
+          "sortedBy": [
+            "totalBytes"
+          ]
+        }
+      }
+    },
+    "failures": [
+      {
+        "id": "first-contentful-paint",
+        "title": "First Contentful Paint",
+        "score": 0.99,
+        "display": "1.2 s",
+        "description": "First Contentful Paint marks the time at which the first text or image is painted. [Learn more about the First Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/first-contentful-paint/)."
+      },
+      {
+        "id": "largest-contentful-paint",
+        "title": "Largest Contentful Paint",
+        "score": 0.97,
+        "display": "2.0 s",
+        "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)"
+      },
+      {
+        "id": "max-potential-fid",
+        "title": "Max Potential First Input Delay",
+        "score": 0.7,
+        "display": "190 ms",
+        "description": "The maximum potential First Input Delay that your users could experience is the duration of the longest task. [Learn more about the Maximum Potential First Input Delay metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-max-potential-fid/)."
+      },
+      {
+        "id": "errors-in-console",
+        "title": "Browser errors were logged to the console",
+        "score": 0,
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "sourceLocation",
+              "valueType": "source-location",
+              "label": "Source"
+            },
+            {
+              "key": "description",
+              "valueType": "code",
+              "label": "Description"
+            }
+          ],
+          "items": [
+            {
+              "source": "security",
+              "description": "Refused to load the font 'data:font/woff2;base64,[redacted]' because it violates the following Content Security Policy directive: \"font-src 'self'\".\n",
+              "sourceLocation": {
+                "type": "source-location",
+                "url": "https://www.privacyscore.fr/fr/",
+                "urlProvider": "network",
+                "line": 3,
+                "column": 0
+              }
+            },
+            {
+              "source": "security",
+              "description": "Refused to load the font 'data:font/woff2;base64,[redacted]' because it violates the following Content Security Policy directive: \"font-src 'self'\".\n",
+              "sourceLocation": {
+                "type": "source-location",
+                "url": "https://www.privacyscore.fr/fr/",
+                "urlProvider": "network",
+                "line": 3,
+                "column": 0
+              }
+            }
+          ]
+        },
+        "description": "Errors logged to the console indicate unresolved problems. They can come from network request failures and other browser concerns. [Learn more about this errors in console diagnostic audit](https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/)"
+      },
+      {
+        "id": "interactive",
+        "title": "Time to Interactive",
+        "score": 0.99,
+        "display": "2.0 s",
+        "description": "Time to Interactive is the amount of time it takes for the page to become fully interactive. [Learn more about the Time to Interactive metric](https://developer.chrome.com/docs/lighthouse/performance/interactive/)."
+      },
+      {
+        "id": "color-contrast",
+        "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+        "score": 0,
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "node",
+              "valueType": "node",
+              "subItemsHeading": {
+                "key": "relatedNode",
+                "valueType": "node"
+              },
+              "label": "Failing Elements"
+            }
+          ],
+          "items": [
+            {
+              "node": {
+                "type": "node",
+                "lhId": "1-8-SPAN",
+                "path": "1,HTML,1,BODY,4,SECTION,0,DIV,0,DIV,0,DIV,0,SPAN,2,SPAN",
+                "selector": "div.section-head > div.chapter > span.ch-pill > span.ch-total",
+                "boundingRect": {
+                  "top": 8491,
+                  "bottom": 8503,
+                  "left": 241,
+                  "right": 276,
+                  "width": 35,
+                  "height": 12
+                },
+                "snippet": "<span class=\"ch-total\">",
+                "nodeLabel": "/ 05",
+                "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 3.02 (foreground color: #3a659e, background color: #0b162e, font size: 8.3pt (11px), font weight: bold). Expected contrast ratio of 4.5:1"
+              },
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "lhId": "1-9-SPAN",
+                      "path": "1,HTML,1,BODY,4,SECTION,0,DIV,0,DIV,0,DIV,0,SPAN",
+                      "selector": "div.container > div.section-head > div.chapter > span.ch-pill",
+                      "boundingRect": {
+                        "top": 8482,
+                        "bottom": 8514,
+                        "left": 121,
+                        "right": 291,
+                        "width": 171,
+                        "height": 32
+                      },
+                      "snippet": "<span class=\"ch-pill\">",
+                      "nodeLabel": "CHAPITRE 03 / 05"
+                    }
+                  },
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "lhId": "1-10-SECTION",
+                      "path": "1,HTML,1,BODY,4,SECTION",
+                      "selector": "body > section#how",
+                      "boundingRect": {
+                        "top": 8362,
+                        "bottom": 10123,
+                        "left": 0,
+                        "right": 412,
+                        "width": 412,
+                        "height": 1762
+                      },
+                      "snippet": "<section id=\"how\" class=\"how\" aria-labelledby=\"how-h2\">",
+                      "nodeLabel": "CHAPITRE 03 / 05\nLA MÉTHODE\nTrois étapes. Soixante secondes. Hors-ligne.\n1\nios_…"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "node": {
+                "type": "node",
+                "lhId": "1-11-FOOTER",
+                "path": "1,HTML,1,BODY,7,SECTION,0,DIV,0,DIV,2,FOOTER",
+                "selector": "section.trust > div.container > div.trust-quote > footer",
+                "boundingRect": {
+                  "top": 16271,
+                  "bottom": 16308,
+                  "left": 64,
+                  "right": 348,
+                  "width": 284,
+                  "height": 38
+                },
+                "snippet": "<footer>",
+                "nodeLabel": "Pied de page de l'écran Réglages, dans l'app.",
+                "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.23 (foreground color: #64748b, background color: #020617, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "lhId": "1-12-SECTION",
+                      "path": "1,HTML,1,BODY,7,SECTION",
+                      "selector": "body > section.trust",
+                      "boundingRect": {
+                        "top": 15899,
+                        "bottom": 16368,
+                        "left": 0,
+                        "right": 412,
+                        "width": 412,
+                        "height": 470
+                      },
+                      "snippet": "<section class=\"trust\" style=\"padding: 100px 32px 60px;\">",
+                      "nodeLabel": "\"\n\nPrivacy Guard ne voit jamais votre trafic. Il vous montre ce que les autres …"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "node": {
+                "type": "node",
+                "lhId": "1-13-P",
+                "path": "1,HTML,1,BODY,11,FOOTER,0,DIV,0,DIV,1,P",
+                "selector": "footer.site-footer > div.footer-inner > div > p.foot-sub",
+                "boundingRect": {
+                  "top": 18940,
+                  "bottom": 18977,
+                  "left": 32,
+                  "right": 352,
+                  "width": 320,
+                  "height": 38
+                },
+                "snippet": "<p class=\"foot-sub\" style=\"max-width: 320px; margin-top: 14px;\">",
+                "nodeLabel": "Une app indépendante, faite en France. Sans cloud, sans compte, sans pisteurs.",
+                "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.23 (foreground color: #64748b, background color: #020617, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "lhId": "1-14-FOOTER",
+                      "path": "1,HTML,1,BODY,11,FOOTER",
+                      "selector": "body > footer.site-footer",
+                      "boundingRect": {
+                        "top": 18806,
+                        "bottom": 19425,
+                        "left": 0,
+                        "right": 412,
+                        "width": 412,
+                        "height": 619
+                      },
+                      "snippet": "<footer class=\"site-footer\" role=\"contentinfo\">",
+                      "nodeLabel": "Privacy Score\n\nUne app indépendante, faite en France. Sans cloud, sans compte, …"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "node": {
+                "type": "node",
+                "lhId": "1-15-SPAN",
+                "path": "1,HTML,1,BODY,11,FOOTER,2,DIV,0,SPAN",
+                "selector": "body > footer.site-footer > div.container > span",
+                "boundingRect": {
+                  "top": 19360,
+                  "bottom": 19395,
+                  "left": 64,
+                  "right": 267,
+                  "width": 203,
+                  "height": 35
+                },
+                "snippet": "<span>",
+                "nodeLabel": "© 2026 Privacy Score · Made by CoDevelop",
+                "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.23 (foreground color: #64748b, background color: #020617, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "lhId": "1-14-FOOTER",
+                      "path": "1,HTML,1,BODY,11,FOOTER",
+                      "selector": "body > footer.site-footer",
+                      "boundingRect": {
+                        "top": 18806,
+                        "bottom": 19425,
+                        "left": 0,
+                        "right": 412,
+                        "width": 412,
+                        "height": 619
+                      },
+                      "snippet": "<footer class=\"site-footer\" role=\"contentinfo\">",
+                      "nodeLabel": "Privacy Score\n\nUne app indépendante, faite en France. Sans cloud, sans compte, …"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "node": {
+                "type": "node",
+                "lhId": "1-16-A",
+                "path": "1,HTML,1,BODY,11,FOOTER,2,DIV,0,SPAN,1,A",
+                "selector": "footer.site-footer > div.container > span > a",
+                "boundingRect": {
+                  "top": 19378,
+                  "bottom": 19393,
+                  "left": 64,
+                  "right": 128,
+                  "width": 64,
+                  "height": 15
+                },
+                "snippet": "<a href=\"https://codevelop.fr\" rel=\"external\">",
+                "nodeLabel": "CoDevelop",
+                "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.23 (foreground color: #64748b, background color: #020617, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "lhId": "1-14-FOOTER",
+                      "path": "1,HTML,1,BODY,11,FOOTER",
+                      "selector": "body > footer.site-footer",
+                      "boundingRect": {
+                        "top": 18806,
+                        "bottom": 19425,
+                        "left": 0,
+                        "right": 412,
+                        "width": 412,
+                        "height": 619
+                      },
+                      "snippet": "<footer class=\"site-footer\" role=\"contentinfo\">",
+                      "nodeLabel": "Privacy Score\n\nUne app indépendante, faite en France. Sans cloud, sans compte, …"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "node": {
+                "type": "node",
+                "lhId": "1-17-SPAN",
+                "path": "1,HTML,1,BODY,11,FOOTER,2,DIV,1,SPAN",
+                "selector": "body > footer.site-footer > div.container > span",
+                "boundingRect": {
+                  "top": 19360,
+                  "bottom": 19395,
+                  "left": 267,
+                  "right": 348,
+                  "width": 81,
+                  "height": 35
+                },
+                "snippet": "<span>",
+                "nodeLabel": "v 0.1.0 · iOS 17+",
+                "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.23 (foreground color: #64748b, background color: #020617, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "lhId": "1-14-FOOTER",
+                      "path": "1,HTML,1,BODY,11,FOOTER",
+                      "selector": "body > footer.site-footer",
+                      "boundingRect": {
+                        "top": 18806,
+                        "bottom": 19425,
+                        "left": 0,
+                        "right": 412,
+                        "width": 412,
+                        "height": 619
+                      },
+                      "snippet": "<footer class=\"site-footer\" role=\"contentinfo\">",
+                      "nodeLabel": "Privacy Score\n\nUne app indépendante, faite en France. Sans cloud, sans compte, …"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "debugData": {
+            "type": "debugdata",
+            "impact": "serious",
+            "tags": [
+              "cat.color",
+              "wcag2aa",
+              "wcag143",
+              "TTv5",
+              "TT13.c",
+              "EN-301-549",
+              "EN-9.1.4.3",
+              "ACT",
+              "RGAAv4",
+              "RGAA-3.2.1"
+            ]
+          }
+        },
+        "description": "Low-contrast text is difficult or impossible for many users to read. [Learn how to provide sufficient color contrast](https://dequeuniversity.com/rules/axe/4.12/color-contrast)."
+      },
+      {
+        "id": "landmark-one-main",
+        "title": "Document does not have a main landmark.",
+        "score": 0,
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "node",
+              "valueType": "node",
+              "subItemsHeading": {
+                "key": "relatedNode",
+                "valueType": "node"
+              },
+              "label": "Failing Elements"
+            }
+          ],
+          "items": [
+            {
+              "node": {
+                "type": "node",
+                "lhId": "1-18-HTML",
+                "path": "1,HTML",
+                "selector": "html",
+                "boundingRect": {
+                  "top": 0,
+                  "bottom": 19425,
+                  "left": 0,
+                  "right": 412,
+                  "width": 412,
+                  "height": 19425
+                },
+                "snippet": "<html lang=\"fr-FR\" data-theme=\"dark\" class=\"\">",
+                "nodeLabel": "html",
+                "explanation": "Fix all of the following:\n  Document does not have a main landmark"
+              }
+            }
+          ],
+          "debugData": {
+            "type": "debugdata",
+            "impact": "moderate",
+            "tags": [
+              "cat.semantics",
+              "best-practice"
+            ]
+          }
+        },
+        "description": "One main landmark helps screen reader users navigate a web page. [Learn more about landmarks](https://dequeuniversity.com/rules/axe/4.12/landmark-one-main)."
+      },
+      {
+        "id": "list",
+        "title": "Lists do not contain only `<li>` elements and script supporting elements (`<script>` and `<template>`).",
+        "score": 0,
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "node",
+              "valueType": "node",
+              "subItemsHeading": {
+                "key": "relatedNode",
+                "valueType": "node"
+              },
+              "label": "Failing Elements"
+            }
+          ],
+          "items": [
+            {
+              "node": {
+                "type": "node",
+                "lhId": "1-19-OL",
+                "path": "1,HTML,1,BODY,4,SECTION,0,DIV,1,OL",
+                "selector": "body > section#how > div.container > ol.steps",
+                "boundingRect": {
+                  "top": 8750,
+                  "bottom": 10003,
+                  "left": 64,
+                  "right": 348,
+                  "width": 284,
+                  "height": 1253
+                },
+                "snippet": "<ol class=\"steps\">",
+                "nodeLabel": "1\nios_share\nExportez votre Rapport\n\nRéglages iOS → Confidentialité & sécurité →…",
+                "explanation": "Fix all of the following:\n  List element has direct children that are not allowed: article"
+              },
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "lhId": "1-20-ARTICLE",
+                      "path": "1,HTML,1,BODY,4,SECTION,0,DIV,1,OL,0,ARTICLE",
+                      "selector": "section#how > div.container > ol.steps > article.step",
+                      "boundingRect": {
+                        "top": 8750,
+                        "bottom": 9153,
+                        "left": 104,
+                        "right": 348,
+                        "width": 244,
+                        "height": 403
+                      },
+                      "snippet": "<article class=\"step reveal\" data-delay=\"0\">",
+                      "nodeLabel": "1\nios_share\nExportez votre Rapport\n\nRéglages iOS → Confidentialité & sécurité →…"
+                    }
+                  },
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "lhId": "1-21-ARTICLE",
+                      "path": "1,HTML,1,BODY,4,SECTION,0,DIV,1,OL,1,ARTICLE",
+                      "selector": "section#how > div.container > ol.steps > article.step",
+                      "boundingRect": {
+                        "top": 9181,
+                        "bottom": 9566,
+                        "left": 104,
+                        "right": 348,
+                        "width": 244,
+                        "height": 385
+                      },
+                      "snippet": "<article class=\"step reveal\" data-delay=\"120\">",
+                      "nodeLabel": "2\nradar\nPrivacy Score l'analyse\n\nTout se passe sur votre iPhone. Nous croisons …"
+                    }
+                  },
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "lhId": "1-22-ARTICLE",
+                      "path": "1,HTML,1,BODY,4,SECTION,0,DIV,1,OL,2,ARTICLE",
+                      "selector": "section#how > div.container > ol.steps > article.step",
+                      "boundingRect": {
+                        "top": 9594,
+                        "bottom": 10003,
+                        "left": 104,
+                        "right": 348,
+                        "width": 244,
+                        "height": 409
+                      },
+                      "snippet": "<article class=\"step reveal\" data-delay=\"240\">",
+                      "nodeLabel": "3\ntrending_up\nVous corrigez. Vous voyez la courbe monter.\n\nChaque recommandatio…"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "debugData": {
+            "type": "debugdata",
+            "impact": "serious",
+            "tags": [
+              "cat.structure",
+              "wcag2a",
+              "wcag131",
+              "EN-301-549",
+              "EN-9.1.3.1",
+              "RGAAv4",
+              "RGAA-9.3.1"
+            ]
+          }
+        },
+        "description": "Screen readers have a specific way of announcing lists. Ensuring proper list structure aids screen reader output. [Learn more about proper list structure](https://dequeuniversity.com/rules/axe/4.12/list)."
+      },
+      {
+        "id": "inspector-issues",
+        "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "issueType",
+              "valueType": "text",
+              "subItemsHeading": {
+                "key": "url",
+                "valueType": "url"
+              },
+              "label": "Issue type"
+            }
+          ],
+          "items": [
+            {
+              "issueType": "Content security policy",
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "url": "data"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "description": "Issues logged to the `Issues` panel in Chrome Devtools indicate unresolved problems. They can come from network request failures, insufficient security controls, and other browser concerns. Open up the Issues panel in Chrome DevTools for more details on each issue."
+      },
+      {
+        "id": "cache-insight",
+        "title": "Use efficient cache lifetimes",
+        "score": 0,
+        "display": "Est savings of 548 KiB",
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "url",
+              "valueType": "url",
+              "label": "Request"
+            },
+            {
+              "key": "cacheLifetimeMs",
+              "valueType": "ms",
+              "label": "Cache TTL",
+              "displayUnit": "duration"
+            },
+            {
+              "key": "totalBytes",
+              "valueType": "bytes",
+              "label": "Transfer Size",
+              "displayUnit": "kb",
+              "granularity": 1
+            }
+          ],
+          "items": [
+            {
+              "url": "https://www.privacyscore.fr/assets/app-icon-512.webp",
+              "cacheLifetimeMs": 14400000,
+              "totalBytes": 260404,
+              "wastedBytes": 177074.71999999997
+            },
+            {
+              "url": "https://www.privacyscore.fr/_astro/material-icons-round.DrirKXBx.woff2",
+              "cacheLifetimeMs": 14400000,
+              "totalBytes": 174118,
+              "wastedBytes": 118400.23999999999
+            },
+            {
+              "url": "https://www.privacyscore.fr/assets/app-icon-256.png",
+              "cacheLifetimeMs": 14400000,
+              "totalBytes": 147603,
+              "wastedBytes": 100370.04
+            },
+            {
+              "url": "https://www.privacyscore.fr/assets/app-icon-256.webp",
+              "cacheLifetimeMs": 14400000,
+              "totalBytes": 71401,
+              "wastedBytes": 48552.67999999999
+            },
+            {
+              "url": "https://www.privacyscore.fr/assets/screen-recommendations.webp",
+              "cacheLifetimeMs": 14400000,
+              "totalBytes": 49561,
+              "wastedBytes": 33701.479999999996
+            },
+            {
+              "url": "https://www.privacyscore.fr/assets/screen-network.webp",
+              "cacheLifetimeMs": 14400000,
+              "totalBytes": 47710,
+              "wastedBytes": 32442.799999999996
+            },
+            {
+              "url": "https://www.privacyscore.fr/assets/screen-evolution.webp",
+              "cacheLifetimeMs": 14400000,
+              "totalBytes": 37042,
+              "wastedBytes": 25188.559999999998
+            },
+            {
+              "url": "https://www.privacyscore.fr/assets/screen-dashboard.webp",
+              "cacheLifetimeMs": 14400000,
+              "totalBytes": 36992,
+              "wastedBytes": 25154.559999999998
+            }
+          ],
+          "sortedBy": [
+            "wastedBytes"
+          ],
+          "skipSumming": [
+            "cacheLifetimeMs"
+          ],
+          "debugData": {
+            "type": "debugdata",
+            "wastedBytes": 560885.0799999998
+          }
+        },
+        "description": "A long cache lifetime can speed up repeat visits to your page. [Learn more about caching](https://developer.chrome.com/docs/performance/insights/cache)."
+      },
+      {
+        "id": "font-display-insight",
+        "title": "Font display",
+        "score": 0,
+        "display": "Est savings of 100 ms",
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "url",
+              "valueType": "url",
+              "label": "URL"
+            },
+            {
+              "key": "wastedMs",
+              "valueType": "ms",
+              "label": "Est Savings"
+            }
+          ],
+          "items": [
+            {
+              "url": "https://www.privacyscore.fr/_astro/material-icons-round.DrirKXBx.woff2",
+              "wastedMs": 100
+            }
+          ],
+          "skipSumming": [
+            "wastedMs"
+          ]
+        },
+        "description": "Consider setting [font-display](https://developer.chrome.com/docs/performance/insights/font-display) to swap or optional to ensure text is consistently visible. swap can be further optimized to mitigate layout shifts with [font metric overrides](https://developer.chrome.com/blog/font-fallbacks)."
+      },
+      {
+        "id": "image-delivery-insight",
+        "title": "Improve image delivery",
+        "score": 0.5,
+        "display": "Est savings of 143 KiB",
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "node",
+              "valueType": "node",
+              "label": ""
+            },
+            {
+              "key": "url",
+              "valueType": "url",
+              "label": "URL",
+              "subItemsHeading": {
+                "key": "reason",
+                "valueType": "text"
+              }
+            },
+            {
+              "key": "totalBytes",
+              "valueType": "bytes",
+              "label": "Resource Size"
+            },
+            {
+              "key": "wastedBytes",
+              "valueType": "bytes",
+              "label": "Est Savings",
+              "subItemsHeading": {
+                "key": "wastedBytes",
+                "valueType": "bytes"
+              }
+            }
+          ],
+          "items": [
+            {
+              "node": {
+                "type": "node",
+                "lhId": "page-6-IMG",
+                "path": "1,HTML,1,BODY,0,HEADER,0,DIV,0,A,0,IMG",
+                "selector": "header.site-nav > div.nav-inner > a.brand > img.brand-mark",
+                "boundingRect": {
+                  "top": 30,
+                  "bottom": 58,
+                  "left": 49,
+                  "right": 77,
+                  "width": 28,
+                  "height": 28
+                },
+                "snippet": "<img class=\"brand-mark\" src=\"/assets/app-icon-256.png\" alt=\"\" width=\"256\" height=\"256\" loading=\"eager\" decoding=\"async\" fetchpriority=\"high\" data-astro-cid-3ef6ksr2=\"\">",
+                "nodeLabel": "header.site-nav > div.nav-inner > a.brand > img.brand-mark"
+              },
+              "url": "https://www.privacyscore.fr/assets/app-icon-256.png",
+              "totalBytes": 147141,
+              "wastedBytes": 146741,
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "reason": "Using a modern image format (WebP, AVIF) or increasing the image compression could improve this image's download size.",
+                    "wastedBytes": 136218
+                  },
+                  {
+                    "reason": "This image file is larger than it needs to be (256x256) for its displayed dimensions (49x49). Use responsive images to reduce the image download size.",
+                    "wastedBytes": 141750
+                  }
+                ]
+              }
+            }
+          ],
+          "debugData": {
+            "type": "debugdata",
+            "wastedBytes": 146741
+          }
+        },
+        "description": "Reducing the download time of images can improve the perceived load time of the page and LCP. [Learn more about optimizing image size](https://developer.chrome.com/docs/performance/insights/image-delivery)"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Network dependency tree",
+        "score": 0,
+        "details": {
+          "type": "list",
+          "items": [
+            {
+              "type": "list-section",
+              "value": {
+                "type": "network-tree",
+                "chains": {
+                  "8D5C152E917A67595827AAC5046BF11D": {
+                    "url": "https://www.privacyscore.fr/fr/",
+                    "navStartToEndTime": 275,
+                    "transferSize": 30779,
+                    "isLongest": true,
+                    "children": {
+                      "78743.32": {
+                        "url": "https://www.privacyscore.fr/_astro/material-icons-round.DrirKXBx.woff2",
+                        "navStartToEndTime": 379,
+                        "transferSize": 174118,
+                        "isLongest": true,
+                        "children": []
+                      }
+                    }
+                  }
+                },
+                "longestChain": {
+                  "duration": 379
+                }
+              }
+            },
+            {
+              "type": "list-section",
+              "title": "Preconnected origins",
+              "description": "[preconnect](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/) hints help the browser establish a connection earlier in the page load, saving time when the first request for that origin is made. The following are the origins that the page preconnected to.",
+              "value": {
+                "type": "text",
+                "value": "no origins were preconnected"
+              }
+            },
+            {
+              "type": "list-section",
+              "title": "Preconnect candidates",
+              "description": "Add [preconnect](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/) hints to your most important origins, but try to use no more than 4.",
+              "value": {
+                "type": "text",
+                "value": "No additional origins are good candidates for preconnecting"
+              }
+            }
+          ]
+        },
+        "description": "[Avoid chaining critical requests](https://developer.chrome.com/docs/performance/insights/network-dependency-tree) by reducing the length of chains, reducing the download size of resources, or deferring the download of unnecessary resources to improve page load."
+      }
+    ]
+  },
+  {
+    "url": "https://www.privacyscore.fr/en/blog/iphone-permissions-guide/",
+    "finalUrl": "https://www.privacyscore.fr/en/blog/iphone-permissions-guide/",
+    "version": "13.4.0",
+    "fetchTime": "2026-10-19T06:39:53.906Z",
+    "runWarnings": [],
+    "config": {
+      "output": [
+        "json"
+      ],
+      "maxWaitForFcp": 30000,
+      "maxWaitForLoad": 45000,
+      "pauseAfterFcpMs": 1000,
+      "pauseAfterLoadMs": 1000,
+      "networkQuietThresholdMs": 1000,
+      "cpuQuietThresholdMs": 1000,
+      "formFactor": "mobile",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "throttlingMethod": "simulate",
+      "screenEmulation": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      },
+      "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+      "auditMode": false,
+      "gatherMode": false,
+      "clearStorageTypes": [
+        "file_systems",
+        "shader_cache",
+        "service_workers",
+        "cache_storage"
+      ],
+      "disableStorageReset": true,
+      "debugNavigation": false,
+      "channel": "cli",
+      "usePassiveGathering": false,
+      "disableFullPageScreenshot": false,
+      "skipAboutBlank": false,
+      "blankPage": "about:blank",
+      "ignoreStatusCode": false,
+      "locale": "en-US",
+      "blockedUrlPatterns": null,
+      "additionalTraceCategories": null,
+      "extraHeaders": null,
+      "precomputedLanternData": null,
+      "onlyAudits": null,
+      "onlyCategories": [
+        "accessibility",
+        "best-practices",
+        "performance",
+        "seo"
+      ],
+      "skipAudits": [
+        "full-page-screenshot"
+      ]
+    },
+    "categories": {
+      "performance": {
+        "score": 0.98,
+        "title": "Performance"
+      },
+      "accessibility": {
+        "score": 0.92,
+        "title": "Accessibility"
+      },
+      "best-practices": {
+        "score": 0.92,
+        "title": "Best Practices"
+      },
+      "seo": {
+        "score": 1,
+        "title": "SEO"
+      }
+    },
+    "metrics": {
+      "first-contentful-paint": {
+        "score": 1,
+        "value": 1039.568,
+        "display": "1.0 s"
+      },
+      "largest-contentful-paint": {
+        "score": 0.93,
+        "value": 2290.568,
+        "display": "2.3 s"
+      },
+      "total-blocking-time": {
+        "score": 1,
+        "value": 0,
+        "display": "0 ms"
+      },
+      "cumulative-layout-shift": {
+        "score": 1,
+        "value": 0.004792313852310833,
+        "display": "0.005",
+        "details": {
+          "type": "debugdata",
+          "items": [
+            {
+              "cumulativeLayoutShiftMainFrame": 0.004792313852310833,
+              "newEngineResultDiffered": false
+            }
+          ]
+        }
+      },
+      "speed-index": {
+        "score": 1,
+        "value": 1039.568,
+        "display": "1.0 s"
+      },
+      "server-response-time": {
+        "score": 1,
+        "value": 91,
+        "display": "Root document took 90 ms",
+        "details": {
+          "type": "opportunity",
+          "headings": [
+            {
+              "key": "url",
+              "valueType": "url",
+              "label": "URL"
+            },
+            {
+              "key": "responseTime",
+              "valueType": "timespanMs",
+              "label": "Time Spent"
+            }
+          ],
+          "items": [
+            {
+              "url": "https://www.privacyscore.fr/en/blog/iphone-permissions-guide/",
+              "responseTime": 91
+            }
+          ],
+          "overallSavingsMs": 0
+        }
+      },
+      "total-byte-weight": {
+        "score": 1,
+        "value": 418565,
+        "display": "Total size was 409 KiB",
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "url",
+              "valueType": "url",
+              "label": "URL"
+            },
+            {
+              "key": "totalBytes",
+              "valueType": "bytes",
+              "label": "Transfer Size"
+            }
+          ],
+          "items": [
+            {
+              "url": "https://www.privacyscore.fr/_astro/material-icons-round.DrirKXBx.woff2",
+              "totalBytes": 174124
+            },
+            {
+              "url": "https://www.privacyscore.fr/assets/app-icon-256.png",
+              "totalBytes": 147662
+            },
+            {
+              "url": "https://www.privacyscore.fr/assets/app-icon-256.webp",
+              "totalBytes": 71332
+            },
+            {
+              "url": "https://www.privacyscore.fr/en/blog/iphone-permissions-guide/",
+              "totalBytes": 25447
+            }
+          ],
+          "sortedBy": [
+            "totalBytes"
+          ]
+        }
+      }
+    },
+    "failures": [
+      {
+        "id": "largest-contentful-paint",
+        "title": "Largest Contentful Paint",
+        "score": 0.93,
+        "display": "2.3 s",
+        "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn more about the Largest Contentful Paint metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-largest-contentful-paint/)"
+      },
+      {
+        "id": "max-potential-fid",
+        "title": "Max Potential First Input Delay",
+        "score": 0.99,
+        "display": "80 ms",
+        "description": "The maximum potential First Input Delay that your users could experience is the duration of the longest task. [Learn more about the Maximum Potential First Input Delay metric](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-max-potential-fid/)."
+      },
+      {
+        "id": "errors-in-console",
+        "title": "Browser errors were logged to the console",
+        "score": 0,
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "sourceLocation",
+              "valueType": "source-location",
+              "label": "Source"
+            },
+            {
+              "key": "description",
+              "valueType": "code",
+              "label": "Description"
+            }
+          ],
+          "items": [
+            {
+              "source": "security",
+              "description": "Refused to load the font 'data:font/woff2;base64,[redacted]' because it violates the following Content Security Policy directive: \"font-src 'self'\".\n",
+              "sourceLocation": {
+                "type": "source-location",
+                "url": "https://www.privacyscore.fr/en/blog/iphone-permissions-guide/",
+                "urlProvider": "network",
+                "line": 150,
+                "column": 0
+              }
+            },
+            {
+              "source": "security",
+              "description": "Refused to load the font 'data:font/woff2;base64,[redacted]' because it violates the following Content Security Policy directive: \"font-src 'self'\".\n",
+              "sourceLocation": {
+                "type": "source-location",
+                "url": "https://www.privacyscore.fr/en/blog/iphone-permissions-guide/",
+                "urlProvider": "network",
+                "line": 150,
+                "column": 0
+              }
+            }
+          ]
+        },
+        "description": "Errors logged to the console indicate unresolved problems. They can come from network request failures and other browser concerns. [Learn more about this errors in console diagnostic audit](https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/)"
+      },
+      {
+        "id": "interactive",
+        "title": "Time to Interactive",
+        "score": 0.99,
+        "display": "2.3 s",
+        "description": "Time to Interactive is the amount of time it takes for the page to become fully interactive. [Learn more about the Time to Interactive metric](https://developer.chrome.com/docs/lighthouse/performance/interactive/)."
+      },
+      {
+        "id": "color-contrast",
+        "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+        "score": 0,
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "node",
+              "valueType": "node",
+              "subItemsHeading": {
+                "key": "relatedNode",
+                "valueType": "node"
+              },
+              "label": "Failing Elements"
+            }
+          ],
+          "items": [
+            {
+              "node": {
+                "type": "node",
+                "lhId": "1-0-P",
+                "path": "1,HTML,1,BODY,1,MAIN,0,ARTICLE,0,P",
+                "selector": "body > main.legal-page > article.legal-content > p.blog-post-meta",
+                "boundingRect": {
+                  "top": 110,
+                  "bottom": 129,
+                  "left": 20,
+                  "right": 392,
+                  "width": 372,
+                  "height": 19
+                },
+                "snippet": "<p class=\"blog-post-meta\" data-astro-cid-zskweizq=\"\">",
+                "nodeLabel": "Blog  ·  June 1, 2026 · Skander Bahri",
+                "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.23 (foreground color: #64748b, background color: #020617, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "lhId": "1-1-BODY",
+                      "path": "1,HTML,1,BODY",
+                      "selector": "body",
+                      "boundingRect": {
+                        "top": 0,
+                        "bottom": 11631,
+                        "left": 0,
+                        "right": 412,
+                        "width": 412,
+                        "height": 11631
+                      },
+                      "snippet": "<body>",
+                      "nodeLabel": "body"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "node": {
+                "type": "node",
+                "lhId": "1-2-TIME",
+                "path": "1,HTML,1,BODY,1,MAIN,0,ARTICLE,0,P,2,TIME",
+                "selector": "main.legal-page > article.legal-content > p.blog-post-meta > time",
+                "boundingRect": {
+                  "top": 111,
+                  "bottom": 127,
+                  "left": 72,
+                  "right": 161,
+                  "width": 90,
+                  "height": 16
+                },
+                "snippet": "<time datetime=\"2026-06-01T00:00:00.000Z\" data-astro-cid-zskweizq=\"\">",
+                "nodeLabel": "June 1, 2026 ",
+                "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.23 (foreground color: #64748b, background color: #020617, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "lhId": "1-1-BODY",
+                      "path": "1,HTML,1,BODY",
+                      "selector": "body",
+                      "boundingRect": {
+                        "top": 0,
+                        "bottom": 11631,
+                        "left": 0,
+                        "right": 412,
+                        "width": 412,
+                        "height": 11631
+                      },
+                      "snippet": "<body>",
+                      "nodeLabel": "body"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "node": {
+                "type": "node",
+                "lhId": "1-3-P",
+                "path": "1,HTML,1,BODY,2,FOOTER,0,DIV,0,DIV,1,P",
+                "selector": "footer.site-footer > div.footer-inner > div > p.foot-sub",
+                "boundingRect": {
+                  "top": 11167,
+                  "bottom": 11204,
+                  "left": 32,
+                  "right": 352,
+                  "width": 320,
+                  "height": 38
+                },
+                "snippet": "<p class=\"foot-sub\" style=\"max-width: 320px; margin-top: 14px;\">",
+                "nodeLabel": "An independent app, made in France. No cloud, no account, no trackers.",
+                "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.23 (foreground color: #64748b, background color: #020617, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "lhId": "1-4-FOOTER",
+                      "path": "1,HTML,1,BODY,2,FOOTER",
+                      "selector": "body > footer.site-footer",
+                      "boundingRect": {
+                        "top": 11033,
+                        "bottom": 11631,
+                        "left": 0,
+                        "right": 412,
+                        "width": 412,
+                        "height": 599
+                      },
+                      "snippet": "<footer class=\"site-footer\" role=\"contentinfo\">",
+                      "nodeLabel": "Privacy Score\n\nAn independent app, made in France. No cloud, no account, no tra…"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "node": {
+                "type": "node",
+                "lhId": "1-5-SPAN",
+                "path": "1,HTML,1,BODY,2,FOOTER,2,DIV,0,SPAN",
+                "selector": "body > footer.site-footer > div.container > span",
+                "boundingRect": {
+                  "top": 11566,
+                  "bottom": 11601,
+                  "left": 64,
+                  "right": 267,
+                  "width": 203,
+                  "height": 35
+                },
+                "snippet": "<span>",
+                "nodeLabel": "© 2026 Privacy Score · Made by CoDevelop",
+                "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.23 (foreground color: #64748b, background color: #020617, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "lhId": "1-4-FOOTER",
+                      "path": "1,HTML,1,BODY,2,FOOTER",
+                      "selector": "body > footer.site-footer",
+                      "boundingRect": {
+                        "top": 11033,
+                        "bottom": 11631,
+                        "left": 0,
+                        "right": 412,
+                        "width": 412,
+                        "height": 599
+                      },
+                      "snippet": "<footer class=\"site-footer\" role=\"contentinfo\">",
+                      "nodeLabel": "Privacy Score\n\nAn independent app, made in France. No cloud, no account, no tra…"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "node": {
+                "type": "node",
+                "lhId": "1-6-A",
+                "path": "1,HTML,1,BODY,2,FOOTER,2,DIV,0,SPAN,1,A",
+                "selector": "footer.site-footer > div.container > span > a",
+                "boundingRect": {
+                  "top": 11585,
+                  "bottom": 11600,
+                  "left": 64,
+                  "right": 128,
+                  "width": 64,
+                  "height": 15
+                },
+                "snippet": "<a href=\"https://codevelop.fr\" rel=\"external\">",
+                "nodeLabel": "CoDevelop",
+                "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.23 (foreground color: #64748b, background color: #020617, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "lhId": "1-4-FOOTER",
+                      "path": "1,HTML,1,BODY,2,FOOTER",
+                      "selector": "body > footer.site-footer",
+                      "boundingRect": {
+                        "top": 11033,
+                        "bottom": 11631,
+                        "left": 0,
+                        "right": 412,
+                        "width": 412,
+                        "height": 599
+                      },
+                      "snippet": "<footer class=\"site-footer\" role=\"contentinfo\">",
+                      "nodeLabel": "Privacy Score\n\nAn independent app, made in France. No cloud, no account, no tra…"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "node": {
+                "type": "node",
+                "lhId": "1-7-SPAN",
+                "path": "1,HTML,1,BODY,2,FOOTER,2,DIV,1,SPAN",
+                "selector": "body > footer.site-footer > div.container > span",
+                "boundingRect": {
+                  "top": 11566,
+                  "bottom": 11601,
+                  "left": 267,
+                  "right": 348,
+                  "width": 81,
+                  "height": 35
+                },
+                "snippet": "<span>",
+                "nodeLabel": "v 0.1.0 · iOS 17+",
+                "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.23 (foreground color: #64748b, background color: #020617, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+              },
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "lhId": "1-4-FOOTER",
+                      "path": "1,HTML,1,BODY,2,FOOTER",
+                      "selector": "body > footer.site-footer",
+                      "boundingRect": {
+                        "top": 11033,
+                        "bottom": 11631,
+                        "left": 0,
+                        "right": 412,
+                        "width": 412,
+                        "height": 599
+                      },
+                      "snippet": "<footer class=\"site-footer\" role=\"contentinfo\">",
+                      "nodeLabel": "Privacy Score\n\nAn independent app, made in France. No cloud, no account, no tra…"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "debugData": {
+            "type": "debugdata",
+            "impact": "serious",
+            "tags": [
+              "cat.color",
+              "wcag2aa",
+              "wcag143",
+              "TTv5",
+              "TT13.c",
+              "EN-301-549",
+              "EN-9.1.4.3",
+              "ACT",
+              "RGAAv4",
+              "RGAA-3.2.1"
+            ]
+          }
+        },
+        "description": "Low-contrast text is difficult or impossible for many users to read. [Learn how to provide sufficient color contrast](https://dequeuniversity.com/rules/axe/4.12/color-contrast)."
+      },
+      {
+        "id": "link-in-text-block",
+        "title": "Links rely on color to be distinguishable.",
+        "score": 0,
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "node",
+              "valueType": "node",
+              "subItemsHeading": {
+                "key": "relatedNode",
+                "valueType": "node"
+              },
+              "label": "Failing Elements"
+            }
+          ],
+          "items": [
+            {
+              "node": {
+                "type": "node",
+                "lhId": "1-8-A",
+                "path": "1,HTML,1,BODY,1,MAIN,0,ARTICLE,0,P,0,A",
+                "selector": "main.legal-page > article.legal-content > p.blog-post-meta > a",
+                "boundingRect": {
+                  "top": 111,
+                  "bottom": 127,
+                  "left": 20,
+                  "right": 48,
+                  "width": 28,
+                  "height": 16
+                },
+                "snippet": "<a href=\"/en/blog/\" data-astro-cid-zskweizq=\"\">",
+                "nodeLabel": "Blog",
+                "explanation": "Fix any of the following:\n  The link has insufficient color contrast of 1.87:1 with the surrounding text. (Minimum contrast is 3:1, link text: #60a5fa, surrounding text: #64748b)\n  The link has no styling (such as underline) to distinguish it from the surrounding text"
+              },
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "relatedNode": {
+                      "type": "node",
+                      "lhId": "1-0-P",
+                      "path": "1,HTML,1,BODY,1,MAIN,0,ARTICLE,0,P",
+                      "selector": "body > main.legal-page > article.legal-content > p.blog-post-meta",
+                      "boundingRect": {
+                        "top": 110,
+                        "bottom": 129,
+                        "left": 20,
+                        "right": 392,
+                        "width": 372,
+                        "height": 19
+                      },
+                      "snippet": "<p class=\"blog-post-meta\" data-astro-cid-zskweizq=\"\">",
+                      "nodeLabel": "Blog  ·  June 1, 2026 · Skander Bahri"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "debugData": {
+            "type": "debugdata",
+            "impact": "serious",
+            "tags": [
+              "cat.color",
+              "wcag2a",
+              "wcag141",
+              "TTv5",
+              "TT13.a",
+              "EN-301-549",
+              "EN-9.1.4.1",
+              "RGAAv4",
+              "RGAA-10.6.1"
+            ]
+          }
+        },
+        "description": "Low-contrast text is difficult or impossible for many users to read. Link text that is discernible improves the experience for users with low vision. [Learn how to make links distinguishable](https://dequeuniversity.com/rules/axe/4.12/link-in-text-block)."
+      },
+      {
+        "id": "unused-css-rules",
+        "title": "Reduce unused CSS",
+        "score": 0.5,
+        "display": "Est savings of 12 KiB",
+        "details": {
+          "type": "opportunity",
+          "headings": [
+            {
+              "key": "url",
+              "valueType": "url",
+              "label": "URL"
+            },
+            {
+              "key": "totalBytes",
+              "valueType": "bytes",
+              "label": "Transfer Size"
+            },
+            {
+              "key": "wastedBytes",
+              "valueType": "bytes",
+              "label": "Est Savings"
+            }
+          ],
+          "items": [
+            {
+              "url": ".nav-trailing[data-astro-cid-3ef6ksr2]{display:inline-flex;align-items:center;gap:12px} …",
+              "wastedBytes": 11946,
+              "wastedPercent": 75.63998634695793,
+              "totalBytes": 15793
+            }
+          ],
+          "overallSavingsMs": 0,
+          "overallSavingsBytes": 11946,
+          "sortedBy": [
+            "wastedBytes"
+          ],
+          "debugData": {
+            "type": "debugdata",
+            "metricSavings": {
+              "FCP": 0,
+              "LCP": 0
+            }
+          }
+        },
+        "description": "Reduce unused rules from stylesheets and defer CSS not used for above-the-fold content to decrease bytes consumed by network activity. [Learn how to reduce unused CSS](https://developer.chrome.com/docs/lighthouse/performance/unused-css-rules/)."
+      },
+      {
+        "id": "inspector-issues",
+        "title": "Issues were logged in the `Issues` panel in Chrome Devtools",
+        "score": 0,
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "issueType",
+              "valueType": "text",
+              "subItemsHeading": {
+                "key": "url",
+                "valueType": "url"
+              },
+              "label": "Issue type"
+            }
+          ],
+          "items": [
+            {
+              "issueType": "Content security policy",
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "url": "data"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "description": "Issues logged to the `Issues` panel in Chrome Devtools indicate unresolved problems. They can come from network request failures, insufficient security controls, and other browser concerns. Open up the Issues panel in Chrome DevTools for more details on each issue."
+      },
+      {
+        "id": "cache-insight",
+        "title": "Use efficient cache lifetimes",
+        "score": 0,
+        "display": "Est savings of 261 KiB",
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "url",
+              "valueType": "url",
+              "label": "Request"
+            },
+            {
+              "key": "cacheLifetimeMs",
+              "valueType": "ms",
+              "label": "Cache TTL",
+              "displayUnit": "duration"
+            },
+            {
+              "key": "totalBytes",
+              "valueType": "bytes",
+              "label": "Transfer Size",
+              "displayUnit": "kb",
+              "granularity": 1
+            }
+          ],
+          "items": [
+            {
+              "url": "https://www.privacyscore.fr/_astro/material-icons-round.DrirKXBx.woff2",
+              "cacheLifetimeMs": 14400000,
+              "totalBytes": 174124,
+              "wastedBytes": 118404.31999999999
+            },
+            {
+              "url": "https://www.privacyscore.fr/assets/app-icon-256.png",
+              "cacheLifetimeMs": 14400000,
+              "totalBytes": 147662,
+              "wastedBytes": 100410.15999999999
+            },
+            {
+              "url": "https://www.privacyscore.fr/assets/app-icon-256.webp",
+              "cacheLifetimeMs": 14400000,
+              "totalBytes": 71332,
+              "wastedBytes": 48505.759999999995
+            }
+          ],
+          "sortedBy": [
+            "wastedBytes"
+          ],
+          "skipSumming": [
+            "cacheLifetimeMs"
+          ],
+          "debugData": {
+            "type": "debugdata",
+            "wastedBytes": 267320.24
+          }
+        },
+        "description": "A long cache lifetime can speed up repeat visits to your page. [Learn more about caching](https://developer.chrome.com/docs/performance/insights/cache)."
+      },
+      {
+        "id": "font-display-insight",
+        "title": "Font display",
+        "score": 0,
+        "display": "Est savings of 50 ms",
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "url",
+              "valueType": "url",
+              "label": "URL"
+            },
+            {
+              "key": "wastedMs",
+              "valueType": "ms",
+              "label": "Est Savings"
+            }
+          ],
+          "items": [
+            {
+              "url": "https://www.privacyscore.fr/_astro/material-icons-round.DrirKXBx.woff2",
+              "wastedMs": 45
+            }
+          ],
+          "skipSumming": [
+            "wastedMs"
+          ]
+        },
+        "description": "Consider setting [font-display](https://developer.chrome.com/docs/performance/insights/font-display) to swap or optional to ensure text is consistently visible. swap can be further optimized to mitigate layout shifts with [font metric overrides](https://developer.chrome.com/blog/font-fallbacks)."
+      },
+      {
+        "id": "image-delivery-insight",
+        "title": "Improve image delivery",
+        "score": 0,
+        "display": "Est savings of 143 KiB",
+        "details": {
+          "type": "table",
+          "headings": [
+            {
+              "key": "node",
+              "valueType": "node",
+              "label": ""
+            },
+            {
+              "key": "url",
+              "valueType": "url",
+              "label": "URL",
+              "subItemsHeading": {
+                "key": "reason",
+                "valueType": "text"
+              }
+            },
+            {
+              "key": "totalBytes",
+              "valueType": "bytes",
+              "label": "Resource Size"
+            },
+            {
+              "key": "wastedBytes",
+              "valueType": "bytes",
+              "label": "Est Savings",
+              "subItemsHeading": {
+                "key": "wastedBytes",
+                "valueType": "bytes"
+              }
+            }
+          ],
+          "items": [
+            {
+              "node": {
+                "type": "node",
+                "lhId": "page-0-IMG",
+                "path": "1,HTML,1,BODY,0,HEADER,0,DIV,0,A,0,IMG",
+                "selector": "header.site-nav > div.nav-inner > a.brand > img.brand-mark",
+                "boundingRect": {
+                  "top": 30,
+                  "bottom": 58,
+                  "left": 49,
+                  "right": 77,
+                  "width": 28,
+                  "height": 28
+                },
+                "snippet": "<img class=\"brand-mark\" src=\"/assets/app-icon-256.png\" alt=\"\" width=\"256\" height=\"256\" loading=\"eager\" decoding=\"async\" fetchpriority=\"high\" data-astro-cid-3ef6ksr2=\"\">",
+                "nodeLabel": "header.site-nav > div.nav-inner > a.brand > img.brand-mark"
+              },
+              "url": "https://www.privacyscore.fr/assets/app-icon-256.png",
+              "totalBytes": 147141,
+              "wastedBytes": 146741,
+              "subItems": {
+                "type": "subitems",
+                "items": [
+                  {
+                    "reason": "Using a modern image format (WebP, AVIF) or increasing the image compression could improve this image's download size.",
+                    "wastedBytes": 136218
+                  },
+                  {
+                    "reason": "This image file is larger than it needs to be (256x256) for its displayed dimensions (49x49). Use responsive images to reduce the image download size.",
+                    "wastedBytes": 141750
+                  }
+                ]
+              }
+            }
+          ],
+          "debugData": {
+            "type": "debugdata",
+            "wastedBytes": 146741
+          }
+        },
+        "description": "Reducing the download time of images can improve the perceived load time of the page and LCP. [Learn more about optimizing image size](https://developer.chrome.com/docs/performance/insights/image-delivery)"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Network dependency tree",
+        "score": 0,
+        "details": {
+          "type": "list",
+          "items": [
+            {
+              "type": "list-section",
+              "value": {
+                "type": "network-tree",
+                "chains": {
+                  "7F2519285CD9FD98C72511B14B76FD25": {
+                    "url": "https://www.privacyscore.fr/en/blog/iphone-permissions-guide/",
+                    "navStartToEndTime": 177,
+                    "transferSize": 25447,
+                    "isLongest": true,
+                    "children": {
+                      "92798.18": {
+                        "url": "https://www.privacyscore.fr/_astro/material-icons-round.DrirKXBx.woff2",
+                        "navStartToEndTime": 232,
+                        "transferSize": 174124,
+                        "isLongest": true,
+                        "children": []
+                      }
+                    }
+                  }
+                },
+                "longestChain": {
+                  "duration": 232
+                }
+              }
+            },
+            {
+              "type": "list-section",
+              "title": "Preconnected origins",
+              "description": "[preconnect](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/) hints help the browser establish a connection earlier in the page load, saving time when the first request for that origin is made. The following are the origins that the page preconnected to.",
+              "value": {
+                "type": "text",
+                "value": "no origins were preconnected"
+              }
+            },
+            {
+              "type": "list-section",
+              "title": "Preconnect candidates",
+              "description": "Add [preconnect](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/) hints to your most important origins, but try to use no more than 4.",
+              "value": {
+                "type": "text",
+                "value": "No additional origins are good candidates for preconnecting"
+              }
+            }
+          ]
+        },
+        "description": "[Avoid chaining critical requests](https://developer.chrome.com/docs/performance/insights/network-dependency-tree) by reducing the length of chains, reducing the download size of resources, or deferring the download of unnecessary resources to improve page load."
+      }
+    ]
+  }
+]

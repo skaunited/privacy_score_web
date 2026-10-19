@@ -1,49 +1,34 @@
 ---
-title: "À propos de Privacy Score"
-description: "Privacy Score est une application iOS française, sans serveur, sans compte, sans analytics. Édité par CoDevelop, un atelier indépendant à Bordeaux."
+title: "À propos de Privacy Score et de son développeur"
+description: "Privacy Score est développé par Skander Bahri, indépendant chez CoDevelop à Bordeaux. Découvrez le projet, son analyse locale et son modèle économique."
 language: "fr"
 author: "Skander Bahri"
 publishedAt: "2026-06-01"
-updatedAt: "2026-06-01"
+updatedAt: "2026-10-19"
 ---
 
-Privacy Score est une application iOS native, conçue et éditée à Bordeaux par un développeur indépendant. Elle est née d'une enquête publiée fin 2024 par <a href="https://www.404media.co/data-broker-tracked-secret-service-fbi-agents-locado-babel-street-locate-x/" rel="external">404 Media</a> et <a href="https://www.wired.com/story/secret-service-phone-location-data-babel-street/" rel="external">Wired</a>&nbsp;: des journalistes avaient acheté, sur le marché légal des courtiers en données, l'historique de localisation de 26 agents des Services secrets américains. Sans piratage, sans fuite&nbsp;: une simple transaction commerciale alimentée par les SDK publicitaires des applications de tous les jours. Cette histoire est le point de départ de l'application.
+Je m'appelle **Skander Bahri**. Je développe et édite Privacy Score sous le nom commercial **CoDevelop**, en tant qu'entrepreneur individuel à Bordeaux. Vous trouverez les coordonnées de l'éditeur dans les [mentions légales](/fr/mentions-legales/).
 
-## Qui suis-je
+Privacy Score aide à comprendre le Rapport de confidentialité des apps d'Apple : quelles applications ont utilisé certaines autorisations, quels domaines ont été contactés et quelles vérifications peuvent être utiles. Le projet est disponible sur [l'App Store](https://apps.apple.com/fr/app/privacy-score-tracker-audit/id6762229573).
 
-Je m'appelle Skander Bahri. Je suis développeur iOS depuis dix ans et je travaille en entrepreneur individuel sous le nom **CoDevelop**, immatriculé au registre du commerce de Bordeaux sous le SIREN&nbsp;852 583 558. Privacy Score est mon projet personnel, pas un produit de start-up financée. C'est un atelier d'une personne qui prend le temps de bien faire les choses, plutôt qu'une roadmap dictée par un comité d'investissement.
+## Une analyse sur votre appareil
 
-## Ce que CoDevelop n'est pas
+Vous choisissez d'importer le rapport généré par votre iPhone. Privacy Score analyse ce fichier localement, sans compte à créer et sans l'envoyer à un serveur d'analyse. Les [engagements de confidentialité](/fr/politique-de-confidentialite/) détaillent les données traitées et leur gestion.
 
-CoDevelop n'est pas une régie publicitaire déguisée en application de confidentialité. Trois principes techniques le rendent vérifiable, pas seulement déclaratif.
-
-**Aucun serveur ne reçoit votre rapport.** Le parsing du Rapport de confidentialité des apps se fait à l'intérieur du bac à sable iOS, sur votre appareil. Vous pouvez le constater par vous-même&nbsp;: en mode Avion, l'application fonctionne toujours, et votre propre Rapport de confidentialité iOS ne montre aucune connexion sortante de Privacy Score.
-
-**Aucun compte n'est créé.** Vous ne saisissez pas d'adresse e-mail, pas de mot de passe, pas d'identifiant social. La seule association possible est votre identifiant Apple, gérée par l'App Store pour la facturation, et qui n'est jamais transmise à CoDevelop.
-
-**Aucun SDK d'analytics n'est embarqué.** Pas de Firebase Analytics, pas d'AppsFlyer, pas de Sentry, pas d'Amplitude. Si une amélioration future nécessite une mesure d'usage, elle se fera via un mécanisme opt-in et sera documentée dans la <a href="/fr/politique-de-confidentialite/">politique de confidentialité</a> avant déploiement.
-
-C'est l'inverse exact du modèle des courtiers en données qui ont alimenté l'enquête sur les Services secrets. Et c'est vérifiable.
+L'application organise les observations et propose des actions. Son score est un indicateur interne : il ne certifie ni l'absence de suivi, ni la sécurité complète d'un appareil, ni la conformité d'une application au RGPD. Un contact réseau ne révèle pas le contenu d'un échange chiffré.
 
 ## Le modèle économique
 
-Privacy Score fonctionne sur un principe simple&nbsp;: le premier scan est gratuit, à vie. Vous pouvez importer votre Rapport de confidentialité, consulter votre score et toutes les solutions concrètes sans rien payer ni installer de compte. Pour la plupart des utilisateurs, qui font un audit annuel ou semi-annuel, c'est suffisant.
+Le premier audit est gratuit. Un abonnement Premium donne accès aux audits suivants, aux outils DNS/VPN et à l'export des résultats. Les offres, leur durée et les conditions de renouvellement sont affichées dans l'App Store avant confirmation de l'achat.
 
-L'abonnement payant débloque les imports suivants, pour celles et ceux qui veulent suivre leur empreinte mois après mois. Deux formules&nbsp;:
+La facturation et la gestion de l'abonnement passent par Apple. Les fournisseurs DNS ou VPN que vous choisissez ont leurs propres services et politiques de confidentialité ; ils sont distincts du traitement local de votre rapport.
 
-- **Abonnement annuel&nbsp;: 23,88&nbsp;€/an** (soit 1,99&nbsp;€ par mois équivalent).
-- **Abonnement semestriel&nbsp;: 20,94&nbsp;€/6&nbsp;mois** (soit 3,49&nbsp;€ par mois équivalent).
+## Des guides pour comprendre avant d'agir
 
-La facturation passe par l'App Store d'Apple. La résiliation s'effectue à tout moment dans Réglages &rarr; Apple ID &rarr; Abonnements, sans démarche auprès de CoDevelop. Aucune carte bancaire n'est saisie dans Privacy Score.
+Le [blog](/fr/blog/) explique la lecture du rapport, son [import dans l'application](/fr/blog/importer-rapport-confidentialite-iphone/) et les vérifications de confidentialité. Les articles distinguent les observations, les interprétations et les limites. Leur date de révision indique une mise à jour éditoriale ; elle ne signifie pas qu'un test physique a été réalisé à cette date.
 
-Ce choix de prix vise à couvrir les frais récurrents (Apple Developer Program, infrastructure de signature, comptabilité) et à rémunérer le développement et la maintenance. Pas plus.
+## Contact et corrections
 
-## Médiation et recours
+Pour une question, un problème d'import ou une correction à apporter à un guide, écrivez à [support@privacyscore.fr](mailto:support@privacyscore.fr). Indiquez la page ou l'étape concernée. Pour un problème dans l'application, ajoutez les versions d'iOS et de Privacy Score, sans joindre votre rapport complet par défaut.
 
-En cas de différend qui ne trouverait pas de solution par e-mail, vous disposez du droit à une médiation gratuite de la consommation. Le médiateur référencé pour CoDevelop est **CM2C**, 49 rue de Ponthieu, 75008 Paris, joignable sur <a href="https://www.cm2c.net/declarer-un-litige.php" rel="external">cm2c.net</a> ou par e-mail à <a href="mailto:litiges@cm2c.net">litiges@cm2c.net</a>. Le détail de la procédure est précisé dans les <a href="/fr/cgu/">Conditions générales d'utilisation</a>.
-
-## Contact
-
-Pour toute question, suggestion ou signalement, l'adresse de contact est <a href="mailto:support@privacyscore.fr">support@privacyscore.fr</a>. Les e-mails sont lus par moi-même. Comptez un délai de réponse de 48&nbsp;à 72&nbsp;heures ouvrées.
-
-Pour un signalement de sécurité responsable concernant l'application iOS, utilisez la même adresse en préfixant l'objet par `[security]`&nbsp;: vous recevrez un accusé de réception sous 24&nbsp;heures et un retour sous cinq jours ouvrés.
+Pour un signalement de sécurité, utilisez cette adresse en précisant `[security]` dans l'objet. Les [conditions d'utilisation](/fr/cgu/) présentent les conditions du service et les voies de recours.

@@ -25,13 +25,13 @@ const title = `About: Skander Bahri, founder of Privacy Score`;
 const description = entry.data.description;
 
 const breadcrumb = breadcrumbListJsonLd([
-  { name: 'Home', url: 'https://www.privacyscore.fr/en/' },
-  { name: 'About', url: 'https://www.privacyscore.fr/en/about/' },
+  { name: 'Home', url: 'https://www.privacyscore.fr/' },
+  { name: 'About', url: 'https://www.privacyscore.fr/about/' },
 ]);
 
 const person = personJsonLd({
   locale: 'en',
-  url: 'https://www.privacyscore.fr/en/about/',
+  url: 'https://www.privacyscore.fr/about/',
   jobTitle: 'Independent iOS developer, founder of CoDevelop',
 });
 ---
@@ -43,7 +43,7 @@ const person = personJsonLd({
   jsonLd={[breadcrumb, person]}
 >
   <Header locale={locale} pathname={Astro.url.pathname} nav={dict.nav} />
-  <main class="legal-page">
+  <main id="main-content" class="legal-page">
     <article class="legal-content">
       <h1>{entry.data.title}</h1>
       <Content />

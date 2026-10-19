@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import { publishedPosts, postPath } from '../content/blog';
+import { getDictionary, pathForPage, toAbsoluteUrl, type Locale } from '../i18n/utils';
+import { breadcrumbListJsonLd } from '../i18n/jsonld';
+const { locale } = Astro.props as { locale: Locale };
+const fr = locale === 'fr';
+const dict = getDictionary(locale);
+const posts = await publishedPosts(locale);
+const title = fr ? 'Guides confidentialité iPhone et rapport des apps' : 'iPhone Privacy Guides and App Privacy Report Help';
+const description = fr ? 'Lire, importer et comprendre le rapport de confidentialité iPhone. Des guides sur les autorisations, les réglages et les rapports vides.' : 'Read, export and understand your iPhone App Privacy Report. Practical guides to permissions, privacy settings and empty or missing report data.';
+const format = new Intl.DateTimeFormat(fr ? 'fr-FR' : 'en-US', { dateStyle:'long' });
+const breadcrumb = breadcrumbListJsonLd([
+  { name: fr ? 'Accueil' : 'Home', url: toAbsoluteUrl(pathForPage(locale, 'home')) },
+  { name:'Blog', url:toAbsoluteUrl(pathForPage(locale, 'blog')) },
+]);
+---
+<BaseLayout locale={locale} title={`${title} | Privacy Score`} description={description} jsonLd={breadcrumb}>
+  <Header locale={locale} pathname={Astro.url.pathname} nav={dict.nav} />
+  <main id="main-content" class="legal-page">
+    <div class="legal-content">
+      <p class="overline">{fr ? 'Le blog Privacy Score' : 'The Privacy Score blog'}</p>
+      <h1>{title}</h1>
+      <p>{description}</p>
+      <ul class="blog-cards">
+        {posts.map((post) => <li><article>
+          <p class="article-date">{fr ? 'Révisé le' : 'Reviewed'} <time datetime={(post.data.updatedAt ?? post.data.publishedAt).toISOString()}>{format.format(post.data.updatedAt ?? post.data.publishedAt)}</time></p>
+          <h2><a href={postPath(post)}>{post.data.title}</a></h2>
+          <p>{post.data.description}</p>
+          <a class="read-guide" href={postPath(post)}>{fr ? 'Lire le guide' : 'Read the guide'} →</a>
+        </article></li>)}
+      </ul>
+    </div>
+  </main>
+  <Footer footer={dict.footer} locale={locale} />
+</BaseLayout>
+<style>
+  .blog-cards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); list-style:none; gap:1.5rem; padding:0; margin-top:2rem; }
+  li { background:#0d1628; border:1px solid #38557f; border-radius:20px; padding:1.5rem; }
+  h2 { font-size:1.35rem; line-height:1.4; margin:.5rem 0; }
+  p { line-height:1.7; }
+  .article-date { color:#b5c3d6; font-size:.875rem; }
+  .read-guide { color:#93c5fd; text-decoration:underline; text-underline-offset:4px; }
+  @media(max-width:650px) { .blog-cards { grid-template-columns:1fr; } }
+</style>

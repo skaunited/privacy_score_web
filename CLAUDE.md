@@ -10,7 +10,7 @@ This is the canonical decision log for the privacyscore.fr project. Every major 
 
 - **Goal**: SEO-first marketing website for the **Privacy Score** iOS app
 - **Domain**: privacyscore.fr
-- **Languages**: French (primary) + English
+- **Languages**: English at `/` (default) + French at `/fr/`
 - **Owner**: Skander Bahri (Codevelop)
 - **App recap**: see `APP_RECAP.md` in this directory
 
@@ -19,7 +19,7 @@ This is the canonical decision log for the privacyscore.fr project. Every major 
 1. **Always route work through the `privacy-score-web` plugin** — never bypass even if a shortcut seems faster
 2. **SEO is the #1 priority** — every decision is weighed against SEO impact first
 3. **Native bilingual** — FR and EN are written separately by native copywriters, never translated
-4. **Privacy by example** — we're a privacy site; no third-party tracking, no Google Fonts CDN, no analytics that phone home
+4. **Privacy by example** — app reports are analyzed locally. Website GA4 is explicitly authorized by the owner on 2026-10-19, after consent only; keep advertising features disabled and fonts local.
 5. **Performance first** — Lighthouse ≥ 95 across all categories is non-negotiable
 6. **Self-hosted** — user has their own server; deployment targets Nginx on their server, not Vercel/Netlify
 7. **Decisions in this file are binding** — do not change them without explicit user approval
@@ -34,6 +34,17 @@ This is the canonical decision log for the privacyscore.fr project. Every major 
     Do NOT trigger this for: trivial config tweaks, copy edits, simple bug fixes, or quick clarifications. See "Extended thinking trigger guide" section below for examples.
 
 ---
+
+## Current state — 2026-10-19 (supersedes historical routing and analytics defaults)
+
+- Owner explicitly requested migration of English to `/`, preserving French under `/fr/`, full content repair now, several commits, then measurement after one or two months. Do not reintroduce language sniffing at `/` or a general blog quarantine.
+- Public host remains `https://www.privacyscore.fr`; legacy paths need real origin 301s from `deploy/redirects.nginx.conf`. Root English is a product decision, not a promise that `/en/` was penalized.
+- Four revised original articles and four new import/troubleshooting guides are published. Use `translationKey` only for true equivalents. Language-switch navigation and hreflang have separate responsibilities.
+- Owner confirms launch prices in France: annual €23.88 first year, then current €59.99/year; six-month €20.94 first six months, then current €39.99/six months. Central facts live in `src/config/product.ts`; keep duration, renewal and storefront explicit.
+- Owner supplied GA4 measurement ID `G-QT0QFTD7L5`, property `559523211`. The ID is public. Do not add an always-loaded Google snippet: `Analytics.astro` and `analytics.ts` gate it by consent. The current reporting connector needs access to the new property (403 when checked).
+- Search Console is accessible via Windsor.ai for `sc-domain:privacyscore.fr`. Baseline is stored in `docs/seo-audit-2026-10-19/search-console-baseline.json`: last 28 complete days, 7 clicks / 211 impressions; preceding 28 days, 6 / 207. Small numbers, no causal claim of a recent drop.
+- Current operations are in `DEPLOY.md`, `SEO.md`, package scripts and `docs/seo-rebuild-2026-10-19.md`. Older audit conclusions and decisions below are historical.
+- Titles and descriptions have no strict indexing character threshold. Do not invent keyword volumes, minimum word counts, app versions, iOS device tests, ratings or AI-citation guarantees. A good translation/adaptation is not intrinsically penalized.
 
 ## Decision log
 
