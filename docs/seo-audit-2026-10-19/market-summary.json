@@ -1,0 +1,234 @@
+{
+  "audited_at": "2026-10-19",
+  "locations": {
+    "fr": "France / French",
+    "en": "United States / English"
+  },
+  "historical_fr": [
+    {
+      "year": 2026,
+      "month": 10,
+      "organic_count": 1,
+      "estimated_traffic_volume": 0.23100000619888306
+    },
+    {
+      "year": 2026,
+      "month": 9,
+      "organic_count": 1,
+      "estimated_traffic_volume": 0.23100000619888306
+    },
+    {
+      "year": 2026,
+      "month": 8,
+      "organic_count": 1,
+      "estimated_traffic_volume": 0.23100000619888306
+    },
+    {
+      "year": 2026,
+      "month": 7,
+      "organic_count": null,
+      "estimated_traffic_volume": null
+    },
+    {
+      "year": 2026,
+      "month": 6,
+      "organic_count": null,
+      "estimated_traffic_volume": null
+    },
+    {
+      "year": 2026,
+      "month": 5,
+      "organic_count": null,
+      "estimated_traffic_volume": null
+    }
+  ],
+  "ranked_fr": [
+    {
+      "keyword": "test privacy",
+      "volume": 110,
+      "organic_rank": 25,
+      "url": "https://www.privacyscore.fr/fr/",
+      "serp_last_updated": "2026-08-27 19:43:46 +00:00"
+    }
+  ],
+  "keywords": {
+    "keywords-fr": [
+      {
+        "keyword": "confidentialité iphone",
+        "volume": 50,
+        "difficulty": 11,
+        "last_updated": "2026-10-17 12:12:09 +00:00"
+      },
+      {
+        "keyword": "données personnelles iphone",
+        "volume": 10,
+        "difficulty": null,
+        "last_updated": "2026-10-16 10:00:42 +00:00"
+      },
+      {
+        "keyword": "privacy score",
+        "volume": 10,
+        "difficulty": null,
+        "last_updated": "2026-10-17 01:21:21 +00:00"
+      },
+      {
+        "keyword": "rapport de confidentialité des apps",
+        "volume": 20,
+        "difficulty": null,
+        "last_updated": "2026-10-17 12:29:32 +00:00"
+      },
+      {
+        "keyword": "rapport de confidentialité iphone",
+        "volume": 10,
+        "difficulty": null,
+        "last_updated": "2026-10-18 12:35:43 +00:00"
+      },
+      {
+        "keyword": "sécurité iphone",
+        "volume": 140,
+        "difficulty": 21,
+        "last_updated": "2026-09-17 14:10:32 +00:00"
+      },
+      {
+        "keyword": "tracker iphone",
+        "volume": 260,
+        "difficulty": 0,
+        "last_updated": "2026-10-17 12:08:39 +00:00"
+      }
+    ],
+    "keywords-us": [
+      {
+        "keyword": "app privacy report",
+        "volume": 590,
+        "difficulty": 15,
+        "last_updated": "2026-10-16 10:20:18 +00:00"
+      },
+      {
+        "keyword": "iphone app tracking",
+        "volume": 1900,
+        "difficulty": 38,
+        "last_updated": "2026-10-16 19:26:00 +00:00"
+      },
+      {
+        "keyword": "iphone permissions",
+        "volume": 140,
+        "difficulty": 16,
+        "last_updated": "2026-10-15 08:44:03 +00:00"
+      },
+      {
+        "keyword": "iphone privacy settings",
+        "volume": 1300,
+        "difficulty": 31,
+        "last_updated": "2026-09-16 20:46:35 +00:00"
+      },
+      {
+        "keyword": "privacy score",
+        "volume": 20,
+        "difficulty": 15,
+        "last_updated": "2026-09-17 04:34:34 +00:00"
+      },
+      {
+        "keyword": "stop tracking iphone",
+        "volume": 10,
+        "difficulty": 23,
+        "last_updated": "2026-10-15 09:57:22 +00:00"
+      }
+    ]
+  },
+  "live_serps": {
+    "serp-fr": [
+      {
+        "keyword": "rapport de confidentialité iphone",
+        "datetime": "2026-10-19 06:41:02 +00:00",
+        "items": [
+          {
+            "rank": 1,
+            "url": "https://support.apple.com/fr-fr/102399",
+            "title": "À propos de la section d'informations sur la confidentialité des données"
+          },
+          {
+            "rank": 2,
+            "url": "https://support.apple.com/fr-mg/guide/iphone/iph6e7d349d1/ios",
+            "title": "Contrôler le contenu partagé sur l'iPhone"
+          },
+          {
+            "rank": 3,
+            "url": "https://www.reddit.com/r/iphone/comments/1cf2s18/app_privacy_report_and_most_contacted_domains/?tl=fr",
+            "title": "Rapport de confidentialité des applications et domaines les plus ..."
+          },
+          {
+            "rank": 4,
+            "url": "https://www.frandroid.com/marques/apple/1558960_ios-16-quelques-astuces-pour-securiser-ses-donnees-personnelles",
+            "title": "iOS 16 : quelques astuces pour sécuriser ses données personnelles"
+          },
+          {
+            "rank": 5,
+            "url": "https://www.reddit.com/r/ios/comments/1pu3kop/app_privacy_report_worrying_me/?tl=fr",
+            "title": "Le rapport de confidentialité des applications m'inquiète : r/ios"
+          },
+          {
+            "rank": 6,
+            "url": "https://support.apple.com/fr-ch/guide/iphone/iph6e7d349d1/ios",
+            "title": "Contrôler le contenu partagé sur l'iPhone - Assistance Apple (CH)"
+          },
+          {
+            "rank": 7,
+            "url": "https://www.reddit.com/r/iphone/comments/1gj4cs5/app_privacy_report/?tl=fr",
+            "title": "Rapport de confidentialité des applications : r/iphone"
+          },
+          {
+            "rank": 8,
+            "url": "https://ecoledelapomme.ch/trucs-et-astuces/comment-voir-le-rapport-de-confidentialite-des-apps/",
+            "title": "Comment voir le rapport de confidentialité des apps"
+          }
+        ]
+      }
+    ],
+    "serp-us": [
+      {
+        "keyword": "app privacy report",
+        "datetime": "2026-10-19 06:41:08 +00:00",
+        "items": [
+          {
+            "rank": 1,
+            "url": "https://support.apple.com/en-us/102188",
+            "title": "About App Privacy Report"
+          },
+          {
+            "rank": 2,
+            "url": "https://www.reddit.com/r/firewalla/comments/1n3bug3/ot_ioss_built_in_app_privacy_report_is_incredibly/",
+            "title": "OT: iOS's built in App Privacy Report is incredibly useful. (Mods, delete if you ..."
+          },
+          {
+            "rank": 3,
+            "url": "https://www.linkedin.com/pulse/what-iphone-app-privacy-report-how-use-nino-bilic-h3fhc",
+            "title": "What is the iPhone app privacy report and how to use it"
+          },
+          {
+            "rank": 4,
+            "url": "https://www.foxnews.com/tech/iphone-app-spying-apples-privacy-report-reveals-all.amp",
+            "title": "Is that iPhone app spying? Apple's App Privacy Report reveals all"
+          },
+          {
+            "rank": 5,
+            "url": "https://www.youtube.com/watch?v=xzVv93kajHE",
+            "title": "Is that iPhone App spying? Apple's Privacy Report reveals all"
+          },
+          {
+            "rank": 6,
+            "url": "https://nhimg.org/glossary/app-privacy-report/",
+            "title": "What Is App Privacy Report? Definition & Examples"
+          }
+        ]
+      }
+    ]
+  },
+  "backlinks": {
+    "status": 20000,
+    "result": null,
+    "cost": 0.024036,
+    "note": "No result returned. Do not infer zero backlinks."
+  },
+  "total_cost_usd": 0.22703600000000002,
+  "caveat": "Volumes are database estimates, not site traffic. Null/absent keywords are not proof of zero demand. Laboratory Lighthouse does not measure real-user INP."
+}

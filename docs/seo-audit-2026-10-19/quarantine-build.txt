@@ -1,0 +1,241 @@
+08:46:40 [vite] Re-optimizing dependencies because vite config has changed
+08:46:40 [content] Syncing content
+08:46:40 [content] Synced content
+08:46:40 [types] Generated 294ms
+08:46:40 [check] Getting diagnostics for Astro files in /private[temporary verification checkout]...
+src/content.config.ts:83:16 - warning ts(6385): 'z' is deprecated.
+
+83     updatedAt: z.coerce.date().optional(),
+                  ~
+src/content.config.ts:82:18 - warning ts(6385): 'z' is deprecated.
+
+82     publishedAt: z.coerce.date(),
+                    ~
+src/content.config.ts:81:13 - warning ts(6385): 'z' is deprecated.
+
+81     author: z.string(),
+               ~
+src/content.config.ts:80:15 - warning ts(6385): 'z' is deprecated.
+
+80     language: z.enum(['fr', 'en']),
+                 ~
+src/content.config.ts:79:18 - warning ts(6385): 'z' is deprecated.
+
+79     description: z.string(),
+                    ~
+src/content.config.ts:78:12 - warning ts(6385): 'z' is deprecated.
+
+78     title: z.string(),
+              ~
+src/content.config.ts:77:11 - warning ts(6385): 'z' is deprecated.
+
+77   schema: z.object({
+             ~
+src/content.config.ts:66:14 - warning ts(6385): 'z' is deprecated.
+
+66         alt: z.string(),
+                ~
+src/content.config.ts:65:14 - warning ts(6385): 'z' is deprecated.
+
+65         src: z.string().optional(),
+                ~
+src/content.config.ts:63:11 - warning ts(6385): 'z' is deprecated.
+
+63     hero: z
+             ~
+src/content.config.ts:62:19 - warning ts(6385): 'z' is deprecated.
+
+62     tags: z.array(z.string()).default([]),
+                     ~
+src/content.config.ts:62:11 - warning ts(6385): 'z' is deprecated.
+
+62     tags: z.array(z.string()).default([]),
+             ~
+src/content.config.ts:61:11 - warning ts(6385): 'z' is deprecated.
+
+61     slug: z.string(),
+             ~
+src/content.config.ts:60:15 - warning ts(6385): 'z' is deprecated.
+
+60     language: z.enum(['fr', 'en']),
+                 ~
+src/content.config.ts:59:13 - warning ts(6385): 'z' is deprecated.
+
+59     author: z.string(),
+               ~
+src/content.config.ts:58:16 - warning ts(6385): 'z' is deprecated.
+
+58     updatedAt: z.coerce.date().optional(),
+                  ~
+src/content.config.ts:57:18 - warning ts(6385): 'z' is deprecated.
+
+57     publishedAt: z.coerce.date(),
+                    ~
+src/content.config.ts:56:18 - warning ts(6385): 'z' is deprecated.
+
+56     description: z.string(),
+                    ~
+src/content.config.ts:55:12 - warning ts(6385): 'z' is deprecated.
+
+55     title: z.string(),
+              ~
+src/content.config.ts:54:11 - warning ts(6385): 'z' is deprecated.
+
+54   schema: z.object({
+             ~
+src/content.config.ts:45:47 - warning ts(6385): 'z' is deprecated.
+
+45     cross_links: z.array(z.record(z.string(), z.string())).optional(),
+                                                 ~
+src/content.config.ts:45:35 - warning ts(6385): 'z' is deprecated.
+
+45     cross_links: z.array(z.record(z.string(), z.string())).optional(),
+                                     ~
+src/content.config.ts:45:26 - warning ts(6385): 'z' is deprecated.
+
+45     cross_links: z.array(z.record(z.string(), z.string())).optional(),
+                            ~
+src/content.config.ts:45:18 - warning ts(6385): 'z' is deprecated.
+
+45     cross_links: z.array(z.record(z.string(), z.string())).optional(),
+                    ~
+src/content.config.ts:44:31 - warning ts(6385): '(params?: string | { abort?: boolean | undefined; pattern?: RegExp | undefined; hostname?: RegExp | undefined; protocol?: RegExp | undefined; normalize?: boolean | undefined; error?: string | ... 1 more ... | undefined; message?: string | undefined; } | undefined): ZodString' is deprecated.
+
+44     canonical_url: z.string().url().optional(),
+                                 ~~~
+src/content.config.ts:44:20 - warning ts(6385): 'z' is deprecated.
+
+44     canonical_url: z.string().url().optional(),
+                      ~
+src/content.config.ts:42:49 - warning ts(6385): 'z' is deprecated.
+
+42     liens_croises: z.array(z.record(z.string(), z.string())).optional(),
+                                                   ~
+src/content.config.ts:42:37 - warning ts(6385): 'z' is deprecated.
+
+42     liens_croises: z.array(z.record(z.string(), z.string())).optional(),
+                                       ~
+src/content.config.ts:42:28 - warning ts(6385): 'z' is deprecated.
+
+42     liens_croises: z.array(z.record(z.string(), z.string())).optional(),
+                              ~
+src/content.config.ts:42:20 - warning ts(6385): 'z' is deprecated.
+
+42     liens_croises: z.array(z.record(z.string(), z.string())).optional(),
+                      ~
+src/content.config.ts:41:31 - warning ts(6385): '(params?: string | { abort?: boolean | undefined; pattern?: RegExp | undefined; hostname?: RegExp | undefined; protocol?: RegExp | undefined; normalize?: boolean | undefined; error?: string | ... 1 more ... | undefined; message?: string | undefined; } | undefined): ZodString' is deprecated.
+
+41     url_canonique: z.string().url().optional(),
+                                 ~~~
+src/content.config.ts:41:20 - warning ts(6385): 'z' is deprecated.
+
+41     url_canonique: z.string().url().optional(),
+                      ~
+src/content.config.ts:39:16 - warning ts(6385): 'z' is deprecated.
+
+39     publisher: z.string(),
+                  ~
+src/content.config.ts:38:19 - warning ts(6385): 'z' is deprecated.
+
+38     last_updated: z.coerce.date(),
+                     ~
+src/content.config.ts:37:14 - warning ts(6385): 'z' is deprecated.
+
+37     version: z.coerce.string(),
+                ~
+src/content.config.ts:36:15 - warning ts(6385): 'z' is deprecated.
+
+36     language: z.enum(['fr', 'en']),
+                 ~
+src/content.config.ts:35:12 - warning ts(6385): 'z' is deprecated.
+
+35     title: z.string(),
+              ~
+src/content.config.ts:34:11 - warning ts(6385): 'z' is deprecated.
+
+34   schema: z.object({
+             ~
+src/content.config.ts:26:28 - warning ts(6385): 'z' is deprecated.
+
+26 import { defineCollection, z } from 'astro:content';
+                              ~
+
+src/pages/en/legal-notice.astro:13:19 - warning ts(6133): 'frontmatter' is declared but its value is never read.
+
+13 import { Content, frontmatter } from '../../content/legal/en/legal-notice.md';
+                     ~~~~~~~~~~~
+
+src/pages/en/privacy-policy.astro:13:19 - warning ts(6133): 'frontmatter' is declared but its value is never read.
+
+13 import { Content, frontmatter } from '../../content/legal/en/privacy-policy.md';
+                     ~~~~~~~~~~~
+
+src/pages/en/terms-of-use.astro:13:19 - warning ts(6133): 'frontmatter' is declared but its value is never read.
+
+13 import { Content, frontmatter } from '../../content/legal/en/terms-of-use.md';
+                     ~~~~~~~~~~~
+
+src/pages/fr/cgu.astro:17:19 - warning ts(6133): 'frontmatter' is declared but its value is never read.
+
+17 import { Content, frontmatter } from '../../content/legal/fr/cgu.md';
+                     ~~~~~~~~~~~
+
+src/pages/fr/mentions-legales.astro:18:19 - warning ts(6133): 'frontmatter' is declared but its value is never read.
+
+18 import { Content, frontmatter } from '../../content/legal/fr/mentions-legales.md';
+                     ~~~~~~~~~~~
+
+src/pages/fr/politique-de-confidentialite.astro:16:19 - warning ts(6133): 'frontmatter' is declared but its value is never read.
+
+16 import { Content, frontmatter } from '../../content/legal/fr/politique-de-confidentialite.md';
+                     ~~~~~~~~~~~
+
+Result (37 files): 
+- 0 errors
+- 0 warnings
+- 45 hints
+
+
+08:46:43 [content] Syncing content
+08:46:43 [content] Synced content
+08:46:43 [types] Generated 214ms
+08:46:43 [build] output: "static"
+08:46:43 [build] mode: "static"
+08:46:43 [build] directory: /private[temporary verification checkout]/dist/
+08:46:43 [build] Collecting build info...
+08:46:43 [build] ✓ Completed in 222ms.
+08:46:43 [build] Building static entrypoints...
+08:46:43 [vite] ✓ built in 828ms
+08:46:43 [vite] ✓ built in 13ms
+08:46:43 [build] Rearranging server assets...
+
+ generating static routes 
+08:46:43   ├─ /404.html (+4ms) 
+08:46:43   ├─ /en/about/index.html (+2ms) 
+08:46:43   ├─ /en/blog/iphone-permissions-guide/index.html (+2ms) 
+08:46:43   ├─ /en/blog/iphone-privacy-settings-2026/index.html (+1ms) 
+08:46:43   ├─ /en/blog/index.html (+1ms) 
+08:46:43   ├─ /en/legal-notice/index.html (+1ms) 
+08:46:43   ├─ /en/privacy-policy/index.html (+1ms) 
+08:46:43   ├─ /en/security-policy/index.html (+1ms) 
+08:46:43   ├─ /en/terms-of-use/index.html (+1ms) 
+08:46:43   ├─ /en/index.html (+3ms) 
+08:46:43   ├─ /fr/a-propos/index.html (+1ms) 
+08:46:43   ├─ /fr/blog/audit-confidentialite-iphone/index.html (+1ms) 
+08:46:43   ├─ /fr/blog/rapport-confidentialite-iphone-guide/index.html (+1ms) 
+08:46:43   ├─ /fr/blog/index.html (+1ms) 
+08:46:43   ├─ /fr/cgu/index.html (+1ms) 
+08:46:43   ├─ /fr/legal-notice/index.html (+0ms) 
+08:46:43   ├─ /fr/mentions-legales/index.html (+1ms) 
+08:46:43   ├─ /fr/politique-de-confidentialite/index.html (+1ms) 
+08:46:43   ├─ /fr/politique-de-securite/index.html (+1ms) 
+08:46:43   ├─ /fr/privacy-policy/index.html (+0ms) 
+08:46:43   ├─ /fr/terms-of-use/index.html (+0ms) 
+08:46:43   ├─ /fr/index.html (+1ms) 
+08:46:43   ├─ /index.html (+1ms) 
+08:46:43 ✓ Completed in 44ms.
+
+08:46:43 [build] ✓ Completed in 912ms.
+08:46:43 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+08:46:43 [build] 20 page(s) built in 1.14s
+08:46:43 [build] Complete!
