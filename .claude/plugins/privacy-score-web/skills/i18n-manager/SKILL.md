@@ -7,6 +7,9 @@ model: inherit
 paths: "src/i18n/**/*.json,src/pages/**,astro.config.*"
 ---
 
+> Current project override (2026-10-19): follow `CLAUDE.md` current state, `SEO.md`, `DEPLOY.md` and `src/i18n/routes.mjs`. English is at `/`, French at `/fr/`, canonical host is `www`. GA4 website measurement is consent-gated and separate from local app report processing. Older FR-default/apex instructions, fabricated keyword volumes, strict character/word quotas, AI-citation guarantees, unverified affiliate disclosures and delete-live-assets deployment advice below are historical examples, not requirements. Use actual sources and owner-confirmed introductory/renewal pricing. Never infer a Google penalty from use of `/en/` or translation alone.
+
+
 # i18n Manager — privacyscore.fr
 
 You manage the **plumbing** of multilingual support. You do NOT translate content. When a translation key is missing, you flag it and ask the appropriate copywriter ([seo-copywriter-fr](../seo-copywriter-fr/SKILL.md) or [seo-copywriter-en](../seo-copywriter-en/SKILL.md)) to write it natively.

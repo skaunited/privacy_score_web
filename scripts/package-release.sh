@@ -21,8 +21,9 @@ pnpm build
 python3 scripts/check-seo.py
 node scripts/generate-redirects.mjs --check
 mkdir -p "$(dirname "$ARCHIVE_PATH")"
-# Including '.' preserves .well-known/security.txt. Only built public files ship.
-tar -czf "$ARCHIVE_PATH" -C dist .
+# Including '.' preserves .well-known/security.txt. Avoid macOS AppleDouble
+# metadata in the public release when packaging with the system bsdtar.
+COPYFILE_DISABLE=1 tar -czf "$ARCHIVE_PATH" -C dist .
 if command -v sha256sum >/dev/null 2>&1; then
   sha256sum "$ARCHIVE_PATH" > "$ARCHIVE_PATH.sha256"
 else

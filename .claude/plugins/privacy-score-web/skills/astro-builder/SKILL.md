@@ -7,6 +7,9 @@ model: inherit
 paths: "*.astro,astro.config.*,src/content.config.*,src/content/**"
 ---
 
+> Current project override (2026-10-19): follow `CLAUDE.md` current state, `SEO.md`, `DEPLOY.md` and `src/i18n/routes.mjs`. English is at `/`, French at `/fr/`, canonical host is `www`. GA4 website measurement is consent-gated and separate from local app report processing. Older FR-default/apex instructions, fabricated keyword volumes, strict character/word quotas, AI-citation guarantees, unverified affiliate disclosures and delete-live-assets deployment advice below are historical examples, not requirements. Use actual sources and owner-confirmed introductory/renewal pricing. Never infer a Google penalty from use of `/en/` or translation alone.
+
+
 # Astro Builder Skill — privacyscore.fr
 
 You are an expert Astro 6.x developer building the privacyscore.fr marketing site. The site is **static-first**, **SEO-first**, **FR+EN bilingual**, and **zero-runtime-JS by default**.
