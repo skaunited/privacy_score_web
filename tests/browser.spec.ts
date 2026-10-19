@@ -16,7 +16,9 @@ test('consent gates Google, remembers refusal, and withdrawal stops custom event
   await page.goto('/blog/');
   await expect(page.locator('#audience-consent')).toBeHidden();
   expect(google).toHaveLength(0);
-  await page.locator('[data-privacy-settings]').click();
+  const choices = page.getByRole('navigation', { name:'Legal', exact:true }).getByRole('button', { name:'Cookie choices', exact:true });
+  await expect(choices).toBeVisible();
+  await choices.click();
   await page.locator('[data-consent="granted"]').click();
   await expect.poll(() => google.length).toBe(1);
   const events = () => page.evaluate(() => Array.from(window.dataLayer ?? []).map((item: any) => Array.from(item)));
@@ -32,6 +34,35 @@ test('consent gates Google, remembers refusal, and withdrawal stops custom event
   });
   expect((await events()).filter((item) => item[0] === 'event')).toHaveLength(count);
   expect(await page.evaluate(() => window['ga-disable-G-TESTPRIVACY'])).toBe(true);
+});
+
+test('French cookie choices stay in the legal footer and reopen preferences', async ({ page }) => {
+  await page.goto('/fr/');
+  await page.locator('[data-consent="denied"]').click();
+  const legal = page.getByRole('navigation', { name:'Légal', exact:true });
+  await expect(legal.getByRole('link', { name:'CGU', exact:true })).toBeVisible();
+  const choices = legal.getByRole('button', { name:'Choix des cookies', exact:true });
+  await expect(page.locator('[data-privacy-settings]')).toHaveCount(1);
+  await choices.click();
+  await expect(page.locator('#audience-consent')).toBeVisible();
+  await page.locator('[data-consent="denied"]').click();
+  await expect(choices).toBeFocused();
+});
+
+test('EN and FR navigation works with a French browser without a language redirect', async ({ browser }) => {
+  const context = await browser.newContext({ locale:'fr-FR', baseURL:'http://127.0.0.1:4329' });
+  const page = await context.newPage();
+  try {
+    await page.goto('/fr/');
+    await page.locator('.lang-switch').getByRole('link', { name:'EN', exact:true }).click();
+    await expect(page).toHaveURL('http://127.0.0.1:4329/');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+    await page.reload();
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+    await page.locator('.lang-switch').getByRole('link', { name:'FR', exact:true }).click();
+    await expect(page).toHaveURL('http://127.0.0.1:4329/fr/');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'fr');
+  } finally { await context.close(); }
 });
 
 test('page views and App Store events omit query strings and fragments', async ({ page }) => {

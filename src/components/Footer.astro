@@ -66,11 +66,15 @@ const cols: FooterColumn[] = [
           {col.links.map((link) => (
             <a href={link.href}>{link.label}</a>
           ))}
+          {col === footer.columns.legal && (
+            <button class="privacy-settings" type="button" data-privacy-settings aria-controls="audience-consent" hidden>
+              {locale === 'fr' ? 'Choix des cookies' : 'Cookie choices'}
+            </button>
+          )}
         </nav>
       ))}
     </div>
   </div>
-  <button class="privacy-settings" type="button" data-privacy-settings hidden>{locale === 'fr' ? 'Préférences de mesure d’audience' : 'Audience measurement preferences'}</button>
   <div class="footer-rule"></div>
   <div class="container footer-foot">
     {/* `set:html` is needed because the copyright string contains an inline
