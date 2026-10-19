@@ -1,18 +1,18 @@
 ---
 title: Conditions Générales d'Utilisation
 language: fr
-version: 1.0
-last_updated: 2026-05-29
+version: 1.1
+last_updated: 2026-10-19
 publisher: Skander BAHRI (entrepreneur individuel), CoDevelop
-url_canonique: https://www.privacyscore.fr/fr/cgu
+url_canonique: https://www.privacyscore.fr/fr/cgu/
 liens_croises:
-  - legal-notice: https://www.privacyscore.fr/fr/mentions-legales
-  - privacy-policy: https://www.privacyscore.fr/fr/politique-de-confidentialite
+  - legal-notice: https://www.privacyscore.fr/fr/mentions-legales/
+  - privacy-policy: https://www.privacyscore.fr/fr/politique-de-confidentialite/
 ---
 
 # Conditions Générales d'Utilisation
 
-Dernière mise à jour : 29 mai 2026, version 1.0
+Dernière mise à jour : 19 octobre 2026, version 1.1
 
 Les présentes conditions générales d'utilisation (les « CGU ») régissent l'usage de l'application iOS **Privacy Score** et du site `privacyscore.fr` édités par **Skander BAHRI**, entrepreneur individuel exerçant sous le nom commercial **CoDevelop** (« CoDevelop », « nous »). Elles s'adressent à toute personne physique majeure utilisant l'application ou le site (« vous », « l'utilisateur »).
 
@@ -26,15 +26,15 @@ Le site `privacyscore.fr` présente l'application, donne accès à la documentat
 
 ## 2. Acceptation
 
-Les CGU sont acceptées par tout acte d'utilisation : téléchargement de l'application, ouverture, importation d'un rapport, souscription d'un abonnement, ou consultation du site. La version applicable est celle en vigueur au moment de l'usage, accessible depuis l'application et depuis `privacyscore.fr/cgu`.
+Les CGU sont acceptées par tout acte d'utilisation : téléchargement de l'application, ouverture, importation d'un rapport, souscription d'un abonnement, ou consultation du site. La version applicable est celle en vigueur au moment de l'usage, accessible depuis l'application et depuis [www.privacyscore.fr/fr/cgu/](https://www.privacyscore.fr/fr/cgu/).
 
 ## 3. Accès au service
 
 ### 3.1 Prérequis techniques
 
-- iPhone fonctionnant sous iOS 17 ou version ultérieure.
+- iPhone fonctionnant sous iOS 17.6 ou version ultérieure.
 - Un identifiant Apple actif est nécessaire pour télécharger l'application depuis l'App Store et pour souscrire un abonnement.
-- L'utilisateur doit avoir préalablement activé le rapport de confidentialité Apple depuis `Réglages` &gt; `Confidentialité et sécurité` &gt; `Rapport sur l'App Privacy`.
+- L'utilisateur doit avoir préalablement activé le rapport de confidentialité Apple depuis `Réglages` &gt; `Confidentialité et sécurité` &gt; `Rapport de confidentialité des apps`.
 
 ### 3.2 Disponibilité
 
@@ -52,12 +52,12 @@ Pour importer un deuxième rapport et au-delà, un abonnement payant est requis.
 
 CoDevelop propose deux formules d'abonnement :
 
-| Formule | Engagement | Prix TTC | Équivalent mensuel |
-|---|---|---|---|
-| Annuel | 12 mois | 23,88 € | 1,99 € / mois |
-| Semestriel | 6 mois | 20,94 € | 3,49 € / mois |
+| Formule France | Offre de lancement éligible | Renouvellement au tarif actuel |
+|---|---|---|
+| Annuel | 23,88 € pour la première année | 59,99 € / an |
+| Semestriel | 20,94 € pour les six premiers mois | 39,99 € / six mois |
 
-Les prix sont indiqués toutes taxes comprises (TVA française au taux normal de 20 %). Apple peut appliquer des prix légèrement différents selon la zone géographique de l'utilisateur, conformément à sa propre grille de prix.
+Les montants français sont TTC. L’offre de lancement est limitée à la première période et aux abonnements éligibles. Le prix local, l’éligibilité et les conditions de renouvellement sont affichés par Apple avant confirmation ; les tarifs peuvent différer selon le pays. Premium inclut les audits supplémentaires, les outils DNS/VPN et l’export du rapport.
 
 ### 5.2 Renouvellement automatique (article L. 215-1 du Code de la consommation)
 
@@ -126,7 +126,7 @@ Toute reproduction ou réutilisation en dehors de ce cadre est interdite et expo
 
 ## 9. Données personnelles
 
-Le traitement de vos données est décrit dans la [politique de confidentialité](https://www.privacyscore.fr/fr/politique-de-confidentialite), qui forme avec les présentes CGU un ensemble contractuel cohérent.
+Le traitement de vos données est décrit dans la [politique de confidentialité](https://www.privacyscore.fr/fr/politique-de-confidentialite/), qui forme avec les présentes CGU un ensemble contractuel cohérent.
 
 ## 10. Responsabilité
 

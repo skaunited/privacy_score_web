@@ -1,18 +1,18 @@
 ---
 title: Privacy Policy
 language: en
-version: 1.0
-last_updated: 2026-05-27
+version: 1.1
+last_updated: 2026-10-19
 publisher: Skander BAHRI (French sole proprietor), CoDevelop
-canonical_url: https://www.privacyscore.fr/en/privacy-policy
+canonical_url: https://www.privacyscore.fr/privacy-policy/
 cross_links:
-  - legal-notice: https://www.privacyscore.fr/en/legal-notice
-  - terms-of-use: https://www.privacyscore.fr/en/terms-of-use
+  - legal-notice: https://www.privacyscore.fr/legal-notice/
+  - terms-of-use: https://www.privacyscore.fr/terms-of-use/
 ---
 
 # Privacy Policy
 
-Last updated: May 27, 2026, version 1.0
+Last updated: October 19, 2026, version 1.1
 
 This policy explains how the **Privacy Score** iOS application and the `privacyscore.fr` website handle your data. We chose to write it in plain English because an app that audits your privacy should itself be worthy of your trust. If a sentence is unclear, write to `support@privacyscore.fr` and we will fix it.
 
@@ -22,7 +22,7 @@ Before detailing what we do collect, here is what Privacy Score **does not colle
 
 - No account, no email address, no password, no user identifier you would provide.
 - No third-party analytics SDK: no Firebase, no Sentry, no Amplitude, no Mixpanel, no Segment, no PostHog, no Crashlytics, and no comparable SDK.
-- No audience-measurement or advertising cookies on the `privacyscore.fr` website.
+- The iOS app has no audience measurement. Optional website measurement is described separately below and requires your permission.
 - No outbound connection from the iOS app to track you or to transmit your report.
 - No profiling, no automated decisions about you.
 
@@ -34,7 +34,7 @@ This list reflects version 1.0 of the app. Any future change to the scope of pro
 
 The data controller within the meaning of Article 4.7 of Regulation (EU) 2016/679 (GDPR) is:
 
-**Skander BAHRI**, a French sole proprietor (`entrepreneur individuel`) trading as **CoDevelop**, whose contact details are listed in the [Legal Notice](https://www.privacyscore.fr/en/legal-notice).
+**Skander BAHRI**, a French sole proprietor (`entrepreneur individuel`) trading as **CoDevelop**, whose contact details are listed in the [Legal Notice](https://www.privacyscore.fr/legal-notice/).
 
 For any question about your data: `support@privacyscore.fr`.
 
@@ -66,10 +66,10 @@ Given our activity (publishing an app that processes data only on the user's dev
 ### 3. Advertising identifier (IDFA)
 
 - **What it is**: a unique identifier assigned by iOS to your device for advertising. If you have declined tracking via App Tracking Transparency, this identifier is all zeros and carries no identifying value.
-- **Purpose**: compute the exposure duration ("you have carried this advertising ID for X days") so we can explain what it represents.
-- **Legal basis**: legitimate interest in providing an educational analysis of your advertising exposure (Art. 6.1.f GDPR). This interest is balanced against your fundamental right to data protection: no transmission to any third party occurs, and you keep full control via iOS settings (App Tracking Transparency, reset of the advertising identifier).
+- **Purpose**: compute the exposure duration ("this advertising ID was first observed locally X days ago") so we can explain what it represents.
+- **Legal basis**: legitimate interest in providing an educational analysis of your advertising exposure (Art. 6.1.f GDPR). This interest is balanced against your fundamental right to data protection: no transmission to any third party occurs, and you keep full control via iOS settings (App Tracking Transparency permissions).
 - **Storage**: the app's `UserDefaults`, on your device. The identifier is stored locally only to compute the first-observed date. If the identifier is null (ATT declined), no date is recorded.
-- **Retention**: until you reset your IDFA from iOS, or delete the app.
+- **Retention**: until a change in the observed identifier is detected, or you delete the app.
 - **Recipients**: none.
 
 > Under French data-protection authority (CNIL) guidance, the advertising identifier qualifies as personal data. We disclose it transparently here even though we transmit it to no one.
@@ -94,8 +94,8 @@ If you enter an encrypted DNS profile (DoH/DoT) or a VPN profile (IKEv2) inside 
 
 The app offers an auto-renewing subscription:
 
-- Annual plan: €23.88 per year (i.e., €1.99 per month).
-- Six-month plan: €20.94 per six months (i.e., €3.49 per month).
+- French annual plan: €23.88 for the first year as a launch offer for eligible subscriptions, then €59.99/year at the current price.
+- French six-month plan: €20.94 for the first six months as a launch offer, then €39.99/six months at the current price. Apple confirms eligibility, local prices and terms before purchase.
 - The first scan is free for life and its full audit remains accessible on your device without any subscription.
 
 The subscription is handled entirely by **Apple In-App Purchase**:
@@ -108,14 +108,24 @@ The subscription is handled entirely by **Apple In-App Purchase**:
 
 The app may schedule local notifications (import reminder, new tip, iOS version change, score drop) with your permission. All notifications are **local**: no remote push notification is used, no server is contacted. Your notification preferences (active categories, quiet hours, dismissal history) are stored in `UserDefaults`.
 
+<span id="website-measurement"></span>
+
 ### 8. The `privacyscore.fr` website
 
-- **Cookies**: only cookies strictly necessary for the site to function are used (for example, a session cookie if a form requires one). These cookies are exempt from prior consent under Article 82, II of French Law No. 78-17 of January 6, 1978 (as amended). No third-party audience-measurement cookie, and no advertising cookie, is set.
-- **Server logs**: our host **HOSTINGER operations, UAB** retains, as any host does, technical logs that include connection IP addresses. This retention is required by Article 6, II of French Law No. 2004-575 of June 21, 2004 (LCEN) for the purpose of detecting, investigating, and prosecuting criminal offenses. The statutory period is **one year**. These logs are managed exclusively by Hostinger and accessed only within the legal framework.
+The website may use **Google Analytics 4**, only after you agree, to understand page visits and clicks to the App Store. When the service is not configured, no Google Analytics measurement is loaded. Declining leaves all website pages and functions available.
+
+- **Data measured after agreement**: page paths without URL query strings or fragments, language, technical browser information, referring-site origin and limited events such as App Store clicks. Our measurement code does not send an Apple report, a report’s domain list, message contents or free-text input.
+- **Purpose and legal basis**: audience statistics and improvement of the website journey, based on your consent (GDPR Article 6(1)(a)). Google’s script is not loaded before agreement. Our code does not enable advertising features or Google Signals.
+- **Your choice**: Accept and Decline are offered together. The choice is saved locally for up to 180 days. Use “Audience measurement preferences” in the footer to change it or withdraw consent for subsequent visits. Withdrawal stops new events from our implementation and removes Analytics cookies accessible to our website; it does not automatically erase previously processed data.
+- **Google cookies**: after agreement, cookies starting with `_ga` support measurement. Our configuration limits them to 13 months without extending their life on every visit; consent is renewed separately.
+- **Recipients**: CoDevelop and Google for the Analytics service. Google can process technical information, including the IP address used to connect to its service, under its contractual terms and [Analytics privacy documentation](https://support.google.com/analytics/answer/6004245). We do not link visits to the report analyzed in the app.
+- **Infrastructure**: Cloudflare and our hosting provider deliver and secure the website, receiving information needed for HTTP connections, including IP addresses. These technical logs are separate from optional Google Analytics measurement and the Apple file held in the app.
+
+For a request concerning website visit data, contact `support@privacyscore.fr`. Do not send an Apple report with that request. See the [CNIL’s guidance on cookies and consent](https://www.cnil.fr/fr/cookies-et-autres-traceurs/que-dit-la-loi).
 
 ## Recipients and Transfers Outside the EU
 
-CoDevelop does not transmit any data to a third party located outside the European Union on its own behalf.
+Our website measurement does not upload your Apple report to Google. Web providers, including Google and Cloudflare, may process technical website data outside the European Union under their applicable contractual and transfer safeguards.
 
 Apple Distribution International Limited, which processes payment data on behalf of CoDevelop, is established in Ireland (European Union). Any subsequent transfers to the United States (in particular to Apple Inc. in Cupertino) are Apple's sole responsibility and are governed by the EU-US Data Privacy Framework, validated by the European Commission on July 10, 2023 (Adequacy Decision 2023/1795). Apple's own [Privacy Policy](https://www.apple.com/legal/privacy/) governs that processing.
 
@@ -162,7 +172,7 @@ No decision producing legal effects on you, or significantly affecting you, is t
 
 Data stored on your device benefits from the standard iOS protection (sandbox, file-system encryption when you have set a passcode). The `.mobileconfig` files temporarily generated for DNS / VPN profiles are flagged with `completeFileProtection` and deleted after sharing.
 
-Because CoDevelop runs no server receiving your data, the risk of a server-side breach is, by design, nonexistent.
+The app does not upload your report to a CoDevelop analysis server. This limits exposure of the report to that particular server risk; it does not remove risks affecting your device, your backups or the separate website infrastructure.
 
 ## Changes to This Policy
 
@@ -172,4 +182,5 @@ CoDevelop may amend this policy to reflect changes to the app, to the legal fram
 
 | Version | Date | Changes |
 |---|---|---|
+| 1.1 | October 19, 2026 | Clarified launch and renewal pricing, root English URLs, and optional consent-based website measurement. |
 | 1.0 | May 27, 2026 | Initial publication. Compliance with GDPR Art. 13, French Data Protection Act Art. 48-56, DPF (Adequacy Decision 2023/1795), CNIL. Internal ROPA maintained separately (see `compliance/ROPA-codevelop.md`). |
