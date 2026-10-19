@@ -14,6 +14,8 @@ for (const language of ['en', 'fr']) {
     const text = await readFile(path.join(root, 'src/content/blog', language, file), 'utf8');
     const frontmatter = text.split('---')[1] ?? '';
     if (/^draft:\s*true\s*$/m.test(frontmatter) || /^status:\s*["']?draft["']?\s*$/m.test(frontmatter)) continue;
+    const publication = frontmatter.match(/^publishedAt:\s*["']?([^\s"']+)["']?\s*$/m)?.[1];
+    if (publication && new Date(publication) > new Date()) continue;
     const slug = frontmatter.match(/^slug:\s*["']?([^\s"']+)["']?\s*$/m)?.[1];
     if (!slug || !/^[a-z0-9-]+$/.test(slug)) throw new Error(`Invalid blog slug in ${file}`);
     routes.add(`${language === 'fr' ? '/fr' : ''}/blog/${slug}/`);

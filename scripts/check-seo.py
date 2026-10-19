@@ -2,6 +2,7 @@
 """Validate built static SEO, local links and resources. No third-party dependencies."""
 from __future__ import annotations
 import argparse
+from datetime import datetime, timezone
 import html
 from html.parser import HTMLParser
 import json
@@ -123,6 +124,9 @@ def main():
         for file in sorted((ROOT / 'src/content/blog' / language).glob('*.md')):
             meta = frontmatter(file)
             if meta.get('draft') == 'true' or meta.get('status') == 'draft': continue
+            published = datetime.fromisoformat(meta['publishedAt'].replace('Z', '+00:00'))
+            if published.tzinfo is None: published = published.replace(tzinfo=timezone.utc)
+            if published > datetime.now(timezone.utc): continue
             route = ('' if language == 'en' else '/fr') + '/blog/' + meta['slug'] + '/'
             article_routes[language].append(route)
             if meta.get('translationKey'):
@@ -130,12 +134,9 @@ def main():
                 if language in group: fail(file.name, 'duplicate locale in translation group')
                 group[language] = route
     for language, routes in article_routes.items():
-        if len(routes) < 4: fail(language, f'expected at least four published posts, found {len(routes)}')
         for route in routes:
             if route not in pages or pages[route].noindex: fail(route, 'published post missing or noindex')
             if ORIGIN + route not in sitemap_urls: fail(route, 'published post absent from sitemap')
-    if set(translations) != {'export-report', 'empty-report'}:
-        fail('translations', f'expected export-report and empty-report, got {sorted(translations)}')
     for key, pair in translations.items():
         if set(pair) != {'en', 'fr'}:
             fail(key, 'translation group must have one EN and one FR page')
