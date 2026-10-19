@@ -1,0 +1,44 @@
+# Privacy Score
+
+> Privacy Score is an iOS app that analyzes exported Apple App Privacy Reports locally on the iPhone.
+
+This is the official product website and guide collection, published by CoDevelop. English pages are at the site root; French pages are under /fr/.
+
+Imported Apple reports are processed on the device. Optional, consent-based website analytics are separate from the app's local report analysis. Product capabilities, report limitations and subscription terms are explained on the linked pages. Apple confirms purchase eligibility and local prices in the App Store.
+
+## Product and publisher
+
+- [Privacy Score (English)](https://www.privacyscore.fr/): App overview, how it works, features, FAQ and download links.
+- [Privacy Score (Français)](https://www.privacyscore.fr/fr/): Présentation, fonctionnement, fonctionnalités, FAQ et téléchargement.
+- [About Privacy Score](https://www.privacyscore.fr/about/): Publisher and author information.
+- [À propos de Privacy Score](https://www.privacyscore.fr/fr/a-propos/): Informations sur l’éditeur et l’auteur.
+- [Privacy Score on the App Store](https://apps.apple.com/app/privacy-score-tracker-audit/id6762229573): Official iOS app listing and current purchase terms.
+
+## Guides in English
+
+- [All English guides](https://www.privacyscore.fr/blog/): Browse the published iPhone privacy guides.
+- [App Privacy Report Empty? What to Check on Your iPhone](https://www.privacyscore.fr/blog/app-privacy-report-empty/): Is your iPhone App Privacy Report empty or missing data? Check activation, recent app use, private browsing, and the original export before importing again.
+- [How to Export Your iPhone App Privacy Report](https://www.privacyscore.fr/blog/export-app-privacy-report/): Export your iPhone App Privacy Report from Settings and open it in Privacy Score. Follow the sharing steps and keep your original report file private.
+- [iPhone Permissions: What to Allow and How to Change Them](https://www.privacyscore.fr/blog/iphone-permissions-guide/): Review iPhone permissions for photos, location, contacts, camera, and more. Choose access that fits each app and check what it actually uses afterward.
+- [iPhone Privacy Settings: A Practical Checklist for 2026](https://www.privacyscore.fr/blog/iphone-privacy-settings-2026/): Review iPhone privacy settings for tracking, location, Safari, and app access. Understand each change, check the trade-offs, and compare a fresh privacy report.
+
+## Guides en français
+
+- [Tous les guides en français](https://www.privacyscore.fr/fr/blog/): Consulter les guides publiés sur la confidentialité iPhone.
+- [Importer le rapport de confidentialité iPhone](https://www.privacyscore.fr/fr/blog/importer-rapport-confidentialite-iphone/): Enregistrez votre rapport de confidentialité iPhone et partagez-le vers Privacy Score. Préparez un fichier utile et résolvez les difficultés d'importation.
+- [Rapport de confidentialité iPhone vide : que vérifier ?](https://www.privacyscore.fr/fr/blog/rapport-confidentialite-iphone-vide/): Votre rapport de confidentialité iPhone est vide ? Vérifiez l'activation, la période, le fichier exporté et son périmètre avant de tout réinitialiser.
+- [Audit confidentialité iPhone : les vérifications utiles](https://www.privacyscore.fr/fr/blog/audit-confidentialite-iphone/): Un audit de confidentialité iPhone pour vérifier les autorisations, le suivi et les domaines contactés. Suivez une méthode concrète, sans conclusions hâtives.
+- [Rapport de confidentialité iPhone : comment le lire](https://www.privacyscore.fr/fr/blog/rapport-confidentialite-iphone-guide/): Comprenez le rapport de confidentialité iPhone : accès aux capteurs, activité réseau et domaines contactés. Distinguez les faits observés des interprétations.
+
+## Optional
+
+- [Privacy policy](https://www.privacyscore.fr/privacy-policy/): App data handling and optional website audience measurement.
+- [Politique de confidentialité](https://www.privacyscore.fr/fr/politique-de-confidentialite/): Traitements de l’application et mesure facultative du site.
+- [Terms of use](https://www.privacyscore.fr/terms-of-use/): Usage, introductory offers and renewal terms.
+- [Conditions générales d’utilisation](https://www.privacyscore.fr/fr/cgu/): Utilisation, offres de lancement et renouvellement.
+- [Legal notice](https://www.privacyscore.fr/legal-notice/): Publisher and website legal information.
+- [Mentions légales](https://www.privacyscore.fr/fr/mentions-legales/): Informations légales de l’éditeur et du site.
+- [Security policy](https://www.privacyscore.fr/security-policy/): Security contact and responsible disclosure.
+- [Politique de sécurité](https://www.privacyscore.fr/fr/politique-de-securite/): Contact sécurité et signalement responsable.
+- [XML sitemap](https://www.privacyscore.fr/sitemap-index.xml): Canonical public URLs for search crawlers.
+- [robots.txt](https://www.privacyscore.fr/robots.txt): Crawler access directives, separate from this content overview.
