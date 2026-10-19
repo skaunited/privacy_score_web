@@ -51,7 +51,7 @@ export function summarizeScenario(name, reports) {
     };
   });
 
-  // Aggregate all three cold-browser runs, never retry until one passes.
+  // Aggregate exactly three complete cold-browser measurements; never retry a low score.
   // Performance metrics fluctuate; semantic failures must pass on EVERY run.
   const scores = Object.fromEntries(
     categories.map((category) => {

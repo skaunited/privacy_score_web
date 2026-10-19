@@ -1,20 +1,21 @@
-import { execFile } from 'node:child_process';
-import { promisify } from 'node:util';
-import { mkdir, readFile, writeFile, appendFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, writeFile, appendFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { serveBuild } from './serve-build.mjs';
 import { auditRuns, summarizeScenario } from './lighthouse-results.mjs';
+import { collectLighthouseSample } from './lighthouse-runner.mjs';
 
-const exec = promisify(execFile);
 const output = resolve('reports/lighthouse');
 await mkdir(output, { recursive: true });
+// A fresh directory also prevents a failed process from reusing an older report.
+const auditOutput = await mkdtemp(resolve(output, 'audit-'));
 const preview = await serveBuild();
 const cli = fileURLToPath(
   new URL('../node_modules/lighthouse/cli/index.js', import.meta.url),
 );
 const results = [];
 const failures = [];
+const attempts = [];
 let auditError;
 try {
   // Sequential audits: concurrent browser runs distort CPU measurements.
@@ -23,30 +24,21 @@ try {
       const name = `${language}-${device}`;
       const reports = [];
       for (let run = 1; run <= auditRuns; run++) {
-        const destination = resolve(output, `${name}-run-${run}`);
-        const args = [
-          cli,
-          `${preview.url}${language === 'fr' ? '/fr/' : '/'}`,
-          '--chrome-flags=--headless --disable-gpu',
-          '--output=json',
-          '--output=html',
-          '--save-assets',
-          `--output-path=${destination}`,
-          '--quiet',
-          ...(device === 'desktop' ? ['--preset=desktop'] : []),
-        ];
-        await exec(process.execPath, args, {
-          timeout: 120000,
-          maxBuffer: 2 * 1024 * 1024,
+        const sample = await collectLighthouseSample({
+          cli, device, destination: resolve(auditOutput, `${name}-run-${run}`),
+          url: `${preview.url}${language === 'fr' ? '/fr/' : '/'}`,
+          onAttempt: (record) => {
+            attempts.push({ name, run, ...record });
+            if (record.status === 'error') console.warn(JSON.stringify({ name, run, ...record }));
+          },
         });
-        const report = JSON.parse(
-          await readFile(`${destination}.report.json`, 'utf8'),
-        );
+        const { report } = sample;
         reports.push(report);
         console.log(
           JSON.stringify({
             name,
             run,
+            attempts: sample.attempts.length,
             performance: report.categories?.performance?.score,
             blockingTime: report.audits?.['total-blocking-time']?.numericValue,
             largestContentfulPaint:
@@ -70,7 +62,7 @@ try {
   await preview.close();
   await writeFile(
     resolve(output, 'summary.json'),
-    JSON.stringify({ results, failures }, null, 2),
+    JSON.stringify({ results, failures, attempts }, null, 2),
   );
   if (process.env.GITHUB_STEP_SUMMARY) {
     const rows = results.map(
@@ -83,12 +75,17 @@ try {
         '## Lighthouse — three cold-browser runs per scenario',
         '',
         'Performance and timing thresholds use the median of all three runs. Accessibility, best practices, SEO and agent navigation must pass on every run. Thresholds remain 95/100 performance, 150 ms blocking and 0.02 CLS.',
+        'Only invalid NO_NAVSTART trace recordings may be retried, at most twice per measurement. Complete scores and other failures are never retried.',
         '',
         '| Scenario | All performance scores | Median score | Median blocking | Result |',
         '| --- | --- | --- | --- | --- |',
         ...rows,
         '',
         'All raw reports, traces and browser logs are in the Lighthouse artifact.',
+        '',
+        ...attempts.filter((attempt) => attempt.status === 'error').map((attempt) =>
+          `- ${attempt.name} run ${attempt.run}, attempt ${attempt.attempt}: ${attempt.runtimeCode ?? 'audit failure'}${attempt.retry ? ' — retried with a fresh browser' : ' — failed'}.`,
+        ),
         ...(failures.length
           ? ['', ...failures.map((message) => `- ${message}`)]
           : []),

@@ -13,6 +13,8 @@ Le workflow `.github/workflows/site.yml` s'exécute sur les pushes et pull reque
 
 Les exécutions d'une même branche sont sérialisées. Un contrôle échoué empêche la publication. Les pull requests peuvent être contrôlées sans mettre à jour `deploy`.
 
+Si Lighthouse ne parvient pas à enregistrer la trace (`NO_NAVSTART`), seule cette mesure invalide est relancée, au maximum deux fois, avec un nouveau processus et navigateur. Les scores complets, même insuffisants, ne sont jamais relancés pour améliorer la médiane. Les autres erreurs et les timeouts restent bloquants. Chaque tentative conserve ses rapports disponibles et ses journaux `.process.json` dans un dossier d’audit distinct ; `summary.json` et le résumé GitHub rendent les relances visibles. Trois mesures complètes restent obligatoires par scénario ; trois échecs de trace consécutifs empêchent la publication. Cette erreur est également [signalée dans Lighthouse](https://github.com/GoogleChrome/lighthouse/issues/15382).
+
 La première publication crée un historique indépendant de celui des sources. Les suivantes ajoutent un commit normal, **sans force push**. Les anciennes pages disparaissent du build publié ; les anciens fichiers `/_astro/` sont conservés pour les visiteurs disposant d'un HTML en cache. Ne pas nettoyer ces assets sans vérifier les références et les besoins de retour arrière.
 
 Seul le job de publication reçoit `contents: write`, via le jeton temporaire `GITHUB_TOKEN`. Aucun jeton personnel, secret Plesk, webhook ni accès SSH au serveur n'est nécessaire. La variable GitHub facultative `PUBLIC_GA_MEASUREMENT_ID` peut remplacer l'ID public de production ; sinon le workflow utilise `G-QT0QFTD7L5`. Le chargement reste soumis au consentement.
