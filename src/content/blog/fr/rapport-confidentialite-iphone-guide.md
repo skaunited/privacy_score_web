@@ -1,131 +1,88 @@
 ---
-title: "Rapport de confidentialité iPhone : guide complet 2026"
-description: "Comprendre, activer et lire le Rapport de confidentialité des apps sur iPhone. Ce que vos applications font vraiment de vos données, en 30 secondes."
+title: "Rapport de confidentialité iPhone : comment le lire"
+description: "Comprenez le rapport de confidentialité iPhone : accès aux capteurs, activité réseau et domaines contactés. Distinguez les faits observés des interprétations."
 publishedAt: "2026-06-01"
-updatedAt: "2026-06-01"
+updatedAt: "2026-10-19"
 author: "Skander Bahri"
 language: "fr"
 slug: "rapport-confidentialite-iphone-guide"
-tags: ["rapport de confidentialité", "iphone", "vie privée", "ios"]
+tags: ["rapport de confidentialité", "iphone", "activité réseau", "ios"]
 hero:
-  alt: "Capture de l'écran Réglages d'un iPhone affichant la section Rapport de confidentialité des apps."
+  src: "/assets/screen-network.webp"
+  alt: "Vue du trafic réseau dans Privacy Score, affichant les onglets destinations, traceurs et entreprises en anglais."
 ---
 
-En 2024, des journalistes de <a href="https://www.wired.com/story/secret-service-phone-location-data-babel-street/" rel="external">Wired</a> et de <a href="https://www.404media.co/data-broker-tracked-secret-service-fbi-agents-locado-babel-street-locate-x/" rel="external">404 Media</a> ont acheté, sur le marché légal des courtiers en données, l'historique de localisation de 26 agents des Services secrets américains. Pas de piratage, pas de fuite&nbsp;: une simple transaction commerciale, alimentée par des SDK publicitaires embarqués dans des applications grand public. L'épisode rappelle une réalité que la plupart des utilisateurs d'iPhone ignorent encore&nbsp;: chaque application installée contacte, en moyenne, des dizaines de domaines tiers chaque jour. Et la réponse d'Apple à ce phénomène existe depuis 2021. Elle s'appelle le **Rapport de confidentialité des apps**, et elle est désactivée par défaut. Ce guide explique ce qu'elle contient, comment l'activer en moins d'une minute, et comment l'interpréter sans bac+5 en cybersécurité.
+Le **rapport de confidentialité iPhone** montre des accès aux données et des domaines contactés pendant l'utilisation de vos applications. Pour l'ouvrir, allez dans **Réglages → Confidentialité et sécurité → Rapport de confidentialité des apps**. S'il est désactivé, activez-le puis utilisez votre iPhone : les informations se construisent à partir de ce moment.
 
-## Qu'est-ce que le Rapport de confidentialité&nbsp;?
+La bonne question est : « Cet accès correspond-il à ce que j'ai demandé à l'application ? ». Un nom de domaine inconnu ou un grand nombre de contacts ne suffit pas à démontrer une fuite. Ce guide vous aide à lire le rapport avant de modifier vos réglages.
 
-Le Rapport de confidentialité des apps est une fonctionnalité native d'iOS, introduite par Apple en décembre 2021 avec iOS 15.2. Il enregistre, sur sept jours glissants, deux types d'événements&nbsp;:
+## Ce que contiennent les quatre rubriques
 
-- **Les accès aux ressources sensibles** de votre téléphone par chaque application&nbsp;: photos, contacts, localisation, micro, appareil photo, calendrier, presse-papiers.
-- **L'activité réseau** de chaque application&nbsp;: la liste des noms de domaine contactés en tâche de fond, avec horodatage à la seconde.
+La [documentation Apple du rapport](https://support.apple.com/fr-fr/102188) distingue les accès aux données des différentes vues réseau. La fenêtre présentée couvre les sept derniers jours, sous réserve que l'enregistrement ait été actif.
 
-L'ensemble est stocké localement, sur votre appareil, dans un fichier au format <a href="https://github.com/ndjson/ndjson-spec" rel="external">NDJSON</a> (une ligne JSON par événement). Apple ne reçoit jamais ce rapport. Vous pouvez l'exporter via le bouton de partage standard d'iOS, le supprimer à tout moment ou désactiver l'enregistrement.
+| Rubrique | Information disponible | Première question utile |
+|---|---|---|
+| Accès aux données et aux capteurs | Utilisations de ressources comme la position, les photos, les contacts, le micro ou l'appareil photo. | Ai-je utilisé une fonction qui justifie cet accès ? |
+| Activité réseau des apps | Domaines contactés directement par l'application ou par le contenu qu'elle affiche. | Le contact vient-il de l'app ou d'une page, vidéo ou publicité intégrée ? |
+| Activité réseau des sites web | Domaines joints par des sites consultés depuis des applications. | Quelle page ai-je ouverte à ce moment-là ? |
+| Domaines les plus contactés | Vue regroupée des domaines fréquemment joints. | Quelles applications ou quels contenus ont contacté ce domaine ? |
 
-Le Rapport de confidentialité est, à ce jour, la seule source officielle, vérifiable et locale qui vous indique précisément ce que vos applications font dans votre dos.
+Vous pouvez commencer par ces vues déjà organisées dans Réglages. Le fichier à enregistrer et partager permet ensuite à un outil compatible de regrouper les événements autrement.
 
-### Pourquoi Apple l'a-t-il introduit&nbsp;?
+## Lire un accès sans le confondre avec une collecte
 
-L'historique compte. En avril 2021, iOS 14.5 a introduit l'<a href="https://www.apple.com/fr/privacy/control/" rel="external">App Tracking Transparency</a>, qui oblige les applications à demander votre consentement avant de vous suivre entre apps. La mesure a fait perdre, selon les estimations publiques de Meta, environ 10 milliards de dollars de revenus publicitaires en 2022 au seul Facebook. Le Rapport de confidentialité, sorti huit mois plus tard, ajoute une couche d'observabilité&nbsp;: l'ATT empêche un suivi déclaré, le rapport révèle les connexions silencieuses qui restent.
+Commencez par une ressource : microphone, appareil photo, position ou contacts. Touchez une application pour examiner les informations disponibles, puis rapprochez-les de votre usage.
 
-## Comment l'activer en 30&nbsp;secondes
+Un accès au micro pendant un message vocal peut être attendu. Un accès dont vous ne comprenez pas le contexte mérite une vérification. L'heure seule ne permet pas toujours de retrouver ce que vous faisiez : notez l'observation avant de conclure.
 
-Le chemin exact dans iOS&nbsp;17 et iOS&nbsp;18, confirmé par <a href="https://support.apple.com/fr-fr/102188" rel="external">la documentation Apple</a>&nbsp;:
+**Accéder à une donnée et la transmettre sont deux événements différents.** Une application peut utiliser une information uniquement sur l'appareil. Le rapport ne montre pas le contenu exact de chaque requête réseau. Pour comprendre le traitement annoncé par l'éditeur, consultez également sa politique et l'étiquette de confidentialité de sa fiche App Store.
 
-1. Ouvrir **Réglages**.
-2. Faire défiler jusqu'à **Confidentialité &amp; sécurité**.
-3. Tout en bas de la liste, toucher **Rapport sur l'App Privacy**.
-4. Toucher **Activer le rapport de confidentialité des apps**.
+Vous pouvez ensuite revoir les permissions dans Réglages. Notre [méthode d'audit de confidentialité iPhone](/fr/blog/audit-confidentialite-iphone/) propose un ordre de vérification et explique les conséquences des changements.
 
-Une fois activé, le rapport commence à enregistrer immédiatement, mais il faut attendre **24 à 48&nbsp;heures** pour obtenir une vue représentative de votre usage. La fenêtre maximale est de sept jours&nbsp;; au-delà, les anciens événements sont effacés automatiquement.
+## Interpréter un domaine : un exemple fictif
 
-### Important à savoir
+Imaginons qu'une application de recettes contacte `images.example.com` et `metrics.example.net`. **Cet exemple est inventé** : les noms servent à expliquer une démarche, pas à désigner des services observés.
 
-L'activation est rétroactive seulement pour le futur. Si vous activez le rapport aujourd'hui, vous n'aurez aucune donnée sur la semaine passée. Pour cette raison, l'activation au plus tôt après un changement d'iPhone ou une réinitialisation est la bonne pratique.
+1. Vérifiez dans quelle vue le domaine apparaît : l'application elle-même ou un contenu web affiché dans l'application.
+2. Notez si vous veniez d'ouvrir une vidéo, une page ou une fonction particulière.
+3. Consultez les informations de l'éditeur pour rechercher le prestataire et son rôle.
+4. Si l'explication manque, posez une question avec le nom exact du domaine et le contexte, sans envoyer tout votre rapport.
 
-## Comment le lire
+Le mot `metrics` suggère une mesure, mais un nom n'est pas une preuve. Le domaine d'images peut appartenir à un prestataire technique. Le volume des contacts peut aussi dépendre d'un contenu qui se recharge ou d'échecs répétés. Le rapport aide à formuler une question vérifiable, pas à deviner les données échangées.
 
-Le Rapport de confidentialité s'affiche en quatre sections distinctes, accessibles depuis le même écran.
+Une base de classification de domaines peut ajouter un propriétaire ou une catégorie. Elle conserve des limites : un prestataire peut avoir plusieurs fonctions, une attribution peut manquer et les services évoluent.
 
-### Apps qui ont accédé aux données
+## Enregistrer le rapport et l'analyser localement
 
-Cette première section liste, par application, chaque accès aux ressources sensibles (localisation, photos, micro, etc.) avec la date et l'heure. C'est ici que vous voyez, par exemple, qu'une application de météo a interrogé votre position 47&nbsp;fois en deux jours, alors qu'une seule lecture quotidienne suffirait.
+Pour passer du relevé à une vue d'ensemble, suivez notre [guide d'export et d'import dans Privacy Score](/fr/blog/importer-rapport-confidentialite-iphone/). Il distingue l'enregistrement du rapport Apple de l'export des résultats dans l'application.
 
-### Apps qui ont contacté des domaines
+Privacy Score regroupe les domaines du fichier importé et propose un score ainsi que des pistes d'action. Cette analyse se déroule sur votre iPhone. Vous choisissez les recommandations à appliquer ; l'analyse ne retire pas automatiquement toutes les autorisations des autres applications.
 
-Pour chaque application, la liste des domaines contactés en réseau, classée par fréquence. C'est la section la plus révélatrice&nbsp;: vous découvrez que telle app de retouche photo contacte régulièrement `graph.facebook.com`, `googleadservices.com` ou `bidder.criteo.com`, alors que rien dans son interface ne le laissait deviner.
+Le score est propre à Privacy Score. Une note élevée ne garantit pas l'absence de suivi, et une note basse ne démontre pas qu'une donnée sensible a été transmise. Pour suivre une évolution, comparez aussi les usages et les périodes observées.
 
-### Domaines les plus contactés
+*La capture de Privacy Score présentée sur cette page est en anglais. Ses chiffres illustrent ce rapport affiché ; ils ne décrivent pas une moyenne ni le résultat attendu sur votre iPhone.*
 
-L'agrégation inverse&nbsp;: les domaines les plus sollicités sur tout votre téléphone, toutes apps confondues. Si `doubleclick.net` (Google) ou `appsflyer.com` apparaît en tête, c'est qu'un grand nombre de vos applications partagent un même prestataire de pistage.
+## Les limites à garder en tête
 
-### Activité réseau
+- **Pas d'historique avant activation.** Si le rapport vient d'être activé, il manque naturellement les usages précédents.
+- **Pas de contenu des échanges TLS.** Un contact réseau ne révèle ni le texte envoyé ni toutes les données conservées par le destinataire.
+- **Pas d'inventaire complet de la navigation privée.** Apple exclut les sessions privées des navigateurs ; des modes privés proposés par d'autres types d'apps peuvent rester visibles dans le rapport.
+- **Pas de verdict automatique.** Ni un compteur élevé ni l'absence d'une alerte ne suffisent à déclarer une application dangereuse ou sûre.
 
-La timeline brute&nbsp;: chaque connexion sortante avec horodatage. Utile pour corréler une fuite à une action précise (ouvrir telle app, recevoir telle notification).
+Ne publiez pas un rapport brut pour demander un avis. Les applications, les domaines et les horaires peuvent révéler vos habitudes. Préférez une question ciblée avec les informations personnelles masquées.
 
-### Un exemple concret de lecture
+## Questions fréquentes
 
-Prenons un cas réel, anonymisé. Sur un iPhone d'un utilisateur français standard, après 72&nbsp;heures d'enregistrement, le rapport remonte 4&nbsp;218&nbsp;connexions sortantes réparties sur 31&nbsp;applications. Les trois domaines les plus contactés sont, dans l'ordre, `firebase-settings.crashlytics.com` (Google, 612&nbsp;occurrences), `graph.facebook.com` (Meta, 384) et `app-measurement.com` (Google Analytics for Firebase, 271). L'application qui contacte le plus grand nombre de domaines distincts (47) est un jeu mobile gratuit installé deux semaines plus tôt&nbsp;; à l'inverse, l'application bancaire ne contacte que quatre domaines, tous appartenant à l'établissement émetteur. La lecture qui en découle est limpide&nbsp;: le poste d'effort prioritaire est le jeu, dont chaque ouverture déclenche en moyenne huit appels à des SDK publicitaires. Privacy Score, en traitement automatique, arrive à la même conclusion en quelques secondes.
+### Pourquoi le rapport est-il vide ?
 
-## Ce que le rapport ne dit pas
+Il vient peut-être d'être activé, la période contient peu d'usage ou les données recherchées ne font pas partie de son périmètre. Vérifiez ces cas dans le [guide des rapports vides ou incomplets](/fr/blog/rapport-confidentialite-iphone-vide/).
 
-Le Rapport de confidentialité a des limites qu'il faut connaître pour ne pas le sur-interpréter.
+### Le rapport bloque-t-il les domaines affichés ?
 
-- **Il ne montre pas le contenu des requêtes.** Vous voyez qu'une app a contacté `analytics.example.com`, mais pas ce qu'elle a envoyé. Le chiffrement TLS protège le contenu, le rapport observe seulement la métadonnée «&nbsp;tel domaine a été joint&nbsp;».
-- **Il n'identifie pas la société propriétaire du domaine.** `doubleclick.net` est Google, `connect.facebook.net` est Meta, `criteo.com` est Criteo, mais le rapport ne fait pas la traduction. C'est précisément le travail des bases comme <a href="https://github.com/duckduckgo/tracker-radar" rel="external">DuckDuckGo Tracker Radar</a> ou <a href="https://disconnect.me/trackerprotection" rel="external">Disconnect</a>, que des outils tiers utilisent pour enrichir le rapport.
-- **Il ne couvre pas les connexions effectuées avant l'activation.** Une fois activé, le rapport remonte au maximum sept jours en arrière.
-- **Il ne distingue pas le légitime du suspect.** Une banque qui contacte son propre domaine et un jeu gratuit qui contacte 30&nbsp;réseaux publicitaires apparaissent dans le même format. À vous (ou à un outil d'analyse) d'arbitrer.
+Non. Il fournit une observation. Le filtrage dépend d'un outil et de règles distincts. Un DNS chiffré ne filtre pas automatiquement les domaines publicitaires.
 
-Le rapport est une matière brute. Il documente sans juger.
+### Faut-il le désactiver pour repartir de zéro ?
 
-## Comment Privacy Score l'interprète
+Désactiver le rapport efface les informations qu'iOS y conserve. Évitez ce geste si vous souhaitez encore les consulter ou les enregistrer. Il ne remplace pas la gestion séparée des fichiers déjà exportés.
 
-Privacy Score est une application iOS native qui prend votre Rapport de confidentialité exporté et le transforme en audit lisible. Le fonctionnement&nbsp;:
-
-1. Vous exportez le rapport depuis Réglages, en passant par le bouton de partage standard d'iOS, et vous le déposez dans Privacy Score.
-2. L'application **parse le fichier localement**, dans le bac à sable d'iOS. Aucune donnée ne quitte votre téléphone. Aucun compte n'est nécessaire. Aucun serveur ne reçoit votre fichier.
-3. Chaque domaine contacté est croisé avec la base DuckDuckGo Tracker Radar pour identifier la société propriétaire (Google, Meta, Criteo, etc.) et la nature de l'activité (publicité, mesure d'audience, hébergement légitime).
-4. Un **score sur 100** est calculé, pondéré par le volume de traceurs uniques, leur réputation et leur concentration. Plus le score est élevé, plus votre exposition est faible.
-5. Trois à cinq **solutions concrètes** sont surfacées, par ordre d'impact estimé&nbsp;: supprimer telle application particulièrement bavarde, révoquer telle autorisation, activer le DNS chiffré, et ainsi de suite.
-
-L'analyse reste sur votre appareil, vérifiable en mode Avion. La grille de notation est documentée. Le premier audit est gratuit à vie. C'est l'inverse exact du modèle des courtiers en données qui ont alimenté l'enquête sur les Services secrets&nbsp;: vous restez propriétaire de votre rapport, et personne d'autre n'y accède.
-
-### Pourquoi un croisement avec une base externe
-
-Le Rapport de confidentialité d'Apple ne dit pas «&nbsp;ce domaine appartient à Google&nbsp;» ou «&nbsp;ce domaine est un réseau publicitaire&nbsp;». Cette attribution est précisément la valeur ajoutée d'un outil tiers. La base DuckDuckGo Tracker Radar agrège plus de 200&nbsp;000 domaines actifs catalogués par société propriétaire, catégorie d'usage et prévalence sur le web. Sa licence permissive et ses mises à jour régulières en font la référence ouverte la plus complète. Privacy Score embarque une copie compressée de cette base, mise à jour à chaque mise à jour de l'application, et l'interroge localement&nbsp;: aucune requête ne sort de votre téléphone pendant le croisement.
-
-[Découvrez Privacy Score sur la page d'accueil](/fr/) pour voir comment se présente un audit complet.
-
-## FAQ
-
-### Le Rapport de confidentialité ralentit-il mon iPhone&nbsp;?
-
-Non. Apple a conçu l'enregistrement pour être asynchrone et compressé. L'impact mesuré sur l'autonomie est inférieur à 1&nbsp;%, et aucun ralentissement notable n'a été rapporté depuis iOS&nbsp;15.2.
-
-### Apple voit-elle ce rapport&nbsp;?
-
-Non. Le rapport est généré et stocké localement, sur votre appareil. Il n'est jamais transmis aux serveurs d'Apple. La <a href="https://www.apple.com/fr/legal/privacy/fr-ww/" rel="external">politique de confidentialité d'Apple</a> le confirme&nbsp;: la fonctionnalité est entièrement client-side.
-
-### Puis-je effacer le rapport&nbsp;?
-
-Oui. Depuis l'écran **Rapport sur l'App Privacy**, touchez «&nbsp;Désactiver le rapport de confidentialité des apps&nbsp;» puis réactivez-le immédiatement. Toute la fenêtre des sept derniers jours est effacée. C'est une pratique courante après avoir testé une nouvelle application.
-
-### Que faire si une application contacte des centaines de domaines&nbsp;?
-
-Trois pistes, dans l'ordre. Premièrement, vérifiez que l'application est bien la dernière version&nbsp;: les correctifs récents corrigent parfois des SDK fuyards. Deuxièmement, révoquez les autorisations sensibles (localisation, contacts) depuis Réglages &gt; Confidentialité. Troisièmement, si le comportement persiste sans justification fonctionnelle, désinstallez. La <a href="https://www.cnil.fr/fr/cookies-et-autres-traceurs/regles/cookies-solutions-pour-les-utilisateurs" rel="external">CNIL rappelle régulièrement</a> que la transparence sur les traceurs reste une obligation, y compris pour les applications mobiles.
-
-### Le Rapport de confidentialité existe-t-il sur iPad et Mac&nbsp;?
-
-Sur iPad, oui, depuis iPadOS&nbsp;15.2, avec le même chemin dans Réglages. Sur macOS, non&nbsp;: il n'existe pas d'équivalent système intégré à ce jour. Les utilisateurs Mac peuvent se rabattre sur des outils comme Little Snitch ou LuLu pour observer les connexions sortantes.
-
-### Le rapport remplace-t-il un VPN ou un DNS chiffré&nbsp;?
-
-Non. Le Rapport de confidentialité est un outil d'**observation**, pas un outil de **filtrage**. Il vous indique quels domaines vos applications contactent, mais il ne bloque rien. Pour bloquer, il vous faut un DNS chiffré avec filtrage (NextDNS, AdGuard, Quad9 avec liste personnalisée) ou un VPN avec règles. Le rapport sert à choisir la cible du filtre, pas à se substituer à lui.
-
-### Le rapport peut-il être utilisé comme preuve juridique&nbsp;?
-
-À ce jour, aucune jurisprudence française ne l'a tranché. Le fichier est généré par votre appareil, sans signature horodatée par un tiers de confiance, et reste donc difficilement opposable en l'état. Sa valeur est documentaire et indicative. Pour un signalement à la <a href="https://www.cnil.fr/fr/plaintes" rel="external">CNIL</a> concernant une application qui ne respecterait pas le RGPD, il peut néanmoins servir de pièce versée au dossier, à côté de captures d'écran et de la politique de confidentialité de l'éditeur visé.
-
-## Conclusion
-
-Le Rapport de confidentialité des apps est l'outil d'observation le plus honnête qu'Apple ait livré à ses utilisateurs depuis l'<a href="/fr/politique-de-confidentialite/">App Tracking Transparency</a>. Il documente sans embellir et sans dramatiser. Pour la plupart des utilisateurs, le déchiffrer manuellement reste fastidieux&nbsp;: c'est précisément ce que [Privacy Score automatise](/fr/), en gardant la même promesse de traitement strictement local. Activez le rapport aujourd'hui, attendez 48&nbsp;heures, et regardez ce que votre téléphone fait quand vous ne le regardez pas.
+Pour organiser votre lecture, [découvrez Privacy Score](/fr/) ou [téléchargez l'application sur l'App Store](https://apps.apple.com/fr/app/privacy-score-tracker-audit/id6762229573). Le premier audit est gratuit ; les fonctions Premium sont présentées avant achat.

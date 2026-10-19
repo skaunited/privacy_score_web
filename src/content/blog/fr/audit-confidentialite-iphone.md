@@ -1,120 +1,81 @@
 ---
-title: "Audit confidentialité iPhone : la méthode complète 2026"
-description: "Comment auditer la vie privée de votre iPhone en 2026 : 5 vecteurs de fuite, 6 étapes manuelles, et l'automatisation par Privacy Score."
+title: "Audit confidentialité iPhone : les vérifications utiles"
+description: "Un audit de confidentialité iPhone pour vérifier les autorisations, le suivi et les domaines contactés. Suivez une méthode concrète, sans conclusions hâtives."
 publishedAt: "2026-06-01"
-updatedAt: "2026-06-01"
+updatedAt: "2026-10-19"
 author: "Skander Bahri"
 language: "fr"
 slug: "audit-confidentialite-iphone"
-tags: ["audit confidentialité", "iphone", "vie privée", "rgpd"]
+tags: ["audit confidentialité", "iphone", "autorisations", "suivi publicitaire"]
 hero:
-  alt: "Tableau de bord d'un audit de confidentialité iPhone affichant un score sur 100, le nombre de traceurs détectés et des solutions concrètes."
+  src: "/assets/screen-network.webp"
+  alt: "Écran en anglais du trafic réseau de Privacy Score, avec les onglets destinations, traceurs et entreprises."
 ---
 
-Un iPhone neuf, sorti de sa boîte, est en 2026 plus respectueux de la vie privée qu'un téléphone Android grand public. C'est la position de départ. Mais en quelques semaines d'usage, le tableau se dégrade&nbsp;: 60&nbsp;applications installées, des dizaines d'autorisations accordées en réflexe, des SDK publicitaires qui ouvrent des connexions à chaque ouverture d'app. Le résultat est que la <a href="https://www.cnil.fr/fr/cnil-direct/question/le-traitement-de-donnees-personnelles-dans-une-application-mobile" rel="external">CNIL</a> documente depuis plusieurs années&nbsp;: la quasi-totalité des applications mobiles, gratuites comme payantes, transmet des identifiants techniques à des tiers sans nécessité fonctionnelle. Le marché des courtiers en données, mis en lumière fin 2024 par l'<a href="https://www.404media.co/data-broker-tracked-secret-service-fbi-agents-locado-babel-street-locate-x/" rel="external">enquête 404 Media / Wired sur les Services secrets américains</a>, vit de cette matière première. Auditer son iPhone n'est donc plus une coquetterie de geek&nbsp;: c'est une hygiène. Ce guide décrit la méthode, manuelle puis automatisée.
+Un **audit de confidentialité iPhone** consiste à rapprocher trois choses : les autorisations accordées aux applications, les usages enregistrés par iOS et les services contactés sur le réseau. Commencez par vérifier les accès sensibles dans Réglages, puis utilisez le rapport de confidentialité pour décider quoi modifier. Le nombre de connexions, à lui seul, ne permet pas de conclure qu'une application vous piste.
 
-## Les 5 vecteurs de fuite d'un iPhone
+Cette méthode sert à prendre des décisions précises : limiter l'accès aux photos, retirer une autorisation devenue inutile ou demander à un éditeur pourquoi son application contacte un domaine. Elle ne constitue ni une certification de sécurité ni une recherche exhaustive de logiciels malveillants.
 
-Avant l'audit, il faut connaître les surfaces. Cinq vecteurs concentrent l'essentiel de la perte de vie privée sur iOS.
+## 1. Préparer une observation utile
 
-### 1. Les applications tierces
+Dans **Réglages → Confidentialité et sécurité**, ouvrez **Rapport de confidentialité des apps** et activez-le si nécessaire. Le rapport se remplit après l'activation ; il ne reconstitue pas votre activité antérieure. Consultez le [guide de lecture du rapport](/fr/blog/rapport-confidentialite-iphone-guide/) pour comprendre ses rubriques et ses limites.
 
-C'est le poste numéro&nbsp;un, et de loin. Chaque application installée embarque en moyenne 6 à 10&nbsp;SDK tiers&nbsp;: analytics, attribution publicitaire, planification de notifications, crash reporting. Chacun de ces SDK ouvre ses propres connexions réseau et envoie ses propres identifiants. Une application de météo gratuite peut contacter 30 à 50&nbsp;domaines distincts à chaque ouverture.
+Utilisez ensuite votre iPhone normalement : messagerie, navigation, cartes, applications que vous souhaitez examiner. Une période contenant vos usages habituels sera plus informative qu'un rapport exporté immédiatement après l'activation. Il n'existe pas de délai unique qui rende tous les rapports représentatifs.
 
-### 2. L'identifiant publicitaire IDFA
+Notez ce que vous cherchez à vérifier. Par exemple : « Cette application a-t-elle besoin de ma position précise ? » ou « Quels domaines ce jeu contacte-t-il ? ». Si aucune donnée n'apparaît, suivez d'abord le [diagnostic d'un rapport vide](/fr/blog/rapport-confidentialite-iphone-vide/).
 
-Apple l'a profondément encadré depuis iOS&nbsp;14.5 (avril 2021) avec l'App Tracking Transparency. Mais beaucoup d'utilisateurs ont, par habitude, autorisé le suivi pour quelques applications phares au moment de l'invite. Tant que l'autorisation reste accordée, l'IDFA reste exploitable par ces applications et leurs partenaires.
+## 2. Réduire les autorisations au besoin réel
 
-### 3. Le DNS non chiffré
+Ouvrez chaque catégorie dans **Réglages → Confidentialité et sécurité**, puis examinez les applications qui ont demandé un accès. [Apple explique comment modifier ces autorisations](https://support.apple.com/fr-fr/guide/iphone/iph251e92810/ios). Commencez par les données qui comptent le plus pour vous.
 
-Par défaut, vos requêtes DNS (la traduction `privacyscore.fr` &rarr; adresse IP) passent en clair vers le résolveur de votre opérateur. Votre fournisseur d'accès peut donc voir, en clair, chaque nom de site que vous visitez. Sur Wi-Fi public, c'est l'opérateur du réseau qui le voit. Le DNS chiffré (DoH ou DoT) ferme cette fuite.
+| Accès à examiner | Question à poser | Action possible |
+|---|---|---|
+| Localisation | La fonction utilisée a-t-elle besoin de ma position en continu ou avec précision ? | Réduire l'accès et la précision lorsque la fonction le permet. |
+| Photos | L'application doit-elle parcourir toute ma photothèque ? | Limiter la sélection lorsque cette option est proposée. |
+| Contacts | Le carnet d'adresses est-il nécessaire à mon usage ? | Retirer l'accès si vous n'utilisez pas la recherche de contacts. |
+| Micro et appareil photo | Ai-je encore besoin d'enregistrer ou d'appeler dans cette application ? | Désactiver l'accès devenu inutile, puis vérifier la fonction concernée. |
+| Bluetooth et réseau local | L'application pilote-t-elle un accessoire ou un appareil du domicile ? | Garder l'autorisation pour cet usage, la retirer sinon. |
 
-### 4. Les services iCloud et les sauvegardes
+Une autorisation permet un accès ; elle ne prouve pas que les données ont été envoyées à un serveur. Inversement, retirer la localisation ne supprime pas toutes les informations qu'un service peut déduire de votre compte ou de vos connexions. Les [réglages matériels décrits par Apple](https://support.apple.com/fr-fr/guide/iphone/iph168c4bbd5/ios) complètent ce premier passage.
 
-Sauvegarde iCloud, Photos iCloud, Trousseau, Mail iCloud&nbsp;: chacun de ces services peut être chiffré de bout en bout (E2EE) ou non, selon que vous avez activé la <a href="https://support.apple.com/fr-fr/108756" rel="external">Protection avancée des données</a> introduite en 2022. Sans cette option, Apple détient les clés de chiffrement de la majorité de vos données iCloud et peut, sur demande judiciaire, les remettre aux autorités.
+## 3. Vérifier le suivi et les publicités séparément
 
-### 5. Les services système connectés
+Dans **Réglages → Confidentialité et sécurité → Suivi**, passez en revue les décisions de chaque application. Vous pouvez retirer une autorisation déjà accordée et désactiver les nouvelles demandes. Ce contrôle concerne le suivi entre applications et sites de différentes entreprises ; il n'interdit pas toute connexion réseau ni tout traitement par le service que vous utilisez. Voir [l'explication d'Apple sur les demandes de suivi](https://support.apple.com/fr-fr/102420).
 
-Game Center, Plans, Siri, Maps, Localiser, App Store&nbsp;: chacun envoie des télémétries qui, individuellement, semblent inoffensives mais qui, agrégées, dressent un portrait précis de votre rythme de vie. La fonctionnalité Apple Intelligence, introduite avec iOS&nbsp;18.1 en octobre 2024, ajoute une nouvelle catégorie de télémétrie liée aux requêtes envoyées au modèle de langage&nbsp;: certaines sont traitées localement, d'autres sont envoyées au service Private Cloud Compute d'Apple. Le périmètre exact de ce qui quitte l'appareil est documenté par Apple, mais reste à vérifier au cas par cas selon les paramètres activés.
+La rubrique **Publicité Apple** contient un autre réglage : les publicités personnalisées diffusées par Apple. Le désactiver ne supprime pas nécessairement les annonces. Il ne faut pas non plus présenter ce geste comme une remise à zéro garantie de l'identifiant publicitaire. [Apple décrit le périmètre de la personnalisation publicitaire](https://support.apple.com/fr-fr/105131).
 
-## L'audit en 6 étapes manuelles
+## 4. Examiner les domaines avant de décider
 
-Voici la séquence à dérouler une fois, idéalement après une mise à jour iOS majeure ou tous les trois mois.
+Choisissez une application dans l'activité réseau du rapport. Pour un domaine inconnu, relevez le nom exact, l'application associée et le contexte d'utilisation. Cherchez ensuite une explication dans la politique de confidentialité de l'éditeur ou auprès de son assistance.
 
-### Étape 1&nbsp;: activer le Rapport de confidentialité des apps
+Un même domaine peut servir à fournir une vidéo, distribuer des images, diagnostiquer une erreur ou mesurer une audience. Une classification comme « publicité » ou « mesure » apporte un indice ; elle ne révèle pas le contenu précis de chaque échange chiffré.
 
-Réglages &rarr; Confidentialité &amp; sécurité &rarr; Rapport sur l'App Privacy &rarr; Activer. Attendez 48&nbsp;heures, puis lisez-le. C'est le seul outil natif qui vous montre ce que vos apps font réellement. La méthode de lecture détaillée est documentée dans notre [guide du Rapport de confidentialité iPhone](/fr/blog/rapport-confidentialite-iphone-guide/).
+Si vous souhaitez regrouper les résultats, vous pouvez [importer le rapport dans Privacy Score](/fr/blog/importer-rapport-confidentialite-iphone/). L'application analyse le fichier localement et organise les domaines et les recommandations. Le score est un indicateur interne pour orienter votre revue, pas une note attribuée par Apple ni une mesure de conformité au RGPD.
 
-### Étape 2&nbsp;: passer en revue les autorisations sensibles
+*La capture de cet article illustre l'interface de Privacy Score en anglais. Ses chiffres concernent la capture présentée ; ils ne constituent pas une moyenne des utilisateurs.*
 
-Réglages &rarr; Confidentialité &amp; sécurité &rarr; passez successivement Localisation, Contacts, Photos, Micro, Appareil photo, Calendrier, Bluetooth. Pour chaque catégorie, regardez la liste des applications autorisées. Pour la localisation, préférez «&nbsp;Lorsque j'utilise l'app&nbsp;» à «&nbsp;Toujours&nbsp;» partout où c'est possible. Pour les photos, préférez «&nbsp;Photos sélectionnées&nbsp;» à «&nbsp;Toutes les photos&nbsp;».
+## 5. Appliquer une action et vérifier son effet
 
-### Étape 3&nbsp;: réinitialiser l'identifiant publicitaire
+Procédez par changements ciblés. Après avoir réduit une autorisation, réutilisez la fonction concernée. Après avoir désinstallé une application inutile, vérifiez simplement que vous n'en avez plus besoin. Pour comparer deux rapports, gardez à l'esprit que les applications utilisées et la durée observée peuvent changer.
 
-Réglages &rarr; Confidentialité &amp; sécurité &rarr; Apple Advertising &rarr; désactivez «&nbsp;Annonces personnalisées&nbsp;». Puis Réglages &rarr; Confidentialité &amp; sécurité &rarr; Suivi &rarr; désactivez «&nbsp;Autoriser les apps à demander à effectuer un suivi&nbsp;» pour bloquer toute future invite. Si vous souhaitez réinitialiser l'IDFA déjà partagé, désactivez puis réactivez «&nbsp;Suivi&nbsp;»&nbsp;: iOS génère alors un nouvel identifiant.
+Le DNS et le VPN méritent un choix distinct. **Chiffrer le DNS protège les échanges DNS avec le résolveur ; filtrer des domaines dépend des règles du fournisseur.** Saisir une adresse DNS dans les réglages Wi-Fi ne suffit pas à activer DoH ou DoT. Apple décrit la [configuration du DNS chiffré par application ou profil](https://developer.apple.com/videos/play/wwdc2020/10047/).
 
-### Étape 4&nbsp;: activer un DNS chiffré
+Privacy Score propose des outils de profils DNS et VPN parmi ses fonctions Premium. Le fournisseur choisi traite alors les échanges nécessaires à son service : l'analyse locale du rapport ne rend pas ce fournisseur invisible. Consultez sa politique de confidentialité avant de configurer un profil.
 
-Réglages &rarr; Général &rarr; VPN et gestion d'appareil &rarr; DNS &rarr; ajouter un profil DNS chiffré. Quelques résolveurs réputés et gratuits&nbsp;: Quad9 (Suisse, à but non lucratif), Cloudflare 1.1.1.1, Mullvad DNS. La <a href="https://www.cnil.fr/fr/le-dns-chiffre-une-protection-supplementaire-pour-votre-navigation" rel="external">CNIL recommande explicitement</a> le DNS chiffré comme protection contre l'analyse passive de votre trafic.
+Votre prochaine revue peut tenir en une liste courte : autorisations sensibles, suivi, domaines à expliquer, applications encore utiles. Reprenez-la lorsque vos usages changent, plutôt que de viser un nombre arbitraire de domaines à supprimer.
 
-### Étape 5&nbsp;: activer la Protection avancée des données iCloud
+## Questions fréquentes
 
-Réglages &rarr; identifiant Apple &rarr; iCloud &rarr; Protection avancée des données. Cette option active le chiffrement de bout en bout sur la quasi-totalité des données iCloud (Photos, Notes, Sauvegarde, Trousseau). Apple ne peut plus, techniquement, lire vos données. La contrepartie&nbsp;: si vous perdez votre code et vos contacts de récupération, la perte est définitive. C'est l'arbitrage à comprendre avant d'activer.
+### Faut-il désactiver toutes les autorisations ?
 
-### Étape 6&nbsp;: passer en revue les apps installées
+Non. Conservez celles qui servent une fonction que vous utilisez et dont vous acceptez le fonctionnement. Un refus peut empêcher une fonction utile ; vous pouvez modifier votre décision ensuite.
 
-Pour chaque application installée depuis plus de six mois, posez deux questions. L'ai-je utilisée le mois dernier&nbsp;? A-t-elle un équivalent open-source ou plus respectueux&nbsp;? Si la réponse à la première est non, désinstallez. Si la réponse à la seconde est oui, migrez. C'est l'étape la plus chronophage, et la plus efficace.
+### Un bon score garantit-il que mes données sont protégées ?
 
-## Le DNS chiffré et le VPN&nbsp;: utiles ou marketing&nbsp;?
+Non. Un score résume les critères d'un outil et les données dont il dispose. Il ne révèle pas ce qu'un serveur conserve et ne couvre pas tous les risques liés à un compte ou à un appareil.
 
-Soyons précis, parce que le marketing brouille volontairement les deux notions.
+### Dois-je payer pour commencer l'audit ?
 
-Le **DNS chiffré** masque, auprès de votre fournisseur d'accès et de l'opérateur du Wi-Fi, la liste des domaines que vous visitez. Il ne masque pas les adresses IP de destination, ni le contenu de votre trafic (déjà chiffré par TLS pour HTTPS). C'est une protection ciblée, utile, et qui coûte zéro à activer.
+Les réglages et le rapport Apple sont accessibles sans Privacy Score. Le premier audit dans l'application est gratuit ; les fonctions Premium et leur tarif sont présentés avant achat sur l'App Store.
 
-Le **VPN** masque, en plus, votre adresse IP réelle auprès des sites visités, et l'identité des sites visités auprès de votre fournisseur d'accès. Il déplace votre confiance vers l'opérateur du VPN, qui devient le seul à voir l'ensemble de votre trafic. Le choix d'un VPN se fait donc moins sur le marketing que sur la juridiction du fournisseur, sa politique de logs (idéalement audités par un tiers indépendant) et sa structure de propriété.
-
-En pratique, pour un usage domestique en France, le DNS chiffré suffit dans 95&nbsp;% des cas. Le VPN devient utile en mobilité (Wi-Fi d'aéroport, café, hôtel) ou en déplacement dans un pays où la surveillance est forte. Toute autre promesse marketing («&nbsp;protégez-vous des hackers&nbsp;», «&nbsp;rendez-vous anonyme&nbsp;») relève de l'hyperbole.
-
-Un mot sur les VPN gratuits, parce que la tentation existe. Le modèle économique d'un VPN consiste à payer des serveurs et de la bande passante en permanence. Quand un service ne demande aucune contrepartie, c'est qu'une autre source de revenus existe&nbsp;: revente d'historiques de navigation, injection publicitaire dans le trafic non chiffré, partage de bande passante (votre iPhone devient un relais pour d'autres clients). Le rapport <a href="https://www.top10vpn.com/research/free-vpn-investigations/ownership/" rel="external">Top10VPN sur la propriété des VPN gratuits</a> documente le phénomène depuis plusieurs années. Si un VPN est nécessaire, il vaut mieux le payer quelques euros par mois à un fournisseur audité indépendamment que d'en utiliser un gratuit.
-
-## Pourquoi un audit régulier
-
-Trois raisons mécaniques rendent l'audit ponctuel insuffisant.
-
-Premièrement, **chaque mise à jour iOS** réintroduit des réglages par défaut. iOS&nbsp;17 a réinitialisé certains paramètres de notifications, iOS&nbsp;18 a réintroduit la collecte d'analytics pour la fonctionnalité Apple Intelligence&nbsp;: à chaque cycle, l'utilisateur doit re-vérifier.
-
-Deuxièmement, **chaque nouvelle application installée** ajoute son propre lot de SDK. Une seule application bavarde, ajoutée le mois dernier, peut décupler vos connexions sortantes sans que rien de visible ne le signale.
-
-Troisièmement, **les pratiques des éditeurs évoluent**. Une application sobre en 2024 peut, après un rachat ou un changement de stratégie monétaire, ajouter trois SDK publicitaires dans sa mise à jour de 2026. Le rapport de confidentialité est le seul moyen de s'en apercevoir sans lire le journal des changements.
-
-C'est cette entropie permanente qui rend nécessaire un audit mensuel, ou au minimum trimestriel.
-
-## Comment Privacy Score remplace l'audit manuel
-
-Faire les six étapes ci-dessus à la main demande, en moyenne, 45 minutes la première fois et 15 minutes ensuite. C'est trop pour la plupart des utilisateurs, et c'est précisément ce qui explique pourquoi presque personne ne le fait.
-
-Privacy Score reprend ce travail et l'exécute en 30 secondes sur votre iPhone&nbsp;:
-
-- Vous exportez votre Rapport de confidentialité depuis Réglages, et vous le déposez dans l'application.
-- L'analyse se fait **strictement localement**, dans le bac à sable iOS. Aucun serveur n'est contacté, aucun compte n'est créé, aucune télémétrie n'est envoyée. Vous pouvez vérifier ce point vous-même&nbsp;: en mode Avion, l'analyse fonctionne toujours, et Privacy Score n'apparaît dans aucune connexion sortante de votre Rapport de confidentialité.
-- Chaque domaine contacté est croisé avec la base <a href="https://github.com/duckduckgo/tracker-radar" rel="external">DuckDuckGo Tracker Radar</a> pour identifier la société propriétaire et la catégorie d'usage (publicité, mesure, hébergement).
-- Un score sur 100 résume l'exposition. Trois à cinq solutions concrètes sont proposées par ordre d'impact estimé.
-
-[Découvrir Privacy Score sur la page d'accueil](/fr/) ou lire la [politique de confidentialité](/fr/politique-de-confidentialite/) pour vérifier les engagements techniques avant d'installer.
-
-## Checklist récapitulative
-
-- Activer le Rapport de confidentialité des apps (Réglages &rarr; Confidentialité &amp; sécurité &rarr; Rapport sur l'App Privacy).
-- Attendre 48&nbsp;heures avant de lire le rapport.
-- Désactiver «&nbsp;Annonces personnalisées&nbsp;» (Apple Advertising).
-- Désactiver «&nbsp;Autoriser les apps à demander à effectuer un suivi&nbsp;» (Suivi).
-- Passer chaque catégorie d'autorisation (Localisation, Photos, Contacts, Micro, etc.) au peigne fin.
-- Configurer un DNS chiffré (Quad9, Cloudflare ou Mullvad).
-- Activer la Protection avancée des données iCloud, après avoir préparé les contacts de récupération.
-- Désinstaller toute application inutilisée depuis plus d'un mois.
-- Vérifier les applications qui contactent plus de 20 domaines distincts par jour.
-- Reprendre l'audit complet tous les trois mois, ou après chaque mise à jour iOS majeure.
-
-## Conclusion
-
-L'audit de confidentialité d'un iPhone n'est ni un acte militant, ni une expertise réservée à une élite technique. C'est un entretien régulier, comparable à la révision d'une voiture, qui prend une demi-heure si on s'en occupe à la main et trente secondes si on l'automatise. La méthode manuelle reste utile pour comprendre ce qu'on fait. L'automatisation devient utile dès qu'on veut le refaire chaque mois. Dans les deux cas, le point de départ est le Rapport de confidentialité d'Apple, et la décision finale reste la vôtre. [Privacy Score](/fr/) est conçu pour vous l'épargner sans jamais voir votre rapport.
+[Découvrir l'audit de confidentialité sur iPhone avec Privacy Score](/fr/#how) ou [télécharger l'application sur l'App Store](https://apps.apple.com/fr/app/privacy-score-tracker-audit/id6762229573).
