@@ -1,5 +1,4 @@
 ---
-import Icon from '@components/Icon.astro';
 /**
  * CTASection.astro - final "Download" call to action.
  * Matches `variation-illustrated.html` lines 1426-1448.
@@ -32,7 +31,7 @@ const { cta, locale } = Astro.props;
       <p>{cta.body}</p>
       <div class="cta-buttons">
         <a href={APP_STORE_URL[locale]} class="btn btn-primary btn-big" target="_blank" rel="noopener" data-cta="download-section">
-          <Icon name="download" class="material-icons-round" />
+          <span class="material-icons-round" aria-hidden="true">download</span>
           {cta.primary}
         </a>
         <span class="cta-note" set:html={cta.note}></span>
@@ -40,7 +39,7 @@ const { cta, locale } = Astro.props;
     </div>
     <div class="cta-mark">
       <img
-        src="/assets/app-icon-240.webp"
+        src="/assets/app-icon-512.webp"
         alt=""
         width="512"
         height="512"

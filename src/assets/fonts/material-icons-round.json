@@ -1,0 +1,25 @@
+{
+  "source": "material-icons@1.13.14/iconfont/material-icons-round.woff",
+  "icons": [
+    "add",
+    "ads_click",
+    "arrow_downward",
+    "battery_full",
+    "check",
+    "cloud_off",
+    "dashboard",
+    "dns",
+    "download",
+    "expand_more",
+    "hub",
+    "ios_share",
+    "near_me",
+    "notifications_off",
+    "person_off",
+    "phone_iphone",
+    "radar",
+    "signal_cellular_alt",
+    "trending_up",
+    "wifi"
+  ]
+}

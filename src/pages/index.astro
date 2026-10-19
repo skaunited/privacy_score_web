@@ -1,6 +1,6 @@
 ---
 /**
- * /en/ - English homepage. Wires BaseLayout + Header + 10 sections + Footer.
+ * / - English homepage. Wires BaseLayout + Header + 10 sections + Footer.
  *
  * Phase 4 adds the JSON-LD payload: four schema.org blocks (WebSite,
  * MobileApplication, Organization, FAQPage) emitted into <head> by BaseLayout.
@@ -8,12 +8,12 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Header from '@components/Header.astro';
 import HeroSection from '@components/sections/HeroSection.astro';
-import OfferSection from '@components/OfferSection.astro';
-import GuidesSection from '@components/GuidesSection.astro';
+import StoryboardSection from '@components/sections/StoryboardSection.astro';
 import ProductIntroSection from '@components/sections/ProductIntroSection.astro';
 import HowItWorksSection from '@components/sections/HowItWorksSection.astro';
 import AnglesSection from '@components/sections/AnglesSection.astro';
 import ManifestoSection from '@components/sections/ManifestoSection.astro';
+import TrustQuoteSection from '@components/sections/TrustQuoteSection.astro';
 import MetricsSection from '@components/sections/MetricsSection.astro';
 import FAQSection from '@components/sections/FAQSection.astro';
 import CTASection from '@components/sections/CTASection.astro';
@@ -48,12 +48,12 @@ const jsonLd = [
   <Header              locale={locale} pathname={Astro.url.pathname} nav={dict.nav} />
   <main id="main-content">
   <HeroSection         hero={dict.hero} locale={locale} />
-  <OfferSection locale={locale} />
+  <StoryboardSection   story={dict.story}        chapters={dict.chapters} />
   <ProductIntroSection product={dict.product}    chapters={dict.chapters} />
   <HowItWorksSection   how={dict.how}            chapters={dict.chapters} />
   <AnglesSection       angles={dict.angles}      chapters={dict.chapters} />
   <ManifestoSection    manifesto={dict.manifesto} chapters={dict.chapters} />
-  <GuidesSection locale={locale} />
+  <TrustQuoteSection   quote={dict.quote} />
   <MetricsSection      metrics={dict.metrics} />
   <FAQSection          faq={dict.faq} />
   <CTASection          cta={dict.cta} locale={locale} />

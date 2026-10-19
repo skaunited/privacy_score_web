@@ -20,28 +20,78 @@ const breadcrumb = breadcrumbListJsonLd([
 <BaseLayout locale={locale} title={`${title} | Privacy Score`} description={description} jsonLd={breadcrumb}>
   <Header locale={locale} pathname={Astro.url.pathname} nav={dict.nav} />
   <main id="main-content" class="legal-page">
-    <div class="legal-content">
-      <p class="overline">{fr ? 'Le blog Privacy Score' : 'The Privacy Score blog'}</p>
+    <article class="legal-content">
       <h1>{title}</h1>
-      <p>{description}</p>
-      <ul class="blog-cards">
-        {posts.map((post) => <li><article>
-          <p class="article-date">{fr ? 'Révisé le' : 'Reviewed'} <time datetime={(post.data.updatedAt ?? post.data.publishedAt).toISOString()}>{format.format(post.data.updatedAt ?? post.data.publishedAt)}</time></p>
+      <p class="blog-intro">{description}</p>
+      <ul class="blog-list">
+        {posts.map((post) => <li class="blog-card"><article>
           <h2><a href={postPath(post)}>{post.data.title}</a></h2>
+          <p class="blog-meta">
+            <time datetime={post.data.publishedAt.toISOString()}>{format.format(post.data.publishedAt)}</time>
+            {post.data.author && <> · {post.data.author}</>}
+            {post.data.updatedAt && <> · {fr ? 'Révisé le' : 'Reviewed'} <time datetime={post.data.updatedAt.toISOString()}>{format.format(post.data.updatedAt)}</time></>}
+          </p>
           <p>{post.data.description}</p>
-          <a class="read-guide" href={postPath(post)}>{fr ? 'Lire le guide' : 'Read the guide'} →</a>
+          {post.data.tags?.length ? <p class="blog-tags">{post.data.tags.map((tag: string) => <span class="blog-tag">{tag}</span>)}</p> : null}
         </article></li>)}
       </ul>
-    </div>
+    </article>
   </main>
   <Footer footer={dict.footer} locale={locale} />
 </BaseLayout>
 <style>
-  .blog-cards { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); list-style:none; gap:1.5rem; padding:0; margin-top:2rem; }
-  li { background:#0d1628; border:1px solid #38557f; border-radius:20px; padding:1.5rem; }
-  h2 { font-size:1.35rem; line-height:1.4; margin:.5rem 0; }
-  p { line-height:1.7; }
-  .article-date { color:#b5c3d6; font-size:.875rem; }
-  .read-guide { color:#93c5fd; text-decoration:underline; text-underline-offset:4px; }
-  @media(max-width:650px) { .blog-cards { grid-template-columns:1fr; } }
+  .blog-intro {
+    color: var(--text-secondary, #94A3B8);
+    font-size: 16px;
+    margin-bottom: 2rem;
+  }
+  .blog-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+  .blog-card {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .blog-card:last-child {
+    border-bottom: none;
+  }
+  .blog-card h2 {
+    margin: 0 0 0.5rem;
+    font-size: 22px;
+    line-height: 1.3;
+  }
+  .blog-card h2 a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .blog-card h2 a:hover {
+    color: #60A5FA;
+    text-decoration: underline;
+  }
+  .blog-meta {
+    color: #697990;
+    font-size: 13px;
+    margin: 0 0 0.75rem;
+  }
+  .blog-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+  .blog-tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 9999px;
+    background: rgba(96, 165, 250, 0.10);
+    color: #60A5FA;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
 </style>

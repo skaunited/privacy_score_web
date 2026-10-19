@@ -1,5 +1,4 @@
 ---
-import Icon from '@components/Icon.astro';
 /**
  * AnglesSection.astro - Chapter 04/05 "L'app".
  *
@@ -53,7 +52,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
     {angles.cards.map((card, i) => (
       <article class="angle-card reveal">
         <span class={`callout ${cardMeta[i].style}`}>
-          <Icon name={cardMeta[i].icon} class="material-icons-round" /> {card.callout}
+          <span class="material-icons-round" aria-hidden="true">{cardMeta[i].icon}</span> {card.callout}
         </span>
         <div>
           <span class="num">{pad(i + 1)}/04</span>

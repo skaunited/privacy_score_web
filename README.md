@@ -21,12 +21,16 @@ Browser tests use installed Google Chrome locally; CI may install Playwright Chr
 - `src/i18n/routes.mjs`: shared canonical pages and historical redirect map.
 - `src/config/product.ts`: verified product facts, French launch/renewal prices and public GA4 ID.
 - `src/content/blog/{en,fr}`: four published guides per language. `status: draft` excludes a post; `translationKey` pairs actual equivalents.
-- `src/components/BlogPost.astro`: article navigation, review dates, author, optimized screenshot, related guides and App Store CTA.
+- `src/components/BlogPost.astro`: original article presentation, author, publication/review dates and corrected structured data.
 - `src/components/Analytics.astro` and `src/assets/analytics.ts`: consent-controlled website measurement, independent of app report processing.
 - `scripts/`: redirect generation, static SEO verification and release packaging.
 - `.github/workflows/site.yml`: validate, build and audit `main`, then publish public files to `deploy` for Plesk.
 
 The first app audit is free. Introductory subscription prices apply to the first eligible period in the French App Store, not permanently or worldwide. Apple confirms local purchase terms.
+
+The original homepage presentation and illustration copy are restored at the owner's request. Preserve its layout, Material Icons Round and demonstration values during technical SEO work. The rewritten blog bodies, canonical URLs, consented Analytics and delivery pipeline remain in place. See the [visual restoration record](docs/visual-restoration-2026-10-19.md).
+
+The local icon font retains the original Material Icons outlines for the 20 icons in `src/assets/fonts/material-icons-round.json`. If an explicitly requested design change adds an icon, update that list and regenerate with `python3 scripts/subset-icons.py` (optional fontTools maintainer dependency). Normal builds use the committed font and need no Python font package.
 
 ## Analytics
 

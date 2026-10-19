@@ -57,6 +57,7 @@ test('expired consent does not load Google', async ({ page }) => {
 
 for (const path of ['/', '/fr/', '/blog/iphone-permissions-guide/', '/fr/blog/importer-rapport-confidentialite-iphone/']) {
   test(`mobile layout and accessibility ${path}`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion:'reduce' });
     await page.setViewportSize({ width:390, height:844 });
     await page.goto(path);
     await page.locator('[data-consent="denied"]').click();
@@ -66,6 +67,24 @@ for (const path of ['/', '/fr/', '/blog/iphone-permissions-guide/', '/fr/blog/im
     await expect(alternative).toHaveCount(1);
     await expect(alternative).toHaveAttribute('href', path === '/' ? '/fr/' : path === '/fr/' ? '/' : path.startsWith('/fr/') ? '/blog/export-app-privacy-report/' : '/fr/blog/');
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    if (path === '/' || path === '/fr/') {
+      await expect(page.locator('.chip-trackers .chip-value')).toHaveText('2487');
+      await expect(page.locator('.chip-trackers .chip-label')).toHaveText(path === '/' ? 'Trackers blocked today' : "Traceurs bloqués aujourd'hui");
+      await expect(page.locator('.chip-dns .chip-label')).toHaveText(path === '/' ? 'Encrypted DNS' : 'DNS chiffré');
+      await expect(page.locator('.chip-dns .chip-value')).toHaveText(path === '/' ? 'On' : 'Actif');
+      await expect(page.locator('#story .sb-panel')).toHaveCount(8);
+      await page.evaluate(() => document.fonts.ready);
+      const icons = await page.locator('.pillar .material-icons-round').evaluateAll((elements) => elements.map((element) => ({
+        width:element.getBoundingClientRect().width, height:element.getBoundingClientRect().height,
+        font:getComputedStyle(element).fontFamily,
+      })));
+      expect(icons).toHaveLength(3);
+      for (const icon of icons) {
+        expect(icon.width).toBeGreaterThanOrEqual(38);
+        expect(icon.height).toBeGreaterThanOrEqual(38);
+        expect(icon.font).toContain('Material Icons Round');
+      }
+    }
     if (path === '/') await page.screenshot({ path:'test-results/home-viewport.png' });
     const results = await new AxeBuilder({ page }).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
     expect(results.violations.map((violation) => ({ id:violation.id, nodes:violation.nodes.map((node) => ({ target:node.target, summary:node.failureSummary })) }))).toEqual([]);

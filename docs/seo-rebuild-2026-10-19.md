@@ -1,5 +1,7 @@
 # Livraison de la refonte SEO — 19 octobre 2026
 
+> Mise à jour visuelle demandée par le propriétaire après publication : l'habillage, les textes d'accueil, les illustrations et les gabarits du blog reviennent à leur présentation antérieure (`df3bf12`). Les nouvelles sections d'offre et de guides sur l'accueil sont retirées ; les conditions commerciales restent dans la FAQ et les pages légales. Les articles corrigés, la migration, les métadonnées, Analytics et la pipeline sont conservés. Les descriptions et mesures ci-dessous documentent la livraison initiale et ne constituent pas une validation éditoriale des textes d'accueil restaurés. Consulter `CLAUDE.md` pour l'état courant.
+
 La refonte demandée est implémentée sur la branche `codex/seo-rebuild`. Le site statique et le paquet de publication sont validés localement. **Cette livraison n'est pas encore déployée sur Plesk/Cloudflare** : les réponses HTTP de production, les en-têtes et la réception effective des événements GA4 restent à vérifier après publication.
 
 ## Corrections livrées

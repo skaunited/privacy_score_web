@@ -31,7 +31,7 @@
       "switcher": "Changer la langue du site"
     },
     "links": {
-      "story": "Mode d’emploi",
+      "story": "L'histoire",
       "app": "L'app",
       "trust": "Confiance",
       "download": "Télécharger"
@@ -45,170 +45,231 @@
   "hero": {
     "overline": "Disponible sur l'App Store",
     "title": {
-      "line1Pre": "Vos apps. ",
-      "line1Em": "Leurs connexions.",
-      "line1Post": "",
-      "line2Pre": "À vous de ",
-      "line2Strike": "comprendre",
+      "line1Pre": "Vous pensez être ",
+      "line1Em": "anonyme",
+      "line1Post": ".",
+      "line2Pre": "Vous ne l'êtes ",
+      "line2Strike": "pas",
       "line2Post": "."
     },
-    "lede": "Privacy Score analyse le <strong>Rapport de confidentialité des apps</strong> exporté depuis iOS. Repérez les domaines contactés, consultez un score expliqué et choisissez vos actions. Votre rapport est traité sur votre appareil, sans compte.",
+    "lede": "Chaque app sur votre iPhone parle dans votre dos. Votre position, vos centres d'intérêt, vos déplacements. <strong>Privacy Score</strong> les écoute. Localement. Sans serveur. Sans compte.",
     "ctas": {
       "primary": "Télécharger sur l'App Store",
       "ghost": "Voir comment"
     },
     "pillars": {
       "cloud": {
-        "title": "Rapport local",
-        "sub": "Aucun envoi pour l’analyse."
+        "title": "Aucun serveur",
+        "sub": "Rien ne quitte votre appareil."
       },
       "person": {
-        "title": "Sans compte",
-        "sub": "Pas d’inscription requise."
+        "title": "Aucun compte",
+        "sub": "Aucune adresse, aucun mot de passe."
       },
       "phone": {
-        "title": "Premier audit gratuit",
-        "sub": "Fonctions Premium en option."
+        "title": "Tout en local",
+        "sub": "Analyse sur l'iPhone, hors-ligne."
       }
     },
     "phone": {
       "statusbarTime": "09:41",
       "dashboardTitle": "Dashboard",
-      "statusOverline": "Exemple de rapport",
-      "statusValue": "Analyse disponible",
+      "statusOverline": "Statut",
+      "statusValue": "Appareil protégé",
       "gaugeGrade": "Bon",
       "metaBrand": "Privacy Score",
-      "metaDetail": "Valeurs de démonstration, propres à cet exemple.",
-      "cta": "Voir les recommandations"
+      "metaDetail": "909 traceurs détectés, 5 apps&nbsp;géolocalisées.",
+      "cta": "Améliorer le score"
     },
     "chips": {
       "trackers": {
-        "label": "Domaines · exemple",
-        "countTo": 42
+        "label": "Traceurs bloqués aujourd'hui",
+        "countTo": 2487
       },
       "dns": {
-        "label": "DNS · exemple",
-        "value": "À vérifier"
+        "label": "DNS chiffré",
+        "value": "Actif"
       }
     },
     "scrollCue": "Faites défiler",
-    "h1": "Comprenez le rapport de confidentialité de votre iPhone."
+    "h1": "Privacy Score : votre audit de confidentialité iPhone, en local."
+  },
+  "story": {
+    "title": {
+      "pre": "En 2024, des journalistes ont identifié ",
+      "hi": "26 agents du Secret Service",
+      "post": ", en achetant des données publicitaires."
+    },
+    "intro": "Pas de fuite. Pas de piratage. Juste un fichier acheté à un courtier en données, comme n'importe qui peut le faire. L'histoire en huit cases.",
+    "panels": [
+      {
+        "tag": "Jan 2024",
+        "captionStrong": "Washington, D.C.",
+        "caption": "Le Secret Service protège le Président, jour et nuit, discrètement. C'est leur métier."
+      },
+      {
+        "tag": "Marché ouvert",
+        "captionStrong": "Des journalistes achètent un jeu de données pub.",
+        "caption": "Cent millions de pings GPS, pour le prix d'un repas. Cent pour cent légal."
+      },
+      {
+        "tag": "26 points rouges",
+        "captionStrong": "Le fichier cartographie 26 personnes.",
+        "caption": "Entrant, sortant, jour après jour, autour de la Maison Blanche."
+      },
+      {
+        "tag": "Identifiés",
+        "captionStrong": "26 noms. 26 visages.",
+        "caption": "Recoupé avec quelques données publiques. Pas un piratage. Légal. C'est ça, le problème."
+      },
+      {
+        "tag": "Strava · 2018",
+        "captionStrong": "2018, déjà.",
+        "caption": "Une app de fitness révèle les routes de patrouille de soldats américains au Moyen-Orient. Au monde entier."
+      },
+      {
+        "tag": "Votre iPhone",
+        "captionStrong": "Aujourd'hui, votre iPhone.",
+        "caption": "909 traceurs par semaine en moyenne. Votre position part dans 26 pays. Sans que vous le sachiez."
+      },
+      {
+        "tag": "Un outil apparaît",
+        "captionStrong": "Privacy Score.",
+        "caption": "Lit le rapport iOS. Calcule un score sur 100. Vous dit exactement quoi corriger. Tout en local."
+      },
+      {
+        "tag": "+ 45 points",
+        "captionStrong": "Soixante secondes.",
+        "caption": "Un score. Trois fixes. La prochaine fuite de données, ce ne sera pas la vôtre."
+      }
+    ],
+    "pivot": {
+      "line1Pre": "Vous ne pouvez pas ",
+      "line1Em": "supprimer",
+      "line1Post": " ces données.",
+      "line2Pre": "Mais vous pouvez ",
+      "line2Strong": "arrêter d'en produire."
+    }
   },
   "product": {
     "title": {
-      "line1": "Un rapport lisible.",
-      "line2": "Un score expliqué.",
-      "line3": "Vos décisions."
+      "line1": "Un score sur 100.",
+      "line2": "Trois actions concrètes.",
+      "line3": "Aucun discours alarmiste."
     },
-    "body": "Le rapport Apple recense des accès aux données et aux capteurs ainsi que des contacts réseau. Privacy Score vous aide à explorer ces domaines et leurs classifications. <strong>Un contact ne prouve pas une fuite</strong> : le contenu chiffré des échanges n’est pas révélé par ce rapport.",
+    "body": "Privacy Score lit le <strong>Rapport de Confidentialité</strong> qu'iOS génère déjà sur votre iPhone. Il croise chaque domaine contacté par vos apps avec la base de DuckDuckGo Tracker Radar, puis calcule un score, et vous dit exactement quoi corriger.",
     "bullets": [
-      "Import depuis le partage du rapport Apple.",
-      "Analyse du fichier sur votre appareil.",
-      "Recommandations pour vos réglages et outils DNS/VPN.",
-      "Historique pour comparer vos rapports."
+      "Lit le rapport iOS natif (pas d'accès supplémentaire).",
+      "Calcule le score localement, en 2 secondes.",
+      "Recommande 3 à 5 fixes immédiats.",
+      "Suit l'évolution semaine après semaine."
     ],
     "phoneAlt": "Privacy Score : score de 67 sur 100 avec son contexte"
   },
   "how": {
-    "title": "Activez. Importez. Examinez.",
+    "title": "Trois étapes. Soixante secondes. Hors-ligne.",
     "steps": [
       {
-        "title": "Activez le rapport Apple",
-        "body": "Réglages → Confidentialité et sécurité → Rapport de confidentialité des apps. Activez-le s’il ne l’est pas encore, puis utilisez vos apps pour recueillir de l’activité.",
-        "meta": "Enregistrement après activation"
+        "title": "Exportez votre Rapport",
+        "body": "Réglages iOS → Confidentialité &amp; sécurité → Rapport sur l'App&nbsp;Privacy. Vous l'avez déjà : iOS l'enregistre en silence.",
+        "meta": "Format&nbsp;: .ndjson · 100% Apple"
       },
       {
-        "title": "Partagez le rapport",
-        "body": "Depuis le rapport iOS, utilisez le partage ou l’enregistrement du fichier, puis ouvrez-le avec Privacy Score. Votre fichier est analysé sur votre appareil.",
-        "meta": "Fichier Apple · traitement local"
+        "title": "Privacy Score l'analyse",
+        "body": "Tout se passe sur votre iPhone. Nous croisons les domaines avec la base ouverte de DuckDuckGo et calculons un score sur 100.",
+        "meta": "0 octet transmis · 2 sec"
       },
       {
-        "title": "Choisissez vos actions",
-        "body": "Consultez les domaines et les recommandations. Adaptez les autorisations à vos besoins ; le score est un indicateur interne, pas une garantie de sécurité.",
-        "meta": "Comparer des rapports comparables"
+        "title": "Vous corrigez. Vous voyez la courbe monter.",
+        "body": "Chaque recommandation indique combien de points elle vous rapporte. Vous appliquez celles que vous voulez. Vous mesurez le progrès.",
+        "meta": "+5 à +45 points · par fix"
       }
     ]
   },
   "angles": {
-    "title": "Explorez votre rapport sous quatre angles.",
+    "title": "Quatre onglets. Quatre angles sur votre exposition.",
     "cards": [
       {
-        "callout": "Synthèse",
-        "title": "Tableau de bord",
-        "body": "Un aperçu du score et des éléments du rapport à examiner.",
-        "meta": "Un point de départ, pas un verdict",
+        "callout": "Vue d'ensemble",
+        "title": "Dashboard",
+        "body": "Votre score, vos traceurs détectés, vos apps géolocalisées, votre DNS, votre VPN. Tout d'un coup d'œil.",
+        "meta": "Score · Statuts · 7 vecteurs",
         "imageAlt": "Privacy Score : tableau de bord avec score de confidentialité"
       },
       {
-        "callout": "Actions",
+        "callout": "+5 à +45 pts",
         "title": "Recommandations",
-        "body": "Des pistes pour vos réglages et les outils DNS/VPN. Vous choisissez celles qui conviennent à votre usage.",
-        "meta": "Effet et limites à lire avant modification",
+        "body": "« Désactivez le tracking pub. +5 pts. » « Activez un DNS chiffré. +8 pts. » Vous appliquez ce que vous voulez.",
+        "meta": "Triées par impact, pas par marketing",
         "imageAlt": "Privacy Score : recommandations classées par impact"
       },
       {
-        "callout": "Historique",
+        "callout": "Tendance",
         "title": "Évolution",
-        "body": "Comparez vos audits en tenant compte de la durée et de l’activité couvertes.",
-        "meta": "Votre usage influence le résultat",
+        "body": "Chaque scan, un point sur la courbe. Voyez votre score monter, semaine après semaine.",
+        "meta": "Historique · Trackers par scan",
         "imageAlt": "Privacy Score : score historique sur 30 jours"
       },
       {
-        "callout": "Domaines",
+        "callout": "Détail brut",
         "title": "Réseau",
-        "body": "Explorez les domaines et leurs classifications. Certains assurent des fonctions légitimes.",
-        "meta": "Un domaine contacté ne suffit pas à conclure",
+        "body": "Qui parle à qui, par pays, par entreprise. Pour ceux qui veulent vraiment comprendre.",
+        "meta": "26 pays · 909 domaines · 121 apps",
         "imageAlt": "Privacy Score : graphe des sociétés et trackers connectés"
       }
     ]
   },
   "manifesto": {
     "title": {
-      "line1": "Votre rapport reste",
-      "negLine": "sur votre appareil."
+      "line1": "Ce que Privacy Score",
+      "negLine": "ne fait pas."
     },
-    "body": "Une analyse utile explique aussi ce qu’elle ne permet pas de savoir.",
+    "body": "Une app de confidentialité doit être irréprochable. Voici, ligne par ligne, ce que nous refusons.",
     "cards": [
       {
-        "title": "Analyse locale",
-        "body": "Le rapport est traité sur l’appareil, sans téléversement pour l’analyse.",
-        "code": "Rapport → appareil"
+        "title": "Pas de serveur",
+        "body": "Pas d'API maison. Pas d'analytics. Aucune requête sortante.",
+        "code": "URLSession · 0"
       },
       {
-        "title": "Sans inscription",
-        "body": "Aucun compte Privacy Score n’est nécessaire pour analyser votre rapport.",
-        "code": "Compte · aucun"
+        "title": "Pas de compte",
+        "body": "Aucune inscription. Aucun email. Aucun mot de passe.",
+        "code": "Auth · 0"
       },
       {
-        "title": "Un indicateur expliqué",
-        "body": "Le score aide à prioriser des vérifications. Il ne certifie ni anonymat ni absence de risque.",
-        "code": "Score ≠ garantie"
+        "title": "Pas de cloud",
+        "body": "Le rapport vit dans la sandbox iOS. Et nulle part ailleurs.",
+        "code": "Sandbox · SwiftData"
       },
       {
-        "title": "Des limites visibles",
-        "body": "Le rapport décrit une activité observée. Il ne révèle pas le contenu TLS et ne couvre pas tout votre usage.",
-        "code": "Observation · contexte"
+        "title": "Pas de panique",
+        "body": "Pas de badge rouge. Pas de notif d'urgence. Aucun « 47 menaces ! ».",
+        "code": "Badge · jamais"
       }
     ]
   },
+  "quote": {
+    "body": "Privacy Guard ne voit jamais votre trafic. Il vous montre ce que les <em>autres</em> en voient.",
+    "attribution": "Pied de page de l'écran Réglages, dans l'app."
+  },
   "metrics": {
-    "ariaLabel": "Quelques repères",
+    "ariaLabel": "Privacy Score en chiffres",
     "items": [
       {
         "countTo": 100,
-        "label": "Échelle du score"
+        "label": "Score sur 100"
       },
       {
         "countTo": 0,
-        "label": "Rapport téléversé pour l’analyse"
+        "label": "Octet envoyé en ligne"
+      },
+      {
+        "countTo": 4,
+        "label": "Onglets, c'est tout"
       },
       {
         "countTo": 2,
-        "label": "Langues : français et anglais"
-      },
-      {
-        "countTo": 1,
-        "label": "Premier audit gratuit"
+        "label": "Secondes d'analyse"
       }
     ]
   },
@@ -239,10 +300,10 @@
     ]
   },
   "cta": {
-    "title": "Passez du rapport aux prochaines étapes.",
-    "body": "Téléchargez Privacy Score, préparez votre rapport Apple et commencez par l’audit gratuit. Vous choisissez ensuite les vérifications utiles à votre usage.",
+    "title": "Reprenez le contrôle de vos données.",
+    "body": "Soixante secondes pour importer votre rapport. Un score. Trois fixes. Et la satisfaction de savoir exactement où vous fuyiez. Et où vous ne fuyez plus.",
     "primary": "Télécharger sur l'App Store",
-    "note": "iPhone et iPad · iOS/iPadOS 17.6+ · premier audit gratuit · achats intégrés"
+    "note": "iPhone · iPadOS 17+ · gratuit · français & anglais"
   },
   "footer": {
     "tagline": "Une app indépendante, faite en France. Sans cloud, sans compte, sans pisteurs.",

@@ -1,5 +1,4 @@
 ---
-import Icon from '@components/Icon.astro';
 /**
  * HeroSection.astro - top of page hero.
  *
@@ -86,32 +85,32 @@ const { hero, locale } = Astro.props;
 
       <div class="hero-ctas">
         <a href={APP_STORE_URL[locale]} class="btn btn-primary" target="_blank" rel="noopener" data-cta="hero">
-          <Icon name="download" class="material-icons-round" />
+          <span class="material-icons-round" aria-hidden="true">download</span>
           {hero.ctas.primary}
         </a>
-        <a href="#how" class="btn btn-ghost">
+        <a href="#story" class="btn btn-ghost">
           {hero.ctas.ghost}
-          <Icon name="arrow_downward" class="material-icons-round" />
+          <span class="material-icons-round" aria-hidden="true">arrow_downward</span>
         </a>
       </div>
 
       <div class="hero-pillars">
         <div class="pillar">
-          <Icon name="cloud_off" class="material-icons-round" />
+          <span class="material-icons-round" aria-hidden="true">cloud_off</span>
           <div>
             <div class="pillar-title">{hero.pillars.cloud.title}</div>
             <div class="pillar-sub">{hero.pillars.cloud.sub}</div>
           </div>
         </div>
         <div class="pillar">
-          <Icon name="person_off" class="material-icons-round" />
+          <span class="material-icons-round" aria-hidden="true">person_off</span>
           <div>
             <div class="pillar-title">{hero.pillars.person.title}</div>
             <div class="pillar-sub">{hero.pillars.person.sub}</div>
           </div>
         </div>
         <div class="pillar">
-          <Icon name="phone_iphone" class="material-icons-round" />
+          <span class="material-icons-round" aria-hidden="true">phone_iphone</span>
           <div>
             <div class="pillar-title">{hero.pillars.phone.title}</div>
             <div class="pillar-sub">{hero.pillars.phone.sub}</div>
@@ -125,11 +124,11 @@ const { hero, locale } = Astro.props;
         <div class="phone-screen">
           <div class="phone-statusbar">
             <span>{hero.phone.statusbarTime}</span>
-            <Icon name="near_me" class="material-icons-round" style="font-size:14px;" />
+            <span class="material-icons-round" style="font-size:14px;" aria-hidden="true">near_me</span>
             <span class="phone-rs">
-              <Icon name="signal_cellular_alt" class="material-icons-round" style="font-size:14px;" />
-              <Icon name="wifi" class="material-icons-round" style="font-size:14px;" />
-              <Icon name="battery_full" class="material-icons-round" style="font-size:14px;" />
+              <span class="material-icons-round" style="font-size:14px;" aria-hidden="true">signal_cellular_alt</span>
+              <span class="material-icons-round" style="font-size:14px;" aria-hidden="true">wifi</span>
+              <span class="material-icons-round" style="font-size:14px;" aria-hidden="true">battery_full</span>
             </span>
           </div>
 
@@ -181,14 +180,14 @@ const { hero, locale } = Astro.props;
       </div>
 
       <div class="float-chip chip-trackers">
-        <Icon name="ads_click" class="material-icons-round" />
+        <span class="material-icons-round" aria-hidden="true">ads_click</span>
         <div>
           <div class="chip-label">{hero.chips.trackers.label}</div>
           <div class="chip-value" data-count-to={hero.chips.trackers.countTo}>{hero.chips.trackers.countTo}</div>
         </div>
       </div>
       <div class="float-chip chip-dns">
-        <Icon name="dns" class="material-icons-round" />
+        <span class="material-icons-round" aria-hidden="true">dns</span>
         <div>
           <div class="chip-label">{hero.chips.dns.label}</div>
           <div class="chip-value chip-good">{hero.chips.dns.value}</div>
@@ -199,6 +198,6 @@ const { hero, locale } = Astro.props;
 
   <div class="scroll-cue" aria-hidden="true">
     <span>{hero.scrollCue}</span>
-    <Icon name="expand_more" class="material-icons-round" />
+    <span class="material-icons-round">expand_more</span>
   </div>
 </section>

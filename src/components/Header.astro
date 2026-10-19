@@ -1,5 +1,4 @@
 ---
-import Icon from '@components/Icon.astro';
 /**
  * Header.astro - site navigation bar.
  *
@@ -74,7 +73,7 @@ function switcherHref(target: Locale): string {
     <a class="brand" href={pathForPage(locale, 'home')} aria-label={nav.aria.brand}>
       <img
         class="brand-mark"
-        src="/assets/app-icon-96.webp"
+        src="/assets/app-icon-256.png"
         alt=""
         width="256"
         height="256"
@@ -86,9 +85,9 @@ function switcherHref(target: Locale): string {
     </a>
 
     <nav class="nav-links" aria-label={nav.aria.nav}>
-      <a href={`${pathForPage(locale, 'home')}#how`}>{nav.links.story}</a>
+      <a href={`${pathForPage(locale, 'home')}#story`}>{nav.links.story}</a>
       <a href={`${pathForPage(locale, 'home')}#angles`}>{nav.links.app}</a>
-      <a href={pathForPage(locale, 'blog')}>Blog</a>
+      <a href={`${pathForPage(locale, 'home')}#manifesto`}>{nav.links.trust}</a>
       <a href={`${pathForPage(locale, 'home')}#download`}>{nav.links.download}</a>
     </nav>
 
@@ -107,7 +106,7 @@ function switcherHref(target: Locale): string {
       </div>
 
       <a href={APP_STORE_URL[locale]} class="nav-cta" target="_blank" rel="noopener" data-cta="header">
-        <Icon name="download" class="material-icons-round" />
+        <span class="material-icons-round" aria-hidden="true">download</span>
         {nav.cta}
       </a>
     </div>

@@ -1,5 +1,4 @@
 ---
-import Icon from '@components/Icon.astro';
 /**
  * ManifestoSection.astro - Chapter 05/05 "La promesse".
  *
@@ -47,7 +46,7 @@ const cardIcons = ['cloud_off', 'person_off', 'phone_iphone', 'notifications_off
     {manifesto.cards.map((card, i) => (
       <article class={`man-card c-${i + 1}`}>
         <div class="x">
-          <Icon name={cardIcons[i]} class="material-icons-round" />
+          <span class="material-icons-round" aria-hidden="true">{cardIcons[i]}</span>
         </div>
         <h3>{card.title}</h3>
         <p>{card.body}</p>

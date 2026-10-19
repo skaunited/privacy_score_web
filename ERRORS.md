@@ -54,7 +54,7 @@
 
 | Tag | Entries |
 |---|---|
-| `astro` | — |
+| `astro` | 2026-10-19 — Preserve the original icon geometry |
 | `i18n` | — |
 | `hreflang` | — |
 | `tailwind` | — |
@@ -73,13 +73,35 @@
 | `gsc` | — |
 | `astro-check` | — |
 | `build` | — |
-| `lighthouse` | — |
+| `lighthouse` | 2026-10-19 — Preserve the original icon geometry |
 
 ---
 
 ## Entries (chronological — newest at the bottom)
 
-*(empty — first entry will be logged after the first task that takes > 2 attempts)*
+### 2026-10-19 — Preserve the original icon geometry during SEO repairs
+
+**Context**: The owner requested reversal of visual regressions introduced during the SEO rebuild. Icon substitutions also changed the site's visual identity and collapsed padded SVGs into very small glyph areas.
+
+**Failed attempts**:
+- The rebuild replaced Material Icons with SVGs using the existing padded icon classes. A one-em SVG box under border-box sizing left almost no room for the drawing; marketing copy and whole sections were also replaced without a separate design request.
+- Restoring the original full icon font recovered the shapes but loaded about 170 KiB and caused layout shifts when text ligatures resolved into icons. Lighthouse exposed the shift despite passing WCAG-focused browser checks.
+- Restoring the original muted colors needed small contrast repairs; global selectors did not override Astro's more specific scoped metadata styles. The restored storyboard also had an invalid article/listitem role pairing.
+
+**What worked**:
+Restore the original sections, visible homepage copy and blog presentation. Retain the original Material Icons glyph outlines and advances in a 3.2 KiB local subset, and reserve the final content-box dimensions before the font loads. Use valid div/listitem markup without changing layout. Apply minimal contrast repairs at the actual scoped selectors. Compare desktop EN/FR geometry against the original build and keep browser assertions for the 2,487 counter, DNS labels, eight panels and three intact icon boxes.
+
+**Root cause**:
+Treating a technical SEO task as authorization to redesign the homepage, and treating icon elements as interchangeable without checking their box model, font metrics or rendered appearance.
+
+**Avoid in the future**:
+- Preserve owner-approved presentation during technical SEO maintenance; get an explicit design request before changing copy, sections or the icon family.
+- Verify rendered glyphs and desktop/mobile geometry, not only the existence of an SVG or an accessibility score.
+- Test CLS and font loading on the actual build; keep original outlines and stable boxes when optimizing delivery.
+
+**Tags**: `astro, icons, image, lighthouse, css, visual-regression`
+
+**Related**: `CLAUDE.md` owner visual correction; `src/styles/material-icons.css`; `scripts/subset-icons.py`; `tests/browser.spec.ts`.
 
 ---
 
