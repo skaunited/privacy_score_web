@@ -1,4 +1,5 @@
 ---
+import Icon from '@components/Icon.astro';
 /**
  * HowItWorksSection.astro - Chapter 03/05 "La méthode".
  * Matches `variation-illustrated.html` lines 1125-1170.
@@ -40,13 +41,13 @@ const stepDelays = [0, 120, 240] as const;
 
     <ol class="steps">
       {how.steps.map((step, i) => (
-        <article class="step reveal" data-delay={stepDelays[i]}>
+        <li class="step reveal" data-delay={stepDelays[i]}>
           <div class="step-number" aria-hidden="true">{i + 1}</div>
-          <div class="step-icon"><span class="material-icons-round" aria-hidden="true">{stepIcons[i]}</span></div>
+          <div class="step-icon"><Icon name={stepIcons[i]} class="material-icons-round" /></div>
           <h3>{step.title}</h3>
           <p set:html={step.body}></p>
           <div class="step-meta mono" set:html={step.meta}></div>
-        </article>
+        </li>
       ))}
     </ol>
   </div>

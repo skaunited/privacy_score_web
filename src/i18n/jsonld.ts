@@ -22,12 +22,12 @@
  *   renders it. We pass `item.a` through unchanged.
  */
 import type { Locale, Dictionary } from './utils';
-import { SITE_ORIGIN } from './utils';
+import { SITE_ORIGIN, pathForPage, APP_STORE_URL } from './utils';
 
 /** Map our locale codes to BCP-47 region tags used by schema.org `inLanguage`. */
 const inLanguageFor: Record<Locale, string> = {
-  fr: 'fr-FR',
-  en: 'en-US',
+  fr: 'fr',
+  en: 'en',
 };
 
 /**
@@ -39,7 +39,7 @@ export function websiteJsonLd(locale: Locale, dict: Dictionary) {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'Privacy Score',
-    url: `${SITE_ORIGIN}/${locale}/`,
+    url: `${SITE_ORIGIN}${pathForPage(locale, 'home')}`,
     inLanguage: inLanguageFor[locale],
     description: dict.meta.description,
     publisher: {
@@ -65,10 +65,10 @@ export function softwareApplicationJsonLd(locale: Locale, dict: Dictionary) {
     '@context': 'https://schema.org',
     '@type': 'MobileApplication',
     name: 'Privacy Score',
-    operatingSystem: 'iOS 17+',
+    operatingSystem: 'iOS 17.6 or later',
     applicationCategory: 'UtilitiesApplication',
     applicationSubCategory: 'Privacy',
-    url: `${SITE_ORIGIN}/${locale}/`,
+    url: `${SITE_ORIGIN}${pathForPage(locale, 'home')}`,
     inLanguage: [inLanguageFor[locale]],
     description: dict.meta.description,
     offers: {
@@ -82,7 +82,8 @@ export function softwareApplicationJsonLd(locale: Locale, dict: Dictionary) {
       url: SITE_ORIGIN,
     },
     image: `${SITE_ORIGIN}/assets/app-icon-512.png`,
-    softwareVersion: '0.1.0',
+    installUrl: APP_STORE_URL[locale],
+    downloadUrl: APP_STORE_URL[locale],
   };
 }
 
@@ -244,7 +245,7 @@ export function blogPostingJsonLd(opts: {
     author: {
       '@type': 'Person',
       name: opts.authorName ?? 'Skander Bahri',
-      url: opts.authorUrl ?? `${SITE_ORIGIN}/${opts.locale}/${opts.locale === 'fr' ? 'a-propos' : 'about'}/`,
+      url: opts.authorUrl ?? `${SITE_ORIGIN}${pathForPage(opts.locale, 'about')}`,
     },
     publisher: {
       '@type': 'Organization',

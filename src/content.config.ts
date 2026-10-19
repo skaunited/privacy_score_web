@@ -23,7 +23,8 @@
  * so that documentation files (if added later) won't be parsed as legal
  * entries and fail schema validation.
  */
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
 import { glob } from 'astro/loaders';
 
 const legal = defineCollection({
@@ -38,10 +39,10 @@ const legal = defineCollection({
     last_updated: z.coerce.date(),
     publisher: z.string(),
     // Optional French-side keys
-    url_canonique: z.string().url().optional(),
+    url_canonique: z.url().optional(),
     liens_croises: z.array(z.record(z.string(), z.string())).optional(),
     // Optional English-side keys
-    canonical_url: z.string().url().optional(),
+    canonical_url: z.url().optional(),
     cross_links: z.array(z.record(z.string(), z.string())).optional(),
   }),
 });
@@ -60,6 +61,8 @@ const blog = defineCollection({
     language: z.enum(['fr', 'en']),
     slug: z.string(),
     tags: z.array(z.string()).default([]),
+    status: z.enum(['draft', 'published']).default('published'),
+    translationKey: z.string().optional(),
     hero: z
       .object({
         src: z.string().optional(),

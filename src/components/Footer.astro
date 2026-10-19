@@ -32,7 +32,7 @@ interface Props {
   locale: Locale;
 }
 
-const { footer } = Astro.props;
+const { footer, locale } = Astro.props;
 const cols: FooterColumn[] = [
   footer.columns.app,
   footer.columns.legal,
@@ -46,11 +46,11 @@ const cols: FooterColumn[] = [
     <div>
       <div class="foot-brand">
         <img
-          src="/assets/app-icon-256.webp"
+          src="/assets/app-icon-96.webp"
           alt=""
           width="256"
           height="256"
-          loading="eager"
+          loading="lazy"
           decoding="async"
         />
         <strong style="color:#F8FAFC; font-family: var(--font-display); font-weight: 700;">Privacy Score</strong>
@@ -70,6 +70,7 @@ const cols: FooterColumn[] = [
       ))}
     </div>
   </div>
+  <button class="privacy-settings" type="button" data-privacy-settings hidden>{locale === 'fr' ? 'Préférences de mesure d’audience' : 'Audience measurement preferences'}</button>
   <div class="footer-rule"></div>
   <div class="container footer-foot">
     {/* `set:html` is needed because the copyright string contains an inline

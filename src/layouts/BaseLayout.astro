@@ -18,9 +18,10 @@
  *   - Inject the global vanilla JS bundle at end-of-body via a processed
  *     `<script>` tag (Astro will bundle, hash, and emit the right <script src>).
  */
-import type { Locale } from '@i18n/utils';
+import type { Locale, LocaleLink } from '@i18n/utils';
 import { htmlLang } from '@i18n/utils';
 import SEO from '@components/SEO.astro';
+import Analytics from '@components/Analytics.astro';
 
 // Global stylesheets - Vite handles bundling, hashing and <link> injection.
 import '../styles/ds.css';
@@ -37,6 +38,9 @@ interface Props {
   noindex?: boolean;
   /** Forward to SEO.astro: pin canonical AND suppress hreflang emission. */
   canonicalOverride?: string;
+  alternates?: LocaleLink[];
+  ogImage?: string;
+  ogType?: 'website' | 'article';
 }
 
 const {
@@ -48,6 +52,9 @@ const {
   jsonLd,
   noindex,
   canonicalOverride,
+  alternates,
+  ogImage,
+  ogType,
 } = Astro.props;
 
 const jsonLdEntries: object[] = jsonLd
@@ -80,6 +87,9 @@ const pathname = Astro.url.pathname;
       pathname={pathname}
       noindex={noindex}
       canonicalOverride={canonicalOverride}
+      alternates={alternates}
+      ogImage={ogImage}
+      ogType={ogType}
     />
 
     {/*
@@ -99,7 +109,9 @@ const pathname = Astro.url.pathname;
   </head>
 
   <body>
+    <a class="skip-link" href="#main-content">{locale === 'fr' ? 'Aller au contenu' : 'Skip to content'}</a>
     <slot />
+    <Analytics locale={locale} />
 
     {/*
       Global vanilla JS bundle. Astro processes the import, bundles via Vite

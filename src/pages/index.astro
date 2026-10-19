@@ -1,63 +1,62 @@
 ---
 /**
- * Root `/` - Accept-Language sniffer.
+ * /en/ - English homepage. Wires BaseLayout + Header + 10 sections + Footer.
  *
- * - JS sniffer in <head> redirects to /fr/ or /en/ based on navigator.languages.
- * - <meta http-equiv="refresh"> is the no-JS fallback (-> /fr/).
- * - <meta name="robots" content="noindex,nofollow"> - must NOT appear in search.
- * - Body has plain <a> links as a final fallback if both above fail.
+ * Phase 4 adds the JSON-LD payload: four schema.org blocks (WebSite,
+ * MobileApplication, Organization, FAQPage) emitted into <head> by BaseLayout.
  */
-const TITLE = 'Privacy Score';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Header from '@components/Header.astro';
+import HeroSection from '@components/sections/HeroSection.astro';
+import OfferSection from '@components/OfferSection.astro';
+import GuidesSection from '@components/GuidesSection.astro';
+import ProductIntroSection from '@components/sections/ProductIntroSection.astro';
+import HowItWorksSection from '@components/sections/HowItWorksSection.astro';
+import AnglesSection from '@components/sections/AnglesSection.astro';
+import ManifestoSection from '@components/sections/ManifestoSection.astro';
+import MetricsSection from '@components/sections/MetricsSection.astro';
+import FAQSection from '@components/sections/FAQSection.astro';
+import CTASection from '@components/sections/CTASection.astro';
+import Footer from '@components/Footer.astro';
+import { getDictionary } from '@i18n/utils';
+import {
+  websiteJsonLd,
+  softwareApplicationJsonLd,
+  organizationJsonLd,
+  faqJsonLd,
+} from '@i18n/jsonld';
+
+const locale = 'en' as const;
+const dict = getDictionary(locale);
+
+const jsonLd = [
+  websiteJsonLd(locale, dict),
+  softwareApplicationJsonLd(locale, dict),
+  organizationJsonLd(),
+  faqJsonLd(dict),
+];
 ---
-<!doctype html>
-<html lang="fr-FR">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{TITLE}</title>
-    <meta name="robots" content="noindex,nofollow" />
 
-    {/*
-      Yandex Webmaster verification. The verified property is
-      https://www.privacyscore.fr/ (root), so the token MUST be present on
-      this exact URL even though it's a noindex sniffer. Verification is a
-      one-shot fetch by Yandex; the noindex only affects indexing.
-    */}
-    <meta name="yandex-verification" content="2b8c8907535df868" />
-
-    {/* hreflang signals for crawlers that do reach here */}
-    <link rel="alternate" hreflang="fr-FR" href="https://www.privacyscore.fr/fr/" />
-    <link rel="alternate" hreflang="en-US" href="https://www.privacyscore.fr/en/" />
-    <link rel="alternate" hreflang="x-default" href="https://www.privacyscore.fr/fr/" />
-    <link rel="canonical" href="https://www.privacyscore.fr/fr/" />
-
-    {/* JS-first sniffer - runs synchronously, before paint. */}
-    <script is:inline>
-      (function () {
-        try {
-          var langs = (navigator.languages && navigator.languages.length)
-            ? navigator.languages
-            : [navigator.language || 'fr'];
-          var target = '/fr/';
-          for (var i = 0; i < langs.length; i++) {
-            var l = (langs[i] || '').toLowerCase();
-            if (l.indexOf('fr') === 0) { target = '/fr/'; break; }
-            if (l.indexOf('en') === 0) { target = '/en/'; break; }
-          }
-          window.location.replace(target);
-        } catch (_) {
-          window.location.replace('/fr/');
-        }
-      })();
-    </script>
-
-    {/* No-JS fallback - defaults to FR (primary market). */}
-    <meta http-equiv="refresh" content="0; url=/fr/" />
-  </head>
-  <body>
-    <p style="font-family: system-ui, sans-serif; padding: 24px;">
-      <a href="/fr/" hreflang="fr">Continuer en français →</a><br/>
-      <a href="/en/" hreflang="en">Continue in English →</a>
-    </p>
-  </body>
-</html>
+<BaseLayout
+  locale={locale}
+  title={dict.meta.title}
+  description={dict.meta.description}
+  ogTitle={dict.meta.ogTitle}
+  ogDescription={dict.meta.ogDescription}
+  jsonLd={jsonLd}
+>
+  <Header              locale={locale} pathname={Astro.url.pathname} nav={dict.nav} />
+  <main id="main-content">
+  <HeroSection         hero={dict.hero} locale={locale} />
+  <OfferSection locale={locale} />
+  <ProductIntroSection product={dict.product}    chapters={dict.chapters} />
+  <HowItWorksSection   how={dict.how}            chapters={dict.chapters} />
+  <AnglesSection       angles={dict.angles}      chapters={dict.chapters} />
+  <ManifestoSection    manifesto={dict.manifesto} chapters={dict.chapters} />
+  <GuidesSection locale={locale} />
+  <MetricsSection      metrics={dict.metrics} />
+  <FAQSection          faq={dict.faq} />
+  <CTASection          cta={dict.cta} locale={locale} />
+  </main>
+  <Footer              footer={dict.footer} locale={locale} />
+</BaseLayout>

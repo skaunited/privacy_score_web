@@ -3,28 +3,35 @@
   "version": "0.0.1",
   "private": true,
   "type": "module",
-  "description": "Marketing site for Privacy Score (privacyscore.fr) — Astro 5 static SSG, bilingual FR/EN.",
+  "description": "Privacy Score iOS marketing site \u2014 Astro 6 static output, English root and French /fr.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview --host",
-    "astro": "astro"
+    "astro": "astro",
+    "redirects": "node scripts/generate-redirects.mjs",
+    "check:seo": "python3 scripts/check-seo.py",
+    "check:redirects": "node scripts/generate-redirects.mjs --check && node scripts/check-redirects.mjs",
+    "test:browser": "playwright test",
+    "check": "pnpm build && pnpm check:seo && pnpm check:redirects",
+    "release": "bash scripts/package-release.sh"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
     "@fontsource-variable/jetbrains-mono": "^5.2.8",
     "@fontsource-variable/manrope": "^5.2.8",
     "astro": "^6.4.3",
-    "material-icons": "^1.13.14",
     "typescript": "^5.9.3"
   },
   "engines": {
-    "node": ">=20.3.0",
+    "node": ">=22.12.0",
     "pnpm": ">=10"
   },
   "packageManager": "pnpm@11.0.0",
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1",
     "sharp": "^0.34.5"
   }
 }

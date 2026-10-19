@@ -26,3 +26,16 @@ pnpm-debug.log*
 .idea/
 *.swp
 *.swo
+
+# Browser verification artifacts
+test-results/
+playwright-report/
+
+# Public configuration example
+!.env.example
+
+# Local release bundles
+/artifacts/
+
+__pycache__/
+*.pyc

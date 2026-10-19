@@ -8,7 +8,7 @@ Contact: support [at] privacyscore.fr
 Last update: 2026-06-01
 Standards: HTML5, CSS3
 Built with: Astro
-Stack: Static site, no tracker, no cookie, no analytics
+Stack: Static site; optional consent-based website analytics; local app report analysis
 
 /* THANKS */
 The Apple App Privacy Report team, for opening this data to users.
