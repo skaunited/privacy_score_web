@@ -25,6 +25,8 @@ The two older English posts and the two older French posts cover different subje
 
 The sitemap contains all current indexable pages, including **four articles per language**. Exclude 404 pages, redirect stubs, and any explicitly unpublished/noindex content. The revised articles are published and indexable; no quarantine of the English blog is planned. A future draft should remain out of public routes and the sitemap; if an accessible preview uses `noindex`, verify both its directive and sitemap exclusion. Do not block a public noindex page in robots.txt while expecting crawlers to read that directive.
 
+`/llms.txt` is generated at build time by `src/pages/llms.txt.ts`, using the same published-article filter as the blog. It contains an English product summary, canonical FR/EN article titles/descriptions, publisher/legal links and the sitemap. Drafts and future publications are excluded. The HTML head advertises it via `rel="describedby"`; it is not an HTML page in the sitemap. `pnpm check:seo` validates the project heading, destinations and exact published-article coverage. It complements robots.txt without changing crawl permissions or guaranteeing indexing/citations. See [the llms.txt proposal](https://llmstxt.org/).
+
 ## Editorial and product facts
 
 The guides answer distinct tasks: permissions, privacy settings, a general audit, reading the report, export/import, and troubleshooting an empty report. Existing article slugs and original publication dates are preserved. Show the real revision date and author, and link readers to the relevant next step.

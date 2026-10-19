@@ -137,6 +137,27 @@ def main():
         for route in routes:
             if route not in pages or pages[route].noindex: fail(route, 'published post missing or noindex')
             if ORIGIN + route not in sitemap_urls: fail(route, 'published post absent from sitemap')
+    llms = dist / 'llms.txt'
+    if not llms.is_file():
+        fail('/llms.txt', 'generated content overview missing')
+    else:
+        content = llms.read_text()
+        if not re.match(r'^# Privacy Score\s*$', content.partition('\n')[0]):
+            fail('/llms.txt', 'expected project H1')
+        refs = re.findall(r'\[(?:\\.|[^\]\\])+\]\(([^\s)]+)\)', content)
+        if not refs: fail('/llms.txt', 'no Markdown links')
+        for ref in refs:
+            check_reference('/llms.txt', 'Markdown link', ref, dist, pages, fail)
+            parsed = urlsplit(ref)
+            if parsed.netloc == HOST and parsed.path in pages:
+                page = pages[parsed.path]
+                if page.noindex or page.canonicals != [ref]:
+                    fail('/llms.txt', f'non-indexable or noncanonical page {ref}')
+        listed_articles = {urlsplit(ref).path for ref in refs if urlsplit(ref).netloc == HOST
+                           and '/blog/' in urlsplit(ref).path and urlsplit(ref).path not in ('/blog/', '/fr/blog/')}
+        published_articles = {route for routes in article_routes.values() for route in routes}
+        if listed_articles != published_articles:
+            fail('/llms.txt', f'article list differs from published posts: {listed_articles ^ published_articles}')
     for key, pair in translations.items():
         if set(pair) != {'en', 'fr'}:
             fail(key, 'translation group must have one EN and one FR page')

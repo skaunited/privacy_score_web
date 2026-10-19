@@ -92,6 +92,8 @@ const pathname = Astro.url.pathname;
       ogType={ogType}
     />
 
+    <link rel="describedby" href="/llms.txt" type="text/plain" />
+
     {/*
       JSON-LD payloads. `is:inline` is mandatory - Astro otherwise treats the
       tag as a module script and errors on the `application/ld+json` MIME.
