@@ -34,7 +34,7 @@ const article = blogPostingJsonLd({
   jsonLd={[breadcrumb, article]} alternates={alternates} ogType="article" ogImage={post.data.hero?.src}>
   <Header locale={locale} pathname={Astro.url.pathname} nav={dict.nav} alternates={alternates.length ? alternates : undefined} />
   <main id="main-content" class="legal-page">
-    <article class="legal-content">
+    <article class="legal-content" data-analytics-article>
       <p class="blog-post-meta">
         <time datetime={post.data.publishedAt.toISOString()}>{format.format(post.data.publishedAt)}</time>
         · <a href={pathForPage(locale, 'about')}>{post.data.author}</a>
@@ -43,7 +43,7 @@ const article = blogPostingJsonLd({
       <h1>{post.data.title}</h1>
       <p class="blog-post-lede">{post.data.description}</p>
       <Content />
-      <footer class="blog-post-footer">
+      <footer class="blog-post-footer" data-article-end>
         <p><a href={pathForPage(locale, 'blog')} class="blog-back-link">← {fr ? 'Tous les articles' : 'All posts'}</a></p>
       </footer>
     </article>

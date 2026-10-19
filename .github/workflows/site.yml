@@ -50,6 +50,8 @@ jobs:
 
       - name: Check consent, accessibility and mobile navigation
         run: pnpm test:browser
+        env:
+          TEST_BUILT_SITE: '1'
 
       - name: Save browser diagnostics on failure
         if: failure()

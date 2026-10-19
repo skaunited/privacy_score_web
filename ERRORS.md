@@ -74,6 +74,8 @@
 | `astro-check` | — |
 | `build` | — |
 | `lighthouse` | 2026-10-19 — Preserve the original icon geometry |
+| `analytics` | 2026-10-19 — Separate browser rendering from virtual measurement time |
+| `playwright` | 2026-10-19 — Separate browser rendering from virtual measurement time |
 
 ---
 
@@ -102,6 +104,33 @@ Treating a technical SEO task as authorization to redesign the homepage, and tre
 **Tags**: `astro, icons, image, lighthouse, css, visual-regression`
 
 **Related**: `CLAUDE.md` owner visual correction; `src/styles/material-icons.css`; `scripts/subset-icons.py`; `tests/browser.spec.ts`.
+
+---
+
+### 2026-10-19 — Separate browser rendering from virtual measurement time
+
+**Context**: Browser coverage for consented scroll thresholds, active article reading and cross-page navigation.
+
+**Failed attempts**:
+- Advancing Playwright's clock immediately after `scrollTo()` missed native scroll dispatches and the 100% event; waiting for fonts and disabling animations did not resolve the rendering-clock mismatch.
+- Checking a new document's data layer immediately after its URL changed raced bundle initialization. Reading assertions also exposed unreported partial time at the inactivity boundary.
+
+**What worked**:
+In virtual-time scroll tests, change the real scroll position, explicitly dispatch scroll and advance the throttled animation frame. Poll the actual page-view event after navigation. Flush incremental reading time on transition to inactivity as well as blur, page hide and navigation. Keep separate real-input coverage on the built site.
+
+Headless Playwright also emulates focus in every page; bringing a second tab forward does not reliably make `document.hasFocus()` false in the first. Control the focus API and focus/blur events explicitly for deterministic reading-time assertions, alongside the actual cross-tab consent and native wheel/click tests.
+
+**Root cause**:
+Playwright's virtual timer controls do not synchronize all native browser rendering events. Periodic incremental reporting also leaves a partial interval until an explicit flush.
+
+**Avoid in the future**:
+- Wait for observable analytics initialization after full-page navigation.
+- Distinguish timer-driven test observations from native rendering/input, and validate both.
+- Sum incremental durations and settle partial time when reading pauses.
+
+**Tags**: `analytics, playwright, consent, browser-clock`
+
+**Related**: `tests/analytics.spec.ts`; `src/assets/engagement.ts`.
 
 ---
 

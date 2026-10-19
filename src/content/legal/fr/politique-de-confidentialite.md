@@ -1,7 +1,7 @@
 ---
 title: Politique de confidentialité
 language: fr
-version: 1.1
+version: 1.2
 last_updated: 2026-10-19
 publisher: Skander BAHRI (entrepreneur individuel), CoDevelop
 url_canonique: https://www.privacyscore.fr/fr/politique-de-confidentialite/
@@ -12,7 +12,7 @@ liens_croises:
 
 # Politique de confidentialité
 
-Dernière mise à jour : 19 octobre 2026, version 1.1
+Dernière mise à jour : 19 octobre 2026, version 1.2
 
 Cette politique explique comment **Privacy Score** (l'application iOS) et le site `privacyscore.fr` traitent vos données. Nous avons choisi de la rédiger en français clair, parce qu'une application qui analyse votre vie privée doit elle-même mériter votre confiance. Si une phrase manque de clarté, écrivez-nous à `support@privacyscore.fr` et nous la corrigerons.
 
@@ -112,11 +112,11 @@ L'application peut programmer des notifications locales (rappel d'import, nouvel
 
 ### 8. Site `privacyscore.fr`
 
-Le site peut utiliser **Google Analytics 4**, uniquement après votre accord, pour comprendre quelles pages sont consultées et quels liens conduisent à l’App Store. Si le service n’est pas configuré, aucune mesure Google Analytics n’est chargée. Le refus laisse toutes les pages et fonctionnalités du site accessibles.
+Le site peut utiliser **Google Analytics 4**, uniquement après votre accord, pour comprendre les visites, le défilement des pages, la lecture des articles et le parcours jusqu’aux clics vers l’App Store. Si le service n’est pas configuré, aucune mesure Google Analytics n’est chargée. Le refus laisse toutes les pages et fonctionnalités du site accessibles.
 
-- **Données mesurées après accord** : pages consultées sans paramètres ni fragments d’URL, langue, caractéristiques techniques transmises par le navigateur, origine du site référent et événements limités, dont les clics App Store. Aucun rapport Apple, liste de domaines de votre rapport, contenu de message ou donnée saisie librement n’est envoyé par notre code de mesure.
+- **Données mesurées après accord** : pages consultées sans paramètres ni fragments d’URL, langue, caractéristiques techniques transmises par le navigateur, origine du site référent, seuils de défilement (25, 50, 75, 90 et 100 %), durée de lecture active, fin d’article atteinte, liens vers les articles et clics App Store avec l’emplacement du bouton. La durée de lecture est une estimation : elle compte seulement lorsque l’article est visible dans un onglet au premier plan et s’interrompt après 60 secondes sans interaction. Atteindre la fin d’un article après au moins 60 secondes de lecture active constitue un indicateur de lecture, sans prouver que chaque phrase a été lue. Aucun rapport Apple, liste de domaines de votre rapport, contenu de message ou donnée saisie librement n’est envoyé par notre code de mesure. Aucun défilement ni temps de lecture antérieur à votre accord n’est reconstitué ; aucun enregistrement de session ou de mouvements du pointeur n’est effectué.
 - **Finalité et base légale** : statistiques de fréquentation et amélioration du parcours, sur la base de votre consentement (article 6.1.a du RGPD). Le script Google n’est pas chargé avant acceptation. Les fonctions publicitaires et Google Signals ne sont pas activées par notre code.
-- **Choix** : les boutons Accepter et Refuser sont proposés ensemble. Votre choix est conservé localement pendant au plus 180 jours. Vous pouvez le modifier dans « Préférences de mesure d’audience », en pied de page, et retirer votre accord pour les visites suivantes. Le retrait arrête les nouveaux événements de notre dispositif et supprime les cookies Analytics accessibles à notre site ; il ne supprime pas automatiquement les données déjà traitées.
+- **Choix** : les boutons Accepter et Refuser sont proposés ensemble. Votre choix est conservé localement pendant au plus 180 jours. Vous pouvez le modifier dans « Choix des cookies », en pied de page. Le retrait arrête immédiatement nos mesures de défilement et de lecture, abandonne le temps non encore transmis et supprime les cookies Analytics accessibles à notre site ; il ne supprime pas automatiquement les données déjà traitées. L’extension de la mesure aux articles et au défilement nécessite de renouveler un accord donné avant cette version. Un refus précédent encore valide est respecté sans prolonger sa durée.
 - **Cookies Google** : après accord, les cookies commençant par `_ga` servent à la mesure. Notre configuration limite leur durée à treize mois sans prolongation automatique à chaque visite ; le renouvellement du consentement est demandé séparément.
 - **Destinataires** : CoDevelop et Google pour le service Analytics. Google peut traiter des informations techniques, dont l’adresse IP lors de la connexion à son service, selon ses engagements contractuels et sa [documentation de confidentialité Analytics](https://support.google.com/analytics/answer/6004245). Nous ne relions pas ces visites au rapport analysé dans l’application.
 - **Infrastructure** : Cloudflare et l’hébergeur assurent la distribution et la sécurité du site ; ils reçoivent les informations nécessaires aux connexions HTTP, notamment l’adresse IP. Ces journaux techniques sont distincts de la mesure facultative Google Analytics et du fichier Apple conservé dans l’application.

@@ -1,6 +1,8 @@
 /** Basic consent mode: never load Google or send analytics before agreement. */
+import { measureEngagement, type EventParams } from './engagement';
+
 type Choice = 'granted' | 'denied';
-type ConsentRecord = { version: 1; analytics: Choice; savedAt: number };
+type ConsentRecord = { version: 2; analytics: Choice; savedAt: number };
 declare global {
   interface Window {
     dataLayer?: unknown[];
@@ -10,21 +12,36 @@ declare global {
 }
 
 const panel = document.querySelector<HTMLElement>('#audience-consent');
-const id = panel?.dataset.measurementId;
-if (panel && id && /^G-[A-Z0-9]+$/.test(id)) {
-  const storageKey = 'privacy-score-audience-consent-v1';
+const candidateId = panel?.dataset.measurementId;
+if (panel && candidateId && /^G-[A-Z0-9]+$/.test(candidateId)) {
+  const id = candidateId;
+  const storageKey = 'privacy-score-audience-consent-v2';
   const expiry = 180 * 24 * 60 * 60 * 1000;
   let choice: Choice = 'denied';
   let configured = false;
   let pageViewed = false;
+  let consentExpiresAt = 0;
+  let expiryTimer: number | undefined;
+  let engagement: ReturnType<typeof measureEngagement> | undefined;
+  const article = document.querySelector('[data-analytics-article]');
+  const pageType = article ? 'article' : /^\/(?:fr\/)?blog\/$/.test(location.pathname) ? 'blog_index'
+    : ['/', '/fr/'].includes(location.pathname) ? 'home' : 'other';
   let returnFocus: HTMLElement | null = null;
   const preferences = document.querySelector<HTMLButtonElement>('[data-privacy-settings]');
 
   const read = (): ConsentRecord | undefined => {
     try {
       const stored = JSON.parse(localStorage.getItem(storageKey) ?? 'null');
-      if (stored?.version === 1 && ['granted', 'denied'].includes(stored.analytics)
-        && Number.isFinite(stored.savedAt) && Date.now() - stored.savedAt < expiry) return stored;
+      if (stored?.version === 2 && ['granted', 'denied'].includes(stored.analytics)
+        && Number.isFinite(stored.savedAt) && stored.savedAt <= Date.now() && Date.now() - stored.savedAt < expiry) return stored;
+      // Respect existing refusals without extending them. Older grants need the updated notice.
+      if (!stored) {
+        const previous = JSON.parse(localStorage.getItem('privacy-score-audience-consent-v1') ?? 'null');
+        if (previous?.version === 1 && previous.analytics === 'denied' && Number.isFinite(previous.savedAt)
+          && previous.savedAt <= Date.now() && Date.now() - previous.savedAt < expiry) {
+          return { version: 2, analytics: 'denied', savedAt: previous.savedAt };
+        }
+      }
     } catch { /* Storage can be unavailable; the visitor can still choose. */ }
   };
 
@@ -39,20 +56,39 @@ if (panel && id && /^G-[A-Z0-9]+$/.test(id)) {
     }
   };
 
-  // Exclude query strings, fragments, article data and arbitrary link destinations.
-  const event = (name: string, params: Record<string, string> = {}) => {
+  // Exclude query strings, fragments, article text and arbitrary link destinations.
+  const event = (name: string, params: EventParams = {}) => {
     if (choice !== 'granted') return;
-    window.gtag?.('event', name, { language: panel.dataset.locale, page_path: location.pathname, ...params });
+    if (Date.now() >= consentExpiresAt) { expire(); return; }
+    window.gtag?.('event', name, { language: panel.dataset.locale, page_path: location.pathname,
+      page_type: pageType, ...(article ? { article_path: location.pathname } : {}), ...params });
   };
 
-  const apply = (next: Choice) => {
+  function expire() {
+    apply('denied');
+    panel!.hidden = false;
+  }
+  function scheduleExpiry() {
+    clearTimeout(expiryTimer);
+    // Browser timeouts cannot exceed a signed 32-bit delay.
+    expiryTimer = window.setTimeout(() => {
+      if (Date.now() >= consentExpiresAt) expire();
+      else scheduleExpiry();
+    }, Math.min(consentExpiresAt - Date.now(), 2_147_483_647));
+  }
+  function apply(next: Choice, savedAt = Date.now()) {
     choice = next;
     window[`ga-disable-${id}`] = next !== 'granted';
     if (next === 'denied') {
+      clearTimeout(expiryTimer);
+      engagement?.stop();
+      engagement = undefined;
       if (configured) window.gtag?.('consent', 'update', { analytics_storage: 'denied' });
       removeCookies();
       return;
     }
+    consentExpiresAt = savedAt + expiry;
+    scheduleExpiry();
     if (!configured) {
       window.dataLayer = window.dataLayer ?? [];
       window.gtag = function () { window.dataLayer!.push(arguments); };
@@ -73,11 +109,12 @@ if (panel && id && /^G-[A-Z0-9]+$/.test(id)) {
       event('page_view', { page_location: `${location.origin}${location.pathname}` });
       pageViewed = true;
     }
-  };
+    engagement ??= measureEngagement(event);
+  }
 
   panel.querySelectorAll<HTMLButtonElement>('[data-consent]').forEach((button) => button.addEventListener('click', () => {
     const next = button.dataset.consent as Choice;
-    try { localStorage.setItem(storageKey, JSON.stringify({ version: 1, analytics: next, savedAt: Date.now() })); } catch { /* Apply for this document anyway. */ }
+    try { localStorage.setItem(storageKey, JSON.stringify({ version: 2, analytics: next, savedAt: Date.now() })); } catch { /* Apply for this document anyway. */ }
     apply(next);
     panel.hidden = true;
     returnFocus?.focus();
@@ -91,9 +128,9 @@ if (panel && id && /^G-[A-Z0-9]+$/.test(id)) {
     });
   }
   window.addEventListener('storage', (change) => {
-    if (change.key !== storageKey) return;
+    if (change.key !== storageKey && change.key !== null) return;
     const record = read();
-    apply(record?.analytics ?? 'denied');
+    apply(record?.analytics ?? 'denied', record?.savedAt);
     panel.hidden = Boolean(record);
   });
   document.addEventListener('click', (click) => {
@@ -102,12 +139,22 @@ if (panel && id && /^G-[A-Z0-9]+$/.test(id)) {
     const url = new URL(target.href, location.href);
     if (url.hostname === 'apps.apple.com' && url.pathname.includes('id6762229573')) {
       const position = target.dataset.cta ?? (target.closest('footer') ? 'footer' : target.closest('article') ? 'article-body' : 'content');
-      event('app_store_click', { cta_position: position });
+      engagement?.flush();
+      event('app_store_click', { cta_position: position, ...engagement?.snapshot() });
     } else if (target.closest('.lang-switch')) event('language_switch', { target_language: url.pathname.startsWith('/fr/') ? 'fr' : 'en' });
-    else if (target.dataset.articleCta) event('article_cta_click', { destination: url.pathname });
+    else if (url.origin === location.origin && url.pathname !== location.pathname && /^\/(?:fr\/)?blog\/[^/]+\/$/.test(url.pathname)) {
+      event('article_link_click', { destination: url.pathname });
+    }
+    if (url.origin === location.origin && url.pathname !== location.pathname) engagement?.flush();
+  });
+  window.addEventListener('pageshow', (show) => {
+    if (!show.persisted) return;
+    const record = read();
+    apply(record?.analytics ?? 'denied', record?.savedAt);
+    panel.hidden = Boolean(record);
   });
   const stored = read();
-  apply(stored?.analytics ?? 'denied');
+  apply(stored?.analytics ?? 'denied', stored?.savedAt);
   panel.hidden = Boolean(stored);
 }
 export {};

@@ -1,7 +1,7 @@
 ---
 title: Privacy Policy
 language: en
-version: 1.1
+version: 1.2
 last_updated: 2026-10-19
 publisher: Skander BAHRI (French sole proprietor), CoDevelop
 canonical_url: https://www.privacyscore.fr/privacy-policy/
@@ -12,7 +12,7 @@ cross_links:
 
 # Privacy Policy
 
-Last updated: October 19, 2026, version 1.1
+Last updated: October 19, 2026, version 1.2
 
 This policy explains how the **Privacy Score** iOS application and the `privacyscore.fr` website handle your data. We chose to write it in plain English because an app that audits your privacy should itself be worthy of your trust. If a sentence is unclear, write to `support@privacyscore.fr` and we will fix it.
 
@@ -112,11 +112,11 @@ The app may schedule local notifications (import reminder, new tip, iOS version 
 
 ### 8. The `privacyscore.fr` website
 
-The website may use **Google Analytics 4**, only after you agree, to understand page visits and clicks to the App Store. When the service is not configured, no Google Analytics measurement is loaded. Declining leaves all website pages and functions available.
+The website may use **Google Analytics 4**, only after you agree, to understand visits, page scrolling, article reading and the journey to App Store clicks. When the service is not configured, no Google Analytics measurement is loaded. Declining leaves all website pages and functions available.
 
-- **Data measured after agreement**: page paths without URL query strings or fragments, language, technical browser information, referring-site origin and limited events such as App Store clicks. Our measurement code does not send an Apple report, a report’s domain list, message contents or free-text input.
+- **Data measured after agreement**: page paths without URL query strings or fragments, language, technical browser information, referring-site origin, scroll thresholds (25, 50, 75, 90 and 100%), active reading time, reaching the end of an article, links to articles and App Store clicks with the button position. Reading time is an estimate: it counts only while the article is visible in a foreground tab and pauses after 60 seconds without interaction. Reaching the end after at least 60 seconds of active reading is a reading indicator, not proof that every sentence was read. Our measurement code does not send an Apple report, a report’s domain list, message contents or free-text input. Scrolling and reading time from before agreement are not reconstructed. There is no session recording or pointer-movement recording.
 - **Purpose and legal basis**: audience statistics and improvement of the website journey, based on your consent (GDPR Article 6(1)(a)). Google’s script is not loaded before agreement. Our code does not enable advertising features or Google Signals.
-- **Your choice**: Accept and Decline are offered together. The choice is saved locally for up to 180 days. Use “Audience measurement preferences” in the footer to change it or withdraw consent for subsequent visits. Withdrawal stops new events from our implementation and removes Analytics cookies accessible to our website; it does not automatically erase previously processed data.
+- **Your choice**: Accept and Decline are offered together. The choice is saved locally for up to 180 days. Use “Cookie choices” in the footer to change it. Withdrawal immediately stops our scroll and reading measurements, discards unreported reading time and removes Analytics cookies accessible to our website; it does not automatically erase previously processed data. Consent given before this version needs to be renewed for the expanded reading and scroll measurement. A previous refusal that is still valid is respected without extending its duration.
 - **Google cookies**: after agreement, cookies starting with `_ga` support measurement. Our configuration limits them to 13 months without extending their life on every visit; consent is renewed separately.
 - **Recipients**: CoDevelop and Google for the Analytics service. Google can process technical information, including the IP address used to connect to its service, under its contractual terms and [Analytics privacy documentation](https://support.google.com/analytics/answer/6004245). We do not link visits to the report analyzed in the app.
 - **Infrastructure**: Cloudflare and our hosting provider deliver and secure the website, receiving information needed for HTTP connections, including IP addresses. These technical logs are separate from optional Google Analytics measurement and the Apple file held in the app.

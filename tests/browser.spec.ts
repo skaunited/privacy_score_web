@@ -33,7 +33,7 @@ test('consent gates Google, remembers refusal, and withdrawal stops custom event
     (link as HTMLAnchorElement).click();
   });
   expect((await events()).filter((item) => item[0] === 'event')).toHaveLength(count);
-  expect(await page.evaluate(() => window['ga-disable-G-TESTPRIVACY'])).toBe(true);
+  expect(await page.evaluate(() => window[`ga-disable-${(document.querySelector('#audience-consent') as HTMLElement).dataset.measurementId}`])).toBe(true);
 });
 
 test('French cookie choices stay in the legal footer and reopen preferences', async ({ page }) => {
@@ -80,7 +80,7 @@ test('page views and App Store events omit query strings and fragments', async (
 });
 
 test('expired consent does not load Google', async ({ page }) => {
-  await page.addInitScript(() => localStorage.setItem('privacy-score-audience-consent-v1', JSON.stringify({ version:1, analytics:'granted', savedAt:Date.now()-181*86400000 })));
+  await page.addInitScript(() => localStorage.setItem('privacy-score-audience-consent-v2', JSON.stringify({ version:2, analytics:'granted', savedAt:Date.now()-181*86400000 })));
   await page.goto('/');
   await expect(page.locator('#audience-consent')).toBeVisible();
   await expect(page.locator('#privacy-score-ga')).toHaveCount(0);
