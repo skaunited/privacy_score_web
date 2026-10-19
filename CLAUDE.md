@@ -44,6 +44,7 @@ This is the canonical decision log for the privacyscore.fr project. Every major 
 - Owner supplied GA4 measurement ID `G-QT0QFTD7L5`, property `559523211`. The ID is public. Do not add an always-loaded Google snippet: `Analytics.astro` and `analytics.ts` gate it by consent. The current reporting connector needs access to the new property (403 when checked).
 - Search Console is accessible via Windsor.ai for `sc-domain:privacyscore.fr`. Baseline is stored in `docs/seo-audit-2026-10-19/search-console-baseline.json`: last 28 complete days, 7 clicks / 211 impressions; preceding 28 days, 6 / 207. Small numbers, no causal claim of a recent drop.
 - Current operations are in `DEPLOY.md`, `SEO.md`, package scripts and `docs/seo-rebuild-2026-10-19.md`. Older audit conclusions and decisions below are historical.
+- Owner requested the same delivery model as Codevelop: GitHub Actions verifies/builds/audits `main`, publishes only public output to `deploy`, then the owner clicks Pull Updates in Plesk. No server build, SSH deployment, webhook or direct publication from a pull request. `deploy` has independent append-only history; preserve old hashed Astro assets. See `.github/workflows/site.yml` and `DEPLOY.md`. This supersedes the earlier manual-upload-only default; the archive remains an alternative.
 - Titles and descriptions have no strict indexing character threshold. Do not invent keyword volumes, minimum word counts, app versions, iOS device tests, ratings or AI-citation guarantees. A good translation/adaptation is not intrinsically penalized.
 
 ## Decision log

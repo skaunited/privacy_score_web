@@ -1,4 +1,58 @@
-# Deployment and URL migration
+# Publication via GitHub Actions et Plesk
+
+Le circuit principal reprend celui de Codevelop : **push sur `main` → contrôles et build GitHub → branche `deploy` → clic sur Pull Updates dans Plesk**. Le propriétaire garde la main sur la mise en ligne depuis son accès privé au panneau. La méthode par archive décrite plus bas reste une alternative.
+
+## Pipeline GitHub Actions
+
+Le workflow `.github/workflows/site.yml` s'exécute sur les pushes et pull requests vers `main`, ainsi que manuellement avec **Actions → Test, build and publish → Run workflow → main** une fois le workflow fusionné.
+
+1. **Verify and build Astro** installe les dépendances verrouillées avec pnpm 11 et Node 24, teste le mécanisme de publication, construit le site et vérifie le SEO et les redirections. Les tests Chromium contrôlent consentement, accessibilité et navigation mobile sans envoyer d'événements à la propriété Analytics réelle.
+2. Le build validé est enregistré dans l'artefact `site-<commit>`, conservé sept jours. Les fichiers cachés publics, dont `.well-known/security.txt`, sont inclus.
+3. **Lighthouse mobile and desktop · EN and FR** audite ce même build trois fois dans chacun des quatre scénarios. La performance médiane doit atteindre **95/100**, conformément au budget de ce projet ; les autres catégories doivent atteindre 100 à chaque mesure, le TBT médian rester à 150 ms maximum et le CLS médian à 0,02 maximum. Rapports, traces et résumé sont conservés sept jours dans `lighthouse-<commit>`. Les en-têtes proposés sont appliqués au serveur d'audit local ; cela ne valide pas les en-têtes réellement configurés dans Plesk.
+4. **Publish the built site for Plesk** publie l'artefact validé à la racine de `deploy`, sans le reconstruire. Il s'exécute seulement pour `main`, hors pull request, et refuse de remplacer `deploy` par un ancien build si `main` a avancé.
+
+Les exécutions d'une même branche sont sérialisées. Un contrôle échoué empêche la publication. Les pull requests peuvent être contrôlées sans mettre à jour `deploy`.
+
+La première publication crée un historique indépendant de celui des sources. Les suivantes ajoutent un commit normal, **sans force push**. Les anciennes pages disparaissent du build publié ; les anciens fichiers `/_astro/` sont conservés pour les visiteurs disposant d'un HTML en cache. Ne pas nettoyer ces assets sans vérifier les références et les besoins de retour arrière.
+
+Seul le job de publication reçoit `contents: write`, via le jeton temporaire `GITHUB_TOKEN`. Aucun jeton personnel, secret Plesk, webhook ni accès SSH au serveur n'est nécessaire. La variable GitHub facultative `PUBLIC_GA_MEASUREMENT_ID` peut remplacer l'ID public de production ; sinon le workflow utilise `G-QT0QFTD7L5`. Le chargement reste soumis au consentement.
+
+**Une pipeline verte signifie que le build est prêt sur `deploy`. Elle ne signifie pas que Plesk l'a publié.**
+
+## Configuration initiale dans Plesk
+
+Avant la première publication, sauvegarder le site et sa configuration. Garder le déploiement Git **Disabled / No deployment** pendant la connexion du dépôt et le choix de la branche, pour éviter de copier les sources de `main` dans le site.
+
+| Réglage | Valeur |
+|---|---|
+| Dépôt Git distant | `git@github.com:skaunited/privacy_score_web.git` |
+| Accès GitHub | Clé publique générée par Plesk, ajoutée en Deploy key **en lecture seule** sur ce dépôt privé si nécessaire |
+| Branche | **`deploy`**, disponible après le premier build réussi de `main` |
+| Deployment directory | **`/httpdocs`** si c'est le document root actuel du domaine ; vérifier dans Hosting Settings, sans remplacer un autre chemin confirmé |
+| Deployment mode | **Automatic** pour publier après le clic manuel sur Pull Updates ; ou Manual puis Deploy now |
+| Additional deployment actions | **Désactivées** : aucune installation Node ni compilation côté serveur |
+| Webhook externe | Aucun : récupération déclenchée depuis le panneau, comme Codevelop |
+
+Après création de `deploy`, cliquer sur **Pull Updates** pour récupérer les branches, puis **Change branch and path**, sélectionner `deploy` et le document root vérifié. Activer ensuite le mode choisi. Le mode Automatic publie après récupération ; aucun appel depuis GitHub n'est configuré pour déclencher cette récupération.
+
+Le site utilise Nginx : les règles HTTP 301 de migration et la CSP Analytics restent à intégrer dans les réglages existants, selon la section « Prepare the origin configuration » ci-dessous. Elles ne sont pas des fichiers publics et ne sont pas copiées dans `deploy`. `.well-known/security.txt` doit être présent sans effacer les fichiers ACME gérés par l'hébergeur.
+
+## Publier une nouvelle version
+
+1. Fusionner/pousser les sources sur `main`, puis attendre la réussite des trois jobs GitHub Actions.
+2. Dans **Plesk → privacyscore.fr → Git**, vérifier la branche **`deploy`**, puis cliquer sur **Pull Updates / Pull now**.
+3. Avec le mode Automatic, les fichiers sont publiés après récupération. Avec Manual, cliquer ensuite sur **Deploy from Repository / Deploy now**.
+4. Vérifier le journal, les pages, les anciennes URLs en 301, le sitemap et les événements GA4 consentis. Ajuster/purger le cache Cloudflare si nécessaire.
+
+Plesk copie le build dans le document root ; ce mécanisme ne garantit pas une bascule atomique de tout le site. Garder une sauvegarde de la version précédente. L'alternative par archive et lien atomique ci-dessous reste disponible pour un hébergement configuré en ce sens ; les deux méthodes ne doivent pas piloter simultanément le même document root.
+
+Pour revenir en arrière, faire un `git revert` du changement sur `main`, laisser la pipeline préparer un nouveau build et le récupérer depuis Plesk. Ne pas éditer `deploy` manuellement. Un retour à une version antérieure à la migration doit aussi restaurer les règles de routage correspondantes pour éviter les boucles.
+
+Si la publication GitHub échoue, vérifier que la politique du dépôt autorise `contents: write` et que la protection de `deploy` autorise GitHub Actions. Si l'interface ne propose pas encore le workflow, vérifier qu'il est fusionné dans `main`. Relancer une ancienne exécution réutilise son ancien code ; lancer une nouvelle exécution de `main` pour prendre les derniers réglages.
+
+Références : [GitHub : déclenchement et GITHUB_TOKEN](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow), [Plesk : dépôt distant, branche, Pull Updates et modes de publication](https://docs.plesk.com/en-US/obsidian/customer-guide/git-support/using-remote-git-hosting.75848/).
+
+## Archive de secours et configuration serveur
 
 Current target: Astro static output on the existing Plesk VM, with Cloudflare in front. The canonical origin is **https://www.privacyscore.fr**. English is served at `/`; French stays under `/fr/`. The origin host, certificates, document-root permissions, Plesk-generated routing, and Cloudflare rules must be inspected before applying server changes.
 

@@ -1,0 +1,163 @@
+name: Test, build and publish
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Finish a publication before starting the next one, as on Codevelop.
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Verify and build Astro
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PUBLIC_GA_MEASUREMENT_ID: ${{ vars.PUBLIC_GA_MEASUREMENT_ID || 'G-QT0QFTD7L5' }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up pnpm from packageManager
+        uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+        with:
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: pnpm
+
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Test publication, build and validate SEO and redirects
+        run: pnpm test:deployment && pnpm check
+
+      - name: Install the isolated browser test runtime
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Check consent, accessibility and mobile navigation
+        run: pnpm test:browser
+
+      - name: Save browser diagnostics on failure
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: browser-${{ github.sha }}
+          path: test-results/
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Save the verified site
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: site-${{ github.sha }}
+          path: dist/
+          include-hidden-files: true # Includes .well-known/security.txt.
+          if-no-files-found: error
+          retention-days: 7
+
+  performance:
+    name: Lighthouse mobile and desktop · EN and FR
+    needs: verify
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out audit tooling
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up pnpm from packageManager
+        uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+        with:
+          run_install: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: pnpm
+
+      - name: Install locked audit dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Download the verified build
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: site-${{ github.sha }}
+          path: dist/
+
+      - name: Audit each scenario three times and check the medians
+        run: pnpm audit:performance
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+
+      - name: Save Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: lighthouse-${{ github.sha }}
+          path: reports/lighthouse/
+          if-no-files-found: warn
+          retention-days: 7
+
+  publish:
+    name: Publish the built site for Plesk
+    needs: [verify, performance]
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - name: Check out the deployment script
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          package-manager-cache: false
+
+      - name: Download the verified site from this run
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: site-${{ github.sha }}
+          path: dist/
+
+      - name: Check that this is still the latest main commit
+        id: current
+        run: |
+          latest=$(git ls-remote --exit-code origin refs/heads/main | cut -f1)
+          if [ "$latest" = "$GITHUB_SHA" ]; then
+            echo 'publish=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'publish=false' >> "$GITHUB_OUTPUT"
+            echo 'A newer main commit exists; this older build will not replace deploy.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Publish the verified build to deploy
+        if: steps.current.outputs.publish == 'true'
+        run: node scripts/publish-build.mjs
+
+      - name: Show Plesk deployment instructions
+        if: steps.current.outputs.publish == 'true'
+        run: |
+          printf '%s\n' \
+            'The verified site is available on the deploy branch.' \
+            'Open Plesk through your usual private access, select deploy and click Pull Updates.' \
+            'For this first migration, apply the reviewed Nginx redirects and Analytics CSP before publishing.' \
+            >> "$GITHUB_STEP_SUMMARY"

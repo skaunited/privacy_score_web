@@ -36,6 +36,7 @@ playwright-report/
 
 # Local release bundles
 /artifacts/
+/reports/
 
 __pycache__/
 *.pyc

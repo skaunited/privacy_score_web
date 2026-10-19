@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "type": "module",
-  "description": "Privacy Score iOS marketing site \u2014 Astro 6 static output, English root and French /fr.",
+  "description": "Privacy Score iOS marketing site — Astro 6 static output, English root and French /fr.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build",
@@ -13,6 +13,8 @@
     "check:seo": "python3 scripts/check-seo.py",
     "check:redirects": "node scripts/generate-redirects.mjs --check && node scripts/check-redirects.mjs",
     "test:browser": "playwright test",
+    "test:deployment": "node --test scripts/*.test.mjs",
+    "audit:performance": "node scripts/audit-performance.mjs",
     "check": "pnpm build && pnpm check:seo && pnpm check:redirects",
     "release": "bash scripts/package-release.sh"
   },
@@ -32,6 +34,7 @@
     "@astrojs/check": "^0.9.9",
     "@axe-core/playwright": "^4.14.0",
     "@playwright/test": "^1.64.1",
+    "lighthouse": "13.5.0",
     "sharp": "^0.34.5"
   }
 }
