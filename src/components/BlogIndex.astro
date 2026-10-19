@@ -29,7 +29,7 @@ const breadcrumb = breadcrumbListJsonLd([
           <p class="blog-meta">
             <time datetime={post.data.publishedAt.toISOString()}>{format.format(post.data.publishedAt)}</time>
             {post.data.author && <> · {post.data.author}</>}
-            {post.data.updatedAt && <> · {fr ? 'Révisé le' : 'Reviewed'} <time datetime={post.data.updatedAt.toISOString()}>{format.format(post.data.updatedAt)}</time></>}
+            {post.data.updatedAt && <> · {fr ? 'Révisé le' : 'Reviewed'}{' '}<time datetime={post.data.updatedAt.toISOString()}>{format.format(post.data.updatedAt)}</time></>}
           </p>
           <p>{post.data.description}</p>
           {post.data.tags?.length ? <p class="blog-tags">{post.data.tags.map((tag: string) => <span class="blog-tag">{tag}</span>)}</p> : null}

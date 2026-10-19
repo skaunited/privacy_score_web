@@ -38,7 +38,7 @@ const article = blogPostingJsonLd({
       <p class="blog-post-meta">
         <time datetime={post.data.publishedAt.toISOString()}>{format.format(post.data.publishedAt)}</time>
         · <a href={pathForPage(locale, 'about')}>{post.data.author}</a>
-        {post.data.updatedAt && <> · {fr ? 'Révisé le' : 'Reviewed'} <time datetime={post.data.updatedAt.toISOString()}>{format.format(post.data.updatedAt)}</time></>}
+        {post.data.updatedAt && <> · {fr ? 'Révisé le' : 'Reviewed'}{' '}<time datetime={post.data.updatedAt.toISOString()}>{format.format(post.data.updatedAt)}</time></>}
       </p>
       <h1>{post.data.title}</h1>
       <p class="blog-post-lede">{post.data.description}</p>
