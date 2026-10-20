@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "origin": "https://www.privacyscore.fr",
+  "release": "1b27db48feacab0b61cb66c92efdccd2b36ec4486a352584f8ff384c2ad9b215",
+  "pages": {
+    "https://www.privacyscore.fr/": "61ee363520f7be8258b572352bbe7868a018e9448aa4401a19799ce9cad324c2",
+    "https://www.privacyscore.fr/about/": "acd7add6fac2dc71fd3cd8479b66dc107642a8efbbf250e4458257d102d87681",
+    "https://www.privacyscore.fr/blog/": "3115a3030767d0bcc4f61536229b5d544ccd44d6738cc7c59234131434960365",
+    "https://www.privacyscore.fr/blog/app-privacy-report-empty/": "112c310ea4824eceaf2df2b585e0f1a83f97da77cd8be6385fd25a3f51e9f754",
+    "https://www.privacyscore.fr/blog/export-app-privacy-report/": "8ce9fbf9f1d822284bfc6bd444f9f183a1db716e97c7c21fd0067e050e2bc267",
+    "https://www.privacyscore.fr/blog/iphone-permissions-guide/": "3fe4ba59946bf9527d84b4760a7045cbbb18cfc897bb582edeef8f72be58f4ba",
+    "https://www.privacyscore.fr/blog/iphone-privacy-settings-2026/": "d2f8c33c87bacbe147b1e7649c591b656a499b01b49985e1f48c736dfe53f318",
+    "https://www.privacyscore.fr/fr/": "db6dc3b2c0ea4b12a215b4d635cbda98dc4a8e9683d1eb2fc72eac521101c26b",
+    "https://www.privacyscore.fr/fr/a-propos/": "6ada64c20229e8a15ce9b04c7b3ece5dc1cbbc04035eae1e3022c2286805e3ac",
+    "https://www.privacyscore.fr/fr/blog/": "ce6221f49c5e0e4c2a78a27bcb177124cfd98b1b51c9a5ae97fde44e29a99746",
+    "https://www.privacyscore.fr/fr/blog/audit-confidentialite-iphone/": "82d388628004587d7a44e51e040451abfe2d9d50e4ceb453b50ba1a37a060ea1",
+    "https://www.privacyscore.fr/fr/blog/importer-rapport-confidentialite-iphone/": "0bb29b259ecaa97247a17db481fd08056889f451a19868a675709dd488e89812",
+    "https://www.privacyscore.fr/fr/blog/rapport-confidentialite-iphone-guide/": "4711a4af8542257e618ea75b9a5b8bf5b1d83cdde41338707a95c9b7271603b3",
+    "https://www.privacyscore.fr/fr/blog/rapport-confidentialite-iphone-vide/": "33388cd7b6cdf543e8650c0708f47fab0803456b545d3bb83bde925fe1c286dc",
+    "https://www.privacyscore.fr/fr/cgu/": "bebe094ad86666e40957dc5acf89773bcecad2f2c4d3d15c5ed08df4518a5f49",
+    "https://www.privacyscore.fr/fr/mentions-legales/": "bb212d7d96679af0d81d52eb954d9f6238899e77ddcf86bce28f4732ef8c1464",
+    "https://www.privacyscore.fr/fr/politique-de-confidentialite/": "d5421312c0f0c3a3e1cbeb35f8f864e7e72fd91efe193e7d0d55b012b49bf620",
+    "https://www.privacyscore.fr/fr/politique-de-securite/": "228e3cc01986e7e8905595d74a3662c7951b5da7e4418a8551c96d83482dbfd7",
+    "https://www.privacyscore.fr/legal-notice/": "e25bc2b2fbe258902d1ae5dffc12cd651016571d24836b0760f1257e629e5b39",
+    "https://www.privacyscore.fr/privacy-policy/": "72f9b38c180815d44de8d2eb1b6ddcc65fa41ef256647b47fd49c8a292f68fb0",
+    "https://www.privacyscore.fr/security-policy/": "e44ef7c96be67f3c6a8337b5517fbe8124ce75d3f589dca2691a391b0e5a3962",
+    "https://www.privacyscore.fr/terms-of-use/": "68244ddb8c74c9f98cc3c693235087fa045a2fa014025d165952d4b58d937083"
+  }
+}
