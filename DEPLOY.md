@@ -21,6 +21,12 @@ Seul le job de publication reçoit `contents: write`, via le jeton temporaire `G
 
 **Une pipeline verte signifie que le build est prêt sur `deploy`. Elle ne signifie pas que Plesk l'a publié.**
 
+## Notifications IndexNow après déploiement
+
+Le workflow séparé **IndexNow after production deployment** contrôle la production après un build réussi, puis chaque heure si le pull Plesk intervient plus tard. Il compare le manifeste et le HTML publics à `deploy`, vérifie la preuve d’appartenance, puis transmet seulement les URLs ajoutées/modifiées/retirées depuis le dernier reçu (22 pages au premier envoi). Il ne récupère rien dans Plesk et n’exige aucun accès SSH ni secret Bing. Une vérification peut aussi être lancée avec **Actions → IndexNow after production deployment → Run workflow → main** après le pull.
+
+Les états `pending-deployment`, `unchanged`, `submitted` et `error` figurent dans le résumé et l’artefact `indexnow-…`. Les réponses 200/202 confirment une réception, pas l’indexation. Les détails, limites du cache de reçus et contrôles Bing sont dans [docs/indexnow.md](docs/indexnow.md).
+
 ## Configuration initiale dans Plesk
 
 Avant la première publication, sauvegarder le site et sa configuration. Garder le déploiement Git **Disabled / No deployment** pendant la connexion du dépôt et le choix de la branche, pour éviter de copier les sources de `main` dans le site.

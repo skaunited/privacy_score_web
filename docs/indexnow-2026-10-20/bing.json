@@ -1,0 +1,86 @@
+{
+  "checkedOn": "2026-10-20",
+  "source": "Authenticated Bing Webmaster Tools UI",
+  "property": "https://privacyscore.fr/",
+  "sitemap": {
+    "url": "https://www.privacyscore.fr/sitemap-index.xml",
+    "lastSubmitted": "2026-10-20",
+    "lastCrawled": "2026-10-20",
+    "status": "Success",
+    "totalDiscoveredUrls": 22
+  },
+  "indexnow": {
+    "view": "Onboarding screen — no submission table available",
+    "newIntegration": "Awaiting owner push and Plesk pull",
+    "notificationsSentByThisIntervention": 0
+  },
+  "articles": [
+    {
+      "url": "https://www.privacyscore.fr/blog/export-app-privacy-report/",
+      "indexed": false,
+      "verdict": "URL cannot appear on Bing",
+      "discovered": "20 Oct 2026",
+      "crawl": "Today at 17:12",
+      "crawlAllowed": "Yes",
+      "fetch": "Successful",
+      "indexingAllowed": "No",
+      "liveTest": "Error encountered while inspecting Live URL (twice)"
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/blog/audit-confidentialite-iphone/",
+      "indexed": true,
+      "verdict": "Indexed successfully — URL can appear on Bing"
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/blog/rapport-confidentialite-iphone-guide/",
+      "indexed": true,
+      "verdict": "Indexed successfully — URL can appear on Bing"
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/blog/importer-rapport-confidentialite-iphone/",
+      "indexed": false,
+      "verdict": "URL cannot appear on Bing",
+      "discovered": "20 Oct 2026",
+      "crawl": "Today at 17:12",
+      "crawlAllowed": "Yes",
+      "fetch": "Successful",
+      "indexingAllowed": "No"
+    },
+    {
+      "url": "https://www.privacyscore.fr/blog/iphone-permissions-guide/",
+      "indexed": false,
+      "verdict": "URL cannot appear on Bing",
+      "discovered": "20 Oct 2026",
+      "crawl": "Today at 17:11",
+      "crawlAllowed": "Yes",
+      "fetch": "Successful",
+      "indexingAllowed": "No"
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/blog/rapport-confidentialite-iphone-vide/",
+      "indexed": false,
+      "verdict": "URL cannot appear on Bing",
+      "discovered": "20 Oct 2026",
+      "crawl": "Today at 17:12",
+      "crawlAllowed": "Yes",
+      "fetch": "Successful",
+      "indexingAllowed": "No"
+    },
+    {
+      "url": "https://www.privacyscore.fr/blog/iphone-privacy-settings-2026/",
+      "indexed": false,
+      "verdict": "Discovered but not crawled — URL cannot appear on Bing",
+      "discovered": "20 Oct 2026"
+    },
+    {
+      "url": "https://www.privacyscore.fr/blog/app-privacy-report-empty/",
+      "indexed": false,
+      "verdict": "URL cannot appear on Bing",
+      "discovered": "20 Oct 2026",
+      "crawl": "Today at 17:12",
+      "crawlAllowed": "Yes",
+      "fetch": "Successful",
+      "indexingAllowed": "No"
+    }
+  ]
+}

@@ -6,7 +6,7 @@
   "description": "Privacy Score iOS marketing site — Astro 6 static output, English root and French /fr.",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro check && astro build && node scripts/prepare-indexnow.mjs",
     "preview": "astro preview --host",
     "astro": "astro",
     "redirects": "node scripts/generate-redirects.mjs",
@@ -14,6 +14,7 @@
     "check:redirects": "node scripts/generate-redirects.mjs --check && node scripts/check-redirects.mjs",
     "test:browser": "playwright test",
     "test:deployment": "node --test scripts/*.test.mjs",
+    "indexnow:submit": "node scripts/submit-indexnow.mjs",
     "audit:performance": "node scripts/audit-performance.mjs",
     "check": "pnpm build && pnpm check:seo && pnpm check:redirects",
     "release": "bash scripts/package-release.sh"

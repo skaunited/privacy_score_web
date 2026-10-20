@@ -5,6 +5,7 @@ import { mkdtemp, mkdir, writeFile, rm, symlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { publishBuild } from './publish-build.mjs';
+import { KEY_FILE, MANIFEST_FILE } from './indexnow.mjs';
 
 async function repository(t) {
   const directory = await mkdtemp(join(tmpdir(), 'privacy-score git test '));
@@ -35,7 +36,7 @@ async function repository(t) {
   await mkdir(join(repoDir, 'dist/fr'), { recursive: true });
   await mkdir(join(repoDir, 'dist/.well-known'), { recursive: true });
   await mkdir(join(repoDir, 'dist/_astro'), { recursive: true });
-  for (const file of ['index.html', 'fr/index.html', '404.html', 'robots.txt', 'sitemap-index.xml', 'sitemap-0.xml', '.well-known/security.txt'])
+  for (const file of ['index.html', 'fr/index.html', '404.html', 'robots.txt', 'sitemap-index.xml', 'sitemap-0.xml', '.well-known/security.txt', KEY_FILE, MANIFEST_FILE])
     await writeFile(join(repoDir, 'dist', file), `built ${file}`);
   return {
     repoDir,
@@ -55,7 +56,7 @@ test('the first deploy branch contains only the built files, including .well-kno
   assert.equal(result.branch, 'deploy');
   assert.deepEqual(
     site.remote(['ls-tree', '-r', '--name-only', 'deploy']).split('\n'),
-    ['.well-known/security.txt', '404.html', 'fr/index.html', 'index.html', 'robots.txt', 'sitemap-0.xml', 'sitemap-index.xml'],
+    ['.well-known/security.txt', '404.html', KEY_FILE, 'fr/index.html', 'index.html', MANIFEST_FILE, 'robots.txt', 'sitemap-0.xml', 'sitemap-index.xml'].sort(),
   );
   assert.equal(site.remote(['show', 'deploy:.well-known/security.txt']), 'built .well-known/security.txt');
   assert.equal(site.remote(['rev-parse', 'main']), original);
@@ -96,6 +97,11 @@ test('incomplete builds, source files, hidden secrets and symlinks are refused b
   await rm(path('.well-known/security.txt'));
   await assert.rejects(publishBuild({ repoDir: site.repoDir }));
   await writeFile(path('.well-known/security.txt'), 'headers');
+  for (const file of [KEY_FILE, MANIFEST_FILE]) {
+    await rm(path(file));
+    await assert.rejects(publishBuild({ repoDir: site.repoDir }), { code: 'ENOENT' });
+    await writeFile(path(file), `built ${file}`);
+  }
   for (const file of ['.env', 'package.json', 'pnpm-lock.yaml', '.well-known/.env']) {
     await writeFile(path(file), 'must not be published');
     await assert.rejects(

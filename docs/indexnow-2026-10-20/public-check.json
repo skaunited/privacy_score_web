@@ -1,0 +1,159 @@
+{
+  "checkedAt": "2026-10-20T15:25:24.421Z",
+  "results": [
+    {
+      "url": "https://www.privacyscore.fr/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    },
+    {
+      "url": "https://www.privacyscore.fr/about/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    },
+    {
+      "url": "https://www.privacyscore.fr/blog/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    },
+    {
+      "url": "https://www.privacyscore.fr/blog/app-privacy-report-empty/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    },
+    {
+      "url": "https://www.privacyscore.fr/blog/export-app-privacy-report/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    },
+    {
+      "url": "https://www.privacyscore.fr/blog/iphone-permissions-guide/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    },
+    {
+      "url": "https://www.privacyscore.fr/blog/iphone-privacy-settings-2026/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/a-propos/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/blog/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/blog/audit-confidentialite-iphone/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/blog/importer-rapport-confidentialite-iphone/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/blog/rapport-confidentialite-iphone-guide/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/blog/rapport-confidentialite-iphone-vide/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/cgu/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/mentions-legales/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/politique-de-confidentialite/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/politique-de-securite/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    },
+    {
+      "url": "https://www.privacyscore.fr/legal-notice/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    },
+    {
+      "url": "https://www.privacyscore.fr/privacy-policy/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    },
+    {
+      "url": "https://www.privacyscore.fr/security-policy/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    },
+    {
+      "url": "https://www.privacyscore.fr/terms-of-use/",
+      "status": 200,
+      "matchesBuild": true,
+      "noindex": false,
+      "canonicalMatches": true
+    }
+  ]
+}

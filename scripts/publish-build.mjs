@@ -3,6 +3,7 @@ import { mkdtemp, readdir, stat, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { KEY_FILE, MANIFEST_FILE } from './indexnow.mjs';
 
 const deployRef = 'refs/heads/deploy';
 const sourceFiles = new Set([
@@ -48,7 +49,7 @@ export async function publishBuild({
   buildDir = 'dist',
 } = {}) {
   const directory = resolve(repoDir, buildDir);
-  for (const file of ['index.html', 'fr/index.html', '404.html', 'robots.txt', 'sitemap-index.xml', 'sitemap-0.xml', '.well-known/security.txt']) {
+  for (const file of ['index.html', 'fr/index.html', '404.html', 'robots.txt', 'sitemap-index.xml', 'sitemap-0.xml', '.well-known/security.txt', KEY_FILE, MANIFEST_FILE]) {
     const info = await stat(join(directory, file));
     if (!info.isFile() || !info.size)
       throw new Error(`Incomplete build: ${file}`);
