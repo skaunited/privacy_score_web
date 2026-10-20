@@ -41,7 +41,7 @@ Aucun timer ni écouteur de mesure d’engagement n’est activé avant accord. 
 
 ## Configuration des rapports dans GA4
 
-Les événements ne nécessitent pas de création préalable dans GA4. En revanche, leurs paramètres personnalisés nécessitent des définitions pour être exploités dans les rapports et explorations. L’accès API à cette propriété renvoyait **403** lors de la préparation : aucune configuration distante ni réception effective dans GA4 n’est confirmée par les tests locaux.
+Les événements ne nécessitent pas de création préalable dans GA4. En revanche, leurs paramètres personnalisés nécessitent des définitions pour être exploités dans les rapports et explorations. Le 20 octobre, la session navigateur autorisée par le propriétaire a permis de créer les neuf dimensions ci-dessous, la métrique et les trois vues de l’exploration, puis de confirmer la réception réelle des événements. Le connecteur API renvoie toujours **403** : son accès doit être reconnecté séparément pour les futures lectures MCP. Les tests locaux restent isolés de Google.
 
 Dans la propriété **Privacy Score → Administration → Affichage des données → Définitions personnalisées**, créer ou réutiliser les dimensions de portée **Événement** suivantes (paramètre exact, sensible à la casse) :
 
@@ -55,16 +55,34 @@ Dans la propriété **Privacy Score → Administration → Affichage des donnée
 | Seuil de scroll | `scroll_percent` |
 | Scroll maximal observé | `max_scroll_percent` |
 | Palier de lecture en secondes | `read_seconds` |
-| Fin d’article atteinte | `article_end_reached` |
+| Fin article atteinte | `article_end_reached` |
 
 Créer la métrique de portée Événement **Temps de lecture actif** : paramètre `reading_time_msec`, unité **Millisecondes**. Le paramètre `active_read_seconds` est un cumul de contexte, pas une métrique à additionner. Le chemin de page a une dimension native dans GA4 ; utiliser **Langue du contenu**, et non **Langue**, pour comparer les pages FR/EN.
 
 Marquer **`app_store_click` comme événement clé** pour analyser le taux de clic vers l’App Store. Conserver le nombre d’événements pour compter tous les clics et les utilisateurs/sessions pour mesurer combien de visiteurs ont cliqué.
 
-Après disponibilité des définitions, créer deux explorations d’entonnoir avec étapes **indirectement suivies** (les événements de scroll peuvent s’intercaler) :
+Les deux entonnoirs sont enregistrés dans l’exploration **Acquisition et lecture Privacy Score**, avec étapes **indirectement suivies** (les événements de scroll peuvent s’intercaler) :
 
 1. Parcours global ouvert : `page_view` → `app_store_click`. Ventiler par page d’entrée, langue du contenu, appareil et source/support.
-2. Parcours éditorial ouvert : `article_view` → `article_read_time` avec `read_seconds = 30` → `app_store_click`. Variante de lecture approfondie : insérer `article_complete` avant le clic. Ventiler par `article_path`.
+2. Parcours éditorial ouvert : `article_view` → `article_read_time` → `app_store_click`. Tous les paliers de cet événement sont supérieurs ou égaux à 30 secondes ; l’étape est nommée **Lecture active au moins 30 secondes**. Ventilation par `article_path`. Une variante de lecture approfondie peut insérer `article_complete` avant le clic.
+
+Un entonnoir ouvert permet d’entrer à une étape intermédiaire : le total des clics de la dernière étape ne prouve pas que tous ces visiteurs ont effectué les étapes précédentes. Examiner les progressions et abandons pour évaluer le parcours complet. Les définitions nouvellement créées ne reconstituent pas leurs paramètres historiques dans les rapports.
+
+La troisième vue **Engagement des articles** contient les lignes **Article** puis **Nom de l’événement**, les colonnes **Langue du contenu**, et les valeurs **Utilisateurs actifs**, **Nombre d’événements** et **Temps de lecture actif**, avec le filtre `page_type = article`. Les paliers, fins, lectures complètes et clics apparaissent sous leur nom d’événement ; les autres dimensions importées permettent d’affiner l’analyse. Le temps actif est renseigné sur `article_engagement`, pas sur chaque autre événement.
+
+Lien direct : [Acquisition et lecture Privacy Score](https://analytics.google.com/analytics/web/#/analysis/a344906043p559523211/edit/rIseypLPRoi5SCJ_0YQ7zg). Les vues ont été contrôlées après rechargement. Leur période initiale couvre les 28 jours complets jusqu’au 19 octobre ; les données des définitions créées le 20 ne doivent pas être attendues dans cette fenêtre antérieure. Utiliser le Temps réel pour les essais du jour, puis les périodes complètes pour les bilans.
+
+## Attribution App Store après consentement
+
+Le 20 octobre 2026, l’interface App Store Connect a généré le lien public officiel :
+
+`https://apps.apple.com/app/apple-store/id6762229573?pt=119041406&ct=privacyscore_web&mt=8`
+
+Le provider token `119041406` provient de ce lien Apple ; ce n’est ni une clé API ni un identifiant utilisateur. La campagne globale `privacyscore_web` permet de regrouper le faible volume initial. Les pages et positions des CTA restent détaillées dans GA4, sans créer une campagne Apple par bouton.
+
+Le code ajoute ces paramètres aux liens de cette app uniquement après accord. Il conserve le chemin, le storefront et le libellé de chaque lien. Le refus, le retrait, l’expiration et le retrait depuis un autre onglet restaurent les destinations initiales. Aucun paramètre de la page courante, identifiant de session ou article n’est transmis dans le lien Apple. Les URLs de téléchargement des données structurées restent sans campagne.
+
+Les résultats Apple apparaissent selon ses seuils et règles d’attribution : un clic n’est ni un téléchargement ni un achat. La campagne ne permet pas de raccorder individuellement un visiteur GA4 à un abonné iOS. L’intégration du lien sera effective en production après le push du propriétaire, la pipeline et le pull Plesk.
 
 Dans l’exploration éditoriale, un clic ultérieur sur l’accueil peut suivre la lecture d’un article dans la même session ; le contexte du clic décrit alors l’accueil. Utiliser la dimension d’article de l’étape de lecture pour interpréter l’origine éditoriale, sans attribuer arbitrairement tous les clics à un seul article lorsque plusieurs ont été lus.
 

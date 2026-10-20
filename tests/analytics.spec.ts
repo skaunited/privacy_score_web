@@ -203,11 +203,14 @@ test('withdrawal discards pending time, stops all new events and propagates betw
   await grant(page);
   const second = await context.newPage();
   await second.goto(articlePath);
+  await expect(second.locator('a[data-cta="header"]')).toHaveAttribute('href', /ct=privacyscore_web/);
   await page.bringToFront();
   await page.clock.runFor(7000);
   await page.locator('[data-privacy-settings]').click();
   await page.locator('[data-consent="denied"]').click();
   await expect.poll(() => second.evaluate(() => window[`ga-disable-${(document.querySelector('#audience-consent') as HTMLElement).dataset.measurementId}`])).toBe(true);
+  await expect(page.locator('a[data-cta="header"]')).not.toHaveAttribute('href', /[?&](?:pt|ct|mt)=/);
+  await expect(second.locator('a[data-cta="header"]')).not.toHaveAttribute('href', /[?&](?:pt|ct|mt)=/);
   const before = await events(page);
   const otherBefore = await events(second);
   await scrollToDepth(page, 100);
@@ -235,8 +238,10 @@ test('consent expiring in an open document stops collection and requests a new c
   await page.addInitScript((key) => localStorage.setItem(key, JSON.stringify({ version:2, analytics:'granted', savedAt:Date.now()-180*86400000+5000 })), consentKey);
   await page.goto(articlePath);
   await expect(page.locator('#privacy-score-ga')).toHaveCount(1);
+  await expect(page.locator('a[data-cta="header"]')).toHaveAttribute('href', /ct=privacyscore_web/);
   await page.clock.runFor(6000);
   await expect(page.locator('#audience-consent')).toBeVisible();
+  await expect(page.locator('a[data-cta="header"]')).not.toHaveAttribute('href', /[?&](?:pt|ct|mt)=/);
   expect(await page.evaluate(() => window[`ga-disable-${(document.querySelector('#audience-consent') as HTMLElement).dataset.measurementId}`])).toBe(true);
   const count = await events(page);
   await scrollToDepth(page, 100);

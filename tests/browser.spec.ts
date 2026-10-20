@@ -49,6 +49,30 @@ test('French cookie choices stay in the legal footer and reopen preferences', as
   await expect(choices).toBeFocused();
 });
 
+for (const path of ['/', '/fr/', '/blog/iphone-permissions-guide/', '/fr/blog/importer-rapport-confidentialite-iphone/']) {
+  test(`App Store campaign follows consent and preserves original links ${path}`, async ({ page }) => {
+    await page.goto(path);
+    const links = page.locator('a[href*="apps.apple.com"][href*="id6762229573"]');
+    const originals = await links.evaluateAll((elements) => elements.map((link) => link.getAttribute('href')));
+    expect(originals.length).toBeGreaterThan(0);
+    expect(originals.every((href) => !new URL(href!).search)).toBe(true);
+    await page.locator('[data-consent="denied"]').click();
+    expect(await links.evaluateAll((elements) => elements.map((link) => link.getAttribute('href')))).toEqual(originals);
+    await page.locator('[data-privacy-settings]').click();
+    await page.locator('[data-consent="granted"]').click();
+    const attributed = await links.evaluateAll((elements) => elements.map((link) => (link as HTMLAnchorElement).href));
+    for (const [index, href] of attributed.entries()) {
+      const url = new URL(href);
+      expect(url.origin + url.pathname).toBe(originals[index]);
+      expect(Object.fromEntries(url.searchParams)).toEqual({ pt:'119041406', ct:'privacyscore_web', mt:'8' });
+    }
+    expect((await page.locator('script[type="application/ld+json"]').allTextContents()).join('')).not.toContain('pt=119041406');
+    await page.locator('[data-privacy-settings]').click();
+    await page.locator('[data-consent="denied"]').click();
+    expect(await links.evaluateAll((elements) => elements.map((link) => link.getAttribute('href')))).toEqual(originals);
+  });
+}
+
 test('EN and FR navigation works with a French browser without a language redirect', async ({ browser }) => {
   const context = await browser.newContext({ locale:'fr-FR', baseURL:'http://127.0.0.1:4329' });
   const page = await context.newPage();

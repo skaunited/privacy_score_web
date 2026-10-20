@@ -75,6 +75,7 @@
 | `build` | — |
 | `lighthouse` | 2026-10-19 — Preserve the original icon geometry |
 | `analytics` | 2026-10-19 — Separate browser rendering from virtual measurement time |
+| `browser-ui` | 2026-10-20 — Verify settled UI state before continuing Google setup |
 | `playwright` | 2026-10-19 — Separate browser rendering from virtual measurement time |
 
 ---
@@ -133,6 +134,30 @@ Playwright's virtual timer controls do not synchronize all native browser render
 **Related**: `tests/analytics.spec.ts`; `src/assets/engagement.ts`.
 
 ---
+
+### 2026-10-20 — Verify settled UI state before continuing Google setup
+
+**Context**: Configuring GA4 definitions/explorations and inspecting URLs through the authenticated browser UI.
+
+**Failed attempts**:
+- Treating an immediately returned accessibility snapshot as a completed save/search sometimes captured a loading state or an old table while the next action was already running.
+- Using uppercase labels from the native accessibility tree as exact Playwright names failed because the DOM names retained sentence case. A URL also appeared in several visible inspection/search elements, so a strict locator was ambiguous.
+- A checkbox locator scoped to an unselected row label changed after clicking; Playwright’s checked-state verification then re-resolved the old row name and reported failure despite successful selection.
+
+**What worked**:
+Read the current DOM snapshot for exact locator names, inspect the visible result after saves, and do independent work while Google processes requests. Select checkboxes with a click and verify the changed row/count in a fresh snapshot. Capture the final inspection or confirmation rather than assuming a queued request was accepted.
+
+**Root cause**:
+Asynchronous Google interfaces, different DOM/native label casing, and accessible names that change with selection.
+
+**Avoid in the future**:
+- Do not chain a new interaction through an unconfirmed save or loading state.
+- Scope selectors using stable concepts and current DOM names; check success after the action.
+- Keep Google’s index snapshot, live test and accepted indexing request as three separate facts.
+
+**Tags**: `browser-ui, analytics, gsc, accessibility, asynchronous-ui`
+
+**Related**: `docs/measurement-2026-10-20/README.md`.
 
 ## References
 

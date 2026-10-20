@@ -1,5 +1,6 @@
 /** Basic consent mode: never load Google or send analytics before agreement. */
 import { measureEngagement, type EventParams } from './engagement';
+import { isPrivacyScoreAppStoreUrl, withAppStoreCampaign } from '../config/app-store-campaign';
 
 type Choice = 'granted' | 'denied';
 type ConsentRecord = { version: 2; analytics: Choice; savedAt: number };
@@ -28,6 +29,21 @@ if (panel && candidateId && /^G-[A-Z0-9]+$/.test(candidateId)) {
     : ['/', '/fr/'].includes(location.pathname) ? 'home' : 'other';
   let returnFocus: HTMLElement | null = null;
   const preferences = document.querySelector<HTMLButtonElement>('[data-privacy-settings]');
+  const plainAppStoreLinks = new Map<HTMLAnchorElement, string>();
+
+  const updateAppStoreLinks = (granted: boolean) => {
+    if (!granted) {
+      for (const [link, original] of plainAppStoreLinks) link.setAttribute('href', original);
+      plainAppStoreLinks.clear();
+      return;
+    }
+    for (const link of document.querySelectorAll<HTMLAnchorElement>('a[href]')) {
+      const url = new URL(link.href, location.href);
+      if (!isPrivacyScoreAppStoreUrl(url)) continue;
+      if (!plainAppStoreLinks.has(link)) plainAppStoreLinks.set(link, link.getAttribute('href')!);
+      link.href = withAppStoreCampaign(url);
+    }
+  };
 
   const read = (): ConsentRecord | undefined => {
     try {
@@ -78,6 +94,7 @@ if (panel && candidateId && /^G-[A-Z0-9]+$/.test(candidateId)) {
   }
   function apply(next: Choice, savedAt = Date.now()) {
     choice = next;
+    updateAppStoreLinks(next === 'granted');
     window[`ga-disable-${id}`] = next !== 'granted';
     if (next === 'denied') {
       clearTimeout(expiryTimer);
@@ -137,7 +154,7 @@ if (panel && candidateId && /^G-[A-Z0-9]+$/.test(candidateId)) {
     const target = click.target instanceof Element ? click.target.closest<HTMLAnchorElement>('a[href]') : null;
     if (!target) return;
     const url = new URL(target.href, location.href);
-    if (url.hostname === 'apps.apple.com' && url.pathname.includes('id6762229573')) {
+    if (isPrivacyScoreAppStoreUrl(url)) {
       const position = target.dataset.cta ?? (target.closest('footer') ? 'footer' : target.closest('article') ? 'article-body' : 'content');
       engagement?.flush();
       event('app_store_click', { cta_position: position, ...engagement?.snapshot() });

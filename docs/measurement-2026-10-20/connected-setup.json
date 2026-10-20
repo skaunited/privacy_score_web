@@ -1,0 +1,220 @@
+{
+  "checked_on": "2026-10-20",
+  "source": "Authenticated browser UI authorized by the owner",
+  "search_console": {
+    "property": "sc-domain:privacyscore.fr",
+    "public_sitemap_urls": 22,
+    "global_index_report": {
+      "updated_on": "2026-10-12",
+      "indexed": 14,
+      "not_indexed": 11,
+      "note": "Historical totals including old paths; not a count of current sitemap URLs."
+    },
+    "sitemap": {
+      "url": "https://www.privacyscore.fr/sitemap-index.xml",
+      "resubmitted_on": "2026-10-20",
+      "last_read_displayed": "2026-10-20",
+      "status": "Success",
+      "discovered_displayed": 18,
+      "note": "The child-sitemap processing/count can lag the public 22-URL sitemap. Discovered is not indexed."
+    },
+    "inspected_priority_pages": [
+      {
+        "path": "/",
+        "status": "not_indexed",
+        "reason": "Excluded by noindex in the old indexed snapshot",
+        "last_crawl_date": "2026-10-15",
+        "snapshot_declared_canonical": "https://www.privacyscore.fr/en/",
+        "snapshot_google_canonical": "https://www.privacyscore.fr/en/",
+        "live_test": "Google can access this URL; page can be indexed",
+        "url": "https://www.privacyscore.fr/",
+        "indexing_request_accepted": true
+      },
+      {
+        "path": "/fr/",
+        "status": "indexed",
+        "url": "https://www.privacyscore.fr/fr/",
+        "indexing_request_accepted": false
+      },
+      {
+        "path": "/blog/",
+        "status": "not_indexed",
+        "reason": "URL unknown to Google",
+        "url": "https://www.privacyscore.fr/blog/",
+        "indexing_request_accepted": false
+      },
+      {
+        "path": "/fr/blog/",
+        "status": "indexed",
+        "url": "https://www.privacyscore.fr/fr/blog/",
+        "indexing_request_accepted": false
+      },
+      {
+        "path": "/blog/iphone-permissions-guide/",
+        "status": "not_indexed",
+        "reason": "URL unknown to Google",
+        "last_crawl_date": null,
+        "url": "https://www.privacyscore.fr/blog/iphone-permissions-guide/",
+        "indexing_request_accepted": true
+      },
+      {
+        "path": "/blog/iphone-privacy-settings-2026/",
+        "status": "not_indexed",
+        "reason": "URL unknown to Google",
+        "last_crawl_date": null,
+        "live_test": "Google can access this URL; page can be indexed",
+        "url": "https://www.privacyscore.fr/blog/iphone-privacy-settings-2026/",
+        "indexing_request_accepted": true
+      },
+      {
+        "path": "/blog/export-app-privacy-report/",
+        "status": "not_indexed",
+        "reason": "URL unknown to Google",
+        "last_crawl_date": null,
+        "url": "https://www.privacyscore.fr/blog/export-app-privacy-report/",
+        "indexing_request_accepted": true
+      },
+      {
+        "path": "/blog/app-privacy-report-empty/",
+        "status": "not_indexed",
+        "reason": "URL unknown to Google",
+        "last_crawl_date": null,
+        "url": "https://www.privacyscore.fr/blog/app-privacy-report-empty/",
+        "indexing_request_accepted": true
+      },
+      {
+        "path": "/fr/blog/audit-confidentialite-iphone/",
+        "status": "not_indexed",
+        "reason": "Discovered, currently not indexed",
+        "last_crawl_date": null,
+        "url": "https://www.privacyscore.fr/fr/blog/audit-confidentialite-iphone/",
+        "indexing_request_accepted": true
+      },
+      {
+        "path": "/fr/blog/rapport-confidentialite-iphone-guide/",
+        "status": "not_indexed",
+        "reason": "Discovered, currently not indexed",
+        "last_crawl_date": null,
+        "url": "https://www.privacyscore.fr/fr/blog/rapport-confidentialite-iphone-guide/",
+        "indexing_request_accepted": true
+      },
+      {
+        "path": "/fr/blog/importer-rapport-confidentialite-iphone/",
+        "status": "not_indexed",
+        "reason": "URL unknown to Google",
+        "last_crawl_date": null,
+        "url": "https://www.privacyscore.fr/fr/blog/importer-rapport-confidentialite-iphone/",
+        "indexing_request_accepted": true
+      },
+      {
+        "path": "/fr/blog/rapport-confidentialite-iphone-vide/",
+        "status": "not_indexed",
+        "reason": "URL unknown to Google",
+        "last_crawl_date": null,
+        "url": "https://www.privacyscore.fr/fr/blog/rapport-confidentialite-iphone-vide/",
+        "indexing_request_accepted": true
+      }
+    ],
+    "indexing_requests_accepted": 9,
+    "request_recovery": {
+      "path": "/blog/export-app-privacy-report/",
+      "first_attempt": "Generic Google submission error",
+      "later_retry": "Accepted",
+      "retries": 1
+    }
+  },
+  "ga4": {
+    "property_id": "559523211",
+    "custom_event_dimensions": [
+      "content_language",
+      "page_type",
+      "article_path",
+      "destination",
+      "cta_position",
+      "scroll_percent",
+      "max_scroll_percent",
+      "read_seconds",
+      "article_end_reached"
+    ],
+    "custom_event_metric": {
+      "parameter": "reading_time_msec",
+      "display_name": "Temps de lecture actif",
+      "unit": "MILLISECONDS"
+    },
+    "key_event": "app_store_click",
+    "exploration": {
+      "name": "Acquisition et lecture Privacy Score",
+      "url": "https://analytics.google.com/analytics/web/#/analysis/a344906043p559523211/edit/rIseypLPRoi5SCJ_0YQ7zg",
+      "tabs": [
+        {
+          "name": "Web vers App Store",
+          "technique": "Open funnel",
+          "steps": [
+            "page_view",
+            "app_store_click"
+          ],
+          "step_sequence": "indirect"
+        },
+        {
+          "name": "Lecture vers App Store",
+          "technique": "Open funnel",
+          "steps": [
+            "article_view",
+            "article_read_time",
+            "app_store_click"
+          ],
+          "step_sequence": "indirect",
+          "breakdown": "article_path",
+          "reading_condition": "Every article_read_time milestone is >= 30 active seconds; no extra exact-30 filter"
+        },
+        {
+          "name": "Engagement des articles",
+          "technique": "Free form",
+          "rows": [
+            "article_path",
+            "eventName"
+          ],
+          "columns": [
+            "content_language"
+          ],
+          "metrics": [
+            "activeUsers",
+            "eventCount",
+            "reading_time_msec"
+          ],
+          "filter": {
+            "page_type": "article"
+          }
+        }
+      ],
+      "verified_after_reload": true,
+      "initial_period": {
+        "from": "2026-09-22",
+        "to": "2026-10-19",
+        "note": "28 complete days; does not include setup day. New custom definitions are not retroactive."
+      }
+    },
+    "realtime_received": [
+      "page_view",
+      "page_scroll",
+      "article_view",
+      "article_read_time",
+      "article_engagement",
+      "app_store_click"
+    ],
+    "control_visit": {
+      "consent": "Granted for the check, then withdrawn",
+      "app_store_click_received_as_key_event": true,
+      "note": "Control traffic is not customer acquisition, an installation or a sale."
+    },
+    "connector_status": "403 remains; browser sign-in did not expand MCP permissions"
+  },
+  "app_store": {
+    "app_id": "6762229573",
+    "generated_campaign_url": "https://apps.apple.com/app/apple-store/id6762229573?pt=119041406&ct=privacyscore_web&mt=8",
+    "campaign_results": "Insufficient data to display campaigns",
+    "attribution_in_repository": "After consent only; original links restored on refusal, withdrawal and expiry, including between tabs",
+    "production_status": "Awaiting owner push, CI and Plesk pull",
+    "api_permissions": "Unchanged; Analytics reports unavailable to the current key"
+  }
+}
