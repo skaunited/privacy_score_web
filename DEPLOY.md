@@ -23,9 +23,11 @@ Seul le job de publication reçoit `contents: write`, via le jeton temporaire `G
 
 ## Notifications IndexNow après déploiement
 
-Le workflow séparé **IndexNow after production deployment** contrôle la production après un build réussi, puis chaque heure si le pull Plesk intervient plus tard. Il compare le manifeste et le HTML publics à `deploy`, vérifie la preuve d’appartenance, puis transmet seulement les URLs ajoutées/modifiées/retirées depuis le dernier reçu (22 pages au premier envoi). Il ne récupère rien dans Plesk et n’exige aucun accès SSH ni secret Bing. Une vérification peut aussi être lancée avec **Actions → IndexNow after production deployment → Run workflow → main** après le pull.
+Le workflow séparé **IndexNow - check Plesk and submit** contrôle la production après un build réussi, puis chaque heure si le pull Plesk intervient plus tard. Le job **Check Plesk deployment - no submission** compare le manifeste et le HTML publics à `deploy` et vérifie la preuve d’appartenance. Tant que Plesk n'a pas publié ce build, le résumé affiche **En attente de publication Plesk** et le job **Submit changed URLs to IndexNow** est **ignoré (skipped)**. Il est aussi ignoré si aucun contenu n'a changé depuis le dernier reçu.
 
-Les états `pending-deployment`, `unchanged`, `submitted` et `error` figurent dans le résumé et l’artefact `indexnow-…`. Les réponses 200/202 confirment une réception, pas l’indexation. Les détails, limites du cache de reçus et contrôles Bing sont dans [docs/indexnow.md](docs/indexnow.md).
+Le job de soumission revérifie la production et ne réussit qu'après réception HTTP 200/202 d'un lot non vide : URLs ajoutées/modifiées/retirées depuis le dernier reçu (22 pages au premier envoi). Le workflow ne déclenche pas le pull Plesk et n’exige aucun accès SSH ni secret Bing. Une vérification immédiate peut aussi être lancée avec **Actions → IndexNow - check Plesk and submit → Run workflow → main** après le pull.
+
+Les états `pending-deployment`, `unchanged`, `ready-to-submit`, `submitted` et `error` figurent dans le résumé. L’artefact `indexnow-check-…/check.json` décrit le contrôle sans POST ; `indexnow-…/result.json` décrit un job de soumission exécuté. Les réponses 200/202 confirment une réception, pas l’indexation. Le cache de reçus existant est conservé. Les détails, limites du cache et contrôles Bing sont dans [docs/indexnow.md](docs/indexnow.md).
 
 ## Configuration initiale dans Plesk
 

@@ -103,7 +103,7 @@ async function text(response) {
   return Buffer.concat(chunks).toString('utf8');
 }
 
-export async function submitDeployed({ manifest, state, fetcher = fetch, now = new Date() }) {
+export async function submitDeployed({ manifest, state, fetcher = fetch, now = new Date(), checkOnly = false }) {
   manifest = validateManifest(manifest);
   validateState(state);
   const report = { checkedAt: now.toISOString(), release: manifest.release, status: 'pending-deployment',
@@ -150,6 +150,8 @@ export async function submitDeployed({ manifest, state, fetcher = fetch, now = n
   }
   if ((await liveManifest())?.release !== manifest.release)
     return pending('Production changed during verification; wait for a stable deployment.');
+  if (checkOnly) return { report: { ...report, status: 'ready-to-submit', plannedUrls: urls,
+    addedOrUpdated: changed.length, removed: removed.length } };
   const response = await fetcher(ENDPOINT, {
     method: 'POST', redirect: 'error', signal: AbortSignal.timeout(30_000),
     headers: { 'Content-Type': 'application/json; charset=utf-8', 'User-Agent': userAgent },

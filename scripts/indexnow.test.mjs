@@ -41,6 +41,49 @@ test('initial receipt verifies live pages and sends every canonical URL once; re
   assert.equal(net.posts().length, 1);
 });
 
+test('preflight verifies production and lists the incremental batch without a POST or new receipt', async () => {
+  const value = manifest({ [a]: html(a, 'updated') });
+  const state = acceptedState(manifest());
+  const before = structuredClone(state);
+  const net = network(value, { pages: { [a]: html(a, 'updated') } });
+  const result = await submitDeployed({ manifest: value, state, fetcher: net.fetcher, checkOnly: true });
+  assert.equal(result.report.status, 'ready-to-submit');
+  assert.deepEqual(result.report.plannedUrls, [a, b]);
+  assert.deepEqual(result.report.submittedUrls, []);
+  assert.equal(result.report.addedOrUpdated, 1);
+  assert.equal(result.report.removed, 1);
+  assert.equal(result.report.checks.length, 2);
+  assert.equal(result.state, undefined);
+  assert.deepEqual(state, before);
+  assert.equal(net.posts().length, 0);
+
+  // A ready preflight is not permission to send stale content later: the
+  // submission job must independently repeat the production verification.
+  const next = network(value, { pages: { [a]: html(a, 'next deployment') } });
+  assert.equal((await submitDeployed({ manifest: value, state, fetcher: next.fetcher })).report.status, 'pending-deployment');
+  assert.equal(next.posts().length, 0);
+});
+
+test('preflight distinguishes unpublished, partially copied and already-submitted content without sending', async () => {
+  const value = manifest();
+  const cases = [
+    { options: { overrides: { [`${ORIGIN}/${MANIFEST_FILE}`]: () => new Response('', { status: 404 }) } }, status: 'pending-deployment' },
+    { options: { pages: { [a]: html(a), [b]: html(b, 'old') } }, status: 'pending-deployment' },
+    { state: acceptedState(value), status: 'unchanged' },
+    { status: 'ready-to-submit' },
+  ];
+  for (const scenario of cases) {
+    const net = network(value, scenario.options);
+    const result = await submitDeployed({ manifest: value, state: scenario.state, fetcher: net.fetcher, checkOnly: true });
+    assert.equal(result.report.status, scenario.status);
+    assert.deepEqual(result.report.submittedUrls, []);
+    assert.equal(result.state, undefined);
+    assert.equal(net.posts().length, 0);
+    if (scenario.status === 'ready-to-submit') assert.deepEqual(result.report.plannedUrls, Object.keys(value.pages));
+    else assert.equal(result.report.plannedUrls, undefined);
+  }
+});
+
 test('changed and removed pages are submitted, unchanged pages are not; previous live content is retained in state until success', async () => {
   const old = manifest();
   const value = manifest({ [a]: html(a, 'updated') });
@@ -179,6 +222,41 @@ test('before the first IndexNow build reaches deploy, the CLI reports pending wi
   await assert.rejects(readFile(join(directory, '.indexnow/state.json')), { code: 'ENOENT' });
   assert.match(await readFile(join(directory, 'output'), 'utf8'), /state_changed=false/);
   assert.match(await readFile(join(directory, 'summary'), 'utf8'), /pending-deployment/);
+});
+
+test('CLI preflight writes separate diagnostics and marks an unpublished build as not ready', async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), 'indexnow-cli-check-'));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const output = execFileSync(process.execPath, [new URL('./submit-indexnow.mjs', import.meta.url).pathname, 'missing-build', '--check-only'], {
+    cwd: directory, encoding: 'utf8',
+    env: { ...process.env, GITHUB_OUTPUT: join(directory, 'output'), GITHUB_STEP_SUMMARY: join(directory, 'summary') },
+  });
+  assert.equal(JSON.parse(output).status, 'pending-deployment');
+  const report = JSON.parse(await readFile(join(directory, 'reports/indexnow/check.json'), 'utf8'));
+  assert.deepEqual(report.submittedUrls, []);
+  for (const path of ['.indexnow/state.json', 'reports/indexnow/result.json'])
+    await assert.rejects(readFile(join(directory, path)), { code: 'ENOENT' });
+  assert.match(await readFile(join(directory, 'output'), 'utf8'), /state_changed=false\nready_to_submit=false/);
+  const summary = await readFile(join(directory, 'summary'), 'utf8');
+  assert.match(summary, /En attente de publication Plesk/);
+  assert.match(summary, /aucun POST IndexNow effectué/);
+  assert.doesNotMatch(summary, /Soumission IndexNow reçue/);
+});
+
+test('strict submission CLI fails rather than reporting a green zero-URL submission, preserving the receipt', async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), 'indexnow-cli-strict-'));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const saved = `${JSON.stringify(acceptedState(manifest()))}\n`;
+  await mkdir(join(directory, '.indexnow'));
+  await writeFile(join(directory, '.indexnow/state.json'), saved);
+  assert.throws(() => execFileSync(process.execPath, [new URL('./submit-indexnow.mjs', import.meta.url).pathname, 'missing-build', '--require-submission'], {
+    cwd: directory, encoding: 'utf8', stdio: 'pipe',
+    env: { ...process.env, GITHUB_OUTPUT: join(directory, 'output'), GITHUB_STEP_SUMMARY: join(directory, 'summary') },
+  }), (error) => error.status === 1 && /No submission attempted/.test(error.stderr));
+  const report = JSON.parse(await readFile(join(directory, 'reports/indexnow/result.json'), 'utf8'));
+  assert.equal(report.status, 'error');
+  assert.equal(await readFile(join(directory, '.indexnow/state.json'), 'utf8'), saved);
+  await assert.rejects(readFile(join(directory, 'output')), { code: 'ENOENT' });
 });
 
 test('oversized production responses fail without notifying IndexNow', async () => {

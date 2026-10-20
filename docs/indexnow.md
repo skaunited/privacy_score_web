@@ -2,11 +2,18 @@
 
 ## Fonctionnement
 
-Le propriétaire pousse `main`, GitHub vérifie le site et prépare `deploy`, puis le propriétaire fait **Pull Updates** dans Plesk. Le workflow **IndexNow after production deployment** vérifie ensuite la production, sans déclencher le pull Plesk ni modifier le serveur.
+Le propriétaire pousse `main`, GitHub vérifie le site et prépare `deploy`, puis le propriétaire fait **Pull Updates** dans Plesk. Le workflow **IndexNow - check Plesk and submit** vérifie la production, sans déclencher le pull Plesk ni modifier le serveur. L'ancien nom **IndexNow after production deployment** ne distinguait pas suffisamment la vérification d'un véritable envoi.
 
 - Après la réussite de **Test, build and publish**, une première vérification est déclenchée.
 - Une vérification horaire (minute 17 UTC) prend le relais si le pull Plesk est fait plus tard. Les horaires GitHub sont indicatifs et peuvent être retardés.
-- **Actions → IndexNow after production deployment → Run workflow → main** permet une vérification immédiate après le pull. Une exécution inchangée ne renvoie pas toutes les pages.
+- **Actions → IndexNow - check Plesk and submit → Run workflow → main** permet une vérification immédiate après le pull. Une exécution inchangée ne renvoie pas toutes les pages.
+
+Le workflow sépare deux jobs :
+
+1. **Check Plesk deployment - no submission** : contrôle uniquement. Si le build n'est pas encore visible, son résumé indique **« En attente de publication Plesk — aucune soumission tentée »**. Si le contenu a déjà été soumis, il indique **« Contenu déjà soumis — aucun nouvel envoi »**.
+2. **Submit changed URLs to IndexNow** : **ignoré (skipped)** dans ces deux cas. Il s'exécute uniquement si la production vérifiée contient des changements à notifier, refait les contrôles puis envoie le lot. Ce job ne peut réussir qu'après un véritable reçu HTTP 200/202 pour un lot non vide. Si la production change entre les deux jobs, il échoue sans enregistrer de nouveau reçu.
+
+Le déclenchement après build est donc un contrôle de disponibilité, pas une preuve de pull Plesk. Après un pull tardif, le contrôle horaire suivant peut effectuer la soumission automatiquement ; le lancement manuel sert seulement à accélérer cette vérification.
 
 Le build génère `indexnow-manifest.json` depuis les URLs canoniques du sitemap, avec une empreinte SHA-256 par fichier HTML. La preuve d’appartenance `<clé>.txt` est publique à la racine ; ce n’est pas une clé de compte Bing et aucun secret Bing/Plesk n’est ajouté à GitHub. Le manifeste ne contient que des URLs et empreintes publiques, aucun SHA du dépôt privé ni donnée Analytics.
 
@@ -24,19 +31,22 @@ Le reçu est conservé dans le cache GitHub Actions, partagé uniquement entre l
 
 ## Lire les résultats
 
-Consulter **Actions → IndexNow after production deployment → résumé**, puis l’artefact **indexnow-…**, fichier `result.json` (conservé 30 jours).
+Consulter **Actions → IndexNow - check Plesk and submit → résumé**. Le contrôle produit l’artefact **indexnow-check-…**, fichier `check.json`. Un job de soumission exécuté produit **indexnow-…**, fichier `result.json`. Ces diagnostics sont conservés 30 jours. L'artefact intermédiaire **indexnow-candidate-…** transmet au second job le manifeste vérifié et, s'il existe, le reçu précédent ; il n'est pas un reçu de soumission.
 
 | État | Sens |
 |---|---|
-| `pending-deployment` | Le build ou certaines pages ne sont pas encore visibles en production. Aucune URL envoyée ; nouveau contrôle à l’exécution suivante. |
-| `unchanged` | Le contenu a déjà été soumis ; aucun nouvel envoi. |
+| `pending-deployment` | Le build ou certaines pages ne sont pas encore visibles en production. Job de soumission ignoré ; nouveau contrôle à l’exécution suivante. |
+| `unchanged` | Le contenu a déjà été soumis ; job de soumission ignoré. |
+| `ready-to-submit` | Production vérifiée : `plannedUrls` liste les URLs prévues. Aucun POST effectué par ce contrôle ; le job de soumission doit encore les revérifier et les envoyer. |
 | `submitted`, HTTP 200 | Le moteur a reçu les URLs. Ce n’est pas une confirmation d’indexation. |
 | `submitted`, HTTP 202 | URLs reçues, mais vérification de la clé encore en attente. |
 | `error` | Accès bloqué, erreur réseau/origine, preuve invalide, `noindex`, manifeste invalide ou refus IndexNow. Le job échoue et le dernier reçu réussi est conservé. |
 
 Les erreurs 429/5xx ne sont pas relancées en boucle : le contrôle horaire suivant réessaie. Si la réponse est ambiguë après une coupure réseau, un doublon est possible. Le script contacte uniquement le domaine canonique et l’endpoint officiel `https://api.indexnow.org/indexnow`, sans transmettre de données visiteurs ni de jeton GitHub.
 
-**Une exécution verte n’implique pas forcément un envoi** : lire son état et le nombre d’URLs. Ne jamais interpréter `indexed: false` comme un verdict Bing négatif ; ce champ rappelle que le script ne prouve pas l’indexation.
+**Le contrôle peut être vert sans envoi, avec le job de soumission explicitement ignoré. Un job de soumission vert signifie un véritable envoi reçu.** Dans `check.json`, `plannedUrls` décrit le lot prévu et `submittedUrls` reste vide ; seul `result.json` avec `status: submitted` contient les URLs réellement envoyées. Ne jamais interpréter `indexed: false` comme un verdict Bing négatif ; ce champ rappelle que le script ne prouve pas l’indexation.
+
+Le cache de reçus conserve son préfixe `indexnow-state-v1-` : cette séparation des jobs ne remet pas à zéro les 22 URLs déjà reçues lors du premier envoi (HTTP 202, exécution [39455494238](https://github.com/skaunited/privacy_score_web/actions/runs/39455494238)).
 
 ## Premier déploiement et diagnostic
 
@@ -46,7 +56,7 @@ Le script utilise `User-Agent: PrivacyScore-IndexNow/1.0 (+https://www.privacysc
 
 Le CDN doit servir le HTML construit sans injection ni transformation. Une modification HTML à la volée (par exemple une nouvelle injection Cloudflare) ou un ancien cache peut empêcher la correspondance des empreintes ; le résumé cite l’URL concernée. Inspecter la différence et les règles de cache avant de modifier ce contrôle. Une ancienne version encore en cache peut retarder l’envoi ; elle ne provoque pas l’envoi du nouveau contenu prématurément.
 
-Commande locale optionnelle après build : `pnpm indexnow:submit`. Elle peut réellement notifier IndexNow si le build est déjà publié ; elle conserve son état sous `.indexnow/` et son rapport sous `reports/indexnow/`, tous deux ignorés par Git. Les tests n’utilisent jamais le vrai endpoint de soumission.
+Commande locale de contrôle sans envoi : `node scripts/submit-indexnow.mjs dist --check-only`. Commande locale optionnelle de soumission après build : `pnpm indexnow:submit`. Cette dernière peut réellement notifier IndexNow si le build est déjà publié ; elle conserve son état sous `.indexnow/` et son rapport sous `reports/indexnow/`, tous deux ignorés par Git. Le workflow utilise `--require-submission` dans le second job pour interdire un succès sans envoi. Les tests n’utilisent jamais le vrai endpoint de soumission.
 
 ## Vérifier dans Bing
 
