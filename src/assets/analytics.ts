@@ -60,7 +60,7 @@ if (panel && candidateId && /^G-[A-Z0-9]+$/.test(candidateId)) {
   const event = (name: string, params: EventParams = {}) => {
     if (choice !== 'granted') return;
     if (Date.now() >= consentExpiresAt) { expire(); return; }
-    window.gtag?.('event', name, { language: panel.dataset.locale, page_path: location.pathname,
+    window.gtag?.('event', name, { content_language: panel.dataset.locale, page_path: location.pathname,
       page_type: pageType, ...(article ? { article_path: location.pathname } : {}), ...params });
   };
 

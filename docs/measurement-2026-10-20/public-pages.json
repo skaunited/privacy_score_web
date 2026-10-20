@@ -1,0 +1,360 @@
+{
+  "sitemaps": [
+    "https://www.privacyscore.fr/sitemap-0.xml"
+  ],
+  "count": 22,
+  "pages": [
+    {
+      "url": "https://www.privacyscore.fr/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/",
+      "canonical": [
+        "https://www.privacyscore.fr/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "en",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "url": "https://www.privacyscore.fr/about/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/about/",
+      "canonical": [
+        "https://www.privacyscore.fr/about/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "en",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "url": "https://www.privacyscore.fr/blog/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/blog/",
+      "canonical": [
+        "https://www.privacyscore.fr/blog/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "en",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "url": "https://www.privacyscore.fr/blog/app-privacy-report-empty/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/blog/app-privacy-report-empty/",
+      "canonical": [
+        "https://www.privacyscore.fr/blog/app-privacy-report-empty/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "en",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "url": "https://www.privacyscore.fr/blog/export-app-privacy-report/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/blog/export-app-privacy-report/",
+      "canonical": [
+        "https://www.privacyscore.fr/blog/export-app-privacy-report/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "en",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "url": "https://www.privacyscore.fr/blog/iphone-permissions-guide/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/blog/iphone-permissions-guide/",
+      "canonical": [
+        "https://www.privacyscore.fr/blog/iphone-permissions-guide/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "en",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "url": "https://www.privacyscore.fr/blog/iphone-privacy-settings-2026/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/blog/iphone-privacy-settings-2026/",
+      "canonical": [
+        "https://www.privacyscore.fr/blog/iphone-privacy-settings-2026/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "en",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/fr/",
+      "canonical": [
+        "https://www.privacyscore.fr/fr/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "fr",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/a-propos/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/fr/a-propos/",
+      "canonical": [
+        "https://www.privacyscore.fr/fr/a-propos/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "fr",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/blog/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/fr/blog/",
+      "canonical": [
+        "https://www.privacyscore.fr/fr/blog/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "fr",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/blog/audit-confidentialite-iphone/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/fr/blog/audit-confidentialite-iphone/",
+      "canonical": [
+        "https://www.privacyscore.fr/fr/blog/audit-confidentialite-iphone/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "fr",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/blog/importer-rapport-confidentialite-iphone/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/fr/blog/importer-rapport-confidentialite-iphone/",
+      "canonical": [
+        "https://www.privacyscore.fr/fr/blog/importer-rapport-confidentialite-iphone/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "fr",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/blog/rapport-confidentialite-iphone-guide/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/fr/blog/rapport-confidentialite-iphone-guide/",
+      "canonical": [
+        "https://www.privacyscore.fr/fr/blog/rapport-confidentialite-iphone-guide/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "fr",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/blog/rapport-confidentialite-iphone-vide/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/fr/blog/rapport-confidentialite-iphone-vide/",
+      "canonical": [
+        "https://www.privacyscore.fr/fr/blog/rapport-confidentialite-iphone-vide/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "fr",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/cgu/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/fr/cgu/",
+      "canonical": [
+        "https://www.privacyscore.fr/fr/cgu/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "fr",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/mentions-legales/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/fr/mentions-legales/",
+      "canonical": [
+        "https://www.privacyscore.fr/fr/mentions-legales/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "fr",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/politique-de-confidentialite/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/fr/politique-de-confidentialite/",
+      "canonical": [
+        "https://www.privacyscore.fr/fr/politique-de-confidentialite/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "fr",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "url": "https://www.privacyscore.fr/fr/politique-de-securite/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/fr/politique-de-securite/",
+      "canonical": [
+        "https://www.privacyscore.fr/fr/politique-de-securite/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "fr",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "url": "https://www.privacyscore.fr/legal-notice/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/legal-notice/",
+      "canonical": [
+        "https://www.privacyscore.fr/legal-notice/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "en",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "url": "https://www.privacyscore.fr/privacy-policy/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/privacy-policy/",
+      "canonical": [
+        "https://www.privacyscore.fr/privacy-policy/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "en",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "url": "https://www.privacyscore.fr/security-policy/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/security-policy/",
+      "canonical": [
+        "https://www.privacyscore.fr/security-policy/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "en",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    },
+    {
+      "url": "https://www.privacyscore.fr/terms-of-use/",
+      "status": 200,
+      "final": "https://www.privacyscore.fr/terms-of-use/",
+      "canonical": [
+        "https://www.privacyscore.fr/terms-of-use/"
+      ],
+      "robots": [
+        "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+      ],
+      "lang": "en",
+      "ga": [
+        "G-QT0QFTD7L5"
+      ],
+      "x_robots_tag": null
+    }
+  ]
+}

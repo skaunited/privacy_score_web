@@ -65,18 +65,26 @@ test('EN and FR navigation works with a French browser without a language redire
   } finally { await context.close(); }
 });
 
-test('page views and App Store events omit query strings and fragments', async ({ page }) => {
-  await page.goto('/?private=test#how');
-  await page.locator('[data-consent="granted"]').click();
-  await page.locator('a[data-cta="hero"]').evaluate((link) => {
-    link.addEventListener('click', (event) => event.preventDefault(), { once:true });
-    (link as HTMLAnchorElement).click();
+test.describe('French browser on English content', () => {
+  test.use({ locale:'fr-FR' });
+  test('page views and App Store events preserve browser language and omit private URL parts', async ({ page }) => {
+    await page.goto('/?private=test#how');
+    await page.locator('[data-consent="granted"]').click();
+    await page.locator('a[data-cta="hero"]').evaluate((link) => {
+      link.addEventListener('click', (event) => event.preventDefault(), { once:true });
+      (link as HTMLAnchorElement).click();
+    });
+    const events = await page.evaluate(() => Array.from(window.dataLayer ?? []).map((item: any) => Array.from(item)));
+    const appStore = events.filter((item) => item[0] === 'event' && item[1] === 'app_store_click');
+    expect(appStore).toHaveLength(1);
+    expect(await page.evaluate(() => navigator.language)).toBe('fr-FR');
+    expect(appStore[0][2]).toMatchObject({ page_path:'/', cta_position:'hero', content_language:'en' });
+    for (const item of events.filter((item) => item[0] === 'event')) {
+      expect(item[2]).toHaveProperty('content_language', 'en');
+      expect(item[2]).not.toHaveProperty('language');
+    }
+    expect(JSON.stringify(events)).not.toContain('private=test');
   });
-  const events = await page.evaluate(() => Array.from(window.dataLayer ?? []).map((item: any) => Array.from(item)));
-  const appStore = events.filter((item) => item[0] === 'event' && item[1] === 'app_store_click');
-  expect(appStore).toHaveLength(1);
-  expect(appStore[0][2]).toMatchObject({ page_path:'/', cta_position:'hero', language:'en' });
-  expect(JSON.stringify(events)).not.toContain('private=test');
 });
 
 test('expired consent does not load Google', async ({ page }) => {

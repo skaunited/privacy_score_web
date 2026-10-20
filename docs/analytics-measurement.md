@@ -4,7 +4,9 @@ Propriété GA4 : `559523211`, flux web `G-QT0QFTD7L5`. Le code mesure l’usage
 
 ## Événements disponibles après déploiement
 
-Chaque événement comporte `language`, `page_path` et `page_type` (`home`, `blog_index`, `article`, `other`). Les événements des articles comportent aussi `article_path`. Les chemins excluent paramètres et fragments. La balise GA4 peut aussi transmettre le titre public de la page ; nos événements personnalisés ne copient pas le texte de l’article.
+Chaque événement comporte `content_language`, `page_path` et `page_type` (`home`, `blog_index`, `article`, `other`). Les événements des articles comportent aussi `article_path`. Les chemins excluent paramètres et fragments. La balise GA4 peut aussi transmettre le titre public de la page ; nos événements personnalisés ne copient pas le texte de l’article.
+
+Depuis le 20 octobre, `content_language` distingue la langue de la page (`fr` ou `en`) de la dimension native GA4 **Langue**, qui décrit le navigateur/appareil. L’ancien paramètre `language` n’est plus forcé par le site. Ne pas fusionner les deux périodes sans vérifier la dimension utilisée ; la nouvelle définition ne reconstitue pas les événements antérieurs.
 
 | Événement | Déclenchement | Paramètres spécifiques |
 | --- | --- | --- |
@@ -45,6 +47,7 @@ Dans la propriété **Privacy Score → Administration → Affichage des donnée
 
 | Nom conseillé | Paramètre |
 | --- | --- |
+| Langue du contenu | `content_language` |
 | Type de page | `page_type` |
 | Article | `article_path` |
 | Destination article | `destination` |
@@ -54,13 +57,13 @@ Dans la propriété **Privacy Score → Administration → Affichage des donnée
 | Palier de lecture en secondes | `read_seconds` |
 | Fin d’article atteinte | `article_end_reached` |
 
-Créer la métrique de portée Événement **Temps de lecture actif** : paramètre `reading_time_msec`, unité **Millisecondes**. Le paramètre `active_read_seconds` est un cumul de contexte, pas une métrique à additionner. La langue et le chemin de page ont déjà des dimensions natives dans GA4.
+Créer la métrique de portée Événement **Temps de lecture actif** : paramètre `reading_time_msec`, unité **Millisecondes**. Le paramètre `active_read_seconds` est un cumul de contexte, pas une métrique à additionner. Le chemin de page a une dimension native dans GA4 ; utiliser **Langue du contenu**, et non **Langue**, pour comparer les pages FR/EN.
 
 Marquer **`app_store_click` comme événement clé** pour analyser le taux de clic vers l’App Store. Conserver le nombre d’événements pour compter tous les clics et les utilisateurs/sessions pour mesurer combien de visiteurs ont cliqué.
 
 Après disponibilité des définitions, créer deux explorations d’entonnoir avec étapes **indirectement suivies** (les événements de scroll peuvent s’intercaler) :
 
-1. Parcours global ouvert : `page_view` → `app_store_click`. Ventiler par page d’entrée, langue, appareil et source/support.
+1. Parcours global ouvert : `page_view` → `app_store_click`. Ventiler par page d’entrée, langue du contenu, appareil et source/support.
 2. Parcours éditorial ouvert : `article_view` → `article_read_time` avec `read_seconds = 30` → `app_store_click`. Variante de lecture approfondie : insérer `article_complete` avant le clic. Ventiler par `article_path`.
 
 Dans l’exploration éditoriale, un clic ultérieur sur l’accueil peut suivre la lecture d’un article dans la même session ; le contexte du clic décrit alors l’accueil. Utiliser la dimension d’article de l’étape de lecture pour interpréter l’origine éditoriale, sans attribuer arbitrairement tous les clics à un seul article lorsque plusieurs ont été lus.

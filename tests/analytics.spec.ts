@@ -66,7 +66,7 @@ test('page scroll thresholds fire once, including a jump to the bottom, in both 
   await page.evaluate(() => document.fonts.ready);
   await scrollToDepth(page, 100);
   expect((await events(page, 'page_scroll')).map((event) => event.params.scroll_percent)).toEqual([25, 50, 75, 90, 100]);
-  expect((await events(page, 'page_scroll'))[0].params).toMatchObject({ language:'fr', page_path:'/fr/' });
+  expect((await events(page, 'page_scroll'))[0].params).toMatchObject({ content_language:'fr', page_path:'/fr/' });
 });
 
 test('resize and pages without scrollable content do not manufacture scroll events', async ({ page }) => {
@@ -193,7 +193,7 @@ test('blog links and App Store clicks form a journey across full page navigation
   await link.click();
   await expect(page).toHaveURL(new RegExp(`${destination}$`));
   await expect.poll(async () => (await events(page, 'page_view')).length).toBe(1);
-  expect((await events(page, 'article_view'))[0].params.language).toBe('fr');
+  expect((await events(page, 'article_view'))[0].params.content_language).toBe('fr');
   await page.clock.runFor(31_000);
   await clickWithoutNavigation(page, 'a[data-cta="header"]');
   expect((await events(page, 'app_store_click'))[0].params).toMatchObject({ article_path:destination, page_type:'article' });
